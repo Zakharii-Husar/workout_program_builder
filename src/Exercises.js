@@ -19,12 +19,9 @@ return (
   <div style={props.exercisesVisibility} className="exercises">
 
     <div className="chosenExercise">
-      {props.chosenExercises.map((exercise, exerciseIndex) => {
+      {props.chosenExercises.map((exercise) => {
         return(
-          <div className="exercise">
             <img className="eIcon" src={exercise.img}/>
-            
-          </div>
         )
       })}
     </div>

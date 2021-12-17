@@ -17,6 +17,7 @@
 
 .eIcon{
     width: 2rem;
+    border: 2px solid black;
 }
 
 @media only screen and (max-width: 600px){
