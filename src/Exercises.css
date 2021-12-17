@@ -1,3 +1,7 @@
+.exercisesList{
+    
+}
+
 .chosenExercise{
     display: flex;
     flex-direction: row;
@@ -7,10 +11,19 @@
 .exercises{
     display:flex;
     flex-direction: column;
-    width: 90%;
-    margin: 0 auto 0 auto;
+    width: 100%;
+}
+
+.exercises *{
+    
 }
 
 .eIcon{
     width: 2rem;
+}
+
+@media only screen and (max-width: 600px){
+    .exercises{
+        width: 100%;
+    }
 }

@@ -36,9 +36,9 @@ return(<div style={props.style}>
         
         return (
         <div className="exerciseslist">
-        <img src={source1} className="icon1" />
-        <div onClick={()=>props.action1(element)} className="name">{index + 1}.{element.name}</div>
-        <img src={source2} onClick={()=>{props.action2(element, index); markDone()}} className="icon2" />
+          <img src={source1} className="icon1" />
+          <div onClick={()=>props.action1(element)} className="name">{index + 1}.{element.name}</div>
+          <img src={source2} onClick={()=>{props.action2(element, index); markDone()}} className="icon2" />
         </div>
         )
       })}

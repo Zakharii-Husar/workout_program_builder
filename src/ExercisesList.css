@@ -1,13 +1,15 @@
 .exerciseslist{
     display: flex;
     flex-direction: row;
-    border: 2px solid black;
     background-color: blue;
     align-items: center;
+    width: 100%;
+    border: 2px solid black;
 }
 
-.exerciseslist * {
+.exerciseslist > img {
     
+
 }
 
 .name{

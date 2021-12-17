@@ -18,9 +18,9 @@ function CreateProgram(props) {
 
 
   useEffect(()=>{
-    PROGRAM.name = name
-    PROGRAM.timer = timer
-    PROGRAM.exercises = props.chosenExercises
+    PROGRAM.name = name;
+    PROGRAM.timer = timer;
+    PROGRAM.exercises = props.chosenExercises;
   },[props.chosenExercises, timer, name]);
 
 
