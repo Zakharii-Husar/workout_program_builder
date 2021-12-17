@@ -1,0 +1,5 @@
+.StartProgram{
+    display:flex;
+    flex-direction: column;
+}
+

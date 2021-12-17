@@ -1,0 +1,19 @@
+.exerciseslist{
+    display: flex;
+    flex-direction: row;
+    border: 2px solid black;
+    background-color: blue;
+    align-items: center;
+}
+
+.exerciseslist * {
+    
+}
+
+.name{
+    margin: 0 auto 0 auto;
+}
+
+.icon1, .icon2{
+    width: 5%;
+}

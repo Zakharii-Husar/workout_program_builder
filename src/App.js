@@ -1,23 +1,55 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
+import Main from './Main';
+import CreateProgram from './CreateProgram';
+import Exercises from './Exercises';
+import StartProgram from './StartProgram';
+
+
 function App() {
+
+  const visibilityOfComponents = {
+    main: "none",
+    createProgram: "none",
+    exercices: "none",
+    startProgram: "none"
+  };
+
+  const [currentDisplay, setCurrentDisplay] = useState({...visibilityOfComponents, main: "flex"});
+  const [chosenExercises, setChosenExercises] = useState([]);
+  const [runningProgram, setRunningProgram] = useState([]);
+
+  const showCreateProgram = () => {setCurrentDisplay({...visibilityOfComponents, createProgram: "flex"})};
+  const showChooseExercises = () => {setCurrentDisplay({...visibilityOfComponents, exercices: "flex"})};
+  const showMain = () => {setCurrentDisplay({...visibilityOfComponents, main: "flex"})};
+  const startProgram = (current) => {setCurrentDisplay({...visibilityOfComponents, startProgram: "flex"});
+  setRunningProgram(current)};
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <Main 
+      mainVisibility = {{display: currentDisplay.main}} 
+      showCreateProgram={showCreateProgram}
+      startProgram={startProgram}/>
+      
+      <CreateProgram 
+      chosenExercises={chosenExercises}
+      showChooseExercises={showChooseExercises}
+      showMain={showMain}
+      createProgramVisibility = {{display: currentDisplay.createProgram}}
+      passSortedExercises={added => setChosenExercises(added)} />
+
+      <Exercises
+      showCreateProgram={showCreateProgram}
+      exercisesVisibility ={{display: currentDisplay.exercices}}
+      passAddedExercises={added => setChosenExercises(added)}
+      chosenExercises={chosenExercises}/>
+
+      <StartProgram
+      showStartProgram={{display: currentDisplay.startProgram}}
+      runningProgram={runningProgram}/>
     </div>
   );
 }

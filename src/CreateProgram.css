@@ -1,0 +1,26 @@
+.CreateProgram{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.nameContainer{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.setTimer{
+    display: flex;
+    flex-direction: column;
+}
+
+.setTimer > div{
+    display: flex;
+    justify-content: space-around;
+}
+
+.exercise{
+    display: flex;
+    flex-direction: row;
+}
