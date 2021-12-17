@@ -1,7 +1,8 @@
 import './ExercisesList.css';
 import {icons} from './data';
 import {musclesGroups} from './data';
-import { useEffect, useState } from 'react/cjs/react.development';
+import React, { useState } from 'react';
+import { useEffect } from 'react/cjs/react.development';
 
 
 function ExercisesList(props) {

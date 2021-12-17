@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import ExercisesList from './ExercisesList';
 import './CreateProgram.css';
 
