@@ -4,13 +4,12 @@ import './Main.css';
 
 function Main(props) {
 
-  let storage = JSON.parse(localStorage.getItem("Exarr"));
-  if(!storage) storage = {};
-  // const [reRender, setReRender] = useState([storage]);
+  const [storage, setStorage] = useState(JSON.parse(localStorage.getItem("Exarr")));
+  if(!storage) setStorage([]);
 
   const remove = (program) =>{
     localStorage.setItem("Exarr", JSON.stringify(storage.filter((p) => p !== program)));
-    // setReRender(storage);
+    setStorage(JSON.parse(localStorage.getItem("Exarr")));
   };
   return (
     <div style={props.mainVisibility} className="Main">
