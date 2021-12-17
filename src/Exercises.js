@@ -18,6 +18,21 @@ function Exercises(props) {
 return (
   <div style={props.exercisesVisibility} className="exercises">
 
+    <div className="chosenExercise">
+      {props.chosenExercises.map((exercise, exerciseIndex) => {
+        return(
+          <div className="exercise">
+            <img className="eIcon" src={exercise.img}/>
+            
+          </div>
+        )
+      })}
+    </div>
+
+<button className="correctBtn" onClick={()=>setAddedToProgram(props.chosenExercises.filter((e, i)=>{ 
+  return i !== props.chosenExercises.length -1}))}
+   style={props.chosenExercises.length > 0 ? {display: "flex"} : {display: "none"}}>Correct</button>
+
 
     {musclesGroups.map((muscle, muscleIndex) =>{
 
@@ -44,22 +59,6 @@ return (
         </>
       )
     })}
-
-
-<div className="chosenExercise">
-{props.chosenExercises.map((exercise, exerciseIndex) => {
-  return(
-    <div className="exercise">
-      <img className="eIcon" src={exercise.img}/>
-      <div>{exerciseIndex + 1}</div>
-    </div>
-  )
-})}
-</div>
-
-<button onClick={()=>setAddedToProgram(props.chosenExercises.filter((e, i)=>{ 
-      return i !== props.chosenExercises.length -1}))}
-      style={props.chosenExercises.length > 0 ? {display: "flex"} : {display: "none"}}>Correct</button>
 
 
       <button onClick={()=>setAddedToProgram([])}>Reset</button>
