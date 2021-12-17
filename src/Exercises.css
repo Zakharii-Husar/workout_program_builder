@@ -1,6 +1,16 @@
+.chosenExercise{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .exercises{
     display:flex;
     flex-direction: column;
     width: 90%;
     margin: 0 auto 0 auto;
+}
+
+.eIcon{
+    width: 2rem;
 }

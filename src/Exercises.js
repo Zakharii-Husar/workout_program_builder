@@ -46,12 +46,12 @@ return (
     })}
 
 
-<div className="chosenEx">
+<div className="chosenExercise">
 {props.chosenExercises.map((exercise, exerciseIndex) => {
   return(
     <div className="exercise">
-      <div>{exercise.img}</div>
-      <div>{exerciseIndex + 1}.{exercise.name}</div>
+      <img className="eIcon" src={exercise.img}/>
+      <div>{exerciseIndex + 1}</div>
     </div>
   )
 })}
