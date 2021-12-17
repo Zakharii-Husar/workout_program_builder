@@ -4,7 +4,7 @@ import './Main.css';
 
 function Main(props) {
 
-  const [storage, setStorage] = useState(JSON.parse(localStorage.getItem("Exarr")));
+  const [storage, setStorage] = useState(()=>JSON.parse(localStorage.getItem("Exarr")));
   if(!storage) setStorage([]);
 
   const remove = (program) =>{
