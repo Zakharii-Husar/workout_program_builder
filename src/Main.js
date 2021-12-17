@@ -5,9 +5,8 @@ import './Main.css';
 function Main(props) {
 
   let storage = JSON.parse(localStorage.getItem("Exarr"));
-  if(!storage) storage = [];
-  const [reRender, setReRender] = useState(storage);
-  if(!reRender) setReRender(storage);
+  if(!storage) storage = {};
+  const [reRender, setReRender] = useState([storage]);
 
   const remove = (program) =>{
     localStorage.setItem("Exarr", JSON.stringify(storage.filter((p) => p !== program)));
