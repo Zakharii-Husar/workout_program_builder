@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import React, { useState, useEffect } from 'react';
 import './Timer.css';
 
 function Timer(props) {
