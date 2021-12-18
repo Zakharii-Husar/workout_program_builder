@@ -16,19 +16,24 @@ function Exercises(props) {
   }, [addedToProgram])
 
 return (
-  <div style={props.exercisesVisibility} className="exercises">
-
+<div style={props.exercisesVisibility} className="exercises">
+ <div className="chosenExercisesContainer">
     <div className="chosenExercise">
       {props.chosenExercises.map((exercise) => {
         return(
-            <img className="eIcon" src={exercise.img}/>
+            <img src={exercise.img}/>
         )
       })}
+
     </div>
 
-<button className="correctBtn" onClick={()=>setAddedToProgram(props.chosenExercises.filter((e, i)=>{ 
+    <button className="correctBtn" 
+    onClick={()=>setAddedToProgram(props.chosenExercises.filter((e, i)=>{ 
   return i !== props.chosenExercises.length -1}))}
-   style={props.chosenExercises.length > 0 ? {display: "flex"} : {display: "none"}}>Correct</button>
+   style={props.chosenExercises.length > 0 ? 
+   {display: "flex"} : 
+   {display: "none"}}>Correct</button>
+ </div>
 
 
     {musclesGroups.map((muscle, muscleIndex) =>{
