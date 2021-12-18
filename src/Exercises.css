@@ -41,9 +41,9 @@
     width: 5%;
 }
 
-.icon2:hover{
+.rotate:hover{
     -webkit-animation: rotate 1s 1 forwards;
-    animation: rotate 1s infinite forwards;
+    animation: rotate 1s 1 forwards;
 }
 
 @keyframes rotate {
