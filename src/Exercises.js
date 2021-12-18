@@ -62,9 +62,11 @@ return (
       )
     })}
 
-
-      <button onClick={()=>setAddedToProgram([])}>Reset</button>
-      <button onClick={props.showCreateProgram}>Okay</button>
+    <div className="controlButtons">
+    <img src={icons.remove} onClick={()=>{setAddedToProgram([]); 
+      props.showCreateProgram()}}/>
+      <img src={icons.check} onClick={props.showCreateProgram}/>
+    </div>
     </div>
   );
 }

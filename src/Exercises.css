@@ -1,3 +1,9 @@
+.exercises{
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .chosenExercisesContainer{
     position: -webkit-sticky;
     position:sticky;
@@ -22,14 +28,17 @@
     background-color: yellow;
 }
 
-.exercises{
-    display:flex;
-    flex-direction: column;
-    width: 100%;
+.controlButtons{
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    justify-content: space-around;
+    background-color:yellow;
+    border: 2px solid black;
 }
 
-.exercises *{
-    
+.controlButtons *{
+    width: 5%;
 }
 
 @media only screen and (max-width: 600px){
