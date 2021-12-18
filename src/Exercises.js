@@ -10,7 +10,6 @@ function Exercises(props) {
 
   const [visibleExercises, setVisibleExercises] = useState([]);
   const [addedToProgram, setAddedToProgram] = useState([]);
-  const [rotation, setRotation] = useState(null);
 
   useEffect(()=>{
     props.passAddedExercises(addedToProgram)
@@ -39,10 +38,9 @@ return (
 
     {musclesGroups.map((muscle, muscleIndex) =>{
 
-                const toggleExercisesVisibility = () =>{
+                const toggleExercisesVisibility = (e) =>{
                   if(!visibleExercises.includes(muscleIndex)){
                     setVisibleExercises([...visibleExercises, muscleIndex]);
-                    setRotation("rotateRight");
                   }else{
                   setVisibleExercises(visibleExercises.filter((current)=> current !== muscleIndex));
                   }
@@ -52,7 +50,7 @@ return (
         <div className="exerciseslist">
           <img className="icon1" src={muscle.img}/>
           <div className="name">{muscle.name}</div>
-          <img src={icons.arrow} className="rotateRigth" className={`${"icon2"} ${rotation}`} onClick={toggleExercisesVisibility}/>
+          <img src={icons.arrow} className="icon2" onClick={toggleExercisesVisibility}/>
         </div>
 
             <ExercisesList
