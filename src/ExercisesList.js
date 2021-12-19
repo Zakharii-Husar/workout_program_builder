@@ -41,7 +41,11 @@ return(<div>
           className="icon1" 
           style={props.icon1 == "none" ?
           {display: "none"} : {display: "flex"}}/>
-          <div onClick={()=>props.action1(element)} className="name">{index + 1}.{element.name}</div>
+          <div 
+          style={props.icon1 == "none" ?
+          {marginLeft: 0, fontSize: "2rem"} : {marginLeft: "auto"}}
+          onClick={()=>props.action1(element)} 
+          className="name">{index + 1}.{element.name}</div>
           <img 
           src={source2} 
           onClick={()=>{props.action2(element, index); 
