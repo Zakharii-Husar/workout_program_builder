@@ -65,7 +65,7 @@ function CreateProgram(props) {
  icon2={"check"}/>
 </div>
       
-      <button onClick={props.showChooseExercises}>
+      <button className="addExercises" onClick={props.showChooseExercises}>
         {props.chosenExercises.length > 0 ? 
         "Edit Exercises" :
          "Add Exercises"}</button>
@@ -80,7 +80,7 @@ function CreateProgram(props) {
 </div>
 
       <div className="nameContainer">
-        <h1>{name}</h1>
+        <h1 className="programName">{name}</h1>
         <input 
         onInput={e=>setName(e.target.value)}
         type="text" 

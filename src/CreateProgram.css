@@ -1,7 +1,12 @@
 .CreateProgram{
     display: flex;
     flex-direction: column;
-    background-color: grey;
+    background-color: black;
+}
+
+.addExercises{
+    background-color: yellow;
+    padding: 1rem 0 1rem 0;
 }
 
 .nameContainer{
@@ -17,6 +22,7 @@
     align-items: center;
     font-weight:900;
     font-size: 3rem;
+    color: blue;
 
 }
 
@@ -36,10 +42,15 @@
     flex-direction: row;
 }
 
+.programName{
+    color: blue;
+}
+
 .cancelOrSave{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    padding: 1rem 0 1rem 0;
     background-color: yellow;
 }
 
