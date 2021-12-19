@@ -43,7 +43,7 @@ return(<div>
           {display: "none"} : {display: "flex"}}/>
           <div 
           style={props.icon1 == "none" ?
-          {marginLeft: 0, fontSize: "2rem"} : {marginLeft: "auto"}}
+          {marginLeft: "5%", fontSize: "2rem"} : {marginLeft: "auto"}}
           onClick={()=>props.action1(element)} 
           className="name">{index + 1}.{element.name}</div>
           <img 
