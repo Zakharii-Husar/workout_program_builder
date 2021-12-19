@@ -44,17 +44,21 @@ return (
                   }else{
                   setVisibleExercises(visibleExercises.filter((current)=> current !== muscleIndex));
                   }
-                }        
+                };
+                
       return(
         <>
         <div className="exerciseslist">
           <img className="icon1" src={muscle.img}/>
           <div className="name">{muscle.name}</div>
-          <img src={icons.arrow} className={`${"icon2"} ${"rotate"}`}onClick={toggleExercisesVisibility}/>
+          <img src={icons.arrow} className={`${"icon2"} ${"rotate"}`}
+          onClick={toggleExercisesVisibility}/>
         </div>
-
+        
             <ExercisesList
-            style={visibleExercises.includes(muscleIndex) ? {display: "flex"} : {display: "none"}}
+              style={visibleExercises.includes(muscleIndex) ?
+              {display: "flex", opacity: 1} :
+              {display: "none", opacity: 0}}
               arr={muscle.exercises}
               icon1={"exercise"}
               icon2={"add"}

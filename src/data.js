@@ -5,6 +5,11 @@ import check from './icons/check.png';
 import remove from './icons/delete.png';
 import greendot from './icons/greendot.png';
 import reddot from './icons/reddot.png';
+import down from './icons/down.png';
+import up from './icons/up.png';
+import start from './icons/start.png';
+import pause from './icons/pause.png';
+import stop from './icons/stop.png';
 
 import chest from './muscles/chest.jpg';
 import back from './muscles/back.jpg';
@@ -26,15 +31,28 @@ export const icons = {
     check,
     remove,
     greendot,
-    reddot
+    reddot,
+    down,
+    up,
+    start,
+    pause,
+    stop
 };
 
 
 export const musclesGroups = [
     {
       img: arms,
-      name: "Armss",
+      name: "Arms",
       exercises:[ {
+        img: dumbellcurls,
+        name: "Dumbellcurls"
+      },
+      {
+        img: dumbellcurls,
+        name: "Dumbellcurls"
+      },
+      {
         img: dumbellcurls,
         name: "Dumbellcurls"
       }

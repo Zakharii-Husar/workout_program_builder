@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import ExercisesList from './ExercisesList';
+import {icons} from './data';
 import './CreateProgram.css';
 
 
@@ -52,9 +53,8 @@ function CreateProgram(props) {
   
 
   return (
-<div style={props.createProgramVisibility} 
-className="CreateProgram">
-
+<div style={props.createProgramVisibility}>
+ <div className="CreateProgram">
 <div className="chosenExercises">
 
 <ExercisesList
@@ -65,16 +65,19 @@ className="CreateProgram">
  icon2={"check"}/>
 </div>
       
-      <button onClick={props.showChooseExercises}>{props.chosenExercises.length > 0 ? "Edit Exercises" : "Add Exercises"}</button>
+      <button onClick={props.showChooseExercises}>
+        {props.chosenExercises.length > 0 ? 
+        "Edit Exercises" :
+         "Add Exercises"}</button>
+         
 
 <div className="setTimer">
-        <h2>Rest Time</h2>
-        <h1>{minutes}:{seconds}</h1>
-        <div>
-        <span onClick={()=>{if (timer >= 15) setTimer(timer - 15)}}>-</span>
-        <span onClick={()=>setTimer(timer + 15)}>+</span>
+        <div>{minutes}:{seconds}</div>
+        <div className="editTime">
+          <img src={icons.up} onClick={()=>setTimer(timer + 15)}/>
+          <img src={icons.down} onClick={()=>{if (timer >= 15) setTimer(timer - 15)}}/>
         </div>
-      </div>
+</div>
 
       <div className="nameContainer">
         <h1>{name}</h1>
@@ -84,9 +87,13 @@ className="CreateProgram">
         placeholder="Program's name">
         </input>
       </div>
-
-      <button onClick={cancel}>Cancel</button>
-      <button onClick={saveProgram}>Save</button>
+      
+      <div className="cancelOrSave">
+        <img src={icons.remove} onClick={cancel}/>
+        <img src={icons.check} onClick={saveProgram}/>
+      </div>
+      
+      </div>
     </div>
   );
 }

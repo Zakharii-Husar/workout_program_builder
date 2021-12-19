@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Timer.css';
+import {icons} from './data';
 
 function Timer(props) {
     let trainingTime = props.time;
@@ -66,8 +67,10 @@ function Timer(props) {
         <h2>{minutes < 10 ? "0"+ minutes : minutes}:
         {seconds < 10 ? "0"+ seconds : seconds}:
         {miliseconds < 10 ? "0"+ miliseconds : miliseconds}</h2>
-        <button onClick={()=>timerIsOn ? setTimerIsOn(false) : setTimerIsOn(true)}>Start/Pause</button>
-        <button onClick={()=>reset()}>Reset</button>
+        <div className="buttonsContainer">
+            <img src={timerIsOn ? icons.pause : icons.start} onClick={()=>timerIsOn ? setTimerIsOn(false) : setTimerIsOn(true)}/>
+            <img src={icons.stop} onClick={()=>reset()}/>
+        </div>
     </div>
   );
 }

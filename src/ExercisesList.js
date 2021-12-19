@@ -11,7 +11,7 @@ function ExercisesList(props) {
     setExerciseIsDone(exerciseIsDone)
   },[exerciseIsDone])
 
-return(<div style={props.style}>
+return(<div>
 {props.arr.map((element, index) => {
         let source1;
         if(props.icon1 === "arrow") source1 = icons.arrow;
@@ -35,7 +35,7 @@ return(<div style={props.style}>
       };
         
         return (
-        <div className="exerciseslist">
+        <div style={props.style} className="exerciseslist">
           <img src={source1} className="icon1" />
           <div onClick={()=>props.action1(element)} className="name">{index + 1}.{element.name}</div>
           <img src={source2} onClick={()=>{props.action2(element, index); markDone()}} className="icon2" />

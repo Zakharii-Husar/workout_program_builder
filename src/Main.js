@@ -20,7 +20,7 @@ function Main(props) {
       arr={storage}
       action1={program => props.startProgram(program)}
       action2={program => remove(program)}/>
-      <div onClick={props.showCreateProgram} className="createBtn">CREATE PROGRAM+</div>
+      <div onClick={props.showCreateProgram} className="createBtn">NEW PROGRAM</div>
     </div>
   );
 }
