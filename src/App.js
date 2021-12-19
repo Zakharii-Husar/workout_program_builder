@@ -49,7 +49,8 @@ function App() {
 
       <StartProgram
       showStartProgram={{display: currentDisplay.startProgram}}
-      runningProgram={runningProgram}/>
+      runningProgram={runningProgram}
+      exit={showMain}/>
     </div>
   );
 }
