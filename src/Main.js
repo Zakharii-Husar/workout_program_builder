@@ -18,7 +18,7 @@ function Main(props) {
     <div style={props.mainVisibility} className="Main">
       <div className="empty" style={storage.length > 0 ?
         {display: "none"} :
-        {display: "flex", marginTop: "40%"}}>You don't have programs yet.</div>
+        {display: "flex"}}>You don't have programs yet.</div>
       <ExercisesList
       icon1={"none"}
       icon2={"remove"}
