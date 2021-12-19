@@ -70,7 +70,7 @@ function CreateProgram(props) {
         "Edit Exercises" :
          "Add Exercises"}</button>
          
-
+<h1 className="timerHeader">Time between sets</h1>
 <div className="setTimer">
         <div>{minutes}:{seconds}</div>
         <div className="editTime">
