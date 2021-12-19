@@ -80,8 +80,8 @@ function CreateProgram(props) {
 </div>
 
       <div className="nameContainer">
-        <h1 className="programName">{name}</h1>
-        <input 
+        <h1 className="nameOutput">{name}</h1>
+        <input
         onInput={e=>setName(e.target.value)}
         type="text" 
         placeholder="Program's name">
