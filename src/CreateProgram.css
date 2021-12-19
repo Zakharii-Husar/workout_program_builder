@@ -46,6 +46,7 @@
 
 
 .nameContainer > input{
+    text-align: center;
     background-color: black;
     color: white;
     padding: 0.5rem 0 0.5rem 0;

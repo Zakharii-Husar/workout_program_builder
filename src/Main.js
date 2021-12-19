@@ -20,7 +20,7 @@ function Main(props) {
         {display: "none"} :
         {display: "flex", marginTop: "40%"}}>You don't have programs yet.</div>
       <ExercisesList
-      icon1={"arrow"}
+      icon1={"none"}
       icon2={"remove"}
       arr={storage}
       action1={program => props.startProgram(program)}

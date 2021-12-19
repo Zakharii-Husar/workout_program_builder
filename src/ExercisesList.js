@@ -36,9 +36,17 @@ return(<div>
         
         return (
         <div style={props.style} className="exerciseslist">
-          <img src={source1} className="icon1" />
+          <img 
+          src={source1} 
+          className="icon1" 
+          style={props.icon1 == "none" ?
+          {display: "none"} : {display: "flex"}}/>
           <div onClick={()=>props.action1(element)} className="name">{index + 1}.{element.name}</div>
-          <img src={source2} onClick={()=>{props.action2(element, index); markDone()}} className="icon2" />
+          <img 
+          src={source2} 
+          onClick={()=>{props.action2(element, index); 
+          markDone()}} 
+          className="icon2"/>
         </div>
         )
       })}

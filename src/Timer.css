@@ -1,8 +1,12 @@
 .Timer{
+    position: sticky;
+    top: 0;
+    background-color: blue;
     display: flex;
     flex-direction: column;
-    margin-top: 5rem;
+    width: 100%;
     margin: 0 auto 0 auto;
+    text-align: center;
     font-weight:900;
     font-size: 2rem;
 }
@@ -10,9 +14,10 @@
 .buttonsContainer{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .buttonsContainer *{
     width: 4rem;
+
 }

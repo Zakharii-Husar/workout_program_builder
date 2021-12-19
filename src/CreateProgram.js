@@ -84,7 +84,7 @@ function CreateProgram(props) {
         <input
         onInput={e=>setName(e.target.value)}
         type="text" 
-        placeholder="Program's name">
+        placeholder="Enter program's name">
         </input>
       </div>
       
