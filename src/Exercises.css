@@ -23,7 +23,7 @@
 
 .correctBtn{
     width: 100%;
-    height: 1.5rem;
+    padding: 0.5rem 0 0.5rem 0;
     justify-content: center;
     background-color: yellow;
 }
@@ -38,7 +38,7 @@
 }
 
 .controlButtons *{
-    width: 5%;
+    width: 10%;
 }
 
 /* .rotate:hover{

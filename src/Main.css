@@ -19,6 +19,7 @@
     width: 100%;
     padding: 1rem 0 1rem 0;
     background-color: yellow;
+    font-size: 2rem;
     cursor: pointer;
     animation: fadeOut 1.5s;
 }
