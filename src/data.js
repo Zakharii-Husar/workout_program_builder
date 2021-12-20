@@ -11,12 +11,12 @@ import start from './icons/start.png';
 import pause from './icons/pause.png';
 import stop from './icons/stop.png';
 
-import chest from './muscles/chest.jpg';
-import back from './muscles/back.jpg';
-import arms from './muscles/arms.jpg';
-import legs from './muscles/legs.jpg';
-import core from './muscles/core.jpg';
-import shoulders from './muscles/shoulders.jpg';
+import chest from './muscles/chest.png';
+import back from './muscles/back.png';
+import arms from './muscles/arms.png';
+import legs from './muscles/legs.png';
+import core from './muscles/core.png';
+import shoulders from './muscles/shoulders.png';
 
 import squats from './exercises/squats.png';
 import dumbellcurls from './exercises/dumbellcurls.png';
