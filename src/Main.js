@@ -13,7 +13,6 @@ function Main(props) {
     setStorage(JSON.parse(localStorage.getItem("Exarr")));
   };
 
-  console.log(storage.length)
   return (
     <div style={props.mainVisibility} className="Main">
       <div className="empty" style={storage.length > 0 ?
