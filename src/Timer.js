@@ -64,7 +64,7 @@ function Timer(props) {
 
   return (
     <div style={props.mainVisibility} className="Timer">
-        <h2>{minutes < 10 ? "0"+ minutes : minutes}:
+        <h2 className="display">{minutes < 10 && miliseconds > -1 ? "0"+ minutes : minutes}:
         {seconds < 10 ? "0"+ seconds : seconds}:
         {miliseconds < 10 ? "0"+ miliseconds : miliseconds}</h2>
         <div className="buttonsContainer">
