@@ -15,7 +15,7 @@ function Main(props) {
 
   return (
     <div style={props.mainVisibility} className="Main">
-      <div className="empty" style={storage.length > 0 ?
+      <div className="empty" style={storage == null ?
         {display: "none"} :
         {display: "flex"}}>You don't have programs yet.</div>
       <ExercisesList
