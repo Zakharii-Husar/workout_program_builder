@@ -37,6 +37,8 @@
 }
 
 .controlButtons{
+    position: sticky;
+    bottom: 0;
     display: flex;
     flex-direction: row;
     padding: 1rem;
@@ -48,20 +50,6 @@
 .controlButtons *{
     width: 10%;
 }
-
-/* .rotate:hover{
-    -webkit-animation: rotate 1s 1 forwards;
-    animation: rotate 1s 1 forwards;
-}
-
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(180deg);
-      }
-} */
 
 @media only screen and (max-width: 600px){
     .exercises{

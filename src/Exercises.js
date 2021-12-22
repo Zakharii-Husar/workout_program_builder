@@ -51,7 +51,7 @@ return (
         <div className="exerciseslist">
           <img className="icon1" src={muscle.img}/>
           <div id="muscleName" className="name">{muscle.name}</div>
-          <img src={icons.arrow} className={`${"icon2"} ${"rotate"}`}
+          <img src={icons.arrow} className="icon2"
           onClick={toggleExercisesVisibility}/>
         </div>
         
