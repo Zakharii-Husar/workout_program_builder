@@ -10,7 +10,7 @@ body{
 .App{
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 50%;
   margin: 0 auto 0 auto;
   justify-content: center;
 }

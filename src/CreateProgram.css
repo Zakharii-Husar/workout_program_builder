@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Tourney&display=swap');
+
 .CreateProgram{
     display: flex;
     flex-direction: column;
@@ -17,6 +19,7 @@
 }
 
 .setTimer{
+    font-family: 'Tourney';
     display: flex;
     flex-direction: row;
     margin: 0 auto 0 auto;
