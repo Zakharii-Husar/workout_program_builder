@@ -53,13 +53,18 @@ return (
                   }else{
                   setVisibleExercises(visibleExercises.filter((current)=> current !== muscleIndex));
                   }
+
+                  setTimeout(()=>{window.scrollBy(0, 100)}, 10)
                 };
+
                 
       return(
         <>
         <div className="exerciseslist">
-          <img className="icon1" src={muscle.img}/>
+          <img className="icon1" src={muscle.img} />
+
           <div id="muscleName" className="name">{muscle.name}</div>
+
           <img src={icons.arrow} className="icon2"
           onClick={toggleExercisesVisibility}/>
         </div>
