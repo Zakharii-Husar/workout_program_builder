@@ -15,6 +15,9 @@ function Exercises(props) {
     props.passAddedExercises(addedToProgram)
   }, [addedToProgram])
 
+  const correct = () => {setAddedToProgram(props.chosenExercises.filter((e, i)=>{ 
+    return i !== props.chosenExercises.length -1}))};
+
 return (
 <div style={props.exercisesVisibility} className="exercises">
  <div className="chosenExercisesContainer">
@@ -27,12 +30,18 @@ return (
 
     </div>
 
-    <button className="correctBtn" 
-    onClick={()=>setAddedToProgram(props.chosenExercises.filter((e, i)=>{ 
-  return i !== props.chosenExercises.length -1}))}
-   style={props.chosenExercises.length > 0 ? 
-   {display: "flex"} : 
-   {display: "none"}}>Correct</button>
+<div className="controlButtons">
+    <img src={icons.cancel} onClick={()=>{setAddedToProgram([]); 
+      props.showCreateProgram()}}/>
+
+      <img src={icons.correct}
+      onClick={correct}
+      style={props.chosenExercises.length > 0 ? 
+        {display: "flex"} : 
+        {display: "none"}}/>
+
+      <img src={icons.save} onClick={props.showCreateProgram}/>
+    </div>
  </div>
 
 
@@ -67,12 +76,6 @@ return (
         </>
       )
     })}
-
-    <div className="controlButtons">
-    <img src={icons.remove} onClick={()=>{setAddedToProgram([]); 
-      props.showCreateProgram()}}/>
-      <img src={icons.check} onClick={props.showCreateProgram}/>
-    </div>
     </div>
   );
 }

@@ -10,6 +10,9 @@ import up from './icons/up.png';
 import start from './icons/start.png';
 import pause from './icons/pause.png';
 import stop from './icons/stop.png';
+import save from './icons/save.png';
+import correct from './icons/correct.png';
+import cancel from './icons/cancel.png';
 
 import chest from './muscles/chest.png';
 import back from './muscles/back.png';
@@ -110,7 +113,10 @@ export const icons = {
     up,
     start,
     pause,
-    stop
+    stop,
+    save,
+    correct,
+    cancel
 };
 
 
