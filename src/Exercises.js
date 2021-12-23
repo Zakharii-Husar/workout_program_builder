@@ -30,18 +30,6 @@ return (
 
     </div>
 
-<div className="controlButtons">
-    <img src={icons.cancel} onClick={()=>{setAddedToProgram([]); 
-      props.showCreateProgram()}}/>
-
-      <img src={icons.correct}
-      onClick={correct}
-      style={props.chosenExercises.length > 0 ? 
-        {display: "flex"} : 
-        {display: "none"}}/>
-
-      <img src={icons.save} onClick={props.showCreateProgram}/>
-    </div>
  </div>
 
 
@@ -54,7 +42,10 @@ return (
                   setVisibleExercises(visibleExercises.filter((current)=> current !== muscleIndex));
                   }
 
-                  setTimeout(()=>{window.scrollBy(0, 100)}, 10)
+                  setTimeout(()=>{window.scrollBy({
+                    top: 100,
+                    behavior: "smooth"
+                  })}, 10)
                 };
 
                 
@@ -81,6 +72,19 @@ return (
         </>
       )
     })}
+
+<div className="controlButtons">
+    <img src={icons.cancel} onClick={()=>{setAddedToProgram([]); 
+      props.showCreateProgram()}}/>
+
+      <img src={icons.correct}
+      onClick={correct}
+      style={props.chosenExercises.length > 0 ? 
+        {display: "flex"} : 
+        {display: "none"}}/>
+
+      <img src={icons.save} onClick={props.showCreateProgram}/>
+    </div>
     </div>
   );
 }
