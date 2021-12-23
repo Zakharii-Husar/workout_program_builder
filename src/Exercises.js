@@ -43,7 +43,7 @@ return (
                   }
 
                   setTimeout(()=>{window.scrollBy({
-                    top: 100,
+                    top: muscleIndex * 100,
                     behavior: "smooth"
                   })}, 10)
                 };
