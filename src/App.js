@@ -6,8 +6,6 @@ import CreateProgram from './CreateProgram';
 import Exercises from './Exercises';
 import StartProgram from './StartProgram';
 
-//sh
-
 
 
 function App() {
