@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.488634e5.css",
-    "main.js": "/static/js/main.95ec1a33.js",
-    "static/media/save.png": "/static/media/save.d4e884b39ba773d069b7.png",
-    "static/media/cancel.png": "/static/media/cancel.2146c5353b5d9535abd2.png",
-    "static/media/dumbbellSquat.png": "/static/media/dumbbellSquat.5db246943d7584ab19af.png",
-    "static/media/reverseLunge.png": "/static/media/reverseLunge.dabaaae45c7ed7f1b2fa.png",
-    "static/media/cableRopeTricepPushdown.png": "/static/media/cableRopeTricepPushdown.a4216df2ce9b4ddba735.png",
-    "static/media/leverageShoulderPress.png": "/static/media/leverageShoulderPress.5e3b40167586b7fa2f8f.png",
-    "static/media/correct.png": "/static/media/correct.0d03c73249b902049afe.png",
-    "index.html": "/index.html",
-    "main.488634e5.css.map": "/static/css/main.488634e5.css.map",
-    "main.95ec1a33.js.map": "/static/js/main.95ec1a33.js.map"
+    "main.css": "./static/css/main.488634e5.css",
+    "main.js": "./static/js/main.b6ba62b4.js",
+    "static/media/save.png": "./static/media/save.d4e884b39ba773d069b7.png",
+    "static/media/cancel.png": "./static/media/cancel.2146c5353b5d9535abd2.png",
+    "static/media/dumbbellSquat.png": "./static/media/dumbbellSquat.5db246943d7584ab19af.png",
+    "static/media/reverseLunge.png": "./static/media/reverseLunge.dabaaae45c7ed7f1b2fa.png",
+    "static/media/cableRopeTricepPushdown.png": "./static/media/cableRopeTricepPushdown.a4216df2ce9b4ddba735.png",
+    "static/media/leverageShoulderPress.png": "./static/media/leverageShoulderPress.5e3b40167586b7fa2f8f.png",
+    "static/media/correct.png": "./static/media/correct.0d03c73249b902049afe.png",
+    "index.html": "./index.html",
+    "main.488634e5.css.map": "./static/css/main.488634e5.css.map",
+    "main.b6ba62b4.js.map": "./static/js/main.b6ba62b4.js.map"
   },
   "entrypoints": [
     "static/css/main.488634e5.css",
-    "static/js/main.95ec1a33.js"
+    "static/js/main.b6ba62b4.js"
   ]
 }
