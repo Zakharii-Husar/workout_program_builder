@@ -4,6 +4,7 @@ import { LoadingSpinner } from './LoadingSpinner';
 import Timer from './Timer';
 import ExercisesList from './ExercisesList';
 import { StartProgramContainer, ExitButton } from './StartProgram.styled';
+import { icons } from '../data/data';
 
 const StartProgram: React.FC = () => {
   const { state, actions } = useApp();
@@ -32,7 +33,8 @@ const StartProgram: React.FC = () => {
       />
 
       <ExitButton onClick={actions.showMain}>
-        Exit
+        <icons.cancel />
+        Exit Workout
       </ExitButton>
     </StartProgramContainer>
   );

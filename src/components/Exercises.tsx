@@ -6,7 +6,6 @@ import ExercisesList from './ExercisesList';
 import { icons } from '../data/data';
 import { 
   ExercisesContainer, 
-  MuscleName, 
   ChosenExercisesContainer, 
   ChosenExercise, 
   ControlButtons,

@@ -36,9 +36,18 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
       case 'remove':
         return <icons.remove onClick={() => action2(element, index)} />;
       case 'dot':
-        return exerciseIsDone.includes(index || 0) ? 
-          <icons.greendot style={{ color: 'green' }} onClick={() => handleMarkDone(index || 0)} /> : 
-          <icons.reddot style={{ color: 'red' }} onClick={() => handleMarkDone(index || 0)} />;
+        const isDone = exerciseIsDone.includes(index || 0);
+        return isDone ? 
+          <icons.checkedSquare 
+            onClick={() => handleMarkDone(index || 0)} 
+            data-icon-type="square"
+            data-checked="true"
+          /> : 
+          <icons.emptySquare 
+            onClick={() => handleMarkDone(index || 0)} 
+            data-icon-type="square"
+            data-checked="false"
+          />;
       default:
         return null;
     }

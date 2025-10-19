@@ -2,7 +2,8 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { LoadingSpinner } from './LoadingSpinner';
 import ExercisesList from './ExercisesList';
-import { MainContainer, EmptyState, CreateButton } from './Main.styled';
+import { MainContainer, EmptyState, EmptyStateTitle, EmptyStateSubtitle, CreateButton } from './Main.styled';
+import { icons } from '../data/data';
 
 const Main: React.FC = () => {
   const { state, actions } = useApp();
@@ -24,10 +25,17 @@ const Main: React.FC = () => {
   if (savedPrograms.length === 0) {
     return (
       <MainContainer style={{ display: state.currentDisplay.main }}>
-        <EmptyState>You don't have programs yet.</EmptyState>
-        <CreateButton onClick={actions.showCreateProgram}>
-          NEW PROGRAM
-        </CreateButton>
+        <EmptyState>
+          <EmptyStateTitle>Ready to Build?</EmptyStateTitle>
+          <EmptyStateSubtitle>
+            Create your first workout program and start your fitness journey. 
+            Choose exercises, set timers, and track your progress.
+          </EmptyStateSubtitle>
+          <CreateButton onClick={actions.showCreateProgram}>
+            <icons.add />
+            CREATE FIRST PROGRAM
+          </CreateButton>
+        </EmptyState>
       </MainContainer>
     );
   }
@@ -42,6 +50,7 @@ const Main: React.FC = () => {
         action2={handleRemoveProgram}
       />
       <CreateButton onClick={actions.showCreateProgram}>
+        <icons.add />
         NEW PROGRAM
       </CreateButton>
     </MainContainer>
