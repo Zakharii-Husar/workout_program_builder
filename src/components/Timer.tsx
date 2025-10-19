@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTimer } from '../hooks/useTimer';
 import { icons } from '../data/data';
-import './Timer.css';
+import { TimerContainer, Display, ButtonsContainer } from './Timer.styled';
 
 interface TimerProps {
   time: number;
@@ -18,9 +18,9 @@ const Timer: React.FC<TimerProps> = ({ time }) => {
   } = useTimer(time);
 
   return (
-    <div className="Timer">
-      <h2 className="display">{displayTime}</h2>
-      <div className="buttonsContainer">
+    <TimerContainer>
+      <Display>{displayTime}</Display>
+      <ButtonsContainer>
         <img 
           src={isRunning ? icons.pause : icons.start} 
           onClick={toggle}
@@ -31,8 +31,8 @@ const Timer: React.FC<TimerProps> = ({ time }) => {
           onClick={reset}
           alt="Stop"
         />
-      </div>
-    </div>
+      </ButtonsContainer>
+    </TimerContainer>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { icons } from '../data/data';
-import './ExercisesList.css';
+import { ExercisesListContainer, ExerciseName, Icon1, Icon2 } from './ExercisesList.styled';
 
 interface ExercisesListProps {
   arr: any[];
@@ -62,30 +62,27 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
         const source2 = getIconSource(icon2, element, index);
 
         return (
-          <div key={`${element.name}-${index}`} style={style} className="exerciseslist">
-            <img 
+          <ExercisesListContainer key={`${element.name}-${index}`} style={style}>
+            <Icon1 
               src={source1} 
-              className="icon1" 
               style={icon1 === "none" ? { display: "none" } : { display: "flex" }}
               alt={element.name}
             />
-            <div 
+            <ExerciseName 
               style={icon1 === "none" ? 
                 { marginLeft: "5%", fontSize: "2rem" } : 
                 { marginLeft: "auto" }
               }
               onClick={() => action1(element)} 
-              className="name"
             >
               {index + 1}. {element.name}
-            </div>
-            <img 
+            </ExerciseName>
+            <Icon2 
               src={source2} 
               onClick={() => handleAction2(element, index)} 
-              className="icon2"
               alt={icon2}
             />
-          </div>
+          </ExercisesListContainer>
         );
       })}
     </div>

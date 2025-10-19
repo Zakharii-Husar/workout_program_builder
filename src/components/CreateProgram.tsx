@@ -5,7 +5,16 @@ import { ProgramService } from '../services/programService';
 import { LoadingSpinner } from './LoadingSpinner';
 import ExercisesList from './ExercisesList';
 import { icons } from '../data/data';
-import './CreateProgram.css';
+import { 
+  CreateProgramContainer, 
+  AddExercisesButton, 
+  TimerHeader, 
+  SetTimer, 
+  EditTime, 
+  NameContainer, 
+  NameOutput, 
+  CancelOrSave 
+} from './CreateProgram.styled';
 
 const CreateProgram: React.FC = () => {
   const { state, actions } = useApp();
@@ -77,7 +86,7 @@ const CreateProgram: React.FC = () => {
 
   return (
     <div style={{ display: state.currentDisplay.createProgram }}>
-      <div className="CreateProgram">
+      <CreateProgramContainer>
         <div className="chosenExercises">
           <ExercisesList
             arr={chosenExercises}
@@ -88,17 +97,14 @@ const CreateProgram: React.FC = () => {
           />
         </div>
 
-        <button 
-          className="addExercises" 
-          onClick={actions.showChooseExercises}
-        >
+        <AddExercisesButton onClick={actions.showChooseExercises}>
           {chosenExercises.length > 0 ? 'Edit Exercises' : 'Add Exercises'}
-        </button>
+        </AddExercisesButton>
 
-        <h1 className="timerHeader">Time between sets</h1>
-        <div className="setTimer">
+        <TimerHeader>Time between sets</TimerHeader>
+        <SetTimer>
           <div>{formatTime(timer)}</div>
-          <div className="editTime">
+          <EditTime>
             <img 
               src={icons.up} 
               onClick={() => handleTimerChange(15)}
@@ -109,20 +115,20 @@ const CreateProgram: React.FC = () => {
               onClick={() => handleTimerChange(-15)}
               alt="Decrease timer"
             />
-          </div>
-        </div>
+          </EditTime>
+        </SetTimer>
 
-        <div className="nameContainer">
-          <h1 className="nameOutput">{name}</h1>
+        <NameContainer>
+          <NameOutput>{name}</NameOutput>
           <input
             onInput={(e) => setName((e.target as HTMLInputElement).value)}
             type="text"
             placeholder="Enter program's name"
             value={name}
           />
-        </div>
+        </NameContainer>
 
-        <div className="cancelOrSave">
+        <CancelOrSave>
           <img 
             src={icons.remove} 
             onClick={handleCancel}
@@ -133,8 +139,8 @@ const CreateProgram: React.FC = () => {
             onClick={handleSaveProgram}
             alt="Save"
           />
-        </div>
-      </div>
+        </CancelOrSave>
+      </CreateProgramContainer>
     </div>
   );
 };

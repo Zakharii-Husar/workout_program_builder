@@ -3,7 +3,7 @@ import { useApp } from '../context/AppContext';
 import { LoadingSpinner } from './LoadingSpinner';
 import Timer from './Timer';
 import ExercisesList from './ExercisesList';
-import './StartProgram.css';
+import { StartProgramContainer, ExitButton } from './StartProgram.styled';
 
 const StartProgram: React.FC = () => {
   const { state, actions } = useApp();
@@ -20,7 +20,7 @@ const StartProgram: React.FC = () => {
   const exercises = runningProgram.exercises || [];
 
   return (
-    <div style={{ display: state.currentDisplay.startProgram }} className="StartProgram">
+    <StartProgramContainer style={{ display: state.currentDisplay.startProgram }}>
       <Timer time={runningProgram.timer} />
       
       <ExercisesList
@@ -31,13 +31,10 @@ const StartProgram: React.FC = () => {
         action2={() => {}}
       />
 
-      <button 
-        className="exitBtn"
-        onClick={actions.showMain}
-      >
+      <ExitButton onClick={actions.showMain}>
         Exit
-      </button>
-    </div>
+      </ExitButton>
+    </StartProgramContainer>
   );
 };
 

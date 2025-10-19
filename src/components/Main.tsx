@@ -2,7 +2,7 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { LoadingSpinner } from './LoadingSpinner';
 import ExercisesList from './ExercisesList';
-import './Main.css';
+import { MainContainer, EmptyState, CreateButton } from './Main.styled';
 
 const Main: React.FC = () => {
   const { state, actions } = useApp();
@@ -23,17 +23,17 @@ const Main: React.FC = () => {
 
   if (savedPrograms.length === 0) {
     return (
-      <div style={{ display: state.currentDisplay.main }} className="Main">
-        <div className="empty">You don't have programs yet.</div>
-        <div onClick={actions.showCreateProgram} className="createBtn">
+      <MainContainer style={{ display: state.currentDisplay.main }}>
+        <EmptyState>You don't have programs yet.</EmptyState>
+        <CreateButton onClick={actions.showCreateProgram}>
           NEW PROGRAM
-        </div>
-      </div>
+        </CreateButton>
+      </MainContainer>
     );
   }
 
   return (
-    <div style={{ display: state.currentDisplay.main }} className="Main">
+    <MainContainer style={{ display: state.currentDisplay.main }}>
       <ExercisesList
         icon1="none"
         icon2="remove"
@@ -41,10 +41,10 @@ const Main: React.FC = () => {
         action1={handleStartProgram}
         action2={handleRemoveProgram}
       />
-      <div onClick={actions.showCreateProgram} className="createBtn">
+      <CreateButton onClick={actions.showCreateProgram}>
         NEW PROGRAM
-      </div>
-    </div>
+      </CreateButton>
+    </MainContainer>
   );
 };
 

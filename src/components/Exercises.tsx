@@ -4,7 +4,17 @@ import { ExerciseService } from '../services/exerciseService';
 import { LoadingSpinner } from './LoadingSpinner';
 import ExercisesList from './ExercisesList';
 import { icons } from '../data/data';
-import './Exercises.css';
+import { 
+  ExercisesContainer, 
+  MuscleName, 
+  ChosenExercisesContainer, 
+  ChosenExercise, 
+  ControlButtons,
+  MuscleGroupContainer,
+  MuscleIcon,
+  ArrowIcon,
+  MuscleNameText
+} from './Exercises.styled';
 
 const Exercises: React.FC = () => {
   const { state, actions } = useApp();
@@ -66,9 +76,9 @@ const Exercises: React.FC = () => {
   }
 
   return (
-    <div style={{ display: state.currentDisplay.exercises }} className="exercises">
-      <div className="chosenExercisesContainer">
-        <div className="chosenExercise">
+    <ExercisesContainer style={{ display: state.currentDisplay.exercises }}>
+      <ChosenExercisesContainer>
+        <ChosenExercise>
           {chosenExercises.map((exercise, index) => (
             <img 
               key={`${exercise.name}-${index}`}
@@ -76,21 +86,20 @@ const Exercises: React.FC = () => {
               alt={exercise.name}
             />
           ))}
-        </div>
-      </div>
+        </ChosenExercise>
+      </ChosenExercisesContainer>
 
       {muscleGroups.map((muscle, muscleIndex) => (
         <div key={muscle.name}>
-          <div className="exerciseslist">
-            <img className="icon1" src={muscle.img} alt={muscle.name} />
-            <div id="muscleName" className="name">{muscle.name}</div>
-            <img 
+          <MuscleGroupContainer>
+            <MuscleIcon src={muscle.img} alt={muscle.name} />
+            <MuscleNameText>{muscle.name}</MuscleNameText>
+            <ArrowIcon 
               src={icons.arrow} 
-              className="icon2"
               onClick={() => toggleExercisesVisibility(muscleIndex)}
               alt="Toggle exercises"
             />
-          </div>
+          </MuscleGroupContainer>
           
           <ExercisesList
             style={visibleExercises.includes(muscleIndex) ? 
@@ -106,7 +115,7 @@ const Exercises: React.FC = () => {
         </div>
       ))}
 
-      <div className="controlButtons">
+      <ControlButtons>
         <img 
           src={icons.cancel} 
           onClick={handleClearAll}
@@ -126,8 +135,8 @@ const Exercises: React.FC = () => {
           onClick={handleSave}
           alt="Save"
         />
-      </div>
-    </div>
+      </ControlButtons>
+    </ExercisesContainer>
   );
 };
 
