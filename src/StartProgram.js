@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import { useEffect } from 'react';
 import Timer from './Timer';
 import ExercisesList from './ExercisesList';
 import './StartProgram.css';
