@@ -54,6 +54,8 @@ export const ChosenExercise = styled.div`
     height: 32px;
     border-radius: ${props => props.theme.borderRadius.sm};
     border: 1px solid ${props => props.theme.colors.border};
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2px;
     transition: ${props => props.theme.transitions.fast};
     box-shadow: ${props => props.theme.shadows.sm};
 
@@ -177,6 +179,8 @@ export const MuscleIcon = styled.img`
   height: 48px;
   border-radius: ${props => props.theme.borderRadius.sm};
   border: 1px solid ${props => props.theme.colors.border};
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 4px;
   transition: ${props => props.theme.transitions.fast};
   flex-shrink: 0;
 
@@ -188,11 +192,13 @@ export const MuscleIcon = styled.img`
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
     width: 40px;
     height: 40px;
+    padding: 3px;
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
     width: 56px;
     height: 56px;
+    padding: 5px;
   }
 `;
 

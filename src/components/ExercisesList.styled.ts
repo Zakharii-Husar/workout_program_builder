@@ -107,6 +107,8 @@ export const Icon1 = styled.div`
     object-fit: cover;
     border-radius: ${props => props.theme.borderRadius.sm};
     border: 1px solid ${props => props.theme.colors.border};
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 3px;
     transition: ${props => props.theme.transitions.fast};
     box-shadow: ${props => props.theme.shadows.sm};
 
@@ -164,6 +166,8 @@ export const Icon2 = styled.div`
     object-fit: cover;
     border-radius: ${props => props.theme.borderRadius.sm};
     border: 1px solid ${props => props.theme.colors.border};
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2px;
     transition: ${props => props.theme.transitions.fast};
     box-shadow: ${props => props.theme.shadows.sm};
 
