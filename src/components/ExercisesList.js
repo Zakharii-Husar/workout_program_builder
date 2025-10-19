@@ -1,6 +1,6 @@
 import './ExercisesList.css';
-import {icons} from './data';
-import {musclesGroups} from './data';
+import {icons} from '../data/data';
+import {musclesGroups} from '../data/data';
 import React, { useState, useEffect } from 'react';
 
 

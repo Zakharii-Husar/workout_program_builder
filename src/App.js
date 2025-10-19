@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import './App.css';
 
-import Main from './Main';
-import CreateProgram from './CreateProgram';
-import Exercises from './Exercises';
-import StartProgram from './StartProgram';
+import Main from './components/Main';
+import CreateProgram from './components/CreateProgram';
+import Exercises from './components/Exercises';
+import StartProgram from './components/StartProgram';
 
 
 function App() {

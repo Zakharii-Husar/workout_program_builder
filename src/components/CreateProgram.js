@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import ExercisesList from './ExercisesList';
-import {icons} from './data';
+import {icons} from '../data/data';
 import './CreateProgram.css';
 
 

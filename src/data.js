@@ -14,91 +14,91 @@ import save from './icons/save.png';
 import correct from './icons/correct.png';
 import cancel from './icons/cancel.png';
 
-import chest from './muscles/chest.png';
-import back from './muscles/back.png';
-import arms from './muscles/arms.png';
-import legs from './muscles/legs.png';
-import core from './muscles/core.png';
-import shoulders from './muscles/shoulders.png';
+import chest from './assets/muscle_groups/chest.png';
+import back from './assets/muscle_groups/back.png';
+import arms from './assets/muscle_groups/arms.png';
+import legs from './assets/muscle_groups/legs.png';
+import core from './assets/muscle_groups/core.png';
+import shoulders from './assets/muscle_groups/shoulders.png';
 
 //ARMS EXERCISES
 //biceps
-import chinUp from './biceps/chinUp.png';
-import barbellCurl from './biceps/barbellCurl.png';
-import hammerCurl from './biceps/hammerCurl.png';
-import seatedDumbbellCurl from './biceps/seatedDumbbellCurl.png';
-import concentrationCurl from './biceps/concentrationCurl.png';
-import barbellPreacherCurl from './biceps/barbellPreacherCurl.png';
-import InclineDumbbellCurl from './biceps/InclineDumbbellCurl.png';
+import chinUp from './assets/exercises_icons/biceps/chinUp.png';
+import barbellCurl from './assets/exercises_icons/biceps/barbellCurl.png';
+import hammerCurl from './assets/exercises_icons/biceps/hammerCurl.png';
+import seatedDumbbellCurl from './assets/exercises_icons/biceps/seatedDumbbellCurl.png';
+import concentrationCurl from './assets/exercises_icons/biceps/concentrationCurl.png';
+import barbellPreacherCurl from './assets/exercises_icons/biceps/barbellPreacherCurl.png';
+import InclineDumbbellCurl from './assets/exercises_icons/biceps/InclineDumbbellCurl.png';
 //triceps
-import narrowPushUps from './triceps/narrowPushUps.png';
-import tricepDips from './triceps/tricepDips.png';
-import benchDip from './triceps/benchDip.png';
-import closeGripBenchPress from './triceps/closeGripBenchPress.png';
-import standingTricepsExtension from './triceps/standingTricepsExtension.png';
-import dumbbellFrenchPress from './triceps/dumbbellFrenchPress.png';
-import lyingTricepsExtension from './triceps/lyingTricepsExtension.png';
-import cableRopeTricepPushdown from './triceps/cableRopeTricepPushdown.png';
+import narrowPushUps from './assets/exercises_icons/triceps/narrowPushUps.png';
+import tricepDips from './assets/exercises_icons/triceps/tricepDips.png';
+import benchDip from './assets/exercises_icons/triceps/benchDip.png';
+import closeGripBenchPress from './assets/exercises_icons/triceps/closeGripBenchPress.png';
+import standingTricepsExtension from './assets/exercises_icons/triceps/standingTricepsExtension.png';
+import dumbbellFrenchPress from './assets/exercises_icons/triceps/dumbbellFrenchPress.png';
+import lyingTricepsExtension from './assets/exercises_icons/triceps/lyingTricepsExtension.png';
+import cableRopeTricepPushdown from './assets/exercises_icons/triceps/cableRopeTricepPushdown.png';
 
 //BACK EXERCISES
-import pullUp from './back/pullUp.png';
-import deadlift from './back/deadlift.png';
-import romanianDeadlift from './back/romanianDeadlift.png';
-import shrug from './back/shrug.png';
-import bentOverDumbbells from './back/bentOverDumbbells.png';
-import oneArmDumbbellRow from './back/oneArmDumbbellRow.png';
-import latPullDown from './back/latPullDown.png';
-import seatedCableRow from './back/seatedCableRow.png';
-import chestSupportedRow from './back/chestSupportedRow.png';
+import pullUp from './assets/exercises_icons/back/pullUp.png';
+import deadlift from './assets/exercises_icons/back/deadlift.png';
+import romanianDeadlift from './assets/exercises_icons/back/romanianDeadlift.png';
+import shrug from './assets/exercises_icons/back/shrug.png';
+import bentOverDumbbells from './assets/exercises_icons/back/bentOverDumbbells.png';
+import oneArmDumbbellRow from './assets/exercises_icons/back/oneArmDumbbellRow.png';
+import latPullDown from './assets/exercises_icons/back/latPullDown.png';
+import seatedCableRow from './assets/exercises_icons/back/seatedCableRow.png';
+import chestSupportedRow from './assets/exercises_icons/back/chestSupportedRow.png';
 
 //CHEST EXERCISES
-import pushUps from './chest/pushUps.png';
-import inclinePushUps from './chest/inclinePushUps.png';
-import declinePushUps from './chest/declinePushUps.png';
-import chestDips from './chest/chestDips.png';
-import flatBenchPress from './chest/flatBenchPress.png';
-import dumbbellPress from './chest/dumbbellPress.png';
-import inclineBenchPress from './chest/inclineBenchPress.png';
-import inclineDumbbellPress from './chest/inclineDumbbellPress.png';
-import declineBenchPress from './chest/declineBenchPress.png';
-import dumbbellFly from './chest/dumbbellFly.png';
-import pectoralFly from './chest/pectoralFly.png';
-import cableCrossover from './chest/cableCrossover.png';
+import pushUps from './assets/exercises_icons/chest/pushUps.png';
+import inclinePushUps from './assets/exercises_icons/chest/inclinePushUps.png';
+import declinePushUps from './assets/exercises_icons/chest/declinePushUps.png';
+import chestDips from './assets/exercises_icons/chest/chestDips.png';
+import flatBenchPress from './assets/exercises_icons/chest/flatBenchPress.png';
+import dumbbellPress from './assets/exercises_icons/chest/dumbbellPress.png';
+import inclineBenchPress from './assets/exercises_icons/chest/inclineBenchPress.png';
+import inclineDumbbellPress from './assets/exercises_icons/chest/inclineDumbbellPress.png';
+import declineBenchPress from './assets/exercises_icons/chest/declineBenchPress.png';
+import dumbbellFly from './assets/exercises_icons/chest/dumbbellFly.png';
+import pectoralFly from './assets/exercises_icons/chest/pectoralFly.png';
+import cableCrossover from './assets/exercises_icons/chest/cableCrossover.png';
 
 //LEGS EXERCISES
-import squat from './legs/squat.png';
-import dumbbellSquat from './legs/dumbbellSquat.png';
-import reverseLunge from './legs/reverseLunge.png';
-import nordicHamstringCurl from './legs/nordicHamstringCurl.png';
-import barbellBackSquat from './legs/barbellBackSquat.png';
-import barbellFrontSquat from './legs/barbellFrontSquat.png';
-import legPress from './legs/legPress.png';
-import lyingLegCurl from './legs/lyingLegCurl.png';
-import barbellHipThrust from './legs/barbellHipThrust.png';
-import standingCalfRaise from './legs/standingCalfRaise.png';
-import seatedCalfRaise from './legs/seatedCalfRaise.png';
+import squat from './assets/exercises_icons/legs/squat.png';
+import dumbbellSquat from './assets/exercises_icons/legs/dumbbellSquat.png';
+import reverseLunge from './assets/exercises_icons/legs/reverseLunge.png';
+import nordicHamstringCurl from './assets/exercises_icons/legs/nordicHamstringCurl.png';
+import barbellBackSquat from './assets/exercises_icons/legs/barbellBackSquat.png';
+import barbellFrontSquat from './assets/exercises_icons/legs/barbellFrontSquat.png';
+import legPress from './assets/exercises_icons/legs/legPress.png';
+import lyingLegCurl from './assets/exercises_icons/legs/lyingLegCurl.png';
+import barbellHipThrust from './assets/exercises_icons/legs/barbellHipThrust.png';
+import standingCalfRaise from './assets/exercises_icons/legs/standingCalfRaise.png';
+import seatedCalfRaise from './assets/exercises_icons/legs/seatedCalfRaise.png';
 
 //SHOULDERS EXERCISES
-import militaryPress from './shoulders/militaryPress.png';
-import militaryDumbbellPress from './shoulders/militaryDumbbellPress.png';
-import seatedBarbellPress from './shoulders/seatedBarbellPress.png';
-import seatedDumbbellPress from './shoulders/seatedDumbbellPress.png';
-import bottomsUpKettlebellPress from './shoulders/bottomsUpKettlebellPress.png';
-import dumbbellLateralRaise from './shoulders/dumbbellLateralRaise.png';
-import frontDumbbellRaise from './shoulders/frontDumbbellRaise.png';
-import leverageShoulderPress from './shoulders/leverageShoulderPress.png';
+import militaryPress from './assets/exercises_icons/shoulders/militaryPress.png';
+import militaryDumbbellPress from './assets/exercises_icons/shoulders/militaryDumbbellPress.png';
+import seatedBarbellPress from './assets/exercises_icons/shoulders/seatedBarbellPress.png';
+import seatedDumbbellPress from './assets/exercises_icons/shoulders/seatedDumbbellPress.png';
+import bottomsUpKettlebellPress from './assets/exercises_icons/shoulders/bottomsUpKettlebellPress.png';
+import dumbbellLateralRaise from './assets/exercises_icons/shoulders/dumbbellLateralRaise.png';
+import frontDumbbellRaise from './assets/exercises_icons/shoulders/frontDumbbellRaise.png';
+import leverageShoulderPress from './assets/exercises_icons/shoulders/leverageShoulderPress.png';
 
 //CORE EXERCISES
-import crunches from './core/crunches.png';
-import plank from './core/plank.png';
-import kneeHipRaise from './core/kneeHipRaise.png';
-import otisUp from './core/otisUp.png';
-import benchSitUp from './core/benchSitUp.png';
-import upsideDown from './core/upsideDown.png';
-import bentPress from './core/bentPress.png';
-import barbellSideBend from './core/barbellSideBend.png';
-import farmerWalk from './core/farmerWalk.png';
-import cableCrunch from './core/cableCrunch.png';
+import crunches from './assets/exercises_icons/core/crunches.png';
+import plank from './assets/exercises_icons/core/plank.png';
+import kneeHipRaise from './assets/exercises_icons/core/kneeHipRaise.png';
+import otisUp from './assets/exercises_icons/core/otisUp.png';
+import benchSitUp from './assets/exercises_icons/core/benchSitUp.png';
+import upsideDown from './assets/exercises_icons/core/upsideDown.png';
+import bentPress from './assets/exercises_icons/core/bentPress.png';
+import barbellSideBend from './assets/exercises_icons/core/barbellSideBend.png';
+import farmerWalk from './assets/exercises_icons/core/farmerWalk.png';
+import cableCrunch from './assets/exercises_icons/core/cableCrunch.png';
 
 
 

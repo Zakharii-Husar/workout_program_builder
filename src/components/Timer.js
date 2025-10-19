@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Timer.css';
-import {icons} from './data';
+import {icons} from '../data/data';
 
 function Timer(props) {
     let trainingTime = props.time;
