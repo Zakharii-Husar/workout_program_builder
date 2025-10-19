@@ -35,32 +35,32 @@ export const ChosenExercisesContainer = styled.div`
   top: 0;
   z-index: 50;
   background: ${props => props.theme.colors.gradient.dark};
-  border-bottom: 2px solid ${props => props.theme.colors.border};
-  padding: ${props => props.theme.spacing.lg};
-  box-shadow: ${props => props.theme.shadows.md};
+  border-bottom: 1px solid ${props => props.theme.colors.border};
+  padding: ${props => props.theme.spacing.md};
+  box-shadow: ${props => props.theme.shadows.sm};
 `;
 
 export const ChosenExercise = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: ${props => props.theme.spacing.sm};
+  gap: ${props => props.theme.spacing.xs};
   justify-content: center;
   align-items: center;
-  min-height: 60px;
+  min-height: 48px;
 
   img {
-    width: 40px;
-    height: 40px;
-    border-radius: ${props => props.theme.borderRadius.md};
-    border: 2px solid ${props => props.theme.colors.border};
+    width: 32px;
+    height: 32px;
+    border-radius: ${props => props.theme.borderRadius.sm};
+    border: 1px solid ${props => props.theme.colors.border};
     transition: ${props => props.theme.transitions.fast};
     box-shadow: ${props => props.theme.shadows.sm};
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
       border-color: ${props => props.theme.colors.secondary};
-      box-shadow: ${props => props.theme.shadows.md};
+      box-shadow: ${props => props.theme.shadows.sm};
     }
   }
 `;
@@ -71,26 +71,26 @@ export const ControlButtons = styled.div`
   z-index: 50;
   display: flex;
   justify-content: center;
-  gap: ${props => props.theme.spacing.lg};
+  gap: ${props => props.theme.spacing.md};
   background: ${props => props.theme.colors.gradient.dark};
-  border-top: 2px solid ${props => props.theme.colors.border};
-  padding: ${props => props.theme.spacing.lg};
-  box-shadow: ${props => props.theme.shadows.lg};
+  border-top: 1px solid ${props => props.theme.colors.border};
+  padding: ${props => props.theme.spacing.md};
+  box-shadow: ${props => props.theme.shadows.md};
 
   svg {
-    width: 48px;
-    height: 48px;
-    padding: ${props => props.theme.spacing.sm};
+    width: 36px;
+    height: 36px;
+    padding: ${props => props.theme.spacing.xs};
     background: ${props => props.theme.colors.surface};
     border-radius: ${props => props.theme.borderRadius.full};
     color: ${props => props.theme.colors.text};
     cursor: pointer;
     transition: ${props => props.theme.transitions.fast};
-    border: 2px solid ${props => props.theme.colors.border};
+    border: 1px solid ${props => props.theme.colors.border};
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: ${props => props.theme.shadows.lg};
+      transform: translateY(-1px);
+      box-shadow: ${props => props.theme.shadows.md};
     }
 
     &:active {
@@ -104,7 +104,7 @@ export const ControlButtons = styled.div`
 
       &:hover {
         background: ${props => props.theme.colors.error};
-        transform: translateY(-2px) scale(1.1);
+        transform: translateY(-1px) scale(1.05);
       }
     }
 
@@ -115,7 +115,7 @@ export const ControlButtons = styled.div`
 
       &:hover {
         background: ${props => props.theme.colors.warning};
-        transform: translateY(-2px) scale(1.1);
+        transform: translateY(-1px) scale(1.05);
       }
     }
 
@@ -125,7 +125,7 @@ export const ControlButtons = styled.div`
       border-color: transparent;
 
       &:hover {
-        transform: translateY(-2px) scale(1.1);
+        transform: translateY(-1px) scale(1.05);
         box-shadow: ${props => props.theme.shadows.glow};
       }
     }
@@ -136,22 +136,22 @@ export const MuscleGroupContainer = styled.div`
   display: flex;
   align-items: center;
   background: ${props => props.theme.colors.gradient.dark};
-  padding: ${props => props.theme.spacing.lg};
-  margin: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.lg};
-  border-radius: ${props => props.theme.borderRadius.lg};
+  padding: ${props => props.theme.spacing.md};
+  margin: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.md};
+  border-radius: ${props => props.theme.borderRadius.md};
   cursor: pointer;
   transition: ${props => props.theme.transitions.fast};
-  border: 2px solid ${props => props.theme.colors.border};
+  border: 1px solid ${props => props.theme.colors.border};
   box-shadow: ${props => props.theme.shadows.sm};
   animation: ${slideIn} 0.5s ease-out;
-  min-height: 80px;
-  gap: ${props => props.theme.spacing.md};
+  min-height: 64px;
+  gap: ${props => props.theme.spacing.sm};
 
   &:hover {
     background: ${props => props.theme.colors.surfaceLight};
     border-color: ${props => props.theme.colors.secondary};
-    transform: translateY(-2px);
-    box-shadow: ${props => props.theme.shadows.lg};
+    transform: translateY(-1px);
+    box-shadow: ${props => props.theme.shadows.md};
   }
 
   &:active {
@@ -159,63 +159,63 @@ export const MuscleGroupContainer = styled.div`
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    padding: ${props => props.theme.spacing.md};
-    margin: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
-    min-height: 70px;
-    gap: ${props => props.theme.spacing.sm};
+    padding: ${props => props.theme.spacing.sm};
+    margin: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.xs};
+    min-height: 56px;
+    gap: ${props => props.theme.spacing.xs};
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    padding: ${props => props.theme.spacing.xl};
-    margin: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
-    min-height: 90px;
+    padding: ${props => props.theme.spacing.lg};
+    margin: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+    min-height: 72px;
   }
 `;
 
 export const MuscleIcon = styled.img`
-  width: 60px;
-  height: 60px;
-  border-radius: ${props => props.theme.borderRadius.md};
-  border: 2px solid ${props => props.theme.colors.border};
+  width: 48px;
+  height: 48px;
+  border-radius: ${props => props.theme.borderRadius.sm};
+  border: 1px solid ${props => props.theme.colors.border};
   transition: ${props => props.theme.transitions.fast};
   flex-shrink: 0;
 
   ${MuscleGroupContainer}:hover & {
     border-color: ${props => props.theme.colors.secondary};
-    transform: scale(1.05);
+    transform: scale(1.02);
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    width: 70px;
-    height: 70px;
+    width: 56px;
+    height: 56px;
   }
 `;
 
 export const ArrowIcon = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   margin-left: auto;
   transition: ${props => props.theme.transitions.fast};
   filter: invert(1);
   flex-shrink: 0;
 
   ${MuscleGroupContainer}:hover & {
-    transform: translateX(4px);
+    transform: translateX(2px);
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    width: 28px;
-    height: 28px;
+    width: 20px;
+    height: 20px;
   }
 `;
 
@@ -223,12 +223,12 @@ export const MuscleNameText = styled.div`
   text-align: center;
   margin: 0 auto;
   font-family: ${props => props.theme.typography.fontFamily.muscle};
-  font-size: ${props => props.theme.typography.fontSize['2xl']};
-  font-weight: ${props => props.theme.typography.fontWeight.bold};
+  font-size: ${props => props.theme.typography.fontSize.lg};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
   color: ${props => props.theme.colors.text};
   text-transform: uppercase;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   flex: 1;
   display: flex;
   align-items: center;
@@ -239,11 +239,11 @@ export const MuscleNameText = styled.div`
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: ${props => props.theme.typography.fontSize.xl};
+    font-size: ${props => props.theme.typography.fontSize.base};
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: ${props => props.theme.typography.fontSize['3xl']};
+    font-size: ${props => props.theme.typography.fontSize.xl};
   }
 `;
 

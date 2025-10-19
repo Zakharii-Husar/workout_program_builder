@@ -37,27 +37,27 @@ export const ExitButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: ${props => props.theme.spacing.sm};
+  gap: ${props => props.theme.spacing.xs};
   background: ${props => props.theme.colors.gradient.primary};
   color: ${props => props.theme.colors.background};
   font-family: ${props => props.theme.typography.fontFamily.display};
-  font-size: ${props => props.theme.typography.fontSize.xl};
-  font-weight: ${props => props.theme.typography.fontWeight.bold};
-  padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.xl};
+  font-size: ${props => props.theme.typography.fontSize.lg};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
+  padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
   border: none;
-  border-top: 2px solid ${props => props.theme.colors.border};
+  border-top: 1px solid ${props => props.theme.colors.border};
   cursor: pointer;
   transition: ${props => props.theme.transitions.normal};
-  box-shadow: ${props => props.theme.shadows.lg};
+  box-shadow: ${props => props.theme.shadows.md};
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   margin: 0;
   width: 100%;
   animation: ${fadeIn} 0.3s ease-out;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: ${props => props.theme.shadows.xl}, ${props => props.theme.shadows.glow};
+    transform: translateY(-1px);
+    box-shadow: ${props => props.theme.shadows.lg}, ${props => props.theme.shadows.glow};
     animation: ${pulse} 2s infinite;
   }
 
@@ -66,27 +66,27 @@ export const ExitButton = styled.button`
   }
 
   svg {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: ${props => props.theme.typography.fontSize.lg};
-    padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
+    font-size: ${props => props.theme.typography.fontSize.base};
+    padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
     
     svg {
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
     }
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: ${props => props.theme.typography.fontSize['2xl']};
-    padding: ${props => props.theme.spacing.xl} ${props => props.theme.spacing.xxl};
+    font-size: ${props => props.theme.typography.fontSize.xl};
+    padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.xl};
     
     svg {
-      width: 28px;
-      height: 28px;
+      width: 20px;
+      height: 20px;
     }
   }
 `;
