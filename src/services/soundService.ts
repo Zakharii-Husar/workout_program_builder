@@ -1,3 +1,6 @@
+// Import the audio file so Vite can process it correctly
+import bellSound from '../assets/bell.mp3';
+
 class SoundService {
   private audio: HTMLAudioElement | null = null;
   private isPermissionGranted = false;
@@ -8,7 +11,7 @@ class SoundService {
 
   private initializeAudio() {
     try {
-      this.audio = new Audio('/src/assets/bell.mp3');
+      this.audio = new Audio(bellSound);
       this.audio.preload = 'auto';
       this.audio.volume = 0.7; // Set a reasonable volume
     } catch (error) {
