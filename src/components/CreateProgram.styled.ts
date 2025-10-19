@@ -70,12 +70,12 @@ export const AddExercisesButton = styled.button`
 export const TimerHeader = styled.h2`
   font-family: ${props => props.theme.typography.fontFamily.display};
   font-size: ${props => props.theme.typography.fontSize['3xl']};
-  font-weight: ${props => props.theme.typography.fontWeight.bold};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
   color: ${props => props.theme.colors.text};
   text-align: center;
   margin: ${props => props.theme.spacing.xl} 0 ${props => props.theme.spacing.lg} 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  font-style: italic;
 `;
 
 export const SetTimer = styled.div`
@@ -91,13 +91,14 @@ export const SetTimer = styled.div`
   box-shadow: ${props => props.theme.shadows.lg};
 
   > div {
-    font-family: ${props => props.theme.typography.fontFamily.display};
+    font-family: ${props => props.theme.typography.fontFamily.timer};
     font-size: ${props => props.theme.typography.fontSize['4xl']};
     font-weight: ${props => props.theme.typography.fontWeight.bold};
     color: ${props => props.theme.colors.text};
     text-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     margin-right: ${props => props.theme.spacing.lg};
+    font-variant-numeric: tabular-nums;
   }
 `;
 
@@ -170,12 +171,12 @@ export const NameContainer = styled.div`
 export const NameOutput = styled.h1`
   font-family: ${props => props.theme.typography.fontFamily.display};
   font-size: ${props => props.theme.typography.fontSize['4xl']};
-  font-weight: ${props => props.theme.typography.fontWeight.bold};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
   color: ${props => props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.lg};
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-style: italic;
 `;
 
 export const CancelOrSave = styled.div`

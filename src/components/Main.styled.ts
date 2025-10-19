@@ -55,14 +55,17 @@ export const EmptyState = styled.div`
 `;
 
 export const EmptyStateTitle = styled.h1`
+  font-family: ${props => props.theme.typography.fontFamily.display};
   font-size: ${props => props.theme.typography.fontSize['5xl']};
-  font-weight: ${props => props.theme.typography.fontWeight.extrabold};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
   color: ${props => props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.lg};
   background: ${props => props.theme.colors.gradient.primary};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-style: italic;
+  letter-spacing: 0.5px;
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
     font-size: ${props => props.theme.typography.fontSize['4xl']};

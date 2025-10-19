@@ -40,16 +40,23 @@ export const TimerContainer = styled.div`
 
 export const Display = styled.div`
   text-align: center;
-  font-family: ${props => props.theme.typography.fontFamily.display};
+  font-family: ${props => props.theme.typography.fontFamily.timer};
   font-size: ${props => props.theme.typography.fontSize['4xl']};
   font-weight: ${props => props.theme.typography.fontWeight.bold};
   color: ${props => props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.lg};
   text-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  font-variant-numeric: tabular-nums;
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
     font-size: ${props => props.theme.typography.fontSize['5xl']};
+    letter-spacing: 4px;
+  }
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    font-size: ${props => props.theme.typography.fontSize['6xl']};
+    letter-spacing: 5px;
   }
 `;
 

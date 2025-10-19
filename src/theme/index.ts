@@ -33,9 +33,10 @@ export const theme = {
   },
   typography: {
     fontFamily: {
-      primary: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      display: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      muscle: "'Bebas Neue', 'Arial Black', sans-serif",
+      primary: "'Source Serif Pro', 'Georgia', serif",
+      display: "'Playfair Display', 'Georgia', serif",
+      muscle: "'Orbitron', 'Courier New', monospace",
+      timer: "'Orbitron', 'Courier New', monospace",
     },
     fontSize: {
       xs: '0.75rem',   // 12px
