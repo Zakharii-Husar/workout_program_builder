@@ -10,6 +10,7 @@ interface TimerProps {
 const Timer: React.FC<TimerProps> = ({ time }) => {
   const {
     isRunning,
+    isFinished,
     displayTime,
     start,
     pause,
@@ -19,7 +20,7 @@ const Timer: React.FC<TimerProps> = ({ time }) => {
 
   return (
     <TimerContainer>
-      <Display>{displayTime}</Display>
+      <Display $isFinished={isFinished}>{displayTime}</Display>
       <ButtonsContainer>
         {isRunning ? (
           <icons.pause onClick={toggle} />

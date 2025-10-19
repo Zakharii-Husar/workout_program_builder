@@ -13,6 +13,8 @@ export const useTimer = (initialTime: number) => {
     };
   });
 
+  const [isFinished, setIsFinished] = useState(false);
+
   const start = useCallback(() => {
     setTimerState(prev => ({ ...prev, isRunning: true }));
   }, []);
@@ -30,11 +32,26 @@ export const useTimer = (initialTime: number) => {
       seconds,
       milliseconds: 0
     });
+    setIsFinished(false);
   }, [initialTime]);
 
   const toggle = useCallback(() => {
-    setTimerState(prev => ({ ...prev, isRunning: !prev.isRunning }));
-  }, []);
+    setTimerState(prev => {
+      // If timer is at 0:00:00 and not running, reset it before starting
+      if (!prev.isRunning && prev.minutes === 0 && prev.seconds === 0 && prev.milliseconds === 0) {
+        const minutes = Math.floor(initialTime / 60);
+        const seconds = initialTime - minutes * 60;
+        setIsFinished(false);
+        return {
+          isRunning: true,
+          minutes,
+          seconds,
+          milliseconds: 0
+        };
+      }
+      return { ...prev, isRunning: !prev.isRunning };
+    });
+  }, [initialTime]);
 
   // Timer logic
   useEffect(() => {
@@ -55,7 +72,8 @@ export const useTimer = (initialTime: number) => {
             seconds = 59;
             milliseconds = 99;
           } else {
-            // Timer finished
+            // Timer finished - stop running but keep the 0:00:00 display
+            setIsFinished(true);
             return {
               isRunning: false,
               minutes: 0,
@@ -84,6 +102,7 @@ export const useTimer = (initialTime: number) => {
       seconds,
       milliseconds: 0
     }));
+    setIsFinished(false);
   }, [initialTime]);
 
   const formatTime = (value: number): string => {
@@ -94,6 +113,7 @@ export const useTimer = (initialTime: number) => {
 
   return {
     ...timerState,
+    isFinished,
     displayTime,
     start,
     pause,

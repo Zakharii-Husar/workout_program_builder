@@ -38,16 +38,19 @@ export const TimerContainer = styled.div`
   }
 `;
 
-export const Display = styled.div`
+export const Display = styled.div<{ $isFinished?: boolean }>`
   text-align: center;
   font-family: ${props => props.theme.typography.fontFamily.timer};
   font-size: ${props => props.theme.typography.fontSize['4xl']};
   font-weight: ${props => props.theme.typography.fontWeight.bold};
-  color: ${props => props.theme.colors.text};
+  color: ${props => props.$isFinished ? props.theme.colors.error : props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.lg};
-  text-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+  text-shadow: ${props => props.$isFinished 
+    ? '0 0 20px rgba(244, 67, 54, 0.6)' 
+    : '0 0 10px rgba(255, 107, 53, 0.3)'};
   letter-spacing: 3px;
   font-variant-numeric: tabular-nums;
+  animation: ${props => props.$isFinished ? pulse : 'none'} 1s infinite;
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
     font-size: ${props => props.theme.typography.fontSize['5xl']};
