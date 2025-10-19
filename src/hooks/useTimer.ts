@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { TimerState } from '../types';
+import { soundService } from '../services/soundService';
 
 export const useTimer = (initialTime: number) => {
   const [timerState, setTimerState] = useState<TimerState>(() => {
@@ -74,6 +75,8 @@ export const useTimer = (initialTime: number) => {
           } else {
             // Timer finished - stop running but keep the 0:00:00 display
             setIsFinished(true);
+            // Play bell sound 3 times when timer finishes
+            soundService.playBellWithPermissionRequest(3);
             return {
               isRunning: false,
               minutes: 0,
