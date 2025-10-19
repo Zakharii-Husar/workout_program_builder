@@ -105,15 +105,11 @@ const CreateProgram: React.FC = () => {
         <SetTimer>
           <div>{formatTime(timer)}</div>
           <EditTime>
-            <img 
-              src={icons.up} 
+            <icons.up 
               onClick={() => handleTimerChange(15)}
-              alt="Increase timer"
             />
-            <img 
-              src={icons.down} 
+            <icons.down 
               onClick={() => handleTimerChange(-15)}
-              alt="Decrease timer"
             />
           </EditTime>
         </SetTimer>
@@ -129,15 +125,11 @@ const CreateProgram: React.FC = () => {
         </NameContainer>
 
         <CancelOrSave>
-          <img 
-            src={icons.remove} 
+          <icons.remove 
             onClick={handleCancel}
-            alt="Cancel"
           />
-          <img 
-            src={icons.check} 
+          <icons.check 
             onClick={handleSaveProgram}
-            alt="Save"
           />
         </CancelOrSave>
       </CreateProgramContainer>

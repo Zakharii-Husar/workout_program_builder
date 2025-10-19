@@ -116,24 +116,18 @@ const Exercises: React.FC = () => {
       ))}
 
       <ControlButtons>
-        <img 
-          src={icons.cancel} 
+        <icons.cancel 
           onClick={handleClearAll}
-          alt="Cancel"
         />
-        <img 
-          src={icons.correct}
+        <icons.correct
           onClick={handleRemoveLastExercise}
           style={chosenExercises.length > 0 ? 
             { display: "flex" } : 
             { display: "none" }
           }
-          alt="Remove last exercise"
         />
-        <img 
-          src={icons.save} 
+        <icons.save 
           onClick={handleSave}
-          alt="Save"
         />
       </ControlButtons>
     </ExercisesContainer>

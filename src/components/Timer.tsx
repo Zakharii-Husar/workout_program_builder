@@ -21,16 +21,12 @@ const Timer: React.FC<TimerProps> = ({ time }) => {
     <TimerContainer>
       <Display>{displayTime}</Display>
       <ButtonsContainer>
-        <img 
-          src={isRunning ? icons.pause : icons.start} 
-          onClick={toggle}
-          alt={isRunning ? 'Pause' : 'Start'}
-        />
-        <img 
-          src={icons.stop} 
-          onClick={reset}
-          alt="Stop"
-        />
+        {isRunning ? (
+          <icons.pause onClick={toggle} />
+        ) : (
+          <icons.start onClick={toggle} />
+        )}
+        <icons.stop onClick={reset} />
       </ButtonsContainer>
     </TimerContainer>
   );

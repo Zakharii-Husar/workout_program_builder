@@ -1,18 +1,21 @@
 import arrow from '../assets/arrow.png';
 
-import add from '../icons/add.png';
-import check from '../icons/check.png';
-import remove from '../icons/delete.png';
-import greendot from '../icons/greendot.png';
-import reddot from '../icons/reddot.png';
-import down from '../icons/down.png';
-import up from '../icons/up.png';
-import start from '../icons/start.png';
-import pause from '../icons/pause.png';
-import stop from '../icons/stop.png';
-import save from '../icons/save.png';
-import correct from '../icons/correct.png';
-import cancel from '../icons/cancel.png';
+// React Icons imports
+import { 
+  FaPlus as AddIcon,
+  FaCheck as CheckIcon,
+  FaTrash as RemoveIcon,
+  FaCircle as GreenDotIcon,
+  FaCircle as RedDotIcon,
+  FaChevronDown as DownIcon,
+  FaChevronUp as UpIcon,
+  FaPlay as StartIcon,
+  FaPause as PauseIcon,
+  FaStop as StopIcon,
+  FaSave as SaveIcon,
+  FaCheckCircle as CorrectIcon,
+  FaTimes as CancelIcon
+} from 'react-icons/fa';
 
 import chest from '../assets/muscle_groups/chest.png';
 import back from '../assets/muscle_groups/back.png';
@@ -102,19 +105,19 @@ import cableCrunch from '../assets/exercises_icons/core/cableCrunch.png';
 
 export const icons = {
     arrow,
-    add,
-    check,
-    remove,
-    greendot,
-    reddot,
-    down,
-    up,
-    start,
-    pause,
-    stop,
-    save,
-    correct,
-    cancel
+    add: AddIcon,
+    check: CheckIcon,
+    remove: RemoveIcon,
+    greendot: GreenDotIcon,
+    reddot: RedDotIcon,
+    down: DownIcon,
+    up: UpIcon,
+    start: StartIcon,
+    pause: PauseIcon,
+    stop: StopIcon,
+    save: SaveIcon,
+    correct: CorrectIcon,
+    cancel: CancelIcon
 };
 
 export const muscleGroups = [

@@ -21,24 +21,26 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
 }) => {
   const [exerciseIsDone, setExerciseIsDone] = useState<number[]>([]);
 
-  const getIconSource = (iconType: string, element?: any, index?: number) => {
+  const getIconComponent = (iconType: string, element?: any, index?: number) => {
     switch (iconType) {
       case 'arrow':
-        return icons.arrow;
+        return <img src={icons.arrow} alt="arrow" />;
       case 'exercise':
-        return element?.img;
+        return <img src={element?.img} alt={element?.name} />;
       case 'muscle':
-        return element?.img;
+        return <img src={element?.img} alt={element?.name} />;
       case 'add':
-        return icons.add;
+        return <icons.add onClick={() => action2(element, index)} />;
       case 'check':
-        return icons.check;
+        return <icons.check onClick={() => action2(element, index)} />;
       case 'remove':
-        return icons.remove;
+        return <icons.remove onClick={() => action2(element, index)} />;
       case 'dot':
-        return exerciseIsDone.includes(index || 0) ? icons.greendot : icons.reddot;
+        return exerciseIsDone.includes(index || 0) ? 
+          <icons.greendot style={{ color: 'green' }} onClick={() => handleMarkDone(index || 0)} /> : 
+          <icons.reddot style={{ color: 'red' }} onClick={() => handleMarkDone(index || 0)} />;
       default:
-        return '';
+        return null;
     }
   };
 
@@ -58,16 +60,16 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
   return (
     <div>
       {arr.map((element, index) => {
-        const source1 = getIconSource(icon1, element, index);
-        const source2 = getIconSource(icon2, element, index);
+        const iconComponent1 = getIconComponent(icon1, element, index);
+        const iconComponent2 = getIconComponent(icon2, element, index);
 
         return (
           <ExercisesListContainer key={`${element.name}-${index}`} style={style}>
             <Icon1 
-              src={source1} 
               style={icon1 === "none" ? { display: "none" } : { display: "flex" }}
-              alt={element.name}
-            />
+            >
+              {iconComponent1}
+            </Icon1>
             <ExerciseName 
               style={icon1 === "none" ? 
                 { marginLeft: "5%", fontSize: "2rem" } : 
@@ -77,11 +79,9 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
             >
               {index + 1}. {element.name}
             </ExerciseName>
-            <Icon2 
-              src={source2} 
-              onClick={() => handleAction2(element, index)} 
-              alt={icon2}
-            />
+            <Icon2>
+              {iconComponent2}
+            </Icon2>
           </ExercisesListContainer>
         );
       })}
