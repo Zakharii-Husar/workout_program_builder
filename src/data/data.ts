@@ -29,7 +29,7 @@ import hammerCurl from '../assets/exercises_icons/biceps/hammerCurl.png';
 import seatedDumbbellCurl from '../assets/exercises_icons/biceps/seatedDumbbellCurl.png';
 import concentrationCurl from '../assets/exercises_icons/biceps/concentrationCurl.png';
 import barbellPreacherCurl from '../assets/exercises_icons/biceps/barbellPreacherCurl.png';
-import InclineDumbbellCurl from '../assets/exercises_icons/biceps/InclineDumbbellCurl.png';
+import inclineDumbbellCurl from '../assets/exercises_icons/biceps/InclineDumbbellCurl.png';
 //triceps
 import narrowPushUps from '../assets/exercises_icons/triceps/narrowPushUps.png';
 import tricepDips from '../assets/exercises_icons/triceps/tricepDips.png';
@@ -100,8 +100,6 @@ import barbellSideBend from '../assets/exercises_icons/core/barbellSideBend.png'
 import farmerWalk from '../assets/exercises_icons/core/farmerWalk.png';
 import cableCrunch from '../assets/exercises_icons/core/cableCrunch.png';
 
-
-
 export const icons = {
     arrow,
     add,
@@ -119,8 +117,7 @@ export const icons = {
     cancel
 };
 
-
-export const musclesGroups = [
+export const muscleGroups = [
     {
       img: arms,
       name: "Arms",
@@ -150,7 +147,7 @@ export const musclesGroups = [
         name: "Barbell preacher curls"
       },
       {
-        img: InclineDumbbellCurl,
+        img: inclineDumbbellCurl,
         name: "Incline dumbbell curl"
       },
       {
@@ -175,7 +172,7 @@ export const musclesGroups = [
       },
       {
         img: dumbbellFrenchPress,
-        name: "Dumbell french press"
+        name: "Dumbbell french press"
       },
       {
         img: lyingTricepsExtension,
@@ -394,7 +391,7 @@ export const musclesGroups = [
       },
       {
         img: barbellSideBend,
-        name: "Barbell side bent"
+        name: "Barbell side bend"
       },
       {
         img: farmerWalk,
