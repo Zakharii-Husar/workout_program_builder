@@ -41,7 +41,7 @@ export const CreateProgramContainer = styled.div`
 `;
 
 export const AddExercisesButton = styled.button`
-  background: ${props => props.theme.colors.gradient.primary};
+  background: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.background};
   font-family: ${props => props.theme.typography.fontFamily.display};
   font-size: ${props => props.theme.typography.fontSize.lg};
@@ -83,7 +83,7 @@ export const SetTimer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background: ${props => props.theme.colors.gradient.dark};
+  background: ${props => props.theme.colors.surface};
   border-radius: ${props => props.theme.borderRadius.lg};
   padding: ${props => props.theme.spacing.lg};
   margin: ${props => props.theme.spacing.md} 0;
@@ -136,7 +136,7 @@ export const NameContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: ${props => props.theme.colors.gradient.dark};
+  background: ${props => props.theme.colors.surface};
   border-radius: ${props => props.theme.borderRadius.lg};
   padding: ${props => props.theme.spacing.lg};
   margin: ${props => props.theme.spacing.md} 0;
@@ -145,7 +145,7 @@ export const NameContainer = styled.div`
 
   > input {
     text-align: center;
-    background: transparent;
+    background: ${props => props.theme.colors.surface};
     color: ${props => props.theme.colors.text};
     padding: ${props => props.theme.spacing.sm};
     font-size: ${props => props.theme.typography.fontSize.base};
@@ -163,7 +163,7 @@ export const NameContainer = styled.div`
     }
 
     &::placeholder {
-      color: ${props => props.theme.colors.textMuted};
+      color: ${props => props.theme.colors.text};
     }
   }
 `;
@@ -184,7 +184,7 @@ export const CancelOrSave = styled.div`
   justify-content: center;
   gap: ${props => props.theme.spacing.md};
   padding: ${props => props.theme.spacing.lg};
-  background: ${props => props.theme.colors.gradient.dark};
+  background: ${props => props.theme.colors.surface};
   border-radius: ${props => props.theme.borderRadius.lg};
   margin-top: ${props => props.theme.spacing.md};
   border: 1px solid ${props => props.theme.colors.border};
@@ -212,7 +212,7 @@ export const CancelOrSave = styled.div`
 
     &:nth-child(1) {
       background: ${props => props.theme.colors.error};
-      color: ${props => props.theme.colors.text};
+      color: ${props => props.theme.colors.textOnPrimary};
       border-color: transparent;
 
       &:hover {
@@ -222,7 +222,7 @@ export const CancelOrSave = styled.div`
     }
 
     &:nth-child(2) {
-      background: ${props => props.theme.colors.gradient.primary};
+      background: ${props => props.theme.colors.primary};
       color: ${props => props.theme.colors.background};
       border-color: transparent;
 

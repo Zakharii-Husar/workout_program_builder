@@ -46,7 +46,7 @@ const Spinner = styled.div<{ size: string }>`
 
 const LoadingMessage = styled.p`
   margin-top: 1rem;
-  color: ${props => props.theme.colors.textMuted};
+  color: ${props => props.theme.colors.text};
   font-size: 0.9rem;
 `;
 

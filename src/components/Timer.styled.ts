@@ -22,7 +22,7 @@ export const TimerContainer = styled.div`
   position: sticky;
   top: 0;
   z-index: 100;
-  background: ${props => props.theme.colors.gradient.dark};
+  background: ${props => props.theme.colors.primary};
   border-bottom: 1px solid ${props => props.theme.colors.border};
   display: flex;
   flex-direction: column;
@@ -43,7 +43,7 @@ export const Display = styled.div<{ $isFinished?: boolean }>`
   font-family: ${props => props.theme.typography.fontFamily.timer};
   font-size: ${props => props.theme.typography.fontSize['3xl']};
   font-weight: ${props => props.theme.typography.fontWeight.bold};
-  color: ${props => props.$isFinished ? props.theme.colors.error : props.theme.colors.text};
+  color: ${props => props.$isFinished ? props.theme.colors.textOnPrimary : props.theme.colors.textOnPrimary};
   margin-bottom: ${props => props.theme.spacing.md};
   text-shadow: ${props => props.$isFinished 
     ? `0 0 15px ${props.theme.colors.error}99` 
@@ -92,7 +92,7 @@ export const ButtonsContainer = styled.div`
     }
 
     &:nth-child(1) {
-      background: ${props => props.theme.colors.gradient.primary};
+      background: ${props => props.theme.colors.primary};
       color: ${props => props.theme.colors.background};
       border-color: transparent;
       animation: ${pulse} 2s infinite;
@@ -104,7 +104,7 @@ export const ButtonsContainer = styled.div`
 
     &:nth-child(2) {
       background: ${props => props.theme.colors.error};
-      color: ${props => props.theme.colors.text};
+      color: ${props => props.theme.colors.textOnPrimary};
       border-color: transparent;
 
       &:hover {

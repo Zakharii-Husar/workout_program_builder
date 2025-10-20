@@ -34,7 +34,7 @@ export const ChosenExercisesContainer = styled.div`
   position: sticky;
   top: 0;
   z-index: 50;
-  background: ${props => props.theme.colors.gradient.dark};
+  background: ${props => props.theme.colors.primary};
   border-bottom: 1px solid ${props => props.theme.colors.border};
   padding: 0;
   box-shadow: ${props => props.theme.shadows.sm};
@@ -177,7 +177,7 @@ export const ControlButtons = styled.div`
   display: flex;
   justify-content: center;
   gap: ${props => props.theme.spacing.md};
-  background: ${props => props.theme.colors.gradient.dark};
+  background: ${props => props.theme.colors.primary};
   border-top: 1px solid ${props => props.theme.colors.border};
   padding: ${props => props.theme.spacing.md};
   box-shadow: ${props => props.theme.shadows.md};
@@ -204,7 +204,7 @@ export const ControlButtons = styled.div`
 
     &:nth-child(1) {
       background: ${props => props.theme.colors.error};
-      color: ${props => props.theme.colors.text};
+      color: ${props => props.theme.colors.textOnPrimary};
       border-color: transparent;
 
       &:hover {
@@ -225,7 +225,7 @@ export const ControlButtons = styled.div`
     }
 
     &:nth-child(3) {
-      background: ${props => props.theme.colors.gradient.primary};
+      background: ${props => props.theme.colors.primary};
       color: ${props => props.theme.colors.background};
       border-color: transparent;
 
@@ -240,7 +240,7 @@ export const ControlButtons = styled.div`
 export const MuscleGroupContainer = styled.div`
   display: flex;
   align-items: center;
-  background: ${props => props.theme.colors.gradient.dark};
+  background: ${props => props.theme.colors.primary};
   padding: ${props => props.theme.spacing.md};
   margin: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.md};
   border-radius: ${props => props.theme.borderRadius.md};
@@ -253,7 +253,7 @@ export const MuscleGroupContainer = styled.div`
   gap: ${props => props.theme.spacing.sm};
 
   &:hover {
-    background: ${props => props.theme.colors.surfaceLight};
+    background: ${props => props.theme.colors.surface};
     border-color: ${props => props.theme.colors.secondary};
     transform: translateY(-1px);
     box-shadow: ${props => props.theme.shadows.md};
@@ -334,7 +334,7 @@ export const MuscleNameText = styled.div`
   font-family: ${props => props.theme.typography.fontFamily.muscle};
   font-size: ${props => props.theme.typography.fontSize.lg};
   font-weight: ${props => props.theme.typography.fontWeight.semibold};
-  color: ${props => props.theme.colors.text};
+  color: ${props => props.theme.colors.textOnPrimary};
   text-transform: uppercase;
   letter-spacing: 0.5px;
   text-shadow: ${props => props.theme.shadows.sm};
@@ -344,7 +344,7 @@ export const MuscleNameText = styled.div`
   justify-content: center;
 
   ${MuscleGroupContainer}:hover & {
-    color: ${props => props.theme.colors.secondary};
+    color: ${props => props.theme.colors.text};
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {

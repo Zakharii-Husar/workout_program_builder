@@ -38,8 +38,8 @@ export const ExitButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: ${props => props.theme.spacing.xs};
-  background: ${props => props.theme.colors.gradient.primary};
-  color: ${props => props.theme.colors.background};
+  background: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.textOnPrimary};
   font-family: ${props => props.theme.typography.fontFamily.display};
   font-size: ${props => props.theme.typography.fontSize.lg};
   font-weight: ${props => props.theme.typography.fontWeight.semibold};

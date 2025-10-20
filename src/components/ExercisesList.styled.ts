@@ -38,7 +38,7 @@ export const ExercisesListContainer = styled.div`
   gap: ${props => props.theme.spacing.sm};
 
   &:hover {
-    background: ${props => props.theme.colors.surfaceLight};
+    background: ${props => props.theme.colors.surface};
     border-color: ${props => props.theme.colors.borderLight};
     transform: translateY(-0.5px);
     box-shadow: ${props => props.theme.shadows.sm};
@@ -123,7 +123,7 @@ export const Icon1 = styled.div<{ $hidden?: boolean }>`
   svg {
     width: 24px;
     height: 24px;
-    color: ${props => props.theme.colors.textSecondary};
+    color: ${props => props.theme.colors.text};
     transition: ${props => props.theme.transitions.fast};
 
     &:hover {
@@ -281,7 +281,7 @@ export const Icon2 = styled.div`
       padding: 2px;
       background: ${props => props.theme.colors.surface};
       border: 2px solid ${props => props.theme.colors.border};
-      color: ${props => props.theme.colors.textSecondary};
+      color: ${props => props.theme.colors.text};
       border-radius: ${props => props.theme.borderRadius.sm};
 
       &:hover {
@@ -297,7 +297,7 @@ export const Icon2 = styled.div`
     &[data-icon-type="square"] {
       background: transparent;
       border: 2px solid ${props => props.theme.colors.border};
-      color: ${props => props.theme.colors.textSecondary};
+      color: ${props => props.theme.colors.text};
       border-radius: ${props => props.theme.borderRadius.sm};
       padding: ${props => props.theme.spacing.xs};
 
@@ -328,7 +328,7 @@ export const Icon2 = styled.div`
       padding: 2px;
       background: ${props => props.theme.colors.surface};
       border: 2px solid ${props => props.theme.colors.border};
-      color: ${props => props.theme.colors.textSecondary};
+      color: ${props => props.theme.colors.text};
       border-radius: ${props => props.theme.borderRadius.sm};
 
       &:hover {

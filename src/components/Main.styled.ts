@@ -39,7 +39,8 @@ export const EmptyState = styled.div`
   flex: 1;
   padding: ${props => props.theme.spacing.xl};
   text-align: center;
-  background: ${props => props.theme.colors.gradient.dark};
+  background: ${props => props.theme.colors.surface};
+  border: 2px solid ${props => props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius.lg};
   margin: ${props => props.theme.spacing.md};
   box-shadow: ${props => props.theme.shadows.md};
@@ -60,10 +61,6 @@ export const EmptyStateTitle = styled.h1`
   font-weight: ${props => props.theme.typography.fontWeight.semibold};
   color: ${props => props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.md};
-  background: ${props => props.theme.colors.gradient.primary};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   font-style: italic;
   letter-spacing: 0.25px;
 
@@ -79,7 +76,7 @@ export const EmptyStateTitle = styled.h1`
 
 export const EmptyStateSubtitle = styled.p`
   font-size: ${props => props.theme.typography.fontSize.base};
-  color: ${props => props.theme.colors.textSecondary};
+  color: ${props => props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.lg};
   max-width: 400px;
   line-height: ${props => props.theme.typography.lineHeight.normal};
@@ -105,7 +102,7 @@ export const CreateButton = styled.button`
   width: 100%;
   max-width: 240px;
   padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
-  background: ${props => props.theme.colors.gradient.primary};
+  background: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.background};
   font-size: ${props => props.theme.typography.fontSize.lg};
   font-weight: ${props => props.theme.typography.fontWeight.semibold};

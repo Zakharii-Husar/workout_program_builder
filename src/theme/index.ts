@@ -8,29 +8,26 @@ export const theme = {
     dustyBrown: '#B89F8A',      // Hint of Dusty Brown - warm accent
     white: '#FFFFFF',           // Pure white (for high contrast elements)
     
-    // Semantic color mappings
-    primary: '#111111',         // Black for primary elements
-    secondary: '#8E8E8E',       // Warm Gray for secondary elements
-    accent: '#B89F8A',          // Dusty Brown for accents and highlights
-    background: '#FAFAF8',      // Ivory background
-    surface: '#D2C7BA',         // Taupe surface
-    surfaceLight: '#FAFAF8',    // Ivory light surface
-    text: '#111111',            // Black text
-    textSecondary: '#8E8E8E',   // Warm Gray for secondary text
-    textMuted: '#B89F8A',       // Dusty Brown for muted text
+    // 5 Main Theme Colors with proper contrast
+    primary: '#111111',         // Black - for primary actions, important elements
+    secondary: '#8E8E8E',       // Warm Gray - for secondary actions, less important elements  
+    accent: '#B89F8A',          // Dusty Brown - for accents, highlights, interactive elements
+    background: '#FAFAF8',      // Ivory - main background color
+    surface: '#D2C7BA',         // Taupe - for cards, containers, surfaces
+    
+    // Text colors based on background
+    text: '#111111',            // Black text on light backgrounds (background, surface)
+    textOnPrimary: '#FAFAF8',   // Ivory text on primary (black) background
+    textOnSecondary: '#FAFAF8', // Ivory text on secondary (gray) background
+    textOnAccent: '#111111',    // Black text on accent (dusty brown) background
+    
+    // Semantic mappings using the 5 main colors
     success: '#8E8E8E',         // Warm Gray for success states
     warning: '#B89F8A',         // Dusty Brown for warning states
-    error: '#111111',           // Black for error states (high contrast)
+    error: '#111111',           // Black for error states
     border: '#D2C7BA',          // Taupe for borders
-    borderLight: '#FAFAF8',     // Ivory for light borders
+    borderLight: '#8E8E8E',     // Warm Gray for light borders
     shadow: 'rgba(17, 17, 17, 0.1)', // Black shadow
-    gradient: {
-      primary: 'linear-gradient(135deg, #111111 0%, #8E8E8E 100%)',
-      secondary: 'linear-gradient(135deg, #B89F8A 0%, #D2C7BA 100%)',
-      dark: 'linear-gradient(135deg, #111111 0%, #B89F8A 100%)',
-      warm: 'linear-gradient(135deg, #FAFAF8 0%, #D2C7BA 100%)',
-      earthy: 'linear-gradient(135deg, #D2C7BA 0%, #B89F8A 100%)',
-    }
   },
   spacing: {
     xs: '0.25rem', // 4px
