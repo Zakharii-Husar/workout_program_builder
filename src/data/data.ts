@@ -4,7 +4,7 @@ import arrow from '../assets/arrow.png';
 import { 
   FaPlus as AddIcon,
   FaCheck as CheckIcon,
-  FaTrash as RemoveIcon,
+  FaRegTrashAlt as RemoveIcon,
   FaSquare as EmptySquareIcon,
   FaCheckSquare as CheckedSquareIcon,
   FaChevronDown as DownIcon,

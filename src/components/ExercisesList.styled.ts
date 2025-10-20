@@ -201,6 +201,23 @@ export const Icon2 = styled.div`
       transform: translateY(0) scale(1.05);
     }
 
+    /* Special styling for remove/trash icons */
+    &[data-icon-type="remove"] {
+      padding: 2px;
+      background: ${props => props.theme.colors.surface};
+      border: 2px solid ${props => props.theme.colors.border};
+      color: ${props => props.theme.colors.textSecondary};
+      border-radius: ${props => props.theme.borderRadius.sm};
+
+      &:hover {
+        background: ${props => props.theme.colors.error || '#ff4444'};
+        color: ${props => props.theme.colors.background};
+        border-color: ${props => props.theme.colors.error || '#ff4444'};
+        transform: translateY(-1px) scale(1.05);
+        box-shadow: ${props => props.theme.shadows.md};
+      }
+    }
+
     /* Special styling for square icons (dot case) */
     &[data-icon-type="square"] {
       background: transparent;

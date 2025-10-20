@@ -34,7 +34,7 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
       case 'check':
         return <icons.check onClick={() => action2(element, index)} />;
       case 'remove':
-        return <icons.remove onClick={() => action2(element, index)} />;
+        return <icons.remove onClick={() => action2(element, index)} data-icon-type="remove" />;
       case 'dot':
         const isDone = exerciseIsDone.includes(index || 0);
         return isDone ? 
