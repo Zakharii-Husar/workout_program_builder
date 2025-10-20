@@ -36,7 +36,7 @@ export const ChosenExercisesContainer = styled.div`
   z-index: 50;
   background: ${props => props.theme.colors.gradient.dark};
   border-bottom: 1px solid ${props => props.theme.colors.border};
-  padding: ${props => props.theme.spacing.md};
+  padding: 0;
   box-shadow: ${props => props.theme.shadows.sm};
 `;
 
@@ -44,25 +44,51 @@ export const ChosenExercise = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: ${props => props.theme.spacing.xs};
-  justify-content: center;
+  gap: 0;
+  justify-content: flex-start;
   align-items: center;
   min-height: 48px;
+  padding: ${props => props.theme.spacing.sm};
 
   img {
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
     border-radius: ${props => props.theme.borderRadius.sm};
     border: 1px solid ${props => props.theme.colors.border};
     background-color: rgba(255, 255, 255, 0.9);
-    padding: 2px;
+    padding: 4px;
     transition: ${props => props.theme.transitions.fast};
     box-shadow: ${props => props.theme.shadows.sm};
+    margin-right: ${props => props.theme.spacing.xs};
 
     &:hover {
       transform: scale(1.05);
       border-color: ${props => props.theme.colors.secondary};
       box-shadow: ${props => props.theme.shadows.sm};
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
+    padding: ${props => props.theme.spacing.xs};
+    
+    img {
+      width: 40px;
+      height: 40px;
+      padding: 3px;
+    }
+  }
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    padding: ${props => props.theme.spacing.md};
+    
+    img {
+      width: 56px;
+      height: 56px;
+      padding: 5px;
     }
   }
 `;
