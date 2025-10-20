@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { ExerciseService } from '../services/exerciseService';
 import { LoadingSpinner } from './LoadingSpinner';
@@ -18,6 +19,11 @@ import {
 const Exercises: React.FC = () => {
   const { state, actions } = useApp();
   const { chosenExercises } = state;
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  const isEditMode = location.pathname.includes('/edit/');
+  const programId = isEditMode ? location.pathname.split('/')[2] : null;
   
   const [visibleExercises, setVisibleExercises] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -43,11 +49,11 @@ const Exercises: React.FC = () => {
 
   const handleClearAll = () => {
     actions.setChosenExercises([]);
-    actions.showCreateProgram();
+    navigate(isEditMode ? `/edit/${programId}` : '/create');
   };
 
   const handleSave = () => {
-    actions.showCreateProgram();
+    navigate(isEditMode ? `/edit/${programId}` : '/create');
   };
 
   const toggleExercisesVisibility = (muscleIndex: number) => {
@@ -68,14 +74,14 @@ const Exercises: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div style={{ display: state.currentDisplay.exercises }}>
+      <div>
         <LoadingSpinner message="Loading exercises..." />
       </div>
     );
   }
 
   return (
-    <ExercisesContainer style={{ display: state.currentDisplay.exercises }}>
+    <ExercisesContainer>
       <ChosenExercisesContainer>
         <ChosenExercise>
           {chosenExercises.map((exercise, index) => (

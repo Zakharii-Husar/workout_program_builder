@@ -10,34 +10,30 @@ export interface MuscleGroup {
 }
 
 export interface WorkoutProgram {
+  id: string;
   name: string;
   timer: number;
   exercises: Exercise[];
 }
 
 export interface AppState {
-  currentDisplay: {
-    main: string;
-    createProgram: string;
-    exercises: string;
-    startProgram: string;
-  };
   chosenExercises: Exercise[];
   runningProgram: WorkoutProgram | null;
   savedPrograms: WorkoutProgram[];
+  editingProgram: WorkoutProgram | null;
 }
 
 export interface AppContextType {
   state: AppState;
   actions: {
-    showCreateProgram: () => void;
-    showChooseExercises: () => void;
-    showMain: () => void;
     startProgram: (program: WorkoutProgram) => void;
     setChosenExercises: (exercises: Exercise[]) => void;
     setRunningProgram: (program: WorkoutProgram | null) => void;
     addProgram: (program: WorkoutProgram) => void;
     removeProgram: (program: WorkoutProgram) => void;
+    editProgram: (program: WorkoutProgram) => void;
+    updateProgram: (program: WorkoutProgram) => void;
+    clearCreateState: () => void;
   };
 }
 

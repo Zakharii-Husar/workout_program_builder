@@ -6,8 +6,10 @@ interface ExercisesListProps {
   arr: any[];
   icon1: string;
   icon2: string;
+  icon3?: string;
   action1: (element: any) => void;
   action2: (element: any, index?: number) => void;
+  action3?: (element: any, index?: number) => void;
   style?: React.CSSProperties;
 }
 
@@ -15,8 +17,10 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
   arr,
   icon1,
   icon2,
+  icon3,
   action1,
   action2,
+  action3,
   style
 }) => {
   const [exerciseIsDone, setExerciseIsDone] = useState<number[]>([]);
@@ -48,6 +52,8 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
             data-icon-type="square"
             data-checked="false"
           />;
+      case 'edit':
+        return <icons.edit onClick={() => action3?.(element, index)} data-icon-type="edit" />;
       default:
         return null;
     }
@@ -71,6 +77,7 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
       {arr.map((element, index) => {
         const iconComponent1 = getIconComponent(icon1, element, index);
         const iconComponent2 = getIconComponent(icon2, element, index);
+        const iconComponent3 = icon3 ? getIconComponent(icon3, element, index) : null;
 
         return (
           <ExercisesListContainer key={`${element.name}-${index}`} style={style}>
@@ -88,9 +95,16 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
             >
               {index + 1}. {element.name}
             </ExerciseName>
-            <Icon2>
-              {iconComponent2}
-            </Icon2>
+            <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+              {iconComponent3 && (
+                <Icon2>
+                  {iconComponent3}
+                </Icon2>
+              )}
+              <Icon2>
+                {iconComponent2}
+              </Icon2>
+            </div>
           </ExercisesListContainer>
         );
       })}

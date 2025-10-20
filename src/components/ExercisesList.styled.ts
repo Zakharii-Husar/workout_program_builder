@@ -247,6 +247,23 @@ export const Icon2 = styled.div`
         }
       }
     }
+
+    /* Special styling for edit icons */
+    &[data-icon-type="edit"] {
+      padding: 2px;
+      background: ${props => props.theme.colors.surface};
+      border: 2px solid ${props => props.theme.colors.border};
+      color: ${props => props.theme.colors.textSecondary};
+      border-radius: ${props => props.theme.borderRadius.sm};
+
+      &:hover {
+        background: ${props => props.theme.colors.warning || '#ffa500'};
+        color: ${props => props.theme.colors.background};
+        border-color: ${props => props.theme.colors.warning || '#ffa500'};
+        transform: translateY(-1px) scale(1.05);
+        box-shadow: ${props => props.theme.shadows.md};
+      }
+    }
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {

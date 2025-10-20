@@ -1,59 +1,51 @@
 import React, { createContext, useContext, useReducer, useMemo, ReactNode } from 'react';
 import { AppState, AppContextType, WorkoutProgram, Exercise } from '../types';
 
+// Migration function to add IDs to existing programs
+const migratePrograms = (programs: any[]): WorkoutProgram[] => {
+  const migratedPrograms = programs.map(program => {
+    if (!program.id) {
+      return {
+        ...program,
+        id: Date.now().toString(36) + Math.random().toString(36).substr(2)
+      };
+    }
+    return program;
+  });
+  
+  // Save migrated programs back to localStorage if any were migrated
+  if (migratedPrograms.some(p => !programs.find(orig => orig.id === p.id))) {
+    localStorage.setItem("Exarr", JSON.stringify(migratedPrograms));
+  }
+  
+  return migratedPrograms;
+};
+
 // Initial state
 const initialState: AppState = {
-  currentDisplay: {
-    main: "flex",
-    createProgram: "none",
-    exercises: "none",
-    startProgram: "none"
-  },
   chosenExercises: [],
   runningProgram: null,
-  savedPrograms: JSON.parse(localStorage.getItem("Exarr") || "[]")
+  savedPrograms: migratePrograms(JSON.parse(localStorage.getItem("Exarr") || "[]")),
+  editingProgram: null
 };
 
 // Action types
 type AppAction =
-  | { type: 'SHOW_CREATE_PROGRAM' }
-  | { type: 'SHOW_CHOOSE_EXERCISES' }
-  | { type: 'SHOW_MAIN' }
   | { type: 'START_PROGRAM'; payload: WorkoutProgram }
   | { type: 'SET_CHOSEN_EXERCISES'; payload: Exercise[] }
   | { type: 'SET_RUNNING_PROGRAM'; payload: WorkoutProgram | null }
   | { type: 'ADD_PROGRAM'; payload: WorkoutProgram }
-  | { type: 'REMOVE_PROGRAM'; payload: WorkoutProgram };
+  | { type: 'REMOVE_PROGRAM'; payload: WorkoutProgram }
+  | { type: 'EDIT_PROGRAM'; payload: WorkoutProgram }
+  | { type: 'UPDATE_PROGRAM'; payload: WorkoutProgram }
+  | { type: 'CLEAR_CREATE_STATE' };
 
 // Reducer
 const appReducer = (state: AppState, action: AppAction): AppState => {
-  const visibilityOfComponents = {
-    main: "none",
-    createProgram: "none",
-    exercises: "none",
-    startProgram: "none"
-  };
-
   switch (action.type) {
-    case 'SHOW_CREATE_PROGRAM':
-      return {
-        ...state,
-        currentDisplay: { ...visibilityOfComponents, createProgram: "flex" }
-      };
-    case 'SHOW_CHOOSE_EXERCISES':
-      return {
-        ...state,
-        currentDisplay: { ...visibilityOfComponents, exercises: "flex" }
-      };
-    case 'SHOW_MAIN':
-      return {
-        ...state,
-        currentDisplay: { ...visibilityOfComponents, main: "flex" }
-      };
     case 'START_PROGRAM':
       return {
         ...state,
-        currentDisplay: { ...visibilityOfComponents, startProgram: "flex" },
         runningProgram: action.payload
       };
     case 'SET_CHOSEN_EXERCISES':
@@ -74,11 +66,34 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         savedPrograms: newPrograms
       };
     case 'REMOVE_PROGRAM':
-      const filteredPrograms = state.savedPrograms.filter(p => p !== action.payload);
+      const filteredPrograms = state.savedPrograms.filter(p => p.id !== action.payload.id);
       localStorage.setItem("Exarr", JSON.stringify(filteredPrograms));
       return {
         ...state,
         savedPrograms: filteredPrograms
+      };
+    case 'EDIT_PROGRAM':
+      return {
+        ...state,
+        editingProgram: action.payload,
+        chosenExercises: action.payload.exercises
+      };
+    case 'UPDATE_PROGRAM':
+      const updatedPrograms = state.savedPrograms.map(p => 
+        p.id === action.payload.id ? action.payload : p
+      );
+      localStorage.setItem("Exarr", JSON.stringify(updatedPrograms));
+      return {
+        ...state,
+        savedPrograms: updatedPrograms,
+        editingProgram: null,
+        chosenExercises: []
+      };
+    case 'CLEAR_CREATE_STATE':
+      return {
+        ...state,
+        chosenExercises: [],
+        editingProgram: null
       };
     default:
       return state;
@@ -93,14 +108,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   const actions = useMemo(() => ({
-    showCreateProgram: () => dispatch({ type: 'SHOW_CREATE_PROGRAM' }),
-    showChooseExercises: () => dispatch({ type: 'SHOW_CHOOSE_EXERCISES' }),
-    showMain: () => dispatch({ type: 'SHOW_MAIN' }),
     startProgram: (program: WorkoutProgram) => dispatch({ type: 'START_PROGRAM', payload: program }),
     setChosenExercises: (exercises: Exercise[]) => dispatch({ type: 'SET_CHOSEN_EXERCISES', payload: exercises }),
     setRunningProgram: (program: WorkoutProgram | null) => dispatch({ type: 'SET_RUNNING_PROGRAM', payload: program }),
     addProgram: (program: WorkoutProgram) => dispatch({ type: 'ADD_PROGRAM', payload: program }),
-    removeProgram: (program: WorkoutProgram) => dispatch({ type: 'REMOVE_PROGRAM', payload: program })
+    removeProgram: (program: WorkoutProgram) => dispatch({ type: 'REMOVE_PROGRAM', payload: program }),
+    editProgram: (program: WorkoutProgram) => dispatch({ type: 'EDIT_PROGRAM', payload: program }),
+    updateProgram: (program: WorkoutProgram) => dispatch({ type: 'UPDATE_PROGRAM', payload: program }),
+    clearCreateState: () => dispatch({ type: 'CLEAR_CREATE_STATE' })
   }), []);
 
   const contextValue = useMemo(() => ({ state, actions }), [state, actions]);

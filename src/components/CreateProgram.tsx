@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { useValidation } from '../hooks/useValidation';
 import { ProgramService } from '../services/programService';
@@ -18,17 +19,48 @@ import {
 
 const CreateProgram: React.FC = () => {
   const { state, actions } = useApp();
-  const { chosenExercises } = state;
+  const { chosenExercises, editingProgram, savedPrograms } = state;
   const { validateProgram, getError, clearErrors, hasErrors } = useValidation();
+  const navigate = useNavigate();
+  const { programId } = useParams<{ programId: string }>();
+  const location = useLocation();
+  
+  const isEditMode = location.pathname.startsWith('/edit/');
+  const currentProgram = isEditMode && programId ? 
+    savedPrograms.find(p => p.id === programId) : null;
   
   const [name, setName] = useState('My Workout');
   const [timer, setTimer] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Initialize form with editing program data if in edit mode
+  useEffect(() => {
+    if (isEditMode && currentProgram) {
+      setName(currentProgram.name);
+      setTimer(currentProgram.timer);
+      actions.setChosenExercises(currentProgram.exercises);
+    } else if (editingProgram) {
+      setName(editingProgram.name);
+      setTimer(editingProgram.timer);
+    } else {
+      // For create mode, only reset if we're starting completely fresh
+      // Don't reset if we already have chosen exercises (coming back from exercises page)
+      if (chosenExercises.length === 0) {
+        setName('My Workout');
+        setTimer(0);
+      }
+    }
+  }, [isEditMode, currentProgram, editingProgram, actions, chosenExercises.length]);
+
   const handleSaveProgram = async () => {
     clearErrors();
     
-    const program = ProgramService.createProgram(name, timer, chosenExercises);
+    const program = ProgramService.createProgram(
+      name, 
+      timer, 
+      chosenExercises, 
+      isEditMode ? programId : editingProgram?.id
+    );
     const validation = ProgramService.validateProgram(program);
     
     if (!validation.isValid) {
@@ -42,13 +74,18 @@ const CreateProgram: React.FC = () => {
     setIsLoading(true);
     
     try {
-      actions.addProgram(program);
-      alert('The program has been saved!');
-      actions.showMain();
+      if (isEditMode || editingProgram) {
+        actions.updateProgram(program);
+        alert('The program has been updated!');
+      } else {
+        actions.addProgram(program);
+        alert('The program has been saved!');
+      }
       // Reset form
       setName('My Workout');
       setTimer(0);
-      actions.setChosenExercises([]);
+      actions.clearCreateState();
+      navigate('/');
     } catch (error) {
       console.error('Error saving program:', error);
       alert('Failed to save program. Please try again.');
@@ -58,7 +95,7 @@ const CreateProgram: React.FC = () => {
   };
 
   const handleCancel = () => {
-    actions.showMain();
+    navigate('/');
   };
 
   const handleTimerChange = (increment: number) => {
@@ -78,14 +115,14 @@ const CreateProgram: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div style={{ display: state.currentDisplay.createProgram }}>
+      <div>
         <LoadingSpinner message="Saving program..." />
       </div>
     );
   }
 
   return (
-    <div style={{ display: state.currentDisplay.createProgram }}>
+    <div>
       <CreateProgramContainer>
         <div className="chosenExercises">
           <ExercisesList
@@ -97,7 +134,7 @@ const CreateProgram: React.FC = () => {
           />
         </div>
 
-        <AddExercisesButton onClick={actions.showChooseExercises}>
+        <AddExercisesButton onClick={() => navigate(isEditMode ? `/edit/${programId}/exercises` : '/create/exercises')}>
           {chosenExercises.length > 0 ? 'Edit Exercises' : 'Add Exercises'}
         </AddExercisesButton>
 

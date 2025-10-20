@@ -25,7 +25,7 @@ export class ProgramService {
   static removeProgram(program: WorkoutProgram): void {
     try {
       const existingPrograms = this.getSavedPrograms();
-      const updatedPrograms = existingPrograms.filter(p => p !== program);
+      const updatedPrograms = existingPrograms.filter(p => p.id !== program.id);
       localStorage.setItem("Exarr", JSON.stringify(updatedPrograms));
     } catch (error) {
       console.error('Error removing program:', error);
@@ -33,12 +33,30 @@ export class ProgramService {
     }
   }
 
-  static createProgram(name: string, timer: number, exercises: Exercise[]): WorkoutProgram {
+  static updateProgram(updatedProgram: WorkoutProgram): void {
+    try {
+      const existingPrograms = this.getSavedPrograms();
+      const updatedPrograms = existingPrograms.map(p => 
+        p.id === updatedProgram.id ? updatedProgram : p
+      );
+      localStorage.setItem("Exarr", JSON.stringify(updatedPrograms));
+    } catch (error) {
+      console.error('Error updating program:', error);
+      throw new Error('Failed to update program');
+    }
+  }
+
+  static createProgram(name: string, timer: number, exercises: Exercise[], id?: string): WorkoutProgram {
     return {
+      id: id || this.generateId(),
       name: name.trim(),
       timer,
       exercises: [...exercises]
     };
+  }
+
+  static generateId(): string {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2);
   }
 
   static validateProgram(program: Partial<WorkoutProgram>): { isValid: boolean; errors: string[] } {

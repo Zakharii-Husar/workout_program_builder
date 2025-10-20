@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { LoadingSpinner } from './LoadingSpinner';
 import Timer from './Timer';
@@ -8,21 +9,33 @@ import { icons } from '../data/data';
 
 const StartProgram: React.FC = () => {
   const { state, actions } = useApp();
-  const { runningProgram } = state;
+  const { runningProgram, savedPrograms } = state;
+  const navigate = useNavigate();
+  const { programId } = useParams<{ programId: string }>();
+  
+  // Find the program by ID from URL params
+  const currentProgram = programId ? savedPrograms.find(p => p.id === programId) : runningProgram;
+  
+  // If program not found, redirect to main page
+  useEffect(() => {
+    if (programId && !currentProgram) {
+      navigate('/');
+    }
+  }, [programId, currentProgram, navigate]);
 
-  if (!runningProgram) {
+  if (!currentProgram) {
     return (
-      <div style={{ display: state.currentDisplay.startProgram }}>
+      <div>
         <LoadingSpinner message="Loading program..." />
       </div>
     );
   }
 
-  const exercises = runningProgram.exercises || [];
+  const exercises = currentProgram.exercises || [];
 
   return (
-    <StartProgramContainer style={{ display: state.currentDisplay.startProgram }}>
-      <Timer time={runningProgram.timer} />
+    <StartProgramContainer>
+      <Timer time={currentProgram.timer} />
       
       <ExercisesList
         arr={exercises}
@@ -32,7 +45,7 @@ const StartProgram: React.FC = () => {
         action2={() => {}}
       />
 
-      <ExitButton onClick={actions.showMain}>
+      <ExitButton onClick={() => navigate('/')}>
         <icons.cancel />
         Exit Workout
       </ExitButton>
