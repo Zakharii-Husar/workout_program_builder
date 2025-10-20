@@ -19,7 +19,8 @@ import {
   MuscleIcon,
   ArrowIcon,
   MuscleNameText,
-  ControlButton
+  ControlButton,
+  ContentWrapper
 } from './Exercises.styled';
 
 const Exercises: React.FC = () => {
@@ -173,28 +174,30 @@ const Exercises: React.FC = () => {
         )}
       </ChosenExercisesContainer>
 
-      {muscleGroups.map((muscle, muscleIndex) => (
-        <div key={muscle.name}>
-          <MuscleGroupContainer>
-            <MuscleIcon src={muscle.img} alt={muscle.name} />
-            <MuscleNameText>{muscle.name}</MuscleNameText>
-            <ArrowIcon 
-              src={icons.arrow} 
-              onClick={() => toggleExercisesVisibility(muscleIndex)}
-              alt="Toggle exercises"
+      <ContentWrapper>
+        {muscleGroups.map((muscle, muscleIndex) => (
+          <div key={muscle.name}>
+            <MuscleGroupContainer>
+              <MuscleIcon src={muscle.img} alt={muscle.name} />
+              <MuscleNameText>{muscle.name}</MuscleNameText>
+              <ArrowIcon 
+                src={icons.arrow} 
+                onClick={() => toggleExercisesVisibility(muscleIndex)}
+                alt="Toggle exercises"
+              />
+            </MuscleGroupContainer>
+            
+            <ExercisesList
+              arr={muscle.exercises}
+              icon1="exercise"
+              icon2="add"
+              action1={() => {}}
+              action2={handleAddExercise}
+              $isVisible={visibleExercises.includes(muscleIndex)}
             />
-          </MuscleGroupContainer>
-          
-          <ExercisesList
-            arr={muscle.exercises}
-            icon1="exercise"
-            icon2="add"
-            action1={() => {}}
-            action2={handleAddExercise}
-            $isVisible={visibleExercises.includes(muscleIndex)}
-          />
-        </div>
-      ))}
+          </div>
+        ))}
+      </ContentWrapper>
 
       <ControlButtons>
         <ControlButton>

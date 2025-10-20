@@ -28,21 +28,54 @@ export const ExercisesContainer = styled.div`
   width: 100%;
   min-height: 100vh;
   background: ${props => props.theme.colors.background};
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: ${props => props.theme.spacing.lg};
+  padding-top: calc(80px + ${props => props.theme.spacing.lg});
+  padding-bottom: calc(120px + ${props => props.theme.spacing.lg});
+  gap: ${props => props.theme.spacing.lg};
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
+    padding: ${props => props.theme.spacing.md};
+    padding-top: calc(70px + ${props => props.theme.spacing.md});
+    padding-bottom: calc(100px + ${props => props.theme.spacing.md});
+    gap: ${props => props.theme.spacing.md};
+  }
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    padding: ${props => props.theme.spacing.xl};
+    padding-top: calc(90px + ${props => props.theme.spacing.xl});
+    padding-bottom: calc(140px + ${props => props.theme.spacing.xl});
+    gap: ${props => props.theme.spacing.xl};
+  }
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
+    padding: ${props => props.theme.spacing.xxxl};
+    padding-top: calc(90px + ${props => props.theme.spacing.xxxl});
+    padding-bottom: calc(140px + ${props => props.theme.spacing.xxxl});
+    gap: ${props => props.theme.spacing.xxxl};
+  }
 `;
 
 export const ChosenExercisesContainer = styled.div`
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 50;
+  left: 0;
+  right: 0;
+  z-index: 100;
   background: linear-gradient(135deg, ${props => props.theme.colors.primary}, ${props => props.theme.colors.accent});
   border-bottom: 2px solid ${props => props.theme.colors.border};
   padding: 0;
   box-shadow: ${props => props.theme.shadows.lg};
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: center;
   min-height: 80px;
   height: 80px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
     min-height: 70px;
@@ -64,6 +97,7 @@ export const ChosenExercise = styled.div`
   align-items: center;
   height: 100%;
   padding: ${props => props.theme.spacing.lg};
+  width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   flex: 1;
@@ -207,32 +241,34 @@ export const ScrollButton = styled.button<{ $position: 'left' | 'right' }>`
 `;
 
 export const ControlButtons = styled.div`
-  position: sticky;
+  position: fixed;
   bottom: 0;
-  z-index: 50;
+  left: 0;
+  right: 0;
+  z-index: 100;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: ${props => props.theme.spacing.lg};
   background: linear-gradient(135deg, ${props => props.theme.colors.primary}, ${props => props.theme.colors.accent});
   border-top: 2px solid ${props => props.theme.colors.border};
   padding: ${props => props.theme.spacing.xl};
   box-shadow: ${props => props.theme.shadows.xl};
-  margin: 0 -${props => props.theme.spacing.lg};
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    margin: 0 -${props => props.theme.spacing.md};
     padding: ${props => props.theme.spacing.lg};
     gap: ${props => props.theme.spacing.md};
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    margin: 0 -${props => props.theme.spacing.xl};
     padding: ${props => props.theme.spacing.xxl};
     gap: ${props => props.theme.spacing.xl};
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
-    margin: 0 -${props => props.theme.spacing.xxxl};
     padding: ${props => props.theme.spacing.xxxl};
   }
 
@@ -455,6 +491,12 @@ export const MuscleNameText = styled.div`
 
 export const ControlButton = styled.div<{ $isVisible?: boolean }>`
   display: ${props => props.$isVisible !== undefined ? (props.$isVisible ? 'flex' : 'none') : 'flex'};
+`;
+
+export const ContentWrapper = styled.div`
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
 `;
 
 // Media query for mobile

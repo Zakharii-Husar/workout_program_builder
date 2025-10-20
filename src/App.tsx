@@ -13,13 +13,11 @@ import StartProgram from './components/StartProgram';
 const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
-  margin: 0 auto 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   justify-content: center;
-
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-  }
+  min-height: 100vh;
 `;
 
 function App() {

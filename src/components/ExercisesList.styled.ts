@@ -27,7 +27,7 @@ export const ExercisesListContainer = styled.div`
   flex-direction: row;
   align-items: center;
   background: linear-gradient(135deg, ${props => props.theme.colors.surface}, ${props => props.theme.colors.background});
-  margin: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
+  margin: ${props => props.theme.spacing.md} 0;
   padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.xl};
   border-radius: ${props => props.theme.borderRadius.xl};
   border: 2px solid ${props => props.theme.colors.border};
@@ -38,6 +38,8 @@ export const ExercisesListContainer = styled.div`
   gap: ${props => props.theme.spacing.lg};
   position: relative;
   overflow: hidden;
+  width: 100%;
+  max-width: 100%;
 
   &::before {
     content: '';
@@ -65,14 +67,14 @@ export const ExercisesListContainer = styled.div`
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    margin: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+    margin: ${props => props.theme.spacing.sm} 0;
     padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
     min-height: 70px;
     gap: ${props => props.theme.spacing.md};
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    margin: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.xl};
+    margin: ${props => props.theme.spacing.lg} 0;
     padding: ${props => props.theme.spacing.xl} ${props => props.theme.spacing.xxl};
     min-height: 90px;
     gap: ${props => props.theme.spacing.xl};
@@ -96,6 +98,10 @@ export const ExerciseName = styled.div<{ $isCentered?: boolean }>`
   margin-left: ${props => props.$isCentered ? '5%' : 'auto'};
   position: relative;
   z-index: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   &:hover {
     color: ${props => props.theme.colors.accent};
@@ -236,6 +242,7 @@ export const ExercisesListWrapper = styled.div<{ $isVisible: boolean }>`
   opacity: ${props => props.$isVisible ? 1 : 0};
   transition: ${props => props.theme.transitions.normal};
   width: 100%;
+  max-width: 100%;
 `;
 
 export const IconContainer = styled.div`
