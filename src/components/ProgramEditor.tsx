@@ -200,14 +200,14 @@ const ProgramEditor: React.FC = () => {
           </StepHeader>
           <StepContent>
             <CancelOrSave>
-              <CancelButton onClick={handleCancel}>
-                <icons.cancel />
-                <span>Cancel</span>
-              </CancelButton>
               <SaveButton onClick={handleSaveProgram}>
                 <icons.check />
                 <span>{isEditMode || editingProgram ? 'Update' : 'Create'}</span>
               </SaveButton>
+              <CancelButton onClick={handleCancel}>
+                <icons.cancel />
+                <span>Cancel</span>
+              </CancelButton>
             </CancelOrSave>
           </StepContent>
         </StepContainer>
