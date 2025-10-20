@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { ExerciseService } from '../services/exerciseService';
 import { LoadingSpinner } from './LoadingSpinner';
 import ExercisesList from './ExercisesList';
 import { icons } from '../data/data';
+import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai';
 import { 
   ExercisesContainer, 
   ChosenExercisesContainer, 
   ChosenExercise, 
   ExerciseContainer,
   ExerciseCountBadge,
+  ScrollButton,
   ControlButtons,
   MuscleGroupContainer,
   MuscleIcon,
@@ -30,6 +32,9 @@ const Exercises: React.FC = () => {
   
   const [visibleExercises, setVisibleExercises] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const muscleGroups = ExerciseService.getAllMuscleGroups();
 
@@ -47,6 +52,35 @@ const Exercises: React.FC = () => {
     
     return acc;
   }, [] as Array<{ name: string; img: string; count: number }>);
+
+  // Check scroll position and update button states
+  const checkScrollPosition = () => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      setCanScrollLeft(container.scrollLeft > 0);
+      setCanScrollRight(container.scrollLeft < container.scrollWidth - container.clientWidth);
+    }
+  };
+
+  // Auto-scroll to end when exercises are added
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
+      checkScrollPosition();
+    }
+  }, [chosenExercises.length]);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+    }
+  };
 
   const handleAddExercise = (exercise: any) => {
     const updatedExercises = ExerciseService.addExerciseToProgram(chosenExercises, exercise);
@@ -101,7 +135,15 @@ const Exercises: React.FC = () => {
   return (
     <ExercisesContainer>
       <ChosenExercisesContainer>
-        <ChosenExercise>
+        {canScrollLeft && (
+          <ScrollButton $position="left" onClick={scrollLeft}>
+            <AiOutlineCaretLeft size={30} />
+          </ScrollButton>
+        )}
+        <ChosenExercise 
+          ref={scrollContainerRef}
+          onScroll={checkScrollPosition}
+        >
           {groupedExercises.map((exercise, index) => (
             <ExerciseContainer key={`${exercise.name}-${index}`}>
               <img 
@@ -114,6 +156,11 @@ const Exercises: React.FC = () => {
             </ExerciseContainer>
           ))}
         </ChosenExercise>
+        {canScrollRight && (
+          <ScrollButton $position="right" onClick={scrollRight}>
+            <AiOutlineCaretRight size={30}/>
+          </ScrollButton>
+        )}
       </ChosenExercisesContainer>
 
       {muscleGroups.map((muscle, muscleIndex) => (

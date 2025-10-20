@@ -38,17 +38,30 @@ export const ChosenExercisesContainer = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.border};
   padding: 0;
   box-shadow: ${props => props.theme.shadows.sm};
+  display: flex;
+  align-items: center;
+  position: relative;
 `;
 
 export const ChosenExercise = styled.div`
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0;
   justify-content: flex-start;
   align-items: center;
   min-height: 48px;
   padding: ${props => props.theme.spacing.sm};
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex: 1;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  /* Hide scrollbar for webkit browsers */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   img {
     width: 48px;
@@ -96,6 +109,7 @@ export const ChosenExercise = styled.div`
 export const ExerciseContainer = styled.div`
   position: relative;
   margin-right: ${props => props.theme.spacing.xs};
+  flex-shrink: 0;
 
   &:last-child {
     margin-right: 0;
@@ -137,6 +151,25 @@ export const ExerciseCountBadge = styled.div`
   }
 `;
 
+export const ScrollButton = styled.button<{ $position: 'left' | 'right' }>`
+  position: absolute;
+  ${props => props.$position}: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+`;
+
 export const ControlButtons = styled.div`
   position: sticky;
   bottom: 0;
@@ -151,7 +184,7 @@ export const ControlButtons = styled.div`
 
   svg {
     width: 36px;
-    height: 36px;
+    height: 100%;
     padding: ${props => props.theme.spacing.xs};
     background: ${props => props.theme.colors.surface};
     border-radius: ${props => props.theme.borderRadius.full};
