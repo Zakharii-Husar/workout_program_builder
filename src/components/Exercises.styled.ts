@@ -93,6 +93,50 @@ export const ChosenExercise = styled.div`
   }
 `;
 
+export const ExerciseContainer = styled.div`
+  position: relative;
+  margin-right: ${props => props.theme.spacing.xs};
+
+  &:last-child {
+    margin-right: 0;
+  }
+`;
+
+export const ExerciseCountBadge = styled.div`
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: ${props => props.theme.colors.error || '#ff4444'};
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    top: -6px;
+    right: -6px;
+  }
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    width: 22px;
+    height: 22px;
+    font-size: 13px;
+    top: -9px;
+    right: -9px;
+  }
+`;
+
 export const ControlButtons = styled.div`
   position: sticky;
   bottom: 0;

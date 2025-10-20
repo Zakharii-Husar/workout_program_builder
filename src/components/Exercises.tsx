@@ -9,6 +9,8 @@ import {
   ExercisesContainer, 
   ChosenExercisesContainer, 
   ChosenExercise, 
+  ExerciseContainer,
+  ExerciseCountBadge,
   ControlButtons,
   MuscleGroupContainer,
   MuscleIcon,
@@ -30,6 +32,21 @@ const Exercises: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const muscleGroups = ExerciseService.getAllMuscleGroups();
+
+  // Group consecutive exercises with the same name
+  const groupedExercises = chosenExercises.reduce((acc, exercise, index) => {
+    const lastGroup = acc[acc.length - 1];
+    
+    // If this is the first exercise or the name is different from the last group, create a new group
+    if (!lastGroup || lastGroup.name !== exercise.name) {
+      acc.push({ ...exercise, count: 1 });
+    } else {
+      // If the name matches the last group, increment the count
+      lastGroup.count += 1;
+    }
+    
+    return acc;
+  }, [] as Array<{ name: string; img: string; count: number }>);
 
   const handleAddExercise = (exercise: any) => {
     const updatedExercises = ExerciseService.addExerciseToProgram(chosenExercises, exercise);
@@ -85,12 +102,16 @@ const Exercises: React.FC = () => {
     <ExercisesContainer>
       <ChosenExercisesContainer>
         <ChosenExercise>
-          {chosenExercises.map((exercise, index) => (
-            <img 
-              key={`${exercise.name}-${index}`}
-              src={exercise.img} 
-              alt={exercise.name}
-            />
+          {groupedExercises.map((exercise, index) => (
+            <ExerciseContainer key={`${exercise.name}-${index}`}>
+              <img 
+                src={exercise.img} 
+                alt={exercise.name}
+              />
+              <ExerciseCountBadge>
+                {exercise.count}
+              </ExerciseCountBadge>
+            </ExerciseContainer>
           ))}
         </ChosenExercise>
       </ChosenExercisesContainer>
