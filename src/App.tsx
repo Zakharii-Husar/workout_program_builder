@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import styled from 'styled-components';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import { ThemeProvider } from './theme/ThemeProvider';
@@ -10,6 +10,18 @@ import CreateProgram from './components/CreateProgram';
 import Exercises from './components/Exercises';
 import StartProgram from './components/StartProgram';
 
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto 0 auto;
+  justify-content: center;
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
+`;
+
 function App() {
   return (
     <ErrorBoundary>
@@ -17,7 +29,7 @@ function App() {
         <AppProvider>
           <Router>
             <RouteGuard>
-              <div className="App">
+              <AppContainer>
                 <Routes>
                   <Route path="/" element={<Main />} />
                   <Route path="/create" element={<CreateProgram />} />
@@ -27,7 +39,7 @@ function App() {
                   <Route path="/start/:programId" element={<StartProgram />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
-              </div>
+              </AppContainer>
             </RouteGuard>
           </Router>
         </AppProvider>

@@ -108,7 +108,7 @@ export const Icon1 = styled.div<{ $hidden?: boolean }>`
     object-fit: cover;
     border-radius: ${props => props.theme.borderRadius.sm};
     border: 1px solid ${props => props.theme.colors.border};
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: ${props => props.theme.colors.white}E6;
     padding: 3px;
     transition: ${props => props.theme.transitions.fast};
     box-shadow: ${props => props.theme.shadows.sm};
@@ -241,7 +241,7 @@ export const Icon2 = styled.div`
     object-fit: cover;
     border-radius: ${props => props.theme.borderRadius.sm};
     border: 1px solid ${props => props.theme.colors.border};
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: ${props => props.theme.colors.white}E6;
     padding: 2px;
     transition: ${props => props.theme.transitions.fast};
     box-shadow: ${props => props.theme.shadows.sm};
@@ -285,9 +285,9 @@ export const Icon2 = styled.div`
       border-radius: ${props => props.theme.borderRadius.sm};
 
       &:hover {
-        background: ${props => props.theme.colors.error || '#ff4444'};
-        color: ${props => props.theme.colors.background};
-        border-color: ${props => props.theme.colors.error || '#ff4444'};
+        background: ${props => props.theme.colors.error};
+        color: ${props => props.theme.colors.white};
+        border-color: ${props => props.theme.colors.error};
         transform: translateY(-1px) scale(1.05);
         box-shadow: ${props => props.theme.shadows.md};
       }
@@ -332,9 +332,9 @@ export const Icon2 = styled.div`
       border-radius: ${props => props.theme.borderRadius.sm};
 
       &:hover {
-        background: ${props => props.theme.colors.warning || '#ffa500'};
-        color: ${props => props.theme.colors.background};
-        border-color: ${props => props.theme.colors.warning || '#ffa500'};
+        background: ${props => props.theme.colors.warning};
+        color: ${props => props.theme.colors.white};
+        border-color: ${props => props.theme.colors.warning};
         transform: translateY(-1px) scale(1.05);
         box-shadow: ${props => props.theme.shadows.md};
       }

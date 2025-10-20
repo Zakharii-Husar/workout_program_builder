@@ -95,7 +95,7 @@ export const SetTimer = styled.div`
     font-size: ${props => props.theme.typography.fontSize['3xl']};
     font-weight: ${props => props.theme.typography.fontWeight.bold};
     color: ${props => props.theme.colors.text};
-    text-shadow: 0 0 8px rgba(255, 107, 53, 0.3);
+    text-shadow: ${props => props.theme.shadows.glow};
     letter-spacing: 2px;
     margin-right: ${props => props.theme.spacing.md};
     font-variant-numeric: tabular-nums;
@@ -159,7 +159,7 @@ export const NameContainer = styled.div`
 
     &:focus {
       border-color: ${props => props.theme.colors.secondary};
-      box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.1);
+      box-shadow: 0 0 0 2px ${props => props.theme.colors.primary}1A;
     }
 
     &::placeholder {
@@ -175,7 +175,7 @@ export const NameOutput = styled.h1`
   color: ${props => props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.md};
   letter-spacing: 0.25px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: ${props => props.theme.shadows.sm};
   font-style: italic;
 `;
 

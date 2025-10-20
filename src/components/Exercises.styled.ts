@@ -68,7 +68,7 @@ export const ChosenExercise = styled.div`
     height: 48px;
     border-radius: ${props => props.theme.borderRadius.sm};
     border: 1px solid ${props => props.theme.colors.border};
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: ${props => props.theme.colors.white}E6;
     padding: 4px;
     transition: ${props => props.theme.transitions.fast};
     box-shadow: ${props => props.theme.shadows.sm};
@@ -120,8 +120,8 @@ export const ExerciseCountBadge = styled.div`
   position: absolute;
   top: -8px;
   right: -8px;
-  background-color: ${props => props.theme.colors.error || '#ff4444'};
-  color: white;
+  background-color: ${props => props.theme.colors.error};
+  color: ${props => props.theme.colors.white};
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -130,8 +130,8 @@ export const ExerciseCountBadge = styled.div`
   justify-content: center;
   font-size: 12px;
   font-weight: bold;
-  border: 2px solid white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border: 2px solid ${props => props.theme.colors.white};
+  box-shadow: ${props => props.theme.shadows.md};
   z-index: 1;
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
@@ -162,11 +162,11 @@ export const ScrollButton = styled.button<{ $position: 'left' | 'right' }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: black;
+  color: ${props => props.theme.colors.black};
   cursor: pointer;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.4);
+    background: ${props => props.theme.colors.black}66;
   }
 `;
 
@@ -282,7 +282,7 @@ export const MuscleIcon = styled.img`
   height: 48px;
   border-radius: ${props => props.theme.borderRadius.sm};
   border: 1px solid ${props => props.theme.colors.border};
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: ${props => props.theme.colors.white}E6;
   padding: 4px;
   transition: ${props => props.theme.transitions.fast};
   flex-shrink: 0;
@@ -337,7 +337,7 @@ export const MuscleNameText = styled.div`
   color: ${props => props.theme.colors.text};
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: ${props => props.theme.shadows.sm};
   flex: 1;
   display: flex;
   align-items: center;

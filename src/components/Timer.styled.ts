@@ -11,10 +11,10 @@ const pulse = keyframes`
 
 const glow = keyframes`
   0%, 100% {
-    box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+    box-shadow: ${props => props.theme.shadows.glow};
   }
   50% {
-    box-shadow: 0 0 30px rgba(255, 107, 53, 0.6);
+    box-shadow: 0 0 30px ${props => props.theme.colors.primary}99;
   }
 `;
 
@@ -46,8 +46,8 @@ export const Display = styled.div<{ $isFinished?: boolean }>`
   color: ${props => props.$isFinished ? props.theme.colors.error : props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.md};
   text-shadow: ${props => props.$isFinished 
-    ? '0 0 15px rgba(244, 67, 54, 0.6)' 
-    : '0 0 8px rgba(255, 107, 53, 0.3)'};
+    ? `0 0 15px ${props.theme.colors.error}99` 
+    : props.theme.shadows.glow};
   letter-spacing: 2px;
   font-variant-numeric: tabular-nums;
   animation: ${props => props.$isFinished ? pulse : 'none'} 1s infinite;

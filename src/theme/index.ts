@@ -1,25 +1,35 @@
 export const theme = {
   colors: {
-    // Modern fitness app color palette
-    primary: '#1a1a1a', // Dark charcoal
-    secondary: '#ff6b35', // Vibrant orange
-    accent: '#4ecdc4', // Teal accent
-    background: '#0f0f0f', // Deep black
-    surface: '#1e1e1e', // Dark surface
-    surfaceLight: '#2a2a2a', // Lighter surface
-    text: '#ffffff', // Pure white
-    textSecondary: '#b3b3b3', // Light gray
-    textMuted: '#666666', // Medium gray
-    success: '#4caf50', // Green
-    warning: '#ff9800', // Orange
-    error: '#f44336', // Red
-    border: '#333333', // Dark border
-    borderLight: '#444444', // Light border
-    shadow: 'rgba(0, 0, 0, 0.3)', // Shadow
+    // New neutral color palette
+    black: '#111111',           // Black - deep, sophisticated
+    ivory: '#FAFAF8',           // Ivory - warm, clean white
+    taupe: '#D2C7BA',           // Taupe - earthy, balanced
+    warmGray: '#8E8E8E',        // Warm Gray - neutral, readable
+    dustyBrown: '#B89F8A',      // Hint of Dusty Brown - warm accent
+    white: '#FFFFFF',           // Pure white (for high contrast elements)
+    
+    // Semantic color mappings
+    primary: '#111111',         // Black for primary elements
+    secondary: '#8E8E8E',       // Warm Gray for secondary elements
+    accent: '#B89F8A',          // Dusty Brown for accents and highlights
+    background: '#FAFAF8',      // Ivory background
+    surface: '#D2C7BA',         // Taupe surface
+    surfaceLight: '#FAFAF8',    // Ivory light surface
+    text: '#111111',            // Black text
+    textSecondary: '#8E8E8E',   // Warm Gray for secondary text
+    textMuted: '#B89F8A',       // Dusty Brown for muted text
+    success: '#8E8E8E',         // Warm Gray for success states
+    warning: '#B89F8A',         // Dusty Brown for warning states
+    error: '#111111',           // Black for error states (high contrast)
+    border: '#D2C7BA',          // Taupe for borders
+    borderLight: '#FAFAF8',     // Ivory for light borders
+    shadow: 'rgba(17, 17, 17, 0.1)', // Black shadow
     gradient: {
-      primary: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)',
-      secondary: 'linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%)',
-      dark: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
+      primary: 'linear-gradient(135deg, #111111 0%, #8E8E8E 100%)',
+      secondary: 'linear-gradient(135deg, #B89F8A 0%, #D2C7BA 100%)',
+      dark: 'linear-gradient(135deg, #111111 0%, #B89F8A 100%)',
+      warm: 'linear-gradient(135deg, #FAFAF8 0%, #D2C7BA 100%)',
+      earthy: 'linear-gradient(135deg, #D2C7BA 0%, #B89F8A 100%)',
     }
   },
   spacing: {
@@ -77,11 +87,13 @@ export const theme = {
     full: '9999px', // Full rounded
   },
   shadows: {
-    sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-    md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-    xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-    glow: '0 0 20px rgba(255, 107, 53, 0.3)',
+    sm: '0 1px 2px 0 rgba(17, 17, 17, 0.05)',
+    md: '0 4px 6px -1px rgba(17, 17, 17, 0.1), 0 2px 4px -1px rgba(17, 17, 17, 0.06)',
+    lg: '0 10px 15px -3px rgba(17, 17, 17, 0.1), 0 4px 6px -2px rgba(17, 17, 17, 0.05)',
+    xl: '0 20px 25px -5px rgba(17, 17, 17, 0.1), 0 10px 10px -5px rgba(17, 17, 17, 0.04)',
+    glow: '0 0 20px rgba(17, 17, 17, 0.2)',
+    warmGlow: '0 0 20px rgba(184, 159, 138, 0.3)',
+    taupeGlow: '0 0 20px rgba(210, 199, 186, 0.3)',
   },
   animations: {
     fadeIn: `
