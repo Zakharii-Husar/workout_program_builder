@@ -20,7 +20,7 @@ const pulse = keyframes`
   }
 `;
 
-export const CreateProgramContainer = styled.div`
+export const ProgramEditorContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;

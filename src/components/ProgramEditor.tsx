@@ -7,7 +7,7 @@ import { LoadingSpinner } from './LoadingSpinner';
 import ExercisesList from './ExercisesList';
 import { icons } from '../data/data';
 import { 
-  CreateProgramContainer, 
+  ProgramEditorContainer, 
   AddExercisesButton, 
   TimerHeader, 
   SetTimer, 
@@ -15,9 +15,9 @@ import {
   NameContainer, 
   NameOutput, 
   CancelOrSave 
-} from './CreateProgram.styled';
+} from './ProgramEditor.styled';
 
-const CreateProgram: React.FC = () => {
+const ProgramEditor: React.FC = () => {
   const { state, actions } = useApp();
   const { chosenExercises, editingProgram, savedPrograms } = state;
   const { validateProgram, getError, clearErrors, hasErrors } = useValidation();
@@ -123,7 +123,7 @@ const CreateProgram: React.FC = () => {
 
   return (
     <div>
-      <CreateProgramContainer>
+      <ProgramEditorContainer>
         <div className="chosenExercises">
           <ExercisesList
             arr={chosenExercises}
@@ -169,9 +169,9 @@ const CreateProgram: React.FC = () => {
             onClick={handleSaveProgram}
           />
         </CancelOrSave>
-      </CreateProgramContainer>
+      </ProgramEditorContainer>
     </div>
   );
 };
 
-export default CreateProgram;
+export default ProgramEditor;

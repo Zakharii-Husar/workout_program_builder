@@ -6,7 +6,7 @@ import { ThemeProvider } from './theme/ThemeProvider';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import RouteGuard from './components/RouteGuard';
 import Main from './components/Main';
-import CreateProgram from './components/CreateProgram';
+import ProgramEditor from './components/ProgramEditor';
 import Exercises from './components/Exercises';
 import StartProgram from './components/StartProgram';
 
@@ -32,9 +32,9 @@ function App() {
               <AppContainer>
                 <Routes>
                   <Route path="/" element={<Main />} />
-                  <Route path="/create" element={<CreateProgram />} />
+                  <Route path="/create" element={<ProgramEditor />} />
                   <Route path="/create/exercises" element={<Exercises />} />
-                  <Route path="/edit/:programId" element={<CreateProgram />} />
+                  <Route path="/edit/:programId" element={<ProgramEditor />} />
                   <Route path="/edit/:programId/exercises" element={<Exercises />} />
                   <Route path="/start/:programId" element={<StartProgram />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
