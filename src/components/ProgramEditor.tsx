@@ -8,13 +8,19 @@ import ExercisesList from './ExercisesList';
 import { icons } from '../data/data';
 import { 
   ProgramEditorContainer, 
+  StepContainer,
+  StepHeader,
+  StepNumber,
+  StepTitle,
+  StepContent,
   AddExercisesButton, 
-  TimerHeader, 
   SetTimer, 
   EditTime, 
   NameContainer, 
   NameOutput, 
-  CancelOrSave 
+  CancelOrSave,
+  CancelButton,
+  SaveButton
 } from './ProgramEditor.styled';
 
 const ProgramEditor: React.FC = () => {
@@ -124,51 +130,87 @@ const ProgramEditor: React.FC = () => {
   return (
     <div>
       <ProgramEditorContainer>
-        <div className="chosenExercises">
-          <ExercisesList
-            arr={chosenExercises}
-            action1={() => {}}
-            action2={() => {}}
-            icon1="exercise"
-            icon2="check"
-          />
-        </div>
+        {/* Step 1: Add/edit exercises */}
+        <StepContainer>
+          <StepHeader>
+            <StepNumber>1</StepNumber>
+            <StepTitle>Add/Edit Exercises</StepTitle>
+          </StepHeader>
+          <StepContent>
+            <div className="chosenExercises">
+              <ExercisesList
+                arr={chosenExercises}
+                action1={() => {}}
+                action2={() => {}}
+                icon1="exercise"
+                icon2="check"
+              />
+            </div>
+            <AddExercisesButton onClick={() => navigate(isEditMode ? `/edit/${programId}/exercises` : '/create/exercises')}>
+              {chosenExercises.length > 0 ? 'Edit Exercises' : 'Add Exercises'}
+            </AddExercisesButton>
+          </StepContent>
+        </StepContainer>
 
-        <AddExercisesButton onClick={() => navigate(isEditMode ? `/edit/${programId}/exercises` : '/create/exercises')}>
-          {chosenExercises.length > 0 ? 'Edit Exercises' : 'Add Exercises'}
-        </AddExercisesButton>
+        {/* Step 2: Set/edit time between sets */}
+        <StepContainer>
+          <StepHeader>
+            <StepNumber>2</StepNumber>
+            <StepTitle>Set Time Between Sets</StepTitle>
+          </StepHeader>
+          <StepContent>
+            <SetTimer>
+              <div>{formatTime(timer)}</div>
+              <EditTime>
+                <icons.up 
+                  onClick={() => handleTimerChange(15)}
+                />
+                <icons.down 
+                  onClick={() => handleTimerChange(-15)}
+                />
+              </EditTime>
+            </SetTimer>
+          </StepContent>
+        </StepContainer>
 
-        <TimerHeader>Time between sets</TimerHeader>
-        <SetTimer>
-          <div>{formatTime(timer)}</div>
-          <EditTime>
-            <icons.up 
-              onClick={() => handleTimerChange(15)}
-            />
-            <icons.down 
-              onClick={() => handleTimerChange(-15)}
-            />
-          </EditTime>
-        </SetTimer>
+        {/* Step 3: Name/Rename program */}
+        <StepContainer>
+          <StepHeader>
+            <StepNumber>3</StepNumber>
+            <StepTitle>Name Your Program</StepTitle>
+          </StepHeader>
+          <StepContent>
+            <NameContainer>
+              <NameOutput>{name}</NameOutput>
+              <input
+                onInput={(e) => setName((e.target as HTMLInputElement).value)}
+                type="text"
+                placeholder="Enter program's name"
+                value={name}
+              />
+            </NameContainer>
+          </StepContent>
+        </StepContainer>
 
-        <NameContainer>
-          <NameOutput>{name}</NameOutput>
-          <input
-            onInput={(e) => setName((e.target as HTMLInputElement).value)}
-            type="text"
-            placeholder="Enter program's name"
-            value={name}
-          />
-        </NameContainer>
-
-        <CancelOrSave>
-          <icons.cancel 
-            onClick={handleCancel}
-          />
-          <icons.check 
-            onClick={handleSaveProgram}
-          />
-        </CancelOrSave>
+        {/* Step 4: Create Program or Cancel */}
+        <StepContainer>
+          <StepHeader>
+            <StepNumber>4</StepNumber>
+            <StepTitle>{isEditMode || editingProgram ? 'Update Program' : 'Create Program'}</StepTitle>
+          </StepHeader>
+          <StepContent>
+            <CancelOrSave>
+              <CancelButton onClick={handleCancel}>
+                <icons.cancel />
+                <span>Cancel</span>
+              </CancelButton>
+              <SaveButton onClick={handleSaveProgram}>
+                <icons.check />
+                <span>{isEditMode || editingProgram ? 'Update' : 'Create'}</span>
+              </SaveButton>
+            </CancelOrSave>
+          </StepContent>
+        </StepContainer>
       </ProgramEditorContainer>
     </div>
   );
