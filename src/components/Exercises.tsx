@@ -28,6 +28,8 @@ const Exercises: React.FC = () => {
   
   const [visibleExercises, setVisibleExercises] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
 
   const muscleGroups = ExerciseService.getAllMuscleGroups();
 
@@ -73,6 +75,47 @@ const Exercises: React.FC = () => {
     }, 10);
   };
 
+  const handleDragStart = (index: number) => {
+    setDragIndex(index);
+  };
+
+  const handleDragOver = (event: React.DragEvent) => {
+    event.preventDefault();
+  };
+
+  const handleDrop = (dropIndex: number) => {
+    if (dragIndex === null) return;
+    const finalIndex = hoverIndex !== null ? hoverIndex : dropIndex;
+    if (finalIndex === dragIndex) {
+      setDragIndex(null);
+      setHoverIndex(null);
+      return;
+    }
+    const updated = [...chosenExercises];
+    const [moved] = updated.splice(dragIndex, 1);
+    updated.splice(finalIndex, 0, moved);
+    actions.setChosenExercises(updated);
+    setDragIndex(null);
+    setHoverIndex(null);
+  };
+
+  const handleDragEnd = () => {
+    setDragIndex(null);
+    setHoverIndex(null);
+  };
+
+  const reorderPreview = (list: any[], from: number, to: number) => {
+    const copy = [...list];
+    const [item] = copy.splice(from, 1);
+    copy.splice(to, 0, item);
+    return copy;
+  };
+
+  const displayedExercises =
+    dragIndex !== null && hoverIndex !== null
+      ? reorderPreview(chosenExercises, dragIndex, hoverIndex)
+      : chosenExercises;
+
   if (isLoading) {
     return (
       <div>
@@ -84,12 +127,26 @@ const Exercises: React.FC = () => {
   return (
     <ExercisesContainer>
       <ChosenExercisesContainer>
-        <ChosenExercise>
-          {chosenExercises.map((exercise, index) => (
+        <ChosenExercise
+          onDragOver={handleDragOver}
+        >
+          {displayedExercises.map((exercise, index) => (
             <img 
               key={`${exercise.name}-${index}`}
               src={exercise.img} 
               alt={exercise.name}
+              draggable
+              onDragStart={() => handleDragStart(index)}
+              onDragOver={(e) => { handleDragOver(e); setHoverIndex(index); }}
+              onDrop={() => handleDrop(index)}
+              onDragEnd={handleDragEnd}
+              style={{
+                opacity: dragIndex === index ? 0.6 : 1,
+                borderColor: hoverIndex === index ? '#7c3aed' : undefined,
+                transform: hoverIndex === index ? 'scale(1.06)' : undefined,
+                boxShadow: hoverIndex === index ? '0 0 0 2px rgba(124,58,237,0.35)' : undefined,
+                transition: 'transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease'
+              }}
             />
           ))}
         </ChosenExercise>
