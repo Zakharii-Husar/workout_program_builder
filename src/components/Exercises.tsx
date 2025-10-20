@@ -4,7 +4,7 @@ import { useApp } from '../context/AppContext';
 import { ExerciseService } from '../services/exerciseService';
 import { LoadingSpinner } from './LoadingSpinner';
 import ExercisesList from './ExercisesList';
-import { icons } from '../data/data';
+import { icons } from '../data';
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai';
 import { 
   ExercisesContainer, 

@@ -5,7 +5,7 @@ import { useValidation } from '../hooks/useValidation';
 import { ProgramService } from '../services/programService';
 import { LoadingSpinner } from './LoadingSpinner';
 import ExercisesList from './ExercisesList';
-import { icons } from '../data/data';
+import { icons } from '../data';
 import { 
   ProgramEditorContainer, 
   StepContainer,

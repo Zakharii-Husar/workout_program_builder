@@ -1,5 +1,5 @@
 import { Exercise, MuscleGroup } from '../types';
-import { muscleGroups } from '../data/data';
+import { muscleGroups } from '../data';
 
 export class ExerciseService {
   static getAllMuscleGroups(): MuscleGroup[] {

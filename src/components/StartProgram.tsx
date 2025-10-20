@@ -5,7 +5,7 @@ import { LoadingSpinner } from './LoadingSpinner';
 import Timer from './Timer';
 import ExercisesList from './ExercisesList';
 import { StartProgramContainer, ExitButton } from './StartProgram.styled';
-import { icons } from '../data/data';
+import { icons } from '../data';
 
 const StartProgram: React.FC = () => {
   const { state, actions } = useApp();

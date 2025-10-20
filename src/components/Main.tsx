@@ -4,7 +4,7 @@ import { useApp } from '../context/AppContext';
 import { LoadingSpinner } from './LoadingSpinner';
 import ExercisesList from './ExercisesList';
 import { MainContainer, MainHeader, MainTitle, MainSubtitle, EmptyState, EmptyStateTitle, EmptyStateSubtitle, CreateButton } from './Main.styled';
-import { icons } from '../data/data';
+import { icons } from '../data';
 
 const Main: React.FC = () => {
   const { state, actions } = useApp();
