@@ -34,13 +34,25 @@ export const ChosenExercisesContainer = styled.div`
   position: sticky;
   top: 0;
   z-index: 50;
-  background: ${props => props.theme.colors.primary};
-  border-bottom: 1px solid ${props => props.theme.colors.border};
+  background: linear-gradient(135deg, ${props => props.theme.colors.primary}, ${props => props.theme.colors.accent});
+  border-bottom: 2px solid ${props => props.theme.colors.border};
   padding: 0;
-  box-shadow: ${props => props.theme.shadows.sm};
+  box-shadow: ${props => props.theme.shadows.lg};
   display: flex;
   align-items: center;
   position: relative;
+  min-height: 80px;
+  height: 80px;
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
+    min-height: 70px;
+    height: 70px;
+  }
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    min-height: 90px;
+    height: 90px;
+  }
 `;
 
 export const ChosenExercise = styled.div`
@@ -50,8 +62,8 @@ export const ChosenExercise = styled.div`
   gap: 0;
   justify-content: flex-start;
   align-items: center;
-  min-height: 48px;
-  padding: ${props => props.theme.spacing.sm};
+  height: 100%;
+  padding: ${props => props.theme.spacing.lg};
   overflow-x: auto;
   overflow-y: hidden;
   flex: 1;
@@ -86,7 +98,7 @@ export const ChosenExercise = styled.div`
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    padding: ${props => props.theme.spacing.xs};
+    padding: ${props => props.theme.spacing.md};
     
     img {
       width: 40px;
@@ -96,13 +108,37 @@ export const ChosenExercise = styled.div`
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    padding: ${props => props.theme.spacing.md};
+    padding: ${props => props.theme.spacing.xl};
     
     img {
       width: 56px;
       height: 56px;
       padding: 5px;
     }
+  }
+`;
+
+export const PlaceholderText = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: ${props => props.theme.colors.background};
+  font-family: ${props => props.theme.typography.fontFamily.display};
+  font-size: ${props => props.theme.typography.fontSize.lg};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
+  text-align: center;
+  opacity: 0.8;
+  font-style: italic;
+  letter-spacing: 0.5px;
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
+    font-size: ${props => props.theme.typography.fontSize.base};
+  }
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    font-size: ${props => props.theme.typography.fontSize.xl};
   }
 `;
 
@@ -176,63 +212,97 @@ export const ControlButtons = styled.div`
   z-index: 50;
   display: flex;
   justify-content: center;
-  gap: ${props => props.theme.spacing.md};
-  background: ${props => props.theme.colors.primary};
-  border-top: 1px solid ${props => props.theme.colors.border};
-  padding: ${props => props.theme.spacing.md};
-  box-shadow: ${props => props.theme.shadows.md};
+  gap: ${props => props.theme.spacing.lg};
+  background: linear-gradient(135deg, ${props => props.theme.colors.primary}, ${props => props.theme.colors.accent});
+  border-top: 2px solid ${props => props.theme.colors.border};
+  padding: ${props => props.theme.spacing.xl};
+  box-shadow: ${props => props.theme.shadows.xl};
+  margin: 0 -${props => props.theme.spacing.lg};
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
+    margin: 0 -${props => props.theme.spacing.md};
+    padding: ${props => props.theme.spacing.lg};
+    gap: ${props => props.theme.spacing.md};
+  }
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    margin: 0 -${props => props.theme.spacing.xl};
+    padding: ${props => props.theme.spacing.xxl};
+    gap: ${props => props.theme.spacing.xl};
+  }
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
+    margin: 0 -${props => props.theme.spacing.xxxl};
+    padding: ${props => props.theme.spacing.xxxl};
+  }
 
   svg {
-    width: 36px;
-    height: 100%;
-    padding: ${props => props.theme.spacing.xs};
-    background: ${props => props.theme.colors.surface};
-    border-radius: ${props => props.theme.borderRadius.full};
+    width: 48px;
+    height: 48px;
+    padding: ${props => props.theme.spacing.sm};
+    background: linear-gradient(135deg, ${props => props.theme.colors.surface}, ${props => props.theme.colors.background});
+    border-radius: ${props => props.theme.borderRadius.xl};
     color: ${props => props.theme.colors.text};
     cursor: pointer;
-    transition: ${props => props.theme.transitions.fast};
-    border: 1px solid ${props => props.theme.colors.border};
+    transition: ${props => props.theme.transitions.normal};
+    border: 2px solid ${props => props.theme.colors.border};
+    box-shadow: ${props => props.theme.shadows.md};
 
     &:hover {
-      transform: translateY(-1px);
-      box-shadow: ${props => props.theme.shadows.md};
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: ${props => props.theme.shadows.lg};
     }
 
     &:active {
-      transform: translateY(0);
+      transform: translateY(-1px) scale(1.05);
     }
 
     &:nth-child(1) {
-      background: ${props => props.theme.colors.error};
-      color: ${props => props.theme.colors.textOnPrimary};
+      background: linear-gradient(135deg, ${props => props.theme.colors.error}, ${props => props.theme.colors.primary});
+      color: ${props => props.theme.colors.background};
       border-color: transparent;
 
       &:hover {
-        background: ${props => props.theme.colors.error};
-        transform: translateY(-1px) scale(1.05);
+        background: linear-gradient(135deg, ${props => props.theme.colors.error}, ${props => props.theme.colors.accent});
+        transform: translateY(-3px) scale(1.1);
+        box-shadow: ${props => props.theme.shadows.lg};
       }
     }
 
     &:nth-child(2) {
-      background: ${props => props.theme.colors.warning};
+      background: linear-gradient(135deg, ${props => props.theme.colors.warning}, ${props => props.theme.colors.accent});
       color: ${props => props.theme.colors.background};
       border-color: transparent;
 
       &:hover {
-        background: ${props => props.theme.colors.warning};
-        transform: translateY(-1px) scale(1.05);
+        background: linear-gradient(135deg, ${props => props.theme.colors.warning}, ${props => props.theme.colors.primary});
+        transform: translateY(-3px) scale(1.1);
+        box-shadow: ${props => props.theme.shadows.lg};
       }
     }
 
     &:nth-child(3) {
-      background: ${props => props.theme.colors.primary};
+      background: linear-gradient(135deg, ${props => props.theme.colors.primary}, ${props => props.theme.colors.accent});
       color: ${props => props.theme.colors.background};
       border-color: transparent;
 
       &:hover {
-        transform: translateY(-1px) scale(1.05);
-        box-shadow: ${props => props.theme.shadows.glow};
+        background: linear-gradient(135deg, ${props => props.theme.colors.accent}, ${props => props.theme.colors.primary});
+        transform: translateY(-3px) scale(1.1);
+        box-shadow: ${props => props.theme.shadows.lg}, ${props => props.theme.shadows.glow};
       }
+    }
+
+    @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
+      width: 40px;
+      height: 40px;
+      padding: ${props => props.theme.spacing.xs};
+    }
+
+    @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+      width: 56px;
+      height: 56px;
+      padding: ${props => props.theme.spacing.md};
     }
   }
 `;
@@ -240,119 +310,146 @@ export const ControlButtons = styled.div`
 export const MuscleGroupContainer = styled.div`
   display: flex;
   align-items: center;
-  background: ${props => props.theme.colors.primary};
-  padding: ${props => props.theme.spacing.md};
-  margin: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.md};
-  border-radius: ${props => props.theme.borderRadius.md};
+  background: linear-gradient(135deg, ${props => props.theme.colors.surface}, ${props => props.theme.colors.background});
+  padding: ${props => props.theme.spacing.lg};
+  margin: ${props => props.theme.spacing.md} 0;
+  border-radius: ${props => props.theme.borderRadius.xl};
   cursor: pointer;
   transition: ${props => props.theme.transitions.fast};
   border: 1px solid ${props => props.theme.colors.border};
   box-shadow: ${props => props.theme.shadows.sm};
   animation: ${slideIn} 0.5s ease-out;
-  min-height: 64px;
-  gap: ${props => props.theme.spacing.sm};
+  min-height: 80px;
+  gap: ${props => props.theme.spacing.lg};
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, ${props => props.theme.colors.primary}05, ${props => props.theme.colors.accent}05);
+    border-radius: ${props => props.theme.borderRadius.xl};
+    opacity: 0;
+    transition: ${props => props.theme.transitions.normal};
+  }
 
   &:hover {
-    background: ${props => props.theme.colors.surface};
-    border-color: ${props => props.theme.colors.secondary};
-    transform: translateY(-1px);
-    box-shadow: ${props => props.theme.shadows.md};
+    background: linear-gradient(135deg, ${props => props.theme.colors.background}, ${props => props.theme.colors.surface});
+    border-color: ${props => props.theme.colors.accent};
+    transform: translateY(-3px);
+    box-shadow: ${props => props.theme.shadows.lg}, ${props => props.theme.shadows.glow};
+    
+    &::before {
+      opacity: 1;
+    }
   }
 
   &:active {
-    transform: translateY(0);
+    transform: translateY(-1px);
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    padding: ${props => props.theme.spacing.sm};
-    margin: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.xs};
-    min-height: 56px;
-    gap: ${props => props.theme.spacing.xs};
+    padding: ${props => props.theme.spacing.md};
+    margin: ${props => props.theme.spacing.sm} 0;
+    min-height: 70px;
+    gap: ${props => props.theme.spacing.md};
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    padding: ${props => props.theme.spacing.lg};
-    margin: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
-    min-height: 72px;
+    padding: ${props => props.theme.spacing.xl};
+    margin: ${props => props.theme.spacing.lg} 0;
+    min-height: 90px;
+    gap: ${props => props.theme.spacing.xl};
   }
 `;
 
 export const MuscleIcon = styled.img`
-  width: 48px;
-  height: 48px;
-  border-radius: ${props => props.theme.borderRadius.sm};
-  border: 1px solid ${props => props.theme.colors.border};
+  width: 64px;
+  height: 64px;
+  border-radius: ${props => props.theme.borderRadius.lg};
+  border: 2px solid ${props => props.theme.colors.border};
   background-color: ${props => props.theme.colors.white}E6;
-  padding: 4px;
-  transition: ${props => props.theme.transitions.fast};
+  padding: 6px;
+  transition: ${props => props.theme.transitions.normal};
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  box-shadow: ${props => props.theme.shadows.md};
 
   ${MuscleGroupContainer}:hover & {
-    border-color: ${props => props.theme.colors.secondary};
-    transform: scale(1.02);
+    border-color: ${props => props.theme.colors.background};
+    transform: scale(1.05);
+    box-shadow: ${props => props.theme.shadows.lg};
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    width: 40px;
-    height: 40px;
-    padding: 3px;
+    width: 56px;
+    height: 56px;
+    padding: 4px;
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    width: 56px;
-    height: 56px;
-    padding: 5px;
+    width: 72px;
+    height: 72px;
+    padding: 8px;
   }
 `;
 
 export const ArrowIcon = styled.img`
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   margin-left: auto;
-  transition: ${props => props.theme.transitions.fast};
-  filter: invert(1);
+  transition: ${props => props.theme.transitions.normal};
+  filter: invert(0);
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 
   ${MuscleGroupContainer}:hover & {
-    transform: translateX(2px);
+    transform: translateX(4px) scale(1.1);
+    filter: invert(0.5);
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
   }
 `;
 
 export const MuscleNameText = styled.div`
   text-align: center;
   margin: 0 auto;
-  font-family: ${props => props.theme.typography.fontFamily.muscle};
-  font-size: ${props => props.theme.typography.fontSize.lg};
-  font-weight: ${props => props.theme.typography.fontWeight.semibold};
-  color: ${props => props.theme.colors.textOnPrimary};
+  font-family: ${props => props.theme.typography.fontFamily.display};
+  font-size: ${props => props.theme.typography.fontSize['2xl']};
+  font-weight: ${props => props.theme.typography.fontWeight.bold};
+  color: ${props => props.theme.colors.text};
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   text-shadow: ${props => props.theme.shadows.sm};
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 
   ${MuscleGroupContainer}:hover & {
-    color: ${props => props.theme.colors.text};
+    color: ${props => props.theme.colors.accent};
+    transform: translateX(2px);
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: ${props => props.theme.typography.fontSize.base};
+    font-size: ${props => props.theme.typography.fontSize.lg};
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: ${props => props.theme.typography.fontSize.xl};
+    font-size: ${props => props.theme.typography.fontSize['3xl']};
   }
 `;
 

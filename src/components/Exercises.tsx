@@ -10,6 +10,7 @@ import {
   ExercisesContainer, 
   ChosenExercisesContainer, 
   ChosenExercise, 
+  PlaceholderText,
   ExerciseContainer,
   ExerciseCountBadge,
   ScrollButton,
@@ -83,7 +84,10 @@ const Exercises: React.FC = () => {
   };
 
   const handleAddExercise = (exercise: any) => {
+    console.log('Adding exercise:', exercise);
+    console.log('Current chosenExercises:', chosenExercises);
     const updatedExercises = ExerciseService.addExerciseToProgram(chosenExercises, exercise);
+    console.log('Updated exercises:', updatedExercises);
     actions.setChosenExercises(updatedExercises);
   };
 
@@ -144,17 +148,23 @@ const Exercises: React.FC = () => {
           ref={scrollContainerRef}
           onScroll={checkScrollPosition}
         >
-          {groupedExercises.map((exercise, index) => (
-            <ExerciseContainer key={`${exercise.name}-${index}`}>
-              <img 
-                src={exercise.img} 
-                alt={exercise.name}
-              />
-              <ExerciseCountBadge>
-                {exercise.count}
-              </ExerciseCountBadge>
-            </ExerciseContainer>
-          ))}
+          {groupedExercises.length > 0 ? (
+            groupedExercises.map((exercise, index) => (
+              <ExerciseContainer key={`${exercise.name}-${index}`}>
+                <img 
+                  src={exercise.img} 
+                  alt={exercise.name}
+                />
+                <ExerciseCountBadge>
+                  {exercise.count}
+                </ExerciseCountBadge>
+              </ExerciseContainer>
+            ))
+          ) : (
+            <PlaceholderText>
+              Select exercises to build your workout program
+            </PlaceholderText>
+          )}
         </ChosenExercise>
         {canScrollRight && (
           <ScrollButton $position="right" onClick={scrollRight}>
