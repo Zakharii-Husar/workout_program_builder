@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { icons } from '../data/data';
-import { ExercisesListContainer, ExerciseName, Icon1, Icon2 } from './ExercisesList.styled';
+import { ExercisesListContainer, ExerciseName, Icon1, Icon2, AddSetButton, IconContainer, ExercisesListWrapper } from './ExercisesList.styled';
 
 interface ExercisesListProps {
   arr: any[];
@@ -11,6 +11,7 @@ interface ExercisesListProps {
   action2: (element: any, index?: number) => void;
   action3?: (element: any, index?: number) => void;
   style?: React.CSSProperties;
+  $isVisible?: boolean;
 }
 
 const ExercisesList: React.FC<ExercisesListProps> = ({
@@ -21,7 +22,8 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
   action1,
   action2,
   action3,
-  style
+  style,
+  $isVisible = true
 }) => {
   const [exerciseIsDone, setExerciseIsDone] = useState<number[]>([]);
 
@@ -34,7 +36,7 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
       case 'muscle':
         return <img src={element?.img} alt={element?.name} />;
       case 'add':
-        return <icons.add onClick={() => action2(element, index)} />;
+        return <AddSetButton onClick={() => action2(element, index)}>Add Set</AddSetButton>;
       case 'check':
         return <icons.check onClick={() => action2(element, index)} />;
       case 'remove':
@@ -73,7 +75,7 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
   };
 
   return (
-    <div>
+    <ExercisesListWrapper $isVisible={$isVisible}>
       {arr.map((element, index) => {
         const iconComponent1 = getIconComponent(icon1, element, index);
         const iconComponent2 = getIconComponent(icon2, element, index);
@@ -81,21 +83,16 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
 
         return (
           <ExercisesListContainer key={`${element.name}-${index}`} style={style}>
-            <Icon1 
-              style={icon1 === "none" ? { display: "none" } : { display: "flex" }}
-            >
+            <Icon1 $hidden={icon1 === "none"}>
               {iconComponent1}
             </Icon1>
             <ExerciseName 
-              style={icon1 === "none" ? 
-                { marginLeft: "5%", fontSize: "2rem" } : 
-                { marginLeft: "auto" }
-              }
+              $isCentered={icon1 === "none"}
               onClick={() => action1(element)} 
             >
               {index + 1}. {element.name}
             </ExerciseName>
-            <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+            <IconContainer>
               {iconComponent3 && (
                 <Icon2>
                   {iconComponent3}
@@ -104,11 +101,11 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
               <Icon2>
                 {iconComponent2}
               </Icon2>
-            </div>
+            </IconContainer>
           </ExercisesListContainer>
         );
       })}
-    </div>
+    </ExercisesListWrapper>
   );
 };
 

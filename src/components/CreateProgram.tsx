@@ -162,7 +162,7 @@ const CreateProgram: React.FC = () => {
         </NameContainer>
 
         <CancelOrSave>
-          <icons.remove 
+          <icons.cancel 
             onClick={handleCancel}
           />
           <icons.check 

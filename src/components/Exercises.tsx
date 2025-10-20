@@ -13,7 +13,8 @@ import {
   MuscleGroupContainer,
   MuscleIcon,
   ArrowIcon,
-  MuscleNameText
+  MuscleNameText,
+  ControlButton
 } from './Exercises.styled';
 
 const Exercises: React.FC = () => {
@@ -107,33 +108,32 @@ const Exercises: React.FC = () => {
           </MuscleGroupContainer>
           
           <ExercisesList
-            style={visibleExercises.includes(muscleIndex) ? 
-              { display: "flex", opacity: 1 } : 
-              { display: "none", opacity: 0 }
-            }
             arr={muscle.exercises}
             icon1="exercise"
             icon2="add"
             action1={() => {}}
             action2={handleAddExercise}
+            $isVisible={visibleExercises.includes(muscleIndex)}
           />
         </div>
       ))}
 
       <ControlButtons>
-        <icons.cancel 
-          onClick={handleClearAll}
-        />
-        <icons.correct
-          onClick={handleRemoveLastExercise}
-          style={chosenExercises.length > 0 ? 
-            { display: "flex" } : 
-            { display: "none" }
-          }
-        />
-        <icons.save 
-          onClick={handleSave}
-        />
+        <ControlButton>
+          <icons.cancel 
+            onClick={handleClearAll}
+          />
+        </ControlButton>
+        <ControlButton $isVisible={chosenExercises.length > 0}>
+          <icons.undo
+            onClick={handleRemoveLastExercise}
+          />
+        </ControlButton>
+        <ControlButton>
+          <icons.check 
+            onClick={handleSave}
+          />
+        </ControlButton>
       </ControlButtons>
     </ExercisesContainer>
   );

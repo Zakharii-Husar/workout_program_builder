@@ -15,7 +15,8 @@ import {
   FaSave as SaveIcon,
   FaCheckCircle as CorrectIcon,
   FaTimes as CancelIcon,
-  FaEdit as EditIcon
+  FaEdit as EditIcon,
+  FaUndo as UndoIcon
 } from 'react-icons/fa';
 
 import chest from '../assets/muscle_groups/chest.png';
@@ -119,7 +120,8 @@ export const icons = {
     save: SaveIcon,
     correct: CorrectIcon,
     cancel: CancelIcon,
-    edit: EditIcon
+    edit: EditIcon,
+    undo: UndoIcon
 };
 
 export const muscleGroups = [

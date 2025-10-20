@@ -253,6 +253,10 @@ export const MuscleNameText = styled.div`
   }
 `;
 
+export const ControlButton = styled.div<{ $isVisible?: boolean }>`
+  display: ${props => props.$isVisible !== undefined ? (props.$isVisible ? 'flex' : 'none') : 'flex'};
+`;
+
 // Media query for mobile
 export const MobileExercisesContainer = styled(ExercisesContainer)`
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {

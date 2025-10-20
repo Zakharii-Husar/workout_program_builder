@@ -62,11 +62,11 @@ export const ExercisesListContainer = styled.div`
   }
 `;
 
-export const ExerciseName = styled.div`
+export const ExerciseName = styled.div<{ $isCentered?: boolean }>`
   flex: 1;
   text-align: left;
   font-family: ${props => props.theme.typography.fontFamily.primary};
-  font-size: ${props => props.theme.typography.fontSize.base};
+  font-size: ${props => props.$isCentered ? props.theme.typography.fontSize['2xl'] : props.theme.typography.fontSize.base};
   font-weight: ${props => props.theme.typography.fontWeight.medium};
   color: ${props => props.theme.colors.text};
   line-height: ${props => props.theme.typography.lineHeight.normal};
@@ -76,27 +76,28 @@ export const ExerciseName = styled.div`
   display: flex;
   align-items: center;
   min-height: 32px;
+  margin-left: ${props => props.$isCentered ? '5%' : 'auto'};
 
   &:hover {
     color: ${props => props.theme.colors.secondary};
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: ${props => props.theme.typography.fontSize.sm};
+    font-size: ${props => props.$isCentered ? props.theme.typography.fontSize.xl : props.theme.typography.fontSize.sm};
     padding: 0 ${props => props.theme.spacing.xs};
     min-height: 28px;
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: ${props => props.theme.typography.fontSize.lg};
+    font-size: ${props => props.$isCentered ? props.theme.typography.fontSize['3xl'] : props.theme.typography.fontSize.lg};
     min-height: 36px;
   }
 `;
 
-export const Icon1 = styled.div`
+export const Icon1 = styled.div<{ $hidden?: boolean }>`
   width: 48px;
   height: 48px;
-  display: flex;
+  display: ${props => props.$hidden ? 'none' : 'flex'};
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
@@ -152,8 +153,82 @@ export const Icon1 = styled.div`
   }
 `;
 
+export const AddSetButton = styled.button`
+  background: ${props => props.theme.colors.secondary};
+  border: 1px solid ${props => props.theme.colors.secondary};
+  border-radius: ${props => props.theme.borderRadius.sm};
+  padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
+  cursor: pointer;
+  font-size: ${props => props.theme.typography.fontSize.xs};
+  color: ${props => props.theme.colors.text};
+  font-weight: ${props => props.theme.typography.fontWeight.medium};
+  font-family: ${props => props.theme.typography.fontFamily.primary};
+  transition: ${props => props.theme.transitions.fast};
+  box-shadow: ${props => props.theme.shadows.sm};
+  min-width: 60px;
+  max-width: 80px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    background: ${props => props.theme.colors.accent};
+    border-color: ${props => props.theme.colors.accent};
+    transform: translateY(-1px);
+    box-shadow: ${props => props.theme.shadows.md};
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: ${props => props.theme.shadows.sm};
+  }
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
+    font-size: ${props => props.theme.typography.fontSize.xs};
+    padding: ${props => props.theme.spacing.xs};
+    min-width: 50px;
+    max-width: 70px;
+    height: 28px;
+  }
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    font-size: ${props => props.theme.typography.fontSize.sm};
+    padding: ${props => props.theme.spacing.sm};
+    min-width: 70px;
+    max-width: 90px;
+    height: 36px;
+  }
+`;
+
+export const ExercisesListWrapper = styled.div<{ $isVisible: boolean }>`
+  display: ${props => props.$isVisible ? 'block' : 'none'};
+  opacity: ${props => props.$isVisible ? 1 : 0};
+  transition: ${props => props.theme.transitions.normal};
+  width: 100%;
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  gap: ${props => props.theme.spacing.sm};
+  align-items: center;
+  padding-right: ${props => props.theme.spacing.sm};
+  
+  @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
+    padding-right: ${props => props.theme.spacing.xs};
+  }
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    padding-right: ${props => props.theme.spacing.md};
+  }
+`;
+
 export const Icon2 = styled.div`
-  width: 32px;
+  width: 48px;
   height: 32px;
   display: flex;
   align-items: center;
@@ -267,8 +342,8 @@ export const Icon2 = styled.div`
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 28px;
     
     svg {
       width: 28px;
@@ -278,8 +353,8 @@ export const Icon2 = styled.div`
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    width: 44px;
-    height: 44px;
+    width: 56px;
+    height: 36px;
     
     svg {
       width: 36px;
