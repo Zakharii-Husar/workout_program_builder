@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { LoadingSpinner } from './LoadingSpinner';
 import ExercisesList from './ExercisesList';
-import { MainContainer, EmptyState, EmptyStateTitle, EmptyStateSubtitle, CreateButton } from './Main.styled';
+import { MainContainer, MainHeader, MainTitle, MainSubtitle, EmptyState, EmptyStateTitle, EmptyStateSubtitle, CreateButton } from './Main.styled';
 import { icons } from '../data/data';
 
 const Main: React.FC = () => {
@@ -31,28 +31,36 @@ const Main: React.FC = () => {
   };
 
   if (savedPrograms.length === 0) {
-  return (
-    <MainContainer>
-      <EmptyState>
-        <EmptyStateTitle>Ready to Build?</EmptyStateTitle>
-        <EmptyStateSubtitle>
-          Create your first workout program and start your fitness journey. 
-          Choose exercises, set timers, and track your progress.
-        </EmptyStateSubtitle>
-        <CreateButton onClick={() => {
-          actions.clearCreateState();
-          navigate('/create');
-        }}>
-          <icons.add />
-          CREATE FIRST PROGRAM
-        </CreateButton>
-      </EmptyState>
-    </MainContainer>
-  );
+    return (
+      <MainContainer>
+        <MainHeader>
+          <MainTitle>Workout Programs</MainTitle>
+          <MainSubtitle>Build, track, and achieve your fitness goals</MainSubtitle>
+        </MainHeader>
+        <EmptyState>
+          <EmptyStateTitle>Ready to Build?</EmptyStateTitle>
+          <EmptyStateSubtitle>
+            Create your first workout program and start your fitness journey. 
+            Choose exercises, set timers, and track your progress.
+          </EmptyStateSubtitle>
+          <CreateButton onClick={() => {
+            actions.clearCreateState();
+            navigate('/create');
+          }}>
+            <icons.add />
+            CREATE FIRST PROGRAM
+          </CreateButton>
+        </EmptyState>
+      </MainContainer>
+    );
   }
 
   return (
     <MainContainer>
+      <MainHeader>
+        <MainTitle>Workout Programs</MainTitle>
+        <MainSubtitle>Build, track, and achieve your fitness goals</MainSubtitle>
+      </MainHeader>
       <ExercisesList
         icon1="none"
         icon2="remove"
