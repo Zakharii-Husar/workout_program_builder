@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { ExerciseService } from '../services/exerciseService';
@@ -30,6 +30,8 @@ const Exercises: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+  const [isTouch, setIsTouch] = useState(false);
+  const chosenContainerRef = useRef<HTMLDivElement | null>(null);
 
   const muscleGroups = ExerciseService.getAllMuscleGroups();
 
@@ -75,6 +77,12 @@ const Exercises: React.FC = () => {
     }, 10);
   };
 
+  useEffect(() => {
+    const coarse = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    const touchSupport = typeof window !== 'undefined' && ('ontouchstart' in window || (navigator as any).maxTouchPoints > 0);
+    setIsTouch(Boolean(coarse || touchSupport));
+  }, []);
+
   const handleDragStart = (index: number) => {
     setDragIndex(index);
   };
@@ -116,6 +124,48 @@ const Exercises: React.FC = () => {
       ? reorderPreview(chosenExercises, dragIndex, hoverIndex)
       : chosenExercises;
 
+  const getIndexFromClientX = (clientX: number) => {
+    const container = chosenContainerRef.current;
+    if (!container) return 0;
+    const imgs = Array.from(container.querySelectorAll('img')) as HTMLImageElement[];
+    if (imgs.length === 0) return 0;
+    for (let i = 0; i < imgs.length; i++) {
+      const rect = imgs[i].getBoundingClientRect();
+      const midpoint = rect.left + rect.width / 2;
+      if (clientX < midpoint) return i;
+    }
+    return imgs.length - 1;
+  };
+
+  const handleTouchStart = (index: number, e: React.TouchEvent) => {
+    setDragIndex(index);
+    setHoverIndex(index);
+    // Prevent long-press context menu
+    e.preventDefault();
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (dragIndex === null) return;
+    const touch = e.touches[0];
+    const idx = getIndexFromClientX(touch.clientX);
+    setHoverIndex(idx);
+    e.preventDefault();
+  };
+
+  const handleTouchEnd = () => {
+    if (dragIndex === null) {
+      setHoverIndex(null);
+      return;
+    }
+    const finalIndex = hoverIndex ?? dragIndex;
+    const updated = [...chosenExercises];
+    const [moved] = updated.splice(dragIndex, 1);
+    updated.splice(finalIndex, 0, moved);
+    actions.setChosenExercises(updated);
+    setDragIndex(null);
+    setHoverIndex(null);
+  };
+
   if (isLoading) {
     return (
       <div>
@@ -128,18 +178,22 @@ const Exercises: React.FC = () => {
     <ExercisesContainer>
       <ChosenExercisesContainer>
         <ChosenExercise
+          ref={chosenContainerRef}
           onDragOver={handleDragOver}
+          onTouchMove={isTouch ? handleTouchMove : undefined}
+          onTouchEnd={isTouch ? handleTouchEnd : undefined}
         >
           {displayedExercises.map((exercise, index) => (
             <img 
               key={`${exercise.name}-${index}`}
               src={exercise.img} 
               alt={exercise.name}
-              draggable
-              onDragStart={() => handleDragStart(index)}
-              onDragOver={(e) => { handleDragOver(e); setHoverIndex(index); }}
-              onDrop={() => handleDrop(index)}
-              onDragEnd={handleDragEnd}
+              draggable={!isTouch}
+              onDragStart={!isTouch ? () => handleDragStart(index) : undefined}
+              onDragOver={!isTouch ? (e) => { handleDragOver(e); setHoverIndex(index); } : undefined}
+              onDrop={!isTouch ? () => handleDrop(index) : undefined}
+              onDragEnd={!isTouch ? handleDragEnd : undefined}
+              onTouchStart={isTouch ? (e) => handleTouchStart(index, e) : undefined}
               style={{
                 opacity: dragIndex === index ? 0.6 : 1,
                 borderColor: hoverIndex === index ? '#7c3aed' : undefined,
