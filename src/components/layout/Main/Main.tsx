@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
-import { LoadingSpinner } from './LoadingSpinner';
-import ExercisesList from './ExercisesList';
+import { useApp } from '../../../context/AppContext';
+import { LoadingSpinner } from '../../common/LoadingSpinner';
+import ExercisesList from '../../exercises/ExercisesList';
 import { MainContainer, MainHeader, MainTitle, MainSubtitle, EmptyState, EmptyStateTitle, EmptyStateSubtitle, CreateButton } from './Main.styled';
-import { icons } from '../data';
+import { icons } from '../../../data';
 
 const Main: React.FC = () => {
   const { state, actions } = useApp();

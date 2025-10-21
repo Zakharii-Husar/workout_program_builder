@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import { ThemeProvider } from './theme/ThemeProvider';
-import { ErrorBoundary } from './components/ErrorBoundary';
-import RouteGuard from './components/RouteGuard';
-import Main from './components/Main';
-import ProgramEditor from './components/ProgramEditor';
-import Exercises from './components/Exercises';
-import StartProgram from './components/StartProgram';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
+import RouteGuard from './components/layout/RouteGuard';
+import Main from './components/layout/Main';
+import ProgramEditor from './components/programs/ProgramEditor';
+import Exercises from './components/exercises/Exercises';
+import StartProgram from './components/programs/StartProgram';
 
 const AppContainer = styled.div`
   display: flex;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { icons } from '../data';
+import { icons } from '../../../data';
 import { ExercisesListContainer, ExerciseName, Icon1, Icon2, AddSetButton, IconContainer, ExercisesListWrapper } from './ExercisesList.styled';
 
 interface ExercisesListProps {

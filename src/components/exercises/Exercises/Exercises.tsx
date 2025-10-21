@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
-import { ExerciseService } from '../services/exerciseService';
-import { LoadingSpinner } from './LoadingSpinner';
-import ExercisesList from './ExercisesList';
-import { icons } from '../data';
+import { useApp } from '../../../context/AppContext';
+import { ExerciseService } from '../../../services/exerciseService';
+import { LoadingSpinner } from '../../common/LoadingSpinner';
+import ExercisesList from '../ExercisesList';
+import { icons } from '../../../data';
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai';
 import { 
   ExercisesContainer, 

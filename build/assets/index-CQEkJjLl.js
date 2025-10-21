@@ -222,6 +222,13 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
   overflow: hidden;
   width: 100%;
   max-width: 100%;
+  z-index: 1;
+
+  /* Ensure any pseudo-elements don't block pointer events */
+  &::before,
+  &::after {
+    pointer-events: none;
+  }
 
   &::before {
     content: '';
@@ -422,6 +429,14 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
   gap: ${t=>t.theme.spacing.md};
   align-items: center;
   padding-right: ${t=>t.theme.spacing.sm};
+  position: relative;
+  z-index: 5;
+  
+  /* Ensure any pseudo-elements don't block pointer events */
+  &::before,
+  &::after {
+    pointer-events: none;
+  }
   
   @media only screen and (max-width: ${t=>t.theme.breakpoints.mobile}) {
     padding-right: ${t=>t.theme.spacing.md};
@@ -439,6 +454,8 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  position: relative;
+  z-index: 10;
   
   img {
     width: 100%;
@@ -466,9 +483,11 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
     border-radius: ${t=>t.theme.borderRadius.lg};
     color: ${t=>t.theme.colors.text};
     cursor: pointer;
-    transition: ${t=>t.theme.transitions.normal};
-    border: 2px solid ${t=>t.theme.colors.border};
-    box-shadow: ${t=>t.theme.shadows.sm};
+    transition: ${t=>t.theme.transitions.fast};
+    border: 1px solid ${t=>t.theme.colors.border};
+    position: relative;
+    z-index: 11;
+    pointer-events: auto;
 
     &:hover {
       background: linear-gradient(135deg, ${t=>t.theme.colors.accent}, ${t=>t.theme.colors.primary});
@@ -659,6 +678,12 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
   position: relative;
   overflow: hidden;
 
+  /* Ensure any pseudo-elements don't block pointer events */
+  &::before,
+  &::after {
+    pointer-events: none;
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -734,7 +759,8 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
   text-transform: uppercase;
   letter-spacing: 1px;
   position: relative;
-  z-index: 1;
+  z-index: 10;
+  pointer-events: auto;
   min-height: 60px;
 
   &::before {
@@ -1995,4 +2021,4 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
   justify-content: center;
   min-height: 100vh;
 `;function Gv(){return C.jsx(Xy,{children:C.jsx(Zy,{children:C.jsx(Vy,{children:C.jsx(zy,{children:C.jsx(qy,{children:C.jsx(Wv,{children:C.jsxs(dy,{children:[C.jsx(An,{path:"/",element:C.jsx(tv,{})}),C.jsx(An,{path:"/create",element:C.jsx(gf,{})}),C.jsx(An,{path:"/create/exercises",element:C.jsx(xf,{})}),C.jsx(An,{path:"/edit/:programId",element:C.jsx(gf,{})}),C.jsx(An,{path:"/edit/:programId/exercises",element:C.jsx(xf,{})}),C.jsx(An,{path:"/start/:programId",element:C.jsx(Jv,{})}),C.jsx(An,{path:"*",element:C.jsx(np,{to:"/",replace:!0})})]})})})})})})})}const hp=document.getElementById("root");if(!hp)throw new Error("Root element not found");const Hv=wm.createRoot(hp);Hv.render(C.jsx(Ue.StrictMode,{children:C.jsx(Gv,{})}));
-//# sourceMappingURL=index-BD-iGs7S.js.map
+//# sourceMappingURL=index-CQEkJjLl.js.map

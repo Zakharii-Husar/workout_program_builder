@@ -1,6 +1,6 @@
 import React from 'react';
-import { useTimer } from '../hooks/useTimer';
-import { icons } from '../data';
+import { useTimer } from '../../../hooks/useTimer';
+import { icons } from '../../../data';
 import { TimerContainer, Display, ButtonsContainer } from './Timer.styled';
 
 interface TimerProps {

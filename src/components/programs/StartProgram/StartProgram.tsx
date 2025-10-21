@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
-import { LoadingSpinner } from './LoadingSpinner';
-import Timer from './Timer';
-import ExercisesList from './ExercisesList';
+import { useApp } from '../../../context/AppContext';
+import { LoadingSpinner } from '../../common/LoadingSpinner';
+import Timer from '../../common/Timer';
+import ExercisesList from '../../exercises/ExercisesList';
 import { StartProgramContainer, ExitButton } from './StartProgram.styled';
-import { icons } from '../data';
+import { icons } from '../../../data';
 
 const StartProgram: React.FC = () => {
   const { state, actions } = useApp();
