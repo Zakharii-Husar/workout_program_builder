@@ -7,10 +7,7 @@ export const useExerciseSelection = () => {
   const { chosenExercises } = state;
 
   const handleAddExercise = (exercise: Exercise) => {
-    console.log('Adding exercise:', exercise);
-    console.log('Current chosenExercises:', chosenExercises);
     const updatedExercises = ExerciseService.addExerciseToProgram(chosenExercises, exercise);
-    console.log('Updated exercises:', updatedExercises);
     actions.setChosenExercises(updatedExercises);
   };
 

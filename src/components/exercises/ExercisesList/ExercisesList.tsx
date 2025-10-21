@@ -26,7 +26,6 @@ const ExercisesList: React.FC<ExerciseListProps> = ({
         return <img src={element?.img} alt={element?.name} />;
       case 'add':
         return <AddSetButton onClick={() => {
-          console.log('Add Set button clicked for:', element);
           onSecondaryAction(element!, index);
         }}>Add Set</AddSetButton>;
       case 'check':

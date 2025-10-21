@@ -1,4 +1,4 @@
-import { Exercise, MuscleGroup, ExerciseServiceMethods } from '../types';
+import { Exercise, MuscleGroup } from '../types';
 import { muscleGroups } from '../data';
 import { ExerciseValidator } from './validation';
 

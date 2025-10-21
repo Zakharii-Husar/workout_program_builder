@@ -3,7 +3,7 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useApp } from '../../../../context/AppContext';
 import { ProgramService } from '../../../../services/programService';
 import { PROGRAM } from '../../../../utils/constants';
-import { WorkoutProgram, Exercise, NavigationState } from '../../../../types';
+import { WorkoutProgram, Exercise } from '../../../../types';
 
 export const useProgramEditor = () => {
   const { state, actions } = useApp();
@@ -13,7 +13,7 @@ export const useProgramEditor = () => {
   const location = useLocation();
 
   // Navigation state
-  const navigationState: NavigationState = {
+  const navigationState = {
     isEditMode: location.pathname.startsWith('/edit/'),
     programId: programId || null,
     currentPath: location.pathname

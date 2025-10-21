@@ -51,17 +51,6 @@ export interface TimerState {
   milliseconds: number;
 }
 
-export interface TimerControls {
-  start: () => void;
-  pause: () => void;
-  reset: () => void;
-  toggle: () => void;
-}
-
-export interface TimerHook extends TimerState, TimerControls {
-  isFinished: boolean;
-  displayTime: string;
-}
 
 // Validation types
 export interface ValidationError {
@@ -74,13 +63,6 @@ export interface ValidationResult {
   errors: ValidationError[];
 }
 
-export interface ValidationHook {
-  errors: ValidationError[];
-  validateProgram: (program: Partial<WorkoutProgram>) => boolean;
-  clearErrors: () => void;
-  getError: (field: string) => string | undefined;
-  hasErrors: boolean;
-}
 
 // Loading types
 export interface LoadingState {
@@ -113,21 +95,7 @@ export interface ProgramValidationResult {
   errors: string[];
 }
 
-export interface ExerciseServiceMethods {
-  getAllMuscleGroups: () => MuscleGroup[];
-  getExercisesByMuscleGroup: (muscleGroupName: string) => Exercise[];
-  searchExercises: (query: string) => Exercise[];
-  addExerciseToProgram: (exercises: Exercise[], newExercise: Exercise) => Exercise[];
-  removeExerciseFromProgram: (exercises: Exercise[], exerciseToRemove: Exercise, index?: number) => Exercise[];
-  reorderExercises: (exercises: Exercise[], fromIndex: number, toIndex: number) => Exercise[];
-}
 
-// Navigation types
-export interface NavigationState {
-  isEditMode: boolean;
-  programId: string | null;
-  currentPath: string;
-}
 
 // Error types
 export interface AppError {
@@ -137,10 +105,3 @@ export interface AppError {
   timestamp: Date;
 }
 
-export interface ErrorState {
-  errors: AppError[];
-  hasErrors: boolean;
-  addError: (error: Omit<AppError, 'timestamp'>) => void;
-  removeError: (code: string) => void;
-  clearErrors: () => void;
-}
