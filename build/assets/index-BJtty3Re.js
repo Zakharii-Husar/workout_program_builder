@@ -269,6 +269,12 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
     gap: ${t=>t.theme.spacing.xl};
   }
 `,H1=_.div`
+  display: ${t=>t.$isVisible?"block":"none"};
+  opacity: ${t=>t.$isVisible?1:0};
+  transition: ${t=>t.theme.transitions.normal};
+  width: 100%;
+  max-width: 100%;
+`,V1=_.div`
   flex: 1;
   text-align: left;
   font-family: ${t=>t.theme.typography.fontFamily.display};
@@ -305,7 +311,7 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
     font-size: ${t=>t.$isCentered?t.theme.typography.fontSize["4xl"]:t.theme.typography.fontSize["2xl"]};
     min-height: 44px;
   }
-`,V1=_.div`
+`,Y1=_.div`
   width: 64px;
   height: 64px;
   display: ${t=>t.$hidden?"none":"flex"};
@@ -364,7 +370,7 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
       height: 36px;
     }
   }
-`,Y1=_.button`
+`,K1=_.button`
   background: linear-gradient(135deg, ${t=>t.theme.colors.accent}, ${t=>t.theme.colors.primary});
   border: 2px solid ${t=>t.theme.colors.accent};
   border-radius: ${t=>t.theme.borderRadius.lg};
@@ -418,12 +424,6 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
     max-width: 140px;
     height: 44px;
   }
-`,K1=_.div`
-  display: ${t=>t.$isVisible?"block":"none"};
-  opacity: ${t=>t.$isVisible?1:0};
-  transition: ${t=>t.theme.transitions.normal};
-  width: 100%;
-  max-width: 100%;
 `,Z1=_.div`
   display: flex;
   gap: ${t=>t.theme.spacing.md};
@@ -586,7 +586,7 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
       height: 40px;
     }
   }
-`,ll=({arr:t,icon1:l,icon2:a,icon3:u,action1:c,action2:f,action3:h,style:v,$isVisible:g=!0})=>{const[w,E]=R.useState([]),k=(L,I,$)=>{switch(L){case"arrow":return C.jsx("img",{src:ze.arrow,alt:"arrow"});case"exercise":return C.jsx("img",{src:I?.img,alt:I?.name});case"muscle":return C.jsx("img",{src:I?.img,alt:I?.name});case"add":return C.jsx(Y1,{onClick:()=>{console.log("Add Set button clicked for:",I),f(I,$)},children:"Add Set"});case"check":return C.jsx(ze.check,{onClick:()=>f(I,$)});case"remove":return C.jsx(ze.remove,{onClick:()=>f(I,$),"data-icon-type":"remove"});case"dot":return w.includes($||0)?C.jsx(ze.checkedSquare,{onClick:()=>b($||0),"data-icon-type":"square","data-checked":"true"}):C.jsx(ze.emptySquare,{onClick:()=>b($||0),"data-icon-type":"square","data-checked":"false"});case"edit":return C.jsx(ze.edit,{onClick:()=>h?.(I,$),"data-icon-type":"edit"});default:return null}},b=L=>{E(I=>I.includes(L)?I.filter($=>$!==L):[...I,L])};return C.jsx(K1,{$isVisible:g,children:t.map((L,I)=>{const $=k(l,L,I),N=k(a,L,I),D=u?k(u,L,I):null;return C.jsxs(G1,{style:v,children:[C.jsx(V1,{$hidden:l==="none",children:$}),C.jsxs(H1,{$isCentered:l==="none",onClick:()=>c(L),children:[I+1,". ",L.name]}),C.jsxs(Z1,{children:[D&&C.jsx(uf,{children:D}),C.jsx(uf,{children:N})]})]},`${L.name}-${I}`)})})},X1=ht`
+`,ll=({arr:t,icon1:l,icon2:a,icon3:u,action1:c,action2:f,action3:h,style:v,$isVisible:g=!0})=>{const[w,E]=R.useState([]),k=(L,I,$)=>{switch(L){case"arrow":return C.jsx("img",{src:ze.arrow,alt:"arrow"});case"exercise":return C.jsx("img",{src:I?.img,alt:I?.name});case"muscle":return C.jsx("img",{src:I?.img,alt:I?.name});case"add":return C.jsx(K1,{onClick:()=>{console.log("Add Set button clicked for:",I),f(I,$)},children:"Add Set"});case"check":return C.jsx(ze.check,{onClick:()=>f(I,$)});case"remove":return C.jsx(ze.remove,{onClick:()=>f(I,$),"data-icon-type":"remove"});case"dot":return w.includes($||0)?C.jsx(ze.checkedSquare,{onClick:()=>b($||0),"data-icon-type":"square","data-checked":"true"}):C.jsx(ze.emptySquare,{onClick:()=>b($||0),"data-icon-type":"square","data-checked":"false"});case"edit":return C.jsx(ze.edit,{onClick:()=>h?.(I,$),"data-icon-type":"edit"});default:return null}},b=L=>{E(I=>I.includes(L)?I.filter($=>$!==L):[...I,L])};return C.jsx(H1,{$isVisible:g,children:t.map((L,I)=>{const $=k(l,L,I),N=k(a,L,I),D=u?k(u,L,I):null;return C.jsxs(G1,{style:v,children:[C.jsx(Y1,{$hidden:l==="none",children:$}),C.jsxs(V1,{$isCentered:l==="none",onClick:()=>c(L),children:[I+1,". ",L.name]}),C.jsxs(Z1,{children:[D&&C.jsx(uf,{children:D}),C.jsx(uf,{children:N})]})]},`${L.name}-${I}`)})})},X1=ht`
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -1348,25 +1348,7 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
     }
   }
 `,gf=()=>{const{state:t,actions:l}=il(),{chosenExercises:a,editingProgram:u,savedPrograms:c}=t,{clearErrors:f}=nv(),h=kr(),{programId:v}=_f(),w=Nt().pathname.startsWith("/edit/"),E=w&&v?c.find(X=>X.id===v):null,[k,b]=R.useState("My Workout"),[L,I]=R.useState(0),[$,N]=R.useState(!1);R.useEffect(()=>{w&&E?(b(E.name),I(E.timer),l.setChosenExercises(E.exercises)):u?(b(u.name),I(u.timer)):a.length===0&&(b("My Workout"),I(0))},[w,E,u,l,a.length]);const D=async()=>{f();const X=mf.createProgram(k,L,a,w?v:u?.id),V=mf.validateProgram(X);if(!V.isValid){V.errors.forEach(W=>{console.error("Validation error:",W)}),alert(V.errors.join(`
-`));return}N(!0);try{w||u?(l.updateProgram(X),alert("The program has been updated!")):(l.addProgram(X),alert("The program has been saved!")),b("My Workout"),I(0),l.clearCreateState(),h("/")}catch(W){console.error("Error saving program:",W),alert("Failed to save program. Please try again.")}finally{N(!1)}},O=()=>{h("/")},J=X=>{const V=L+X;V>=0&&I(V)},q=X=>{const V=Math.floor(X/60),W=X-V*60,ve=V<10?`0${V}`:`${V}`,ge=W<10?`0${W}`:`${W}`;return`${ve}:${ge}`};return $?C.jsx("div",{children:C.jsx(Ds,{message:"Saving program..."})}):C.jsx("div",{children:C.jsxs(sv,{children:[C.jsxs(Mi,{children:[C.jsxs(Ii,{children:[C.jsx(ji,{children:"1"}),C.jsx(zi,{children:"Add/Edit Exercises"})]}),C.jsxs(Ni,{children:[C.jsx("div",{className:"chosenExercises",children:C.jsx(ll,{arr:a,action1:()=>{},action2:()=>{},icon1:"exercise",icon2:"check"})}),C.jsx(uv,{onClick:()=>h(w?`/edit/${v}/exercises`:"/create/exercises"),children:a.length>0?"Edit Exercises":"Add Exercises"})]})]}),C.jsxs(Mi,{children:[C.jsxs(Ii,{children:[C.jsx(ji,{children:"2"}),C.jsx(zi,{children:"Set Time Between Sets"})]}),C.jsx(Ni,{children:C.jsxs(cv,{children:[C.jsx("div",{children:q(L)}),C.jsxs(dv,{children:[C.jsx(ze.up,{onClick:()=>J(15)}),C.jsx(ze.down,{onClick:()=>J(-15)})]})]})})]}),C.jsxs(Mi,{children:[C.jsxs(Ii,{children:[C.jsx(ji,{children:"3"}),C.jsx(zi,{children:"Name Your Program"})]}),C.jsx(Ni,{children:C.jsxs(fv,{children:[C.jsx(pv,{children:k}),C.jsx("input",{onInput:X=>b(X.target.value),type:"text",placeholder:"Enter program's name",value:k})]})})]}),C.jsxs(Mi,{children:[C.jsxs(Ii,{children:[C.jsx(ji,{children:"4"}),C.jsx(zi,{children:w||u?"Update Program":"Create Program"})]}),C.jsx(Ni,{children:C.jsxs(hv,{children:[C.jsxs(gv,{onClick:D,children:[C.jsx(ze.check,{}),C.jsx("span",{children:w||u?"Update":"Create"})]}),C.jsxs(mv,{onClick:O,children:[C.jsx(ze.cancel,{}),C.jsx("span",{children:"Cancel"})]})]})})]})]})})};class yf{static getAllMuscleGroups(){return fs}static getExercisesByMuscleGroup(l){const a=fs.find(u=>u.name.toLowerCase()===l.toLowerCase());return a?a.exercises:[]}static searchExercises(l){return fs.flatMap(u=>u.exercises).filter(u=>u.name.toLowerCase().includes(l.toLowerCase()))}static addExerciseToProgram(l,a){return[...l,a]}static removeExerciseFromProgram(l,a,u){return u!==void 0?l.filter((c,f)=>f!==u):l.filter(c=>c.name!==a.name)}static reorderExercises(l,a,u){const c=[...l],[f]=c.splice(a,1);return c.splice(u,0,f),c}}function yv(t){return tt({attr:{viewBox:"0 0 1024 1024"},child:[{tag:"path",attr:{d:"M689 165.1L308.2 493.5c-10.9 9.4-10.9 27.5 0 37L689 858.9c14.2 12.2 35 1.2 35-18.5V183.6c0-19.7-20.8-30.7-35-18.5z"},child:[]}]})(t)}function vv(t){return tt({attr:{viewBox:"0 0 1024 1024"},child:[{tag:"path",attr:{d:"M715.8 493.5L335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z"},child:[]}]})(t)}const xv=ht`
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;ht`
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;const fp=_.div`
+`));return}N(!0);try{w||u?(l.updateProgram(X),alert("The program has been updated!")):(l.addProgram(X),alert("The program has been saved!")),b("My Workout"),I(0),l.clearCreateState(),h("/")}catch(W){console.error("Error saving program:",W),alert("Failed to save program. Please try again.")}finally{N(!1)}},O=()=>{h("/")},J=X=>{const V=L+X;V>=0&&I(V)},q=X=>{const V=Math.floor(X/60),W=X-V*60,ve=V<10?`0${V}`:`${V}`,ge=W<10?`0${W}`:`${W}`;return`${ve}:${ge}`};return $?C.jsx("div",{children:C.jsx(Ds,{message:"Saving program..."})}):C.jsx("div",{children:C.jsxs(sv,{children:[C.jsxs(Mi,{children:[C.jsxs(Ii,{children:[C.jsx(ji,{children:"1"}),C.jsx(zi,{children:"Add/Edit Exercises"})]}),C.jsxs(Ni,{children:[C.jsx("div",{className:"chosenExercises",children:C.jsx(ll,{arr:a,action1:()=>{},action2:()=>{},icon1:"exercise",icon2:"check"})}),C.jsx(uv,{onClick:()=>h(w?`/edit/${v}/exercises`:"/create/exercises"),children:a.length>0?"Edit Exercises":"Add Exercises"})]})]}),C.jsxs(Mi,{children:[C.jsxs(Ii,{children:[C.jsx(ji,{children:"2"}),C.jsx(zi,{children:"Set Time Between Sets"})]}),C.jsx(Ni,{children:C.jsxs(cv,{children:[C.jsx("div",{children:q(L)}),C.jsxs(dv,{children:[C.jsx(ze.up,{onClick:()=>J(15)}),C.jsx(ze.down,{onClick:()=>J(-15)})]})]})})]}),C.jsxs(Mi,{children:[C.jsxs(Ii,{children:[C.jsx(ji,{children:"3"}),C.jsx(zi,{children:"Name Your Program"})]}),C.jsx(Ni,{children:C.jsxs(fv,{children:[C.jsx(pv,{children:k}),C.jsx("input",{onInput:X=>b(X.target.value),type:"text",placeholder:"Enter program's name",value:k})]})})]}),C.jsxs(Mi,{children:[C.jsxs(Ii,{children:[C.jsx(ji,{children:"4"}),C.jsx(zi,{children:w||u?"Update Program":"Create Program"})]}),C.jsx(Ni,{children:C.jsxs(hv,{children:[C.jsxs(gv,{onClick:D,children:[C.jsx(ze.check,{}),C.jsx("span",{children:w||u?"Update":"Create"})]}),C.jsxs(mv,{onClick:O,children:[C.jsx(ze.cancel,{}),C.jsx("span",{children:"Cancel"})]})]})})]})]})})};class yf{static getAllMuscleGroups(){return fs}static getExercisesByMuscleGroup(l){const a=fs.find(u=>u.name.toLowerCase()===l.toLowerCase());return a?a.exercises:[]}static searchExercises(l){return fs.flatMap(u=>u.exercises).filter(u=>u.name.toLowerCase().includes(l.toLowerCase()))}static addExerciseToProgram(l,a){return[...l,a]}static removeExerciseFromProgram(l,a,u){return u!==void 0?l.filter((c,f)=>f!==u):l.filter(c=>c.name!==a.name)}static reorderExercises(l,a,u){const c=[...l],[f]=c.splice(a,1);return c.splice(u,0,f),c}}function yv(t){return tt({attr:{viewBox:"0 0 1024 1024"},child:[{tag:"path",attr:{d:"M689 165.1L308.2 493.5c-10.9 9.4-10.9 27.5 0 37L689 858.9c14.2 12.2 35 1.2 35-18.5V183.6c0-19.7-20.8-30.7-35-18.5z"},child:[]}]})(t)}function vv(t){return tt({attr:{viewBox:"0 0 1024 1024"},child:[{tag:"path",attr:{d:"M715.8 493.5L335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z"},child:[]}]})(t)}const fp=_.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -1400,7 +1382,15 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
     padding-bottom: calc(140px + ${t=>t.theme.spacing.xxxl});
     gap: ${t=>t.theme.spacing.xxxl};
   }
-`,wv=_.div`
+`,xv=_.div`
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+`;_(fp)`
+  @media only screen and (max-width: ${t=>t.theme.breakpoints.mobile}) {
+    width: 100%;
+  }
+`;const wv=_.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -1570,108 +1560,25 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
   &:hover {
     background: ${t=>t.theme.colors.black}66;
   }
-`,Cv=_.div`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: ${t=>t.theme.spacing.lg};
-  background: linear-gradient(135deg, ${t=>t.theme.colors.primary}, ${t=>t.theme.colors.accent});
-  border-top: 2px solid ${t=>t.theme.colors.border};
-  padding: ${t=>t.theme.spacing.xl};
-  box-shadow: ${t=>t.theme.shadows.xl};
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-
-  @media only screen and (max-width: ${t=>t.theme.breakpoints.mobile}) {
-    padding: ${t=>t.theme.spacing.lg};
-    gap: ${t=>t.theme.spacing.md};
+`,Cv=ht`
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
   }
-
-  @media only screen and (min-width: ${t=>t.theme.breakpoints.tablet}) {
-    padding: ${t=>t.theme.spacing.xxl};
-    gap: ${t=>t.theme.spacing.xl};
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-
-  @media only screen and (min-width: ${t=>t.theme.breakpoints.desktop}) {
-    padding: ${t=>t.theme.spacing.xxxl};
+`;ht`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-
-  svg {
-    width: 48px;
-    height: 48px;
-    padding: ${t=>t.theme.spacing.sm};
-    background: linear-gradient(135deg, ${t=>t.theme.colors.surface}, ${t=>t.theme.colors.background});
-    border-radius: ${t=>t.theme.borderRadius.xl};
-    color: ${t=>t.theme.colors.text};
-    cursor: pointer;
-    transition: ${t=>t.theme.transitions.normal};
-    border: 2px solid ${t=>t.theme.colors.border};
-    box-shadow: ${t=>t.theme.shadows.md};
-
-    &:hover {
-      transform: translateY(-3px) scale(1.1);
-      box-shadow: ${t=>t.theme.shadows.lg};
-    }
-
-    &:active {
-      transform: translateY(-1px) scale(1.05);
-    }
-
-    &:nth-child(1) {
-      background: linear-gradient(135deg, ${t=>t.theme.colors.error}, ${t=>t.theme.colors.primary});
-      color: ${t=>t.theme.colors.background};
-      border-color: transparent;
-
-      &:hover {
-        background: linear-gradient(135deg, ${t=>t.theme.colors.error}, ${t=>t.theme.colors.accent});
-        transform: translateY(-3px) scale(1.1);
-        box-shadow: ${t=>t.theme.shadows.lg};
-      }
-    }
-
-    &:nth-child(2) {
-      background: linear-gradient(135deg, ${t=>t.theme.colors.warning}, ${t=>t.theme.colors.accent});
-      color: ${t=>t.theme.colors.background};
-      border-color: transparent;
-
-      &:hover {
-        background: linear-gradient(135deg, ${t=>t.theme.colors.warning}, ${t=>t.theme.colors.primary});
-        transform: translateY(-3px) scale(1.1);
-        box-shadow: ${t=>t.theme.shadows.lg};
-      }
-    }
-
-    &:nth-child(3) {
-      background: linear-gradient(135deg, ${t=>t.theme.colors.primary}, ${t=>t.theme.colors.accent});
-      color: ${t=>t.theme.colors.background};
-      border-color: transparent;
-
-      &:hover {
-        background: linear-gradient(135deg, ${t=>t.theme.colors.accent}, ${t=>t.theme.colors.primary});
-        transform: translateY(-3px) scale(1.1);
-        box-shadow: ${t=>t.theme.shadows.lg}, ${t=>t.theme.shadows.glow};
-      }
-    }
-
-    @media only screen and (max-width: ${t=>t.theme.breakpoints.mobile}) {
-      width: 40px;
-      height: 40px;
-      padding: ${t=>t.theme.spacing.xs};
-    }
-
-    @media only screen and (min-width: ${t=>t.theme.breakpoints.tablet}) {
-      width: 56px;
-      height: 56px;
-      padding: ${t=>t.theme.spacing.md};
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-`,al=_.div`
+`;const al=_.div`
   display: flex;
   align-items: center;
   background: linear-gradient(135deg, ${t=>t.theme.colors.surface}, ${t=>t.theme.colors.background});
@@ -1682,7 +1589,7 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
   transition: ${t=>t.theme.transitions.fast};
   border: 1px solid ${t=>t.theme.colors.border};
   box-shadow: ${t=>t.theme.shadows.sm};
-  animation: ${xv} 0.5s ease-out;
+  animation: ${Cv} 0.5s ease-out;
   min-height: 80px;
   gap: ${t=>t.theme.spacing.lg};
   position: relative;
@@ -1809,17 +1716,110 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
   @media only screen and (min-width: ${t=>t.theme.breakpoints.tablet}) {
     font-size: ${t=>t.theme.typography.fontSize["3xl"]};
   }
+`,Lv=_.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: ${t=>t.theme.spacing.lg};
+  background: linear-gradient(135deg, ${t=>t.theme.colors.primary}, ${t=>t.theme.colors.accent});
+  border-top: 2px solid ${t=>t.theme.colors.border};
+  padding: ${t=>t.theme.spacing.xl};
+  box-shadow: ${t=>t.theme.shadows.xl};
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media only screen and (max-width: ${t=>t.theme.breakpoints.mobile}) {
+    padding: ${t=>t.theme.spacing.lg};
+    gap: ${t=>t.theme.spacing.md};
+  }
+
+  @media only screen and (min-width: ${t=>t.theme.breakpoints.tablet}) {
+    padding: ${t=>t.theme.spacing.xxl};
+    gap: ${t=>t.theme.spacing.xl};
+  }
+
+  @media only screen and (min-width: ${t=>t.theme.breakpoints.desktop}) {
+    padding: ${t=>t.theme.spacing.xxxl};
+  }
+
+  svg {
+    width: 48px;
+    height: 48px;
+    padding: ${t=>t.theme.spacing.sm};
+    background: linear-gradient(135deg, ${t=>t.theme.colors.surface}, ${t=>t.theme.colors.background});
+    border-radius: ${t=>t.theme.borderRadius.xl};
+    color: ${t=>t.theme.colors.text};
+    cursor: pointer;
+    transition: ${t=>t.theme.transitions.normal};
+    border: 2px solid ${t=>t.theme.colors.border};
+    box-shadow: ${t=>t.theme.shadows.md};
+
+    &:hover {
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: ${t=>t.theme.shadows.lg};
+    }
+
+    &:active {
+      transform: translateY(-1px) scale(1.05);
+    }
+
+    &:nth-child(1) {
+      background: linear-gradient(135deg, ${t=>t.theme.colors.error}, ${t=>t.theme.colors.primary});
+      color: ${t=>t.theme.colors.background};
+      border-color: transparent;
+
+      &:hover {
+        background: linear-gradient(135deg, ${t=>t.theme.colors.error}, ${t=>t.theme.colors.accent});
+        transform: translateY(-3px) scale(1.1);
+        box-shadow: ${t=>t.theme.shadows.lg};
+      }
+    }
+
+    &:nth-child(2) {
+      background: linear-gradient(135deg, ${t=>t.theme.colors.warning}, ${t=>t.theme.colors.accent});
+      color: ${t=>t.theme.colors.background};
+      border-color: transparent;
+
+      &:hover {
+        background: linear-gradient(135deg, ${t=>t.theme.colors.warning}, ${t=>t.theme.colors.primary});
+        transform: translateY(-3px) scale(1.1);
+        box-shadow: ${t=>t.theme.shadows.lg};
+      }
+    }
+
+    &:nth-child(3) {
+      background: linear-gradient(135deg, ${t=>t.theme.colors.primary}, ${t=>t.theme.colors.accent});
+      color: ${t=>t.theme.colors.background};
+      border-color: transparent;
+
+      &:hover {
+        background: linear-gradient(135deg, ${t=>t.theme.colors.accent}, ${t=>t.theme.colors.primary});
+        transform: translateY(-3px) scale(1.1);
+        box-shadow: ${t=>t.theme.shadows.lg}, ${t=>t.theme.shadows.glow};
+      }
+    }
+
+    @media only screen and (max-width: ${t=>t.theme.breakpoints.mobile}) {
+      width: 40px;
+      height: 40px;
+      padding: ${t=>t.theme.spacing.xs};
+    }
+
+    @media only screen and (min-width: ${t=>t.theme.breakpoints.tablet}) {
+      width: 56px;
+      height: 56px;
+      padding: ${t=>t.theme.spacing.md};
+    }
+  }
 `,ps=_.div`
   display: ${t=>t.$isVisible!==void 0?t.$isVisible?"flex":"none":"flex"};
-`,Lv=_.div`
-  flex: 1;
-  width: 100%;
-  max-width: 100%;
-`;_(fp)`
-  @media only screen and (max-width: ${t=>t.theme.breakpoints.mobile}) {
-    width: 100%;
-  }
-`;const xf=()=>{const{state:t,actions:l}=il(),{chosenExercises:a}=t,u=kr(),c=Nt(),f=c.pathname.includes("/edit/"),h=f?c.pathname.split("/")[2]:null,[v,g]=R.useState([]),[w,E]=R.useState(!1),[k,b]=R.useState(!1),[L,I]=R.useState(!1),$=R.useRef(null),N=yf.getAllMuscleGroups(),D=a.reduce((ne,xe,qe)=>{const Ne=ne[ne.length-1];return!Ne||Ne.name!==xe.name?ne.push({...xe,count:1}):Ne.count+=1,ne},[]),O=()=>{const ne=$.current;ne&&(b(ne.scrollLeft>0),I(ne.scrollLeft<ne.scrollWidth-ne.clientWidth))};R.useEffect(()=>{$.current&&($.current.scrollLeft=$.current.scrollWidth,O())},[a.length]);const J=()=>{$.current&&$.current.scrollBy({left:-200,behavior:"smooth"})},q=()=>{$.current&&$.current.scrollBy({left:200,behavior:"smooth"})},X=ne=>{console.log("Adding exercise:",ne),console.log("Current chosenExercises:",a);const xe=yf.addExerciseToProgram(a,ne);console.log("Updated exercises:",xe),l.setChosenExercises(xe)},V=()=>{if(a.length>0){const ne=a.slice(0,-1);l.setChosenExercises(ne)}},W=()=>{l.setChosenExercises([]),u(f?`/edit/${h}`:"/create")},ve=()=>{u(f?`/edit/${h}`:"/create")},ge=ne=>{g(xe=>xe.includes(ne)?xe.filter(qe=>qe!==ne):[...xe,ne]),setTimeout(()=>{window.scrollBy({top:ne*100,behavior:"smooth"})},10)};return w?C.jsx("div",{children:C.jsx(Ds,{message:"Loading exercises..."})}):C.jsxs(fp,{children:[C.jsxs(wv,{children:[k&&C.jsx(vf,{$position:"left",onClick:J,children:C.jsx(yv,{size:30})}),C.jsx(Av,{ref:$,onScroll:O,children:D.length>0?D.map((ne,xe)=>C.jsxs(Sv,{children:[C.jsx("img",{src:ne.img,alt:ne.name}),C.jsx(Ev,{children:ne.count})]},`${ne.name}-${xe}`)):C.jsx(kv,{children:"Select exercises to build your workout program"})}),L&&C.jsx(vf,{$position:"right",onClick:q,children:C.jsx(vv,{size:30})})]}),C.jsx(Lv,{children:N.map((ne,xe)=>C.jsxs("div",{children:[C.jsxs(al,{children:[C.jsx(Rv,{src:ne.img,alt:ne.name}),C.jsx(bv,{children:ne.name}),C.jsx(Pv,{src:ze.arrow,onClick:()=>ge(xe),alt:"Toggle exercises"})]}),C.jsx(ll,{arr:ne.exercises,icon1:"exercise",icon2:"add",action1:()=>{},action2:X,$isVisible:v.includes(xe)})]},ne.name))}),C.jsxs(Cv,{children:[C.jsx(ps,{children:C.jsx(ze.cancel,{onClick:W})}),C.jsx(ps,{$isVisible:a.length>0,children:C.jsx(ze.undo,{onClick:V})}),C.jsx(ps,{children:C.jsx(ze.check,{onClick:ve})})]})]})},$v=""+new URL("bell-C4IK5SW1.mp3",import.meta.url).href;class Mv{constructor(){this.audio=null,this.isPermissionGranted=!1,this.initializeAudio()}initializeAudio(){try{this.audio=new Audio($v),this.audio.preload="auto",this.audio.volume=.7}catch(l){console.warn("Failed to initialize audio:",l)}}async requestPermission(){if(!this.audio)return console.warn("Audio not initialized"),!1;try{return await this.audio.play(),this.audio.pause(),this.audio.currentTime=0,this.isPermissionGranted=!0,!0}catch(l){return console.warn("Audio permission denied or failed:",l),!1}}async playBell(l=1){if(!this.audio||!this.isPermissionGranted){console.warn("Audio not available or permission not granted");return}try{for(let a=0;a<l;a++)this.audio.currentTime=0,await this.audio.play(),await new Promise(u=>{const c=()=>{this.audio?.removeEventListener("ended",c),u()};this.audio?.addEventListener("ended",c)}),a<l-1&&await new Promise(u=>setTimeout(u,200))}catch(a){console.warn("Failed to play bell sound:",a)}}async playBellWithPermissionRequest(l=1){if(!this.isPermissionGranted&&!await this.requestPermission()){console.warn("Could not get audio permission");return}await this.playBell(l)}setVolume(l){this.audio&&(this.audio.volume=Math.max(0,Math.min(1,l)))}}const Iv=new Mv,jv=t=>{const[l,a]=R.useState(()=>{const k=Math.floor(t/60),b=t-k*60;return{isRunning:!1,minutes:k,seconds:b,milliseconds:0}}),[u,c]=R.useState(!1),f=R.useCallback(()=>{a(k=>({...k,isRunning:!0}))},[]),h=R.useCallback(()=>{a(k=>({...k,isRunning:!1}))},[]),v=R.useCallback(()=>{const k=Math.floor(t/60),b=t-k*60;a({isRunning:!1,minutes:k,seconds:b,milliseconds:0}),c(!1)},[t]),g=R.useCallback(()=>{a(k=>{if(!k.isRunning&&k.minutes===0&&k.seconds===0&&k.milliseconds===0){const b=Math.floor(t/60),L=t-b*60;return c(!1),{isRunning:!0,minutes:b,seconds:L,milliseconds:0}}return{...k,isRunning:!k.isRunning}})},[t]);R.useEffect(()=>{let k;return l.isRunning&&(k=setInterval(()=>{a(b=>{let{minutes:L,seconds:I,milliseconds:$}=b;if($>0)$-=1;else if(I>0)I-=1,$=99;else if(L>0)L-=1,I=59,$=99;else return c(!0),Iv.playBellWithPermissionRequest(3),{isRunning:!1,minutes:0,seconds:0,milliseconds:0};return{...b,minutes:L,seconds:I,milliseconds:$}})},10)),()=>{k&&clearInterval(k)}},[l.isRunning]),R.useEffect(()=>{const k=Math.floor(t/60),b=t-k*60;a(L=>({...L,minutes:k,seconds:b,milliseconds:0})),c(!1)},[t]);const w=k=>k<10?`0${k}`:`${k}`,E=`${w(l.minutes)}:${w(l.seconds)}:${w(l.milliseconds)}`;return{...l,isFinished:u,displayTime:E,start:f,pause:h,reset:v,toggle:g}},pp=ht`
+`,xf=()=>{const{state:t,actions:l}=il(),{chosenExercises:a}=t,u=kr(),c=Nt(),f=c.pathname.includes("/edit/"),h=f?c.pathname.split("/")[2]:null,[v,g]=R.useState([]),[w,E]=R.useState(!1),[k,b]=R.useState(!1),[L,I]=R.useState(!1),$=R.useRef(null),N=yf.getAllMuscleGroups(),D=a.reduce((ne,xe,qe)=>{const Ne=ne[ne.length-1];return!Ne||Ne.name!==xe.name?ne.push({...xe,count:1}):Ne.count+=1,ne},[]),O=()=>{const ne=$.current;ne&&(b(ne.scrollLeft>0),I(ne.scrollLeft<ne.scrollWidth-ne.clientWidth))};R.useEffect(()=>{$.current&&($.current.scrollLeft=$.current.scrollWidth,O())},[a.length]);const J=()=>{$.current&&$.current.scrollBy({left:-200,behavior:"smooth"})},q=()=>{$.current&&$.current.scrollBy({left:200,behavior:"smooth"})},X=ne=>{console.log("Adding exercise:",ne),console.log("Current chosenExercises:",a);const xe=yf.addExerciseToProgram(a,ne);console.log("Updated exercises:",xe),l.setChosenExercises(xe)},V=()=>{if(a.length>0){const ne=a.slice(0,-1);l.setChosenExercises(ne)}},W=()=>{l.setChosenExercises([]),u(f?`/edit/${h}`:"/create")},ve=()=>{u(f?`/edit/${h}`:"/create")},ge=ne=>{g(xe=>xe.includes(ne)?xe.filter(qe=>qe!==ne):[...xe,ne]),setTimeout(()=>{window.scrollBy({top:ne*100,behavior:"smooth"})},10)};return w?C.jsx("div",{children:C.jsx(Ds,{message:"Loading exercises..."})}):C.jsxs(fp,{children:[C.jsxs(wv,{children:[k&&C.jsx(vf,{$position:"left",onClick:J,children:C.jsx(yv,{size:30})}),C.jsx(Av,{ref:$,onScroll:O,children:D.length>0?D.map((ne,xe)=>C.jsxs(Sv,{children:[C.jsx("img",{src:ne.img,alt:ne.name}),C.jsx(Ev,{children:ne.count})]},`${ne.name}-${xe}`)):C.jsx(kv,{children:"Select exercises to build your workout program"})}),L&&C.jsx(vf,{$position:"right",onClick:q,children:C.jsx(vv,{size:30})})]}),C.jsx(xv,{children:N.map((ne,xe)=>C.jsxs("div",{children:[C.jsxs(al,{children:[C.jsx(Rv,{src:ne.img,alt:ne.name}),C.jsx(bv,{children:ne.name}),C.jsx(Pv,{src:ze.arrow,onClick:()=>ge(xe),alt:"Toggle exercises"})]}),C.jsx(ll,{arr:ne.exercises,icon1:"exercise",icon2:"add",action1:()=>{},action2:X,$isVisible:v.includes(xe)})]},ne.name))}),C.jsxs(Lv,{children:[C.jsx(ps,{children:C.jsx(ze.cancel,{onClick:W})}),C.jsx(ps,{$isVisible:a.length>0,children:C.jsx(ze.undo,{onClick:V})}),C.jsx(ps,{children:C.jsx(ze.check,{onClick:ve})})]})]})},$v=""+new URL("bell-C4IK5SW1.mp3",import.meta.url).href;class Mv{constructor(){this.audio=null,this.isPermissionGranted=!1,this.initializeAudio()}initializeAudio(){try{this.audio=new Audio($v),this.audio.preload="auto",this.audio.volume=.7}catch(l){console.warn("Failed to initialize audio:",l)}}async requestPermission(){if(!this.audio)return console.warn("Audio not initialized"),!1;try{return await this.audio.play(),this.audio.pause(),this.audio.currentTime=0,this.isPermissionGranted=!0,!0}catch(l){return console.warn("Audio permission denied or failed:",l),!1}}async playBell(l=1){if(!this.audio||!this.isPermissionGranted){console.warn("Audio not available or permission not granted");return}try{for(let a=0;a<l;a++)this.audio.currentTime=0,await this.audio.play(),await new Promise(u=>{const c=()=>{this.audio?.removeEventListener("ended",c),u()};this.audio?.addEventListener("ended",c)}),a<l-1&&await new Promise(u=>setTimeout(u,200))}catch(a){console.warn("Failed to play bell sound:",a)}}async playBellWithPermissionRequest(l=1){if(!this.isPermissionGranted&&!await this.requestPermission()){console.warn("Could not get audio permission");return}await this.playBell(l)}setVolume(l){this.audio&&(this.audio.volume=Math.max(0,Math.min(1,l)))}}const Iv=new Mv,jv=t=>{const[l,a]=R.useState(()=>{const k=Math.floor(t/60),b=t-k*60;return{isRunning:!1,minutes:k,seconds:b,milliseconds:0}}),[u,c]=R.useState(!1),f=R.useCallback(()=>{a(k=>({...k,isRunning:!0}))},[]),h=R.useCallback(()=>{a(k=>({...k,isRunning:!1}))},[]),v=R.useCallback(()=>{const k=Math.floor(t/60),b=t-k*60;a({isRunning:!1,minutes:k,seconds:b,milliseconds:0}),c(!1)},[t]),g=R.useCallback(()=>{a(k=>{if(!k.isRunning&&k.minutes===0&&k.seconds===0&&k.milliseconds===0){const b=Math.floor(t/60),L=t-b*60;return c(!1),{isRunning:!0,minutes:b,seconds:L,milliseconds:0}}return{...k,isRunning:!k.isRunning}})},[t]);R.useEffect(()=>{let k;return l.isRunning&&(k=setInterval(()=>{a(b=>{let{minutes:L,seconds:I,milliseconds:$}=b;if($>0)$-=1;else if(I>0)I-=1,$=99;else if(L>0)L-=1,I=59,$=99;else return c(!0),Iv.playBellWithPermissionRequest(3),{isRunning:!1,minutes:0,seconds:0,milliseconds:0};return{...b,minutes:L,seconds:I,milliseconds:$}})},10)),()=>{k&&clearInterval(k)}},[l.isRunning]),R.useEffect(()=>{const k=Math.floor(t/60),b=t-k*60;a(L=>({...L,minutes:k,seconds:b,milliseconds:0})),c(!1)},[t]);const w=k=>k<10?`0${k}`:`${k}`,E=`${w(l.minutes)}:${w(l.seconds)}:${w(l.milliseconds)}`;return{...l,isFinished:u,displayTime:E,start:f,pause:h,reset:v,toggle:g}},pp=ht`
   0%, 100% {
     transform: scale(1);
   }
@@ -2021,4 +2021,4 @@ Please change the parent <Route path="${O}"> to <Route path="${O==="/"?"*":`${O}
   justify-content: center;
   min-height: 100vh;
 `;function Gv(){return C.jsx(Xy,{children:C.jsx(Zy,{children:C.jsx(Vy,{children:C.jsx(zy,{children:C.jsx(qy,{children:C.jsx(Wv,{children:C.jsxs(dy,{children:[C.jsx(An,{path:"/",element:C.jsx(tv,{})}),C.jsx(An,{path:"/create",element:C.jsx(gf,{})}),C.jsx(An,{path:"/create/exercises",element:C.jsx(xf,{})}),C.jsx(An,{path:"/edit/:programId",element:C.jsx(gf,{})}),C.jsx(An,{path:"/edit/:programId/exercises",element:C.jsx(xf,{})}),C.jsx(An,{path:"/start/:programId",element:C.jsx(Jv,{})}),C.jsx(An,{path:"*",element:C.jsx(np,{to:"/",replace:!0})})]})})})})})})})}const hp=document.getElementById("root");if(!hp)throw new Error("Root element not found");const Hv=wm.createRoot(hp);Hv.render(C.jsx(Ue.StrictMode,{children:C.jsx(Gv,{})}));
-//# sourceMappingURL=index-CQEkJjLl.js.map
+//# sourceMappingURL=index-BJtty3Re.js.map

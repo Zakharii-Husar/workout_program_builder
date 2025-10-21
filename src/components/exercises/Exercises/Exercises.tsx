@@ -21,7 +21,7 @@ import {
   MuscleNameText,
   ControlButton,
   ContentWrapper
-} from './Exercises.styled';
+} from './index.styled';
 
 const Exercises: React.FC = () => {
   const { state, actions } = useApp();

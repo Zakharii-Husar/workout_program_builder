@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { icons } from '../../../data';
-import { ExercisesListContainer, ExerciseName, Icon1, Icon2, AddSetButton, IconContainer, ExercisesListWrapper } from './ExercisesList.styled';
+import { ExercisesListContainer, ExerciseName, Icon1, Icon2, AddSetButton, IconContainer, ExercisesListWrapper } from './index.styled';
 
 interface ExercisesListProps {
   arr: any[];

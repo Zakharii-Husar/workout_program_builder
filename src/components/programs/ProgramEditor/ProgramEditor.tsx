@@ -21,7 +21,7 @@ import {
   CancelOrSave,
   CancelButton,
   SaveButton
-} from './ProgramEditor.styled';
+} from './index.styled';
 
 const ProgramEditor: React.FC = () => {
   const { state, actions } = useApp();
