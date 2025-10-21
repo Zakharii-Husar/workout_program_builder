@@ -36,6 +36,14 @@ export const ExercisesListContainer = styled.div`
   box-shadow: ${props => props.theme.shadows.sm};
   min-height: 64px;
   gap: ${props => props.theme.spacing.sm};
+  position: relative;
+  z-index: 1;
+
+  /* Ensure any pseudo-elements don't block pointer events */
+  &::before,
+  &::after {
+    pointer-events: none;
+  }
 
   &:hover {
     background: ${props => props.theme.colors.surface};
@@ -217,6 +225,14 @@ export const IconContainer = styled.div`
   gap: ${props => props.theme.spacing.sm};
   align-items: center;
   padding-right: ${props => props.theme.spacing.sm};
+  position: relative;
+  z-index: 5;
+  
+  /* Ensure any pseudo-elements don't block pointer events */
+  &::before,
+  &::after {
+    pointer-events: none;
+  }
   
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
     padding-right: ${props => props.theme.spacing.xs};
@@ -234,6 +250,8 @@ export const Icon2 = styled.div`
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  position: relative;
+  z-index: 10;
   
   img {
     width: 100%;
@@ -263,6 +281,9 @@ export const Icon2 = styled.div`
     cursor: pointer;
     transition: ${props => props.theme.transitions.fast};
     border: 1px solid ${props => props.theme.colors.border};
+    position: relative;
+    z-index: 11;
+    pointer-events: auto;
 
     &:hover {
       background: ${props => props.theme.colors.secondary};

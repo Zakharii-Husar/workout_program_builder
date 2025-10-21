@@ -44,6 +44,13 @@ export const EmptyState = styled.div`
   border-radius: ${props => props.theme.borderRadius.lg};
   margin: ${props => props.theme.spacing.md};
   box-shadow: ${props => props.theme.shadows.md};
+  position: relative;
+
+  /* Ensure any pseudo-elements don't block pointer events */
+  &::before,
+  &::after {
+    pointer-events: none;
+  }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
     padding: ${props => props.theme.spacing.lg};
@@ -114,6 +121,9 @@ export const CreateButton = styled.button`
   border: none;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
 
   &:hover {
     transform: translateY(-1px);
