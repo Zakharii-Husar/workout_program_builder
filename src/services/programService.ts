@@ -1,82 +1,111 @@
-import { WorkoutProgram, Exercise } from '../types';
+import { WorkoutProgram, Exercise, ProgramValidationResult } from '../types';
+import { LocalStorageService, MigrationService } from './storage';
+import { ProgramValidator } from './validation';
+import { generateId, ERROR_CODES, createError } from '../utils';
 
 export class ProgramService {
-  static saveProgram(program: WorkoutProgram): void {
+  static saveProgram(program: WorkoutProgram): { success: boolean; error?: any } {
     try {
       const existingPrograms = this.getSavedPrograms();
       const updatedPrograms = [...existingPrograms, program];
-      localStorage.setItem("Exarr", JSON.stringify(updatedPrograms));
+      const success = LocalStorageService.savePrograms(updatedPrograms);
+      
+      if (!success) {
+        throw new Error('Failed to save to localStorage');
+      }
+      
+      return { success: true };
     } catch (error) {
       console.error('Error saving program:', error);
-      throw new Error('Failed to save program');
+      return { 
+        success: false, 
+        error: createError(ERROR_CODES.PROGRAM_SAVE_FAILED, error) 
+      };
     }
   }
 
   static getSavedPrograms(): WorkoutProgram[] {
     try {
-      const programs = localStorage.getItem("Exarr");
-      return programs ? JSON.parse(programs) : [];
+      const programs = LocalStorageService.getPrograms();
+      return MigrationService.migratePrograms(programs);
     } catch (error) {
       console.error('Error loading programs:', error);
       return [];
     }
   }
 
-  static removeProgram(program: WorkoutProgram): void {
+  static removeProgram(program: WorkoutProgram): { success: boolean; error?: any } {
     try {
       const existingPrograms = this.getSavedPrograms();
       const updatedPrograms = existingPrograms.filter(p => p.id !== program.id);
-      localStorage.setItem("Exarr", JSON.stringify(updatedPrograms));
+      const success = LocalStorageService.savePrograms(updatedPrograms);
+      
+      if (!success) {
+        throw new Error('Failed to save to localStorage');
+      }
+      
+      return { success: true };
     } catch (error) {
       console.error('Error removing program:', error);
-      throw new Error('Failed to remove program');
+      return { 
+        success: false, 
+        error: createError(ERROR_CODES.PROGRAM_DELETE_FAILED, error) 
+      };
     }
   }
 
-  static updateProgram(updatedProgram: WorkoutProgram): void {
+  static updateProgram(updatedProgram: WorkoutProgram): { success: boolean; error?: any } {
     try {
       const existingPrograms = this.getSavedPrograms();
       const updatedPrograms = existingPrograms.map(p => 
-        p.id === updatedProgram.id ? updatedProgram : p
+        p.id === updatedProgram.id ? { ...updatedProgram, updatedAt: new Date() } : p
       );
-      localStorage.setItem("Exarr", JSON.stringify(updatedPrograms));
+      const success = LocalStorageService.savePrograms(updatedPrograms);
+      
+      if (!success) {
+        throw new Error('Failed to save to localStorage');
+      }
+      
+      return { success: true };
     } catch (error) {
       console.error('Error updating program:', error);
-      throw new Error('Failed to update program');
+      return { 
+        success: false, 
+        error: createError(ERROR_CODES.PROGRAM_UPDATE_FAILED, error) 
+      };
     }
   }
 
   static createProgram(name: string, timer: number, exercises: Exercise[], id?: string): WorkoutProgram {
+    const now = new Date();
     return {
-      id: id || this.generateId(),
+      id: id || generateId(),
       name: name.trim(),
       timer,
-      exercises: [...exercises]
+      exercises: [...exercises],
+      createdAt: id ? undefined : now, // Only set createdAt for new programs
+      updatedAt: now
     };
   }
 
-  static generateId(): string {
-    return Date.now().toString(36) + Math.random().toString(36).substr(2);
-  }
-
-  static validateProgram(program: Partial<WorkoutProgram>): { isValid: boolean; errors: string[] } {
-    const errors: string[] = [];
-
-    if (!program.name || program.name.trim() === '') {
-      errors.push('Program name is required');
-    }
-
-    if (!program.timer || program.timer <= 0) {
-      errors.push('Rest time must be greater than 0 seconds');
-    }
-
-    if (!program.exercises || program.exercises.length === 0) {
-      errors.push('At least one exercise is required');
-    }
-
+  static validateProgram(program: Partial<WorkoutProgram>): ProgramValidationResult {
+    const result = ProgramValidator.validate(program);
     return {
-      isValid: errors.length === 0,
-      errors
+      isValid: result.isValid,
+      errors: result.errors.map(error => error.message)
     };
+  }
+
+  static getProgramById(id: string): WorkoutProgram | null {
+    const programs = this.getSavedPrograms();
+    return programs.find(p => p.id === id) || null;
+  }
+
+  static searchPrograms(query: string): WorkoutProgram[] {
+    const programs = this.getSavedPrograms();
+    const searchTerm = query.toLowerCase();
+    return programs.filter(program => 
+      program.name.toLowerCase().includes(searchTerm)
+    );
   }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../../context/AppContext';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
-import ExercisesList from '../../exercises/ExercisesList';
+import ProgramList from './ProgramList';
 import { MainContainer, MainHeader, MainTitle, MainSubtitle, EmptyState, EmptyStateTitle, EmptyStateSubtitle, CreateButton } from './Main.styled';
 import { icons } from '../../../data';
 
@@ -61,14 +61,11 @@ const Main: React.FC = () => {
         <MainTitle>Workout Programs</MainTitle>
         <MainSubtitle>Build, track, and achieve your fitness goals</MainSubtitle>
       </MainHeader>
-      <ExercisesList
-        icon1="none"
-        icon2="remove"
-        icon3="edit"
-        arr={savedPrograms}
-        action1={handleStartProgram}
-        action2={handleRemoveProgram}
-        action3={handleEditProgram}
+      <ProgramList
+        programs={savedPrograms}
+        onStartProgram={handleStartProgram}
+        onRemoveProgram={handleRemoveProgram}
+        onEditProgram={handleEditProgram}
       />
       <CreateButton onClick={() => {
         actions.clearCreateState();

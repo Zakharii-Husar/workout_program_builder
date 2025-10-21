@@ -1,33 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { icons } from '../../../data';
+import { Exercise, ExerciseListProps } from '../../../types';
 import { ExercisesListContainer, ExerciseName, Icon1, Icon2, AddSetButton, IconContainer, ExercisesListWrapper } from './index.styled';
 
-interface ExercisesListProps {
-  arr: any[];
-  icon1: string;
-  icon2: string;
-  icon3?: string;
-  action1: (element: any) => void;
-  action2: (element: any, index?: number) => void;
-  action3?: (element: any, index?: number) => void;
-  style?: React.CSSProperties;
-  $isVisible?: boolean;
-}
-
-const ExercisesList: React.FC<ExercisesListProps> = ({
-  arr,
-  icon1,
-  icon2,
-  icon3,
-  action1,
-  action2,
-  action3,
+const ExercisesList: React.FC<ExerciseListProps> = ({
+  exercises,
+  primaryIcon,
+  secondaryIcon,
+  tertiaryIcon,
+  onPrimaryAction,
+  onSecondaryAction,
+  onTertiaryAction,
   style,
-  $isVisible = true
+  isVisible = true
 }) => {
   const [exerciseIsDone, setExerciseIsDone] = useState<number[]>([]);
 
-  const getIconComponent = (iconType: string, element?: any, index?: number) => {
+  const getIconComponent = (iconType: string, element?: Exercise, index?: number) => {
     switch (iconType) {
       case 'arrow':
         return <img src={icons.arrow} alt="arrow" />;
@@ -38,12 +27,12 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
       case 'add':
         return <AddSetButton onClick={() => {
           console.log('Add Set button clicked for:', element);
-          action2(element, index);
+          onSecondaryAction(element!, index);
         }}>Add Set</AddSetButton>;
       case 'check':
-        return <icons.check onClick={() => action2(element, index)} />;
+        return <icons.check onClick={() => onSecondaryAction(element!, index)} />;
       case 'remove':
-        return <icons.remove onClick={() => action2(element, index)} data-icon-type="remove" />;
+        return <icons.remove onClick={() => onSecondaryAction(element!, index)} data-icon-type="remove" />;
       case 'dot':
         const isDone = exerciseIsDone.includes(index || 0);
         return isDone ? 
@@ -58,7 +47,7 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
             data-checked="false"
           />;
       case 'edit':
-        return <icons.edit onClick={() => action3?.(element, index)} data-icon-type="edit" />;
+        return <icons.edit onClick={() => onTertiaryAction?.(element!, index)} data-icon-type="edit" />;
       default:
         return null;
     }
@@ -72,26 +61,26 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
     );
   };
 
-  const handleAction2 = (element: any, index: number) => {
-    action2(element, index);
+  const handleAction2 = (element: Exercise, index: number) => {
+    onSecondaryAction(element, index);
     handleMarkDone(index);
   };
 
   return (
-    <ExercisesListWrapper $isVisible={$isVisible}>
-      {arr.map((element, index) => {
-        const iconComponent1 = getIconComponent(icon1, element, index);
-        const iconComponent2 = getIconComponent(icon2, element, index);
-        const iconComponent3 = icon3 ? getIconComponent(icon3, element, index) : null;
+    <ExercisesListWrapper $isVisible={isVisible}>
+      {exercises.map((element: Exercise, index: number) => {
+        const iconComponent1 = getIconComponent(primaryIcon, element, index);
+        const iconComponent2 = getIconComponent(secondaryIcon, element, index);
+        const iconComponent3 = tertiaryIcon ? getIconComponent(tertiaryIcon, element, index) : null;
 
         return (
           <ExercisesListContainer key={`${element.name}-${index}`} style={style}>
-            <Icon1 $hidden={icon1 === "none"}>
+            <Icon1 $hidden={primaryIcon === "none"}>
               {iconComponent1}
             </Icon1>
             <ExerciseName 
-              $isCentered={icon1 === "none"}
-              onClick={() => action1(element)} 
+              $isCentered={primaryIcon === "none"}
+              onClick={() => onPrimaryAction(element)} 
             >
               {index + 1}. {element.name}
             </ExerciseName>

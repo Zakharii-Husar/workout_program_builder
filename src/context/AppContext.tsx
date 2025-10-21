@@ -1,31 +1,12 @@
 import React, { createContext, useContext, useReducer, useMemo, ReactNode } from 'react';
 import { AppState, AppContextType, WorkoutProgram, Exercise } from '../types';
-
-// Migration function to add IDs to existing programs
-const migratePrograms = (programs: any[]): WorkoutProgram[] => {
-  const migratedPrograms = programs.map(program => {
-    if (!program.id) {
-      return {
-        ...program,
-        id: Date.now().toString(36) + Math.random().toString(36).substr(2)
-      };
-    }
-    return program;
-  });
-  
-  // Save migrated programs back to localStorage if any were migrated
-  if (migratedPrograms.some(p => !programs.find(orig => orig.id === p.id))) {
-    localStorage.setItem("Exarr", JSON.stringify(migratedPrograms));
-  }
-  
-  return migratedPrograms;
-};
+import { ProgramService } from '../services/programService';
 
 // Initial state
 const initialState: AppState = {
   chosenExercises: [],
   runningProgram: null,
-  savedPrograms: migratePrograms(JSON.parse(localStorage.getItem("Exarr") || "[]")),
+  savedPrograms: ProgramService.getSavedPrograms(),
   editingProgram: null
 };
 
@@ -59,19 +40,25 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         runningProgram: action.payload
       };
     case 'ADD_PROGRAM':
-      const newPrograms = [...state.savedPrograms, action.payload];
-      localStorage.setItem("Exarr", JSON.stringify(newPrograms));
-      return {
-        ...state,
-        savedPrograms: newPrograms
-      };
+      const result = ProgramService.saveProgram(action.payload);
+      if (result.success) {
+        const newPrograms = [...state.savedPrograms, action.payload];
+        return {
+          ...state,
+          savedPrograms: newPrograms
+        };
+      }
+      return state;
     case 'REMOVE_PROGRAM':
-      const filteredPrograms = state.savedPrograms.filter(p => p.id !== action.payload.id);
-      localStorage.setItem("Exarr", JSON.stringify(filteredPrograms));
-      return {
-        ...state,
-        savedPrograms: filteredPrograms
-      };
+      const removeResult = ProgramService.removeProgram(action.payload);
+      if (removeResult.success) {
+        const filteredPrograms = state.savedPrograms.filter(p => p.id !== action.payload.id);
+        return {
+          ...state,
+          savedPrograms: filteredPrograms
+        };
+      }
+      return state;
     case 'EDIT_PROGRAM':
       return {
         ...state,
@@ -79,16 +66,19 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         chosenExercises: action.payload.exercises
       };
     case 'UPDATE_PROGRAM':
-      const updatedPrograms = state.savedPrograms.map(p => 
-        p.id === action.payload.id ? action.payload : p
-      );
-      localStorage.setItem("Exarr", JSON.stringify(updatedPrograms));
-      return {
-        ...state,
-        savedPrograms: updatedPrograms,
-        editingProgram: null,
-        chosenExercises: []
-      };
+      const updateResult = ProgramService.updateProgram(action.payload);
+      if (updateResult.success) {
+        const updatedPrograms = state.savedPrograms.map(p => 
+          p.id === action.payload.id ? action.payload : p
+        );
+        return {
+          ...state,
+          savedPrograms: updatedPrograms,
+          editingProgram: null,
+          chosenExercises: []
+        };
+      }
+      return state;
     case 'CLEAR_CREATE_STATE':
       return {
         ...state,

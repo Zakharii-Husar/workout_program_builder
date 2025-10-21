@@ -38,11 +38,11 @@ const StartProgram: React.FC = () => {
       <Timer time={currentProgram.timer} />
       
       <ExercisesList
-        arr={exercises}
-        icon1="exercise"
-        icon2="dot"
-        action1={() => {}}
-        action2={() => {}}
+        exercises={exercises}
+        primaryIcon="exercise"
+        secondaryIcon="dot"
+        onPrimaryAction={() => {}}
+        onSecondaryAction={() => {}}
       />
 
       <ExitButton onClick={() => navigate('/')}>
