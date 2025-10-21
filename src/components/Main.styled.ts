@@ -105,6 +105,12 @@ export const EmptyState = styled.div`
   position: relative;
   overflow: hidden;
 
+  /* Ensure any pseudo-elements don't block pointer events */
+  &::before,
+  &::after {
+    pointer-events: none;
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -186,7 +192,8 @@ export const CreateButton = styled.button`
   text-transform: uppercase;
   letter-spacing: 1px;
   position: relative;
-  z-index: 1;
+  z-index: 10;
+  pointer-events: auto;
   min-height: 60px;
 
   &::before {

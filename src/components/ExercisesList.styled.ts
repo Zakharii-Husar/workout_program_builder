@@ -40,6 +40,13 @@ export const ExercisesListContainer = styled.div`
   overflow: hidden;
   width: 100%;
   max-width: 100%;
+  z-index: 1;
+
+  /* Ensure any pseudo-elements don't block pointer events */
+  &::before,
+  &::after {
+    pointer-events: none;
+  }
 
   &::before {
     content: '';
@@ -250,6 +257,14 @@ export const IconContainer = styled.div`
   gap: ${props => props.theme.spacing.md};
   align-items: center;
   padding-right: ${props => props.theme.spacing.sm};
+  position: relative;
+  z-index: 5;
+  
+  /* Ensure any pseudo-elements don't block pointer events */
+  &::before,
+  &::after {
+    pointer-events: none;
+  }
   
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
     padding-right: ${props => props.theme.spacing.md};
@@ -269,6 +284,8 @@ export const Icon2 = styled.div`
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  position: relative;
+  z-index: 10;
   
   img {
     width: 100%;
@@ -296,9 +313,11 @@ export const Icon2 = styled.div`
     border-radius: ${props => props.theme.borderRadius.lg};
     color: ${props => props.theme.colors.text};
     cursor: pointer;
-    transition: ${props => props.theme.transitions.normal};
-    border: 2px solid ${props => props.theme.colors.border};
-    box-shadow: ${props => props.theme.shadows.sm};
+    transition: ${props => props.theme.transitions.fast};
+    border: 1px solid ${props => props.theme.colors.border};
+    position: relative;
+    z-index: 11;
+    pointer-events: auto;
 
     &:hover {
       background: linear-gradient(135deg, ${props => props.theme.colors.accent}, ${props => props.theme.colors.primary});
