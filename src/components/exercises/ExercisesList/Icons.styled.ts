@@ -25,7 +25,7 @@ export const IconContainer = styled.div`
   }
 `;
 
-export const Icon2 = styled.div`
+export const ActionIcon = styled.div`
   width: 56px;
   height: 40px;
   display: flex;

@@ -39,7 +39,7 @@ export const ExerciseName = styled.div<{ $isCentered?: boolean }>`
   }
 `;
 
-export const Icon1 = styled.div<{ $hidden?: boolean }>`
+export const ExerciseIcon = styled.div<{ $hidden?: boolean }>`
   width: 64px;
   height: 64px;
   display: ${props => props.$hidden ? 'none' : 'flex'};

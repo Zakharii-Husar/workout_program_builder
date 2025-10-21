@@ -3,8 +3,8 @@ import { WorkoutProgram } from '../../../types';
 import { 
   ExercisesListContainer, 
   ExerciseName, 
-  Icon1, 
-  Icon2, 
+  ExerciseIcon, 
+  ActionIcon, 
   IconContainer 
 } from '../../exercises/ExercisesList/index.styled';
 import { icons } from '../../../data';
@@ -26,7 +26,7 @@ const ProgramList: React.FC<ProgramListProps> = ({
     <>
       {programs.map((program, index) => (
         <ExercisesListContainer key={`${program.name}-${index}`}>
-          <Icon1 $hidden={true}></Icon1>
+          <ExerciseIcon $hidden={true}></ExerciseIcon>
           <ExerciseName 
             $isCentered={true}
             onClick={() => onStartProgram(program)} 
@@ -34,12 +34,12 @@ const ProgramList: React.FC<ProgramListProps> = ({
             {index + 1}. {program.name}
           </ExerciseName>
           <IconContainer>
-            <Icon2>
+            <ActionIcon>
               <icons.edit onClick={() => onEditProgram(program)} />
-            </Icon2>
-            <Icon2>
+            </ActionIcon>
+            <ActionIcon>
               <icons.remove onClick={() => onRemoveProgram(program)} />
-            </Icon2>
+            </ActionIcon>
           </IconContainer>
         </ExercisesListContainer>
       ))}
