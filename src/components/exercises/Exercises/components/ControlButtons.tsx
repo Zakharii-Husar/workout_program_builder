@@ -5,6 +5,7 @@ import { ControlButtons as ControlButtonsStyled, ControlButton } from '../index.
 interface ControlButtonsProps {
   hasExercises: boolean;
   onClearAll: () => void;
+  onCancel: () => void;
   onRemoveLast: () => void;
   onSave: () => void;
 }
@@ -12,14 +13,20 @@ interface ControlButtonsProps {
 const ControlButtons: React.FC<ControlButtonsProps> = ({
   hasExercises,
   onClearAll,
+  onCancel,
   onRemoveLast,
   onSave
 }) => {
   return (
     <ControlButtonsStyled>
       <ControlButton>
-        <icons.cancel 
+        <icons.remove 
           onClick={onClearAll}
+        />
+      </ControlButton>
+      <ControlButton>
+        <icons.cancel 
+          onClick={onCancel}
         />
       </ControlButton>
       <ControlButton $isVisible={hasExercises}>

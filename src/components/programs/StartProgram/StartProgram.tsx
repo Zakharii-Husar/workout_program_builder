@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useApp } from '../../../context/AppContext';
+import { useAppSelector } from '../../../store/hooks';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
 import Timer from '../../common/Timer';
 import ExercisesList from '../../exercises/ExercisesList';
@@ -8,13 +8,12 @@ import { StartProgramContainer, ExitButton } from './StartProgram.styled';
 import { icons } from '../../../data';
 
 const StartProgram: React.FC = () => {
-  const { state, actions } = useApp();
-  const { runningProgram, savedPrograms } = state;
+  const { runningProgram, allPrograms } = useAppSelector(state => state.programs);
   const navigate = useNavigate();
   const { programId } = useParams<{ programId: string }>();
   
   // Find the program by ID from URL params
-  const currentProgram = programId ? savedPrograms.find(p => p.id === programId) : runningProgram;
+  const currentProgram = programId ? allPrograms.find(p => p.id === programId) : runningProgram;
   
   // If program not found, redirect to main page
   useEffect(() => {

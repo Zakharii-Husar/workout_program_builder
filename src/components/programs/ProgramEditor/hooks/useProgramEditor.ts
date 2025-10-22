@@ -1,13 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { useApp } from '../../../../context/AppContext';
+import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
+import { 
+  updateDraftName, 
+  updateDraftTimer, 
+  updateDraftExercises, 
+  saveDraft, 
+  clearDraft 
+} from '../../../../store/slices/programSlice';
 import { ProgramService } from '../../../../services/programService';
 import { PROGRAM } from '../../../../utils/constants';
 import { WorkoutProgram, Exercise } from '../../../../types';
 
 export const useProgramEditor = () => {
-  const { state, actions } = useApp();
-  const { chosenExercises, editingProgram, savedPrograms } = state;
+  const dispatch = useAppDispatch();
+  const { programDraft } = useAppSelector(state => state.programs);
   const navigate = useNavigate();
   const { programId } = useParams<{ programId: string }>();
   const location = useLocation();
@@ -19,51 +26,31 @@ export const useProgramEditor = () => {
     currentPath: location.pathname
   };
 
-  // Form state
-  const [name, setName] = useState<string>(PROGRAM.DEFAULT_NAME);
-  const [timer, setTimer] = useState(PROGRAM.DEFAULT_NAME === 'My Workout' ? 0 : 60);
+  // Form state - use programDraft directly for persistence
   const [isLoading, setIsLoading] = useState(false);
-
-  // Get current program for edit mode
-  const currentProgram = navigationState.isEditMode && programId ? 
-    savedPrograms.find(p => p.id === programId) : null;
-
-  // Initialize form with program data
-  useEffect(() => {
-    if (navigationState.isEditMode && currentProgram) {
-      setName(currentProgram.name);
-      setTimer(currentProgram.timer);
-      actions.setChosenExercises(currentProgram.exercises);
-    } else if (editingProgram) {
-      setName(editingProgram.name);
-      setTimer(editingProgram.timer);
-    } else {
-      // For create mode, only reset if we're starting completely fresh
-      if (chosenExercises.length === 0) {
-        setName(PROGRAM.DEFAULT_NAME);
-        setTimer(0);
-      }
-    }
-  }, [navigationState.isEditMode, currentProgram, editingProgram, actions, chosenExercises.length]);
+  
+  // Get form values from programDraft
+  const name = programDraft?.name || PROGRAM.DEFAULT_NAME;
+  const timer = programDraft?.timer || 60;
 
   // Timer controls
   const handleTimerChange = (increment: number) => {
     const newTimer = timer + increment;
     if (newTimer >= 0) {
-      setTimer(newTimer);
+      dispatch(updateDraftTimer(newTimer));
     }
+  };
+
+  // Update draft name when form changes
+  const handleNameChange = (newName: string) => {
+    dispatch(updateDraftName(newName));
   };
 
   // Program actions
   const handleSaveProgram = async () => {
-    const program = ProgramService.createProgram(
-      name, 
-      timer, 
-      chosenExercises, 
-      navigationState.isEditMode ? programId : editingProgram?.id
-    );
+    if (!programDraft) return;
     
-    const validation = ProgramService.validateProgram(program);
+    const validation = ProgramService.validateProgram(programDraft);
     
     if (!validation.isValid) {
       validation.errors.forEach(error => {
@@ -76,18 +63,8 @@ export const useProgramEditor = () => {
     setIsLoading(true);
     
     try {
-      if (navigationState.isEditMode || editingProgram) {
-        actions.updateProgram(program);
-        alert('The program has been updated!');
-      } else {
-        actions.addProgram(program);
-        alert('The program has been saved!');
-      }
-      
-      // Reset form and navigate
-      setName(PROGRAM.DEFAULT_NAME);
-      setTimer(0);
-      actions.clearCreateState();
+      dispatch(saveDraft());
+      alert(navigationState.isEditMode ? 'The program has been updated!' : 'The program has been saved!');
       navigate('/');
     } catch (error) {
       console.error('Error saving program:', error);
@@ -113,19 +90,19 @@ export const useProgramEditor = () => {
     name,
     timer,
     isLoading,
-    chosenExercises,
+    chosenExercises: programDraft?.exercises || [],
     navigationState,
     
     // Actions
-    setName,
+    setName: handleNameChange,
     handleTimerChange,
     handleSaveProgram,
     handleCancel,
     handleNavigateToExercises,
     
     // Computed values
-    hasExercises: chosenExercises.length > 0,
+    hasExercises: (programDraft?.exercises?.length || 0) > 0,
     isEditMode: navigationState.isEditMode,
-    isUpdating: navigationState.isEditMode || !!editingProgram
+    isUpdating: navigationState.isEditMode
   };
 };

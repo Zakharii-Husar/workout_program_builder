@@ -44,6 +44,10 @@ const Exercises: React.FC = () => {
     navigate(isEditMode ? `/edit/${programId}` : '/create');
   };
 
+  const handleCancel = () => {
+    navigate(isEditMode ? `/edit/${programId}` : '/create');
+  };
+
   const handleSave = () => {
     navigate(isEditMode ? `/edit/${programId}` : '/create');
   };
@@ -77,6 +81,7 @@ const Exercises: React.FC = () => {
       <ControlButtons
         hasExercises={hasExercises}
         onClearAll={handleClearAll}
+        onCancel={handleCancel}
         onRemoveLast={handleRemoveLastExercise}
         onSave={handleSave}
       />

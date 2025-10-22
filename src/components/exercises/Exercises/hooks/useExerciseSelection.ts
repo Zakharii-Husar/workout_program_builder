@@ -1,30 +1,29 @@
-import { useApp } from '../../../../context/AppContext';
+import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
+import { addDraftExercise, removeDraftExercise, updateDraftExercises } from '../../../../store/slices/programSlice';
 import { ExerciseService } from '../../../../services/exerciseService';
 import { Exercise } from '../../../../types';
 
 export const useExerciseSelection = () => {
-  const { state, actions } = useApp();
-  const { chosenExercises } = state;
+  const dispatch = useAppDispatch();
+  const { programDraft } = useAppSelector(state => state.programs);
+  const chosenExercises = programDraft?.exercises || [];
 
   const handleAddExercise = (exercise: Exercise) => {
-    const updatedExercises = ExerciseService.addExerciseToProgram(chosenExercises, exercise);
-    actions.setChosenExercises(updatedExercises);
+    dispatch(addDraftExercise(exercise));
   };
 
   const handleRemoveExercise = (exercise: Exercise, index: number) => {
-    const updatedExercises = ExerciseService.removeExerciseFromProgram(chosenExercises, exercise, index);
-    actions.setChosenExercises(updatedExercises);
+    dispatch(removeDraftExercise(index));
   };
 
   const handleRemoveLastExercise = () => {
     if (chosenExercises.length > 0) {
-      const updatedExercises = chosenExercises.slice(0, -1);
-      actions.setChosenExercises(updatedExercises);
+      dispatch(removeDraftExercise(chosenExercises.length - 1));
     }
   };
 
   const handleClearAll = () => {
-    actions.setChosenExercises([]);
+    dispatch(updateDraftExercises([]));
   };
 
   // Group consecutive exercises with the same name

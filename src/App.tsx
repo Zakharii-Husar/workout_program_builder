@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AppProvider } from './context/AppContext';
+import { Provider } from 'react-redux';
+import { store } from './store';
 import { ThemeProvider } from './theme/ThemeProvider';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 import RouteGuard from './components/layout/RouteGuard';
@@ -24,7 +25,7 @@ function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider>
-        <AppProvider>
+        <Provider store={store}>
           <Router>
             <RouteGuard>
               <AppContainer>
@@ -40,7 +41,7 @@ function App() {
               </AppContainer>
             </RouteGuard>
           </Router>
-        </AppProvider>
+        </Provider>
       </ThemeProvider>
     </ErrorBoundary>
   );

@@ -1,19 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useApp } from '../../../context/AppContext';
+import { useAppSelector, useAppDispatch } from '../../../store/hooks';
+import { deleteProgram, startProgram, loadProgramForEdit, createDraft } from '../../../store/slices/programSlice';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
 import ProgramList from './ProgramList';
 import { MainContainer, MainHeader, MainTitle, MainSubtitle, EmptyState, EmptyStateTitle, EmptyStateSubtitle, CreateButton } from './Main.styled';
 import { icons } from '../../../data';
 
 const Main: React.FC = () => {
-  const { state, actions } = useApp();
-  const { savedPrograms } = state;
+  const dispatch = useAppDispatch();
+  const { allPrograms } = useAppSelector(state => state.programs);
   const navigate = useNavigate();
 
   const handleRemoveProgram = (program: any) => {
     try {
-      actions.removeProgram(program);
+      dispatch(deleteProgram(program.id));
     } catch (error) {
       console.error('Error removing program:', error);
       alert('Failed to remove program. Please try again.');
@@ -21,16 +22,16 @@ const Main: React.FC = () => {
   };
 
   const handleStartProgram = (program: any) => {
-    actions.startProgram(program);
+    dispatch(startProgram(program));
     navigate(`/start/${program.id}`);
   };
 
   const handleEditProgram = (program: any) => {
-    actions.editProgram(program);
+    dispatch(loadProgramForEdit(program));
     navigate(`/edit/${program.id}`);
   };
 
-  if (savedPrograms.length === 0) {
+  if (allPrograms.length === 0) {
     return (
       <MainContainer>
         <MainHeader>
@@ -44,7 +45,7 @@ const Main: React.FC = () => {
             Choose exercises, set timers, and track your progress.
           </EmptyStateSubtitle>
           <CreateButton onClick={() => {
-            actions.clearCreateState();
+            dispatch(createDraft());
             navigate('/create');
           }}>
             <icons.add />
@@ -62,13 +63,13 @@ const Main: React.FC = () => {
         <MainSubtitle>Build, track, and achieve your fitness goals</MainSubtitle>
       </MainHeader>
       <ProgramList
-        programs={savedPrograms}
+        programs={allPrograms}
         onStartProgram={handleStartProgram}
         onRemoveProgram={handleRemoveProgram}
         onEditProgram={handleEditProgram}
       />
       <CreateButton onClick={() => {
-        actions.clearCreateState();
+        dispatch(createDraft());
         navigate('/create');
       }}>
         <icons.add />

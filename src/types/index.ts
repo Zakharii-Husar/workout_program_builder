@@ -21,10 +21,9 @@ export interface WorkoutProgram {
 
 // App state types
 export interface AppState {
-  chosenExercises: Exercise[];
   runningProgram: WorkoutProgram | null;
-  savedPrograms: WorkoutProgram[];
-  editingProgram: WorkoutProgram | null;
+  allPrograms: WorkoutProgram[];
+  programDraft: WorkoutProgram | null;
 }
 
 export interface AppContextType {
@@ -33,14 +32,23 @@ export interface AppContextType {
 }
 
 export interface AppActions {
+  // Draft management
+  createDraft: () => void;
+  loadProgramForEdit: (program: WorkoutProgram) => void;
+  updateDraftName: (name: string) => void;
+  updateDraftTimer: (timer: number) => void;
+  addDraftExercise: (exercise: Exercise) => void;
+  removeDraftExercise: (index: number) => void;
+  updateDraftExercises: (exercises: Exercise[]) => void;
+  clearDraft: () => void;
+  
+  // Program management
+  saveDraft: () => void;
+  deleteProgram: (programId: string) => void;
+  
+  // Workout management
   startProgram: (program: WorkoutProgram) => void;
-  setChosenExercises: (exercises: Exercise[]) => void;
-  setRunningProgram: (program: WorkoutProgram | null) => void;
-  addProgram: (program: WorkoutProgram) => void;
-  removeProgram: (program: WorkoutProgram) => void;
-  editProgram: (program: WorkoutProgram) => void;
-  updateProgram: (program: WorkoutProgram) => void;
-  clearCreateState: () => void;
+  stopProgram: () => void;
 }
 
 // Timer types
