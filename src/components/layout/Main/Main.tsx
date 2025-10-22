@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { deleteProgram, startProgram, loadProgramForEdit, createDraft } from '../../../store/slices/programSlice';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
 import ProgramList from './ProgramList';
-import { MainContainer, MainHeader, MainTitle, MainSubtitle, EmptyState, EmptyStateTitle, EmptyStateSubtitle, CreateButton } from './Main.styled';
+import { MainContainer, MainHeader, MainTitle, MainSubtitle, EmptyState, EmptyStateTitle, EmptyStateSubtitle, CreateButton, MenuButton, MenuContainer } from './Main.styled';
 import { icons } from '../../../data';
 
 const Main: React.FC = () => {
@@ -31,50 +31,23 @@ const Main: React.FC = () => {
     navigate(`/edit/${program.id}`);
   };
 
-  if (allPrograms.length === 0) {
-    return (
-      <MainContainer>
-        <MainHeader>
-          <MainTitle>Workout Programs</MainTitle>
-          <MainSubtitle>Build, track, and achieve your fitness goals</MainSubtitle>
-        </MainHeader>
-        <EmptyState>
-          <EmptyStateTitle>Ready to Build?</EmptyStateTitle>
-          <EmptyStateSubtitle>
-            Create your first workout program and start your fitness journey. 
-            Choose exercises, set timers, and track your progress.
-          </EmptyStateSubtitle>
-          <CreateButton onClick={() => {
-            dispatch(createDraft());
-            navigate('/create');
-          }}>
-            <icons.add />
-            CREATE FIRST PROGRAM
-          </CreateButton>
-        </EmptyState>
-      </MainContainer>
-    );
-  }
-
   return (
     <MainContainer>
       <MainHeader>
-        <MainTitle>Workout Programs</MainTitle>
+        <MainTitle>Workout Builder</MainTitle>
         <MainSubtitle>Build, track, and achieve your fitness goals</MainSubtitle>
       </MainHeader>
-      <ProgramList
-        programs={allPrograms}
-        onStartProgram={handleStartProgram}
-        onRemoveProgram={handleRemoveProgram}
-        onEditProgram={handleEditProgram}
-      />
-      <CreateButton onClick={() => {
-        dispatch(createDraft());
-        navigate('/create');
-      }}>
-        <icons.add />
-        NEW PROGRAM
-      </CreateButton>
+      
+      <MenuContainer>
+        <MenuButton onClick={() => navigate('/programs')}>
+          <icons.edit />
+          Programs
+        </MenuButton>
+        <MenuButton onClick={() => navigate('/workouts')}>
+          <icons.check />
+          Workouts History
+        </MenuButton>
+      </MenuContainer>
     </MainContainer>
   );
 };

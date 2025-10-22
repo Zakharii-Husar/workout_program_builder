@@ -1,6 +1,34 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { generateId } from '../../utils/formatters';
 
+// Load workout history from localStorage
+const loadWorkoutHistory = (): WorkoutSession[] => {
+  try {
+    const saved = localStorage.getItem('workoutHistory');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      // Convert date strings back to Date objects
+      return parsed.map((workout: any) => ({
+        ...workout,
+        startTime: new Date(workout.startTime),
+        endTime: workout.endTime ? new Date(workout.endTime) : null
+      }));
+    }
+  } catch (error) {
+    console.error('Error loading workout history:', error);
+  }
+  return [];
+};
+
+// Save workout history to localStorage
+const saveWorkoutHistory = (history: WorkoutSession[]) => {
+  try {
+    localStorage.setItem('workoutHistory', JSON.stringify(history));
+  } catch (error) {
+    console.error('Error saving workout history:', error);
+  }
+};
+
 // Set within a workout session
 export interface WorkoutSet {
   id: string;
@@ -24,11 +52,13 @@ export interface WorkoutSession {
 // Workout state
 export interface WorkoutState {
   runningWorkout: WorkoutSession | null;
+  workoutHistory: WorkoutSession[];
 }
 
 // Initial state
 const initialState: WorkoutState = {
-  runningWorkout: null
+  runningWorkout: null,
+  workoutHistory: loadWorkoutHistory()
 };
 
 const workoutSlice = createSlice({
@@ -95,10 +125,12 @@ const workoutSlice = createSlice({
     },
 
 
-    // End workout
+    // End workout and save to history
     endWorkout: (state) => {
       if (state.runningWorkout) {
         state.runningWorkout.endTime = new Date();
+        state.workoutHistory.push(state.runningWorkout);
+        saveWorkoutHistory(state.workoutHistory);
         state.runningWorkout = null;
       }
     },

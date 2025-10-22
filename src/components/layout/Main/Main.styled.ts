@@ -250,3 +250,79 @@ export const CreateButton = styled.button`
     }
   }
 `;
+
+// Menu components
+export const MenuContainer = styled.div`
+  display: flex;
+  gap: ${props => props.theme.spacing.lg};
+  justify-content: center;
+  margin-bottom: ${props => props.theme.spacing.xl};
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
+    flex-direction: column;
+    gap: ${props => props.theme.spacing.md};
+    margin-bottom: ${props => props.theme.spacing.lg};
+  }
+`;
+
+export const MenuButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${props => props.theme.spacing.md};
+  padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.xl};
+  background: ${props => props.theme.colors.surface};
+  color: ${props => props.theme.colors.text};
+  font-size: ${props => props.theme.typography.fontSize.lg};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
+  font-family: ${props => props.theme.typography.fontFamily.display};
+  border: 2px solid ${props => props.theme.colors.border};
+  border-radius: ${props => props.theme.borderRadius.xl};
+  cursor: pointer;
+  transition: ${props => props.theme.transitions.normal};
+  box-shadow: ${props => props.theme.shadows.md};
+  min-width: 200px;
+  min-height: 60px;
+
+  &:hover {
+    background: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.background};
+    border-color: ${props => props.theme.colors.primary};
+    transform: translateY(-2px);
+    box-shadow: ${props => props.theme.shadows.lg};
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
+    font-size: ${props => props.theme.typography.fontSize.base};
+    padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
+    min-height: 52px;
+    min-width: 100%;
+  }
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    font-size: ${props => props.theme.typography.fontSize.xl};
+    padding: ${props => props.theme.spacing.xl} ${props => props.theme.spacing.xxl};
+    min-height: 68px;
+    min-width: 250px;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+
+    @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+      width: 28px;
+      height: 28px;
+    }
+  }
+`;

@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAppSelector } from '../../../store/hooks';
+import { useAppSelector, useAppDispatch } from '../../../store/hooks';
+import { startWorkout, endWorkout, cancelWorkout, markSetComplete, markSetIncomplete } from '../../../store/slices/workoutSlice';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
 import Timer from '../../common/Timer';
 import ExercisesList from '../../exercises/ExercisesList';
-import { StartProgramContainer, ExitButton } from './StartProgram.styled';
+import { StartProgramContainer, ExitButton, WorkoutButton, WorkoutControls } from './StartProgram.styled';
 import { icons } from '../../../data';
 
 const StartProgram: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { runningProgram, allPrograms } = useAppSelector(state => state.programs);
+  const { runningWorkout } = useAppSelector(state => state.workouts);
   const navigate = useNavigate();
   const { programId } = useParams<{ programId: string }>();
   
@@ -22,6 +25,31 @@ const StartProgram: React.FC = () => {
     }
   }, [programId, currentProgram, navigate]);
 
+  const handleStartWorkout = () => {
+    if (currentProgram) {
+      dispatch(startWorkout({
+        programId: currentProgram.id,
+        name: currentProgram.name,
+        restBetweenSets: 60, // Default 60 seconds rest
+        exercises: currentProgram.exercises.map(exercise => ({
+          name: exercise.name,
+          reps: null,
+          weight: null
+        }))
+      }));
+    }
+  };
+
+  const handleEndWorkout = () => {
+    dispatch(endWorkout());
+    navigate('/');
+  };
+
+  const handleCancelWorkout = () => {
+    dispatch(cancelWorkout());
+    navigate('/');
+  };
+
   if (!currentProgram) {
     return (
       <div>
@@ -31,6 +59,16 @@ const StartProgram: React.FC = () => {
   }
 
   const exercises = currentProgram.exercises || [];
+  const isWorkoutActive = !!runningWorkout;
+  const workoutSets = runningWorkout?.exercises || [];
+
+  const handleSetToggle = (setId: string, isCompleted: boolean) => {
+    if (isCompleted) {
+      dispatch(markSetComplete(setId));
+    } else {
+      dispatch(markSetIncomplete(setId));
+    }
+  };
 
   return (
     <StartProgramContainer>
@@ -44,9 +82,29 @@ const StartProgram: React.FC = () => {
         onSecondaryAction={() => {}}
       />
 
+      <WorkoutControls>
+        {!isWorkoutActive ? (
+          <WorkoutButton onClick={handleStartWorkout}>
+            <icons.check />
+            Start Workout
+          </WorkoutButton>
+        ) : (
+          <>
+            <WorkoutButton onClick={handleEndWorkout}>
+              <icons.check />
+              End Workout
+            </WorkoutButton>
+            <WorkoutButton onClick={handleCancelWorkout}>
+              <icons.cancel />
+              Cancel Workout
+            </WorkoutButton>
+          </>
+        )}
+      </WorkoutControls>
+
       <ExitButton onClick={() => navigate('/')}>
         <icons.cancel />
-        Exit Workout
+        Exit Program
       </ExitButton>
     </StartProgramContainer>
   );
