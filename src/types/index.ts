@@ -26,6 +26,9 @@ export interface AppState {
   programDraft: WorkoutProgram | null;
 }
 
+// Workout state types (re-exported from workoutSlice for convenience)
+export type { WorkoutSet, WorkoutSession, WorkoutState } from '../store/slices/workoutSlice';
+
 export interface AppContextType {
   state: AppState;
   actions: AppActions;
