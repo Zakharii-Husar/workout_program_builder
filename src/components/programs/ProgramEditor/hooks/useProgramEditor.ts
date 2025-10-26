@@ -30,7 +30,7 @@ export const useProgramEditor = () => {
   const [isLoading, setIsLoading] = useState(false);
   
   // Get form values from programDraft
-  const name = programDraft?.name || PROGRAM.DEFAULT_NAME;
+  const name = programDraft?.name ?? PROGRAM.DEFAULT_NAME;
   const timer = programDraft?.timer || 60;
 
   // Timer controls
@@ -50,7 +50,20 @@ export const useProgramEditor = () => {
   const handleSaveProgram = async () => {
     if (!programDraft) return;
     
-    const validation = ProgramService.validateProgram(programDraft);
+    // If name is empty or only whitespace, set it to default name before saving
+    const programToValidate = {
+      ...programDraft,
+      name: (!programDraft.name || programDraft.name.trim() === '') 
+        ? PROGRAM.DEFAULT_NAME 
+        : programDraft.name
+    };
+    
+    // Update the draft with the default name if it was empty
+    if (programToValidate.name !== programDraft.name) {
+      dispatch(updateDraftName(programToValidate.name));
+    }
+    
+    const validation = ProgramService.validateProgram(programToValidate);
     
     if (!validation.isValid) {
       validation.errors.forEach(error => {

@@ -18,6 +18,8 @@ const NameStep: React.FC<NameStepProps> = ({
   name,
   onNameChange
 }) => {
+  const displayName = name || 'My Workout';
+  
   return (
     <StepContainer>
       <StepHeader>
@@ -26,11 +28,11 @@ const NameStep: React.FC<NameStepProps> = ({
       </StepHeader>
       <StepContent>
         <NameContainer>
-          <NameOutput>{name}</NameOutput>
+          <NameOutput>{displayName}</NameOutput>
           <input
             onInput={(e) => onNameChange((e.target as HTMLInputElement).value)}
             type="text"
-            placeholder="Enter program's name"
+            placeholder="Enter Program Name"
             value={name}
           />
         </NameContainer>

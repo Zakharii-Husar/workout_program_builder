@@ -19,7 +19,7 @@ const programSlice = createSlice({
     createDraft: (state) => {
       state.programDraft = {
         id: generateId(),
-        name: 'My Workout',
+        name: '',
         timer: 60,
         exercises: [],
         createdAt: new Date().toISOString(),
