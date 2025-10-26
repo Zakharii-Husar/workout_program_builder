@@ -11,8 +11,8 @@ export class MigrationService {
         return {
           ...program,
           id: generateId(),
-          createdAt: program.createdAt || new Date(),
-          updatedAt: program.updatedAt || new Date()
+          createdAt: program.createdAt || new Date().toISOString(),
+          updatedAt: program.updatedAt || new Date().toISOString()
         };
       }
       return program;
@@ -29,8 +29,8 @@ export class MigrationService {
       return {
         ...program,
         id: generateId(),
-        createdAt: program.createdAt || new Date(),
-        updatedAt: program.updatedAt || new Date()
+        createdAt: program.createdAt || new Date().toISOString(),
+        updatedAt: program.updatedAt || new Date().toISOString()
       };
     }
     return program;

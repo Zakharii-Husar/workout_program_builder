@@ -41,8 +41,8 @@ const Workouts: React.FC = () => {
             border: '1px solid #ddd'
           }}>
             <h3>{workout.name}</h3>
-            <p>Started: {workout.startTime.toLocaleString()}</p>
-            <p>Ended: {workout.endTime?.toLocaleString()}</p>
+            <p>Started: {new Date(workout.startTime).toLocaleString()}</p>
+            <p>Ended: {workout.endTime ? new Date(workout.endTime).toLocaleString() : 'N/A'}</p>
             <p>Sets completed: {workout.exercises.filter(ex => ex.completed).length} / {workout.exercises.length}</p>
           </div>
         ))}

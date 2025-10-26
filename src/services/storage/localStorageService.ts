@@ -76,13 +76,7 @@ export class LocalStorageService {
   }
 
   static getWorkoutHistory(): WorkoutSession[] {
-    const history = this.getItem<any[]>(STORAGE_KEYS.WORKOUT_HISTORY, []);
-    // Convert date strings back to Date objects
-    return history.map((workout) => ({
-      ...workout,
-      startTime: new Date(workout.startTime),
-      endTime: workout.endTime ? new Date(workout.endTime) : null,
-    }));
+    return this.getItem<WorkoutSession[]>(STORAGE_KEYS.WORKOUT_HISTORY, []);
   }
 
   static removeWorkoutHistory(): boolean {
@@ -98,15 +92,7 @@ export class LocalStorageService {
   }
 
   static getRunningWorkout(): WorkoutSession | null {
-    const workout = this.getItem<any>(STORAGE_KEYS.RUNNING_WORKOUT, null);
-    if (!workout) return null;
-    
-    // Convert date strings back to Date objects
-    return {
-      ...workout,
-      startTime: new Date(workout.startTime),
-      endTime: workout.endTime ? new Date(workout.endTime) : null,
-    };
+    return this.getItem<WorkoutSession | null>(STORAGE_KEYS.RUNNING_WORKOUT, null);
   }
 
   static removeRunningWorkout(): boolean {
