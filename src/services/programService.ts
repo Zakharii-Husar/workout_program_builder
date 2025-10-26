@@ -7,7 +7,18 @@ export class ProgramService {
   static saveProgram(program: WorkoutProgram): { success: boolean; error?: any } {
     try {
       const existingPrograms = this.getSavedPrograms();
-      const updatedPrograms = [...existingPrograms, program];
+      const existingIndex = existingPrograms.findIndex(p => p.id === program.id);
+      
+      let updatedPrograms: WorkoutProgram[];
+      if (existingIndex !== -1) {
+        // Update existing program
+        updatedPrograms = [...existingPrograms];
+        updatedPrograms[existingIndex] = program;
+      } else {
+        // Add new program
+        updatedPrograms = [...existingPrograms, program];
+      }
+      
       const success = LocalStorageService.savePrograms(updatedPrograms);
       
       if (!success) {

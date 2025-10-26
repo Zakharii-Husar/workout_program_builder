@@ -25,7 +25,7 @@ const ProgramList: React.FC<ProgramListProps> = ({
   return (
     <>
       {programs.map((program, index) => (
-        <ExercisesListContainer key={`${program.name}-${index}`}>
+        <ExercisesListContainer key={program.id}>
           <ExerciseIcon $hidden={true}></ExerciseIcon>
           <ExerciseName 
             $isCentered={true}
