@@ -1,6 +1,7 @@
 import { safeJsonParse, safeJsonStringify } from '../../utils/helpers';
 import { STORAGE_KEYS } from '../../utils/constants';
 import { WorkoutProgram } from '../../types';
+import { WorkoutSession } from '../../store/slices/workoutSlice';
 
 export class LocalStorageService {
   /**
@@ -67,5 +68,48 @@ export class LocalStorageService {
 
   static removePrograms(): boolean {
     return this.removeItem(STORAGE_KEYS.PROGRAMS);
+  }
+
+  // Workout history methods
+  static saveWorkoutHistory(history: WorkoutSession[]): boolean {
+    return this.setItem(STORAGE_KEYS.WORKOUT_HISTORY, history);
+  }
+
+  static getWorkoutHistory(): WorkoutSession[] {
+    const history = this.getItem<any[]>(STORAGE_KEYS.WORKOUT_HISTORY, []);
+    // Convert date strings back to Date objects
+    return history.map((workout) => ({
+      ...workout,
+      startTime: new Date(workout.startTime),
+      endTime: workout.endTime ? new Date(workout.endTime) : null,
+    }));
+  }
+
+  static removeWorkoutHistory(): boolean {
+    return this.removeItem(STORAGE_KEYS.WORKOUT_HISTORY);
+  }
+
+  // Running workout methods (for persistence during active workouts)
+  static saveRunningWorkout(workout: WorkoutSession | null): boolean {
+    if (workout === null) {
+      return this.removeItem(STORAGE_KEYS.RUNNING_WORKOUT);
+    }
+    return this.setItem(STORAGE_KEYS.RUNNING_WORKOUT, workout);
+  }
+
+  static getRunningWorkout(): WorkoutSession | null {
+    const workout = this.getItem<any>(STORAGE_KEYS.RUNNING_WORKOUT, null);
+    if (!workout) return null;
+    
+    // Convert date strings back to Date objects
+    return {
+      ...workout,
+      startTime: new Date(workout.startTime),
+      endTime: workout.endTime ? new Date(workout.endTime) : null,
+    };
+  }
+
+  static removeRunningWorkout(): boolean {
+    return this.removeItem(STORAGE_KEYS.RUNNING_WORKOUT);
   }
 }

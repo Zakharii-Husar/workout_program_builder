@@ -12,9 +12,17 @@ const ExercisesList: React.FC<ExerciseListProps> = ({
   onSecondaryAction,
   onTertiaryAction,
   style,
-  isVisible = true
+  isVisible = true,
+  checkedIndices
 }) => {
   const [exerciseIsDone, setExerciseIsDone] = useState<number[]>([]);
+  
+  // Sync internal state with external checkedIndices prop
+  useEffect(() => {
+    if (checkedIndices !== undefined) {
+      setExerciseIsDone(checkedIndices);
+    }
+  }, [checkedIndices]);
 
   const getIconComponent = (iconType: string, exercise?: Exercise, exerciseIndex?: number) => {
     switch (iconType) {
@@ -34,14 +42,18 @@ const ExercisesList: React.FC<ExerciseListProps> = ({
         return <icons.remove onClick={() => onSecondaryAction(exercise!, exerciseIndex)} data-icon-type="remove" />;
       case 'dot':
         const isExerciseDone = exerciseIsDone.includes(exerciseIndex || 0);
+        const handleDotClick = () => {
+          handleMarkDone(exerciseIndex || 0);
+          onSecondaryAction(exercise!, exerciseIndex);
+        };
         return isExerciseDone ?
           <icons.checkedSquare
-            onClick={() => handleMarkDone(exerciseIndex || 0)}
+            onClick={handleDotClick}
             data-icon-type="square"
             data-checked="true"
           /> :
           <icons.emptySquare
-            onClick={() => handleMarkDone(exerciseIndex || 0)}
+            onClick={handleDotClick}
             data-icon-type="square"
             data-checked="false"
           />;

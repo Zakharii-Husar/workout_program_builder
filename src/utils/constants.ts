@@ -27,6 +27,8 @@ export const PROGRAM = {
 export const STORAGE_KEYS = {
   PROGRAMS: 'Exarr',
   SETTINGS: 'workout_settings',
+  WORKOUT_HISTORY: 'workout_history',
+  RUNNING_WORKOUT: 'running_workout',
 } as const;
 
 // Animation durations (in milliseconds)

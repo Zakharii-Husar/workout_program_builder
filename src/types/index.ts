@@ -98,6 +98,7 @@ export interface ExerciseListProps {
   onTertiaryAction?: ExerciseListAction;
   style?: React.CSSProperties;
   isVisible?: boolean;
+  checkedIndices?: number[]; // External control of which exercises are marked as done
 }
 
 // Service types

@@ -1,33 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { generateId } from '../../utils/formatters';
-
-// Load workout history from localStorage
-const loadWorkoutHistory = (): WorkoutSession[] => {
-  try {
-    const saved = localStorage.getItem('workoutHistory');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      // Convert date strings back to Date objects
-      return parsed.map((workout: any) => ({
-        ...workout,
-        startTime: new Date(workout.startTime),
-        endTime: workout.endTime ? new Date(workout.endTime) : null
-      }));
-    }
-  } catch (error) {
-    console.error('Error loading workout history:', error);
-  }
-  return [];
-};
-
-// Save workout history to localStorage
-const saveWorkoutHistory = (history: WorkoutSession[]) => {
-  try {
-    localStorage.setItem('workoutHistory', JSON.stringify(history));
-  } catch (error) {
-    console.error('Error saving workout history:', error);
-  }
-};
+import { LocalStorageService } from '../../services/storage';
 
 // Set within a workout session
 export interface WorkoutSet {
@@ -57,8 +30,8 @@ export interface WorkoutState {
 
 // Initial state
 const initialState: WorkoutState = {
-  runningWorkout: null,
-  workoutHistory: loadWorkoutHistory()
+  runningWorkout: LocalStorageService.getRunningWorkout(),
+  workoutHistory: LocalStorageService.getWorkoutHistory()
 };
 
 const workoutSlice = createSlice({
@@ -89,6 +62,9 @@ const workoutSlice = createSlice({
           completed: false
         }))
       };
+      
+      // Persist running workout to localStorage
+      LocalStorageService.saveRunningWorkout(state.runningWorkout);
     },
 
     // Mark a set as completed
@@ -97,6 +73,8 @@ const workoutSlice = createSlice({
         const set = state.runningWorkout.exercises.find(ex => ex.id === action.payload);
         if (set) {
           set.completed = true;
+          // Persist running workout state
+          LocalStorageService.saveRunningWorkout(state.runningWorkout);
         }
       }
     },
@@ -107,6 +85,8 @@ const workoutSlice = createSlice({
         const set = state.runningWorkout.exercises.find(ex => ex.id === action.payload);
         if (set) {
           set.completed = false;
+          // Persist running workout state
+          LocalStorageService.saveRunningWorkout(state.runningWorkout);
         }
       }
     },
@@ -120,6 +100,8 @@ const workoutSlice = createSlice({
         const set = state.runningWorkout.exercises.find(ex => ex.id === action.payload.setId);
         if (set) {
           Object.assign(set, action.payload.updates);
+          // Persist running workout state
+          LocalStorageService.saveRunningWorkout(state.runningWorkout);
         }
       }
     },
@@ -130,14 +112,18 @@ const workoutSlice = createSlice({
       if (state.runningWorkout) {
         state.runningWorkout.endTime = new Date();
         state.workoutHistory.push(state.runningWorkout);
-        saveWorkoutHistory(state.workoutHistory);
+        LocalStorageService.saveWorkoutHistory(state.workoutHistory);
         state.runningWorkout = null;
+        // Remove running workout from localStorage since it's now in history
+        LocalStorageService.removeRunningWorkout();
       }
     },
 
     // Cancel workout
     cancelWorkout: (state) => {
       state.runningWorkout = null;
+      // Remove running workout from localStorage
+      LocalStorageService.removeRunningWorkout();
     }
   },
 });

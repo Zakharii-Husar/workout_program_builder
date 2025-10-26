@@ -62,11 +62,21 @@ const StartProgram: React.FC = () => {
   const isWorkoutActive = !!runningWorkout;
   const workoutSets = runningWorkout?.exercises || [];
 
-  const handleSetToggle = (setId: string, isCompleted: boolean) => {
-    if (isCompleted) {
-      dispatch(markSetComplete(setId));
-    } else {
-      dispatch(markSetIncomplete(setId));
+  // Get indices of completed sets for visual display
+  const completedIndices = isWorkoutActive 
+    ? workoutSets.map((set, index) => set.completed ? index : -1).filter(i => i !== -1)
+    : [];
+
+  const handleSetToggle = (exercise: any, exerciseIndex?: number) => {
+    if (!runningWorkout || exerciseIndex === undefined) return;
+    
+    const workoutSet = runningWorkout.exercises[exerciseIndex];
+    if (workoutSet) {
+      if (workoutSet.completed) {
+        dispatch(markSetIncomplete(workoutSet.id));
+      } else {
+        dispatch(markSetComplete(workoutSet.id));
+      }
     }
   };
 
@@ -77,9 +87,10 @@ const StartProgram: React.FC = () => {
       <ExercisesList
         exercises={exercises}
         primaryIcon="exercise"
-        secondaryIcon="dot"
+        secondaryIcon={isWorkoutActive ? "dot" : "none"}
         onPrimaryAction={() => {}}
-        onSecondaryAction={() => {}}
+        onSecondaryAction={isWorkoutActive ? handleSetToggle : () => {}}
+        checkedIndices={completedIndices}
       />
 
       <WorkoutControls>
