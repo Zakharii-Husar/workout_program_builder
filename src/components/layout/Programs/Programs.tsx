@@ -68,13 +68,6 @@ const Programs: React.FC = () => {
         onRemoveProgram={handleRemoveProgram}
         onEditProgram={handleEditProgram}
       />
-      <CreateButton onClick={() => {
-        dispatch(createDraft());
-        navigate('/create');
-      }}>
-        <icons.add />
-        NEW PROGRAM
-      </CreateButton>
     </MainContainer>
   );
 };
