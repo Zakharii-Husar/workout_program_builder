@@ -16,9 +16,9 @@ export interface WorkoutSession {
   id: string;
   programId: string;
   name: string;
-  startTime: Date;
+  startTime: string; // ISO string
   restBetweenSets: number; // in seconds
-  endTime: Date | null;
+  endTime: string | null; // ISO string
   exercises: WorkoutSet[];
 }
 
@@ -51,7 +51,7 @@ const workoutSlice = createSlice({
         id: generateId(),
         programId,
         name,
-        startTime: new Date(),
+        startTime: new Date().toISOString(),
         restBetweenSets,
         endTime: null,
         exercises: exercises.map(exercise => ({
@@ -110,7 +110,7 @@ const workoutSlice = createSlice({
     // End workout and save to history
     endWorkout: (state) => {
       if (state.runningWorkout) {
-        state.runningWorkout.endTime = new Date();
+        state.runningWorkout.endTime = new Date().toISOString();
         state.workoutHistory.push(state.runningWorkout);
         LocalStorageService.saveWorkoutHistory(state.workoutHistory);
         state.runningWorkout = null;

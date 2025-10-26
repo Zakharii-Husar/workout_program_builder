@@ -22,29 +22,29 @@ const programSlice = createSlice({
         name: 'My Workout',
         timer: 60,
         exercises: [],
-        createdAt: new Date(),
-        updatedAt: new Date()
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       };
     },
 
     loadProgramForEdit: (state, action: PayloadAction<WorkoutProgram>) => {
       state.programDraft = {
         ...action.payload,
-        updatedAt: new Date()
+        updatedAt: new Date().toISOString()
       };
     },
 
     updateDraftName: (state, action: PayloadAction<string>) => {
       if (state.programDraft) {
         state.programDraft.name = action.payload;
-        state.programDraft.updatedAt = new Date();
+        state.programDraft.updatedAt = new Date().toISOString();
       }
     },
 
     updateDraftTimer: (state, action: PayloadAction<number>) => {
       if (state.programDraft) {
         state.programDraft.timer = action.payload;
-        state.programDraft.updatedAt = new Date();
+        state.programDraft.updatedAt = new Date().toISOString();
       }
     },
 
@@ -55,7 +55,7 @@ const programSlice = createSlice({
           action.payload
         );
         state.programDraft.exercises = updatedExercises;
-        state.programDraft.updatedAt = new Date();
+        state.programDraft.updatedAt = new Date().toISOString();
       }
     },
 
@@ -65,14 +65,14 @@ const programSlice = createSlice({
           (_, index) => index !== action.payload
         );
         state.programDraft.exercises = updatedExercises;
-        state.programDraft.updatedAt = new Date();
+        state.programDraft.updatedAt = new Date().toISOString();
       }
     },
 
     updateDraftExercises: (state, action: PayloadAction<Exercise[]>) => {
       if (state.programDraft) {
         state.programDraft.exercises = action.payload;
-        state.programDraft.updatedAt = new Date();
+        state.programDraft.updatedAt = new Date().toISOString();
       }
     },
 

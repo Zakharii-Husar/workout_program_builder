@@ -15,8 +15,8 @@ export interface WorkoutProgram {
   name: string;
   timer: number;
   exercises: Exercise[];
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: string; // ISO string
+  updatedAt?: string; // ISO string
 }
 
 // App state types
@@ -114,6 +114,6 @@ export interface AppError {
   code: string;
   message: string;
   details?: any;
-  timestamp: Date;
+  timestamp: string; // ISO string
 }
 

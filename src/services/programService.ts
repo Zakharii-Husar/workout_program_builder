@@ -69,7 +69,7 @@ export class ProgramService {
     try {
       const existingPrograms = this.getSavedPrograms();
       const updatedPrograms = existingPrograms.map(p => 
-        p.id === updatedProgram.id ? { ...updatedProgram, updatedAt: new Date() } : p
+        p.id === updatedProgram.id ? { ...updatedProgram, updatedAt: new Date().toISOString() } : p
       );
       const success = LocalStorageService.savePrograms(updatedPrograms);
       
@@ -88,7 +88,7 @@ export class ProgramService {
   }
 
   static createProgram(name: string, timer: number, exercises: Exercise[], id?: string): WorkoutProgram {
-    const now = new Date();
+    const now = new Date().toISOString();
     return {
       id: id || generateId(),
       name: name.trim(),
