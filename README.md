@@ -1,70 +1,51 @@
 # Workout Program Builder
 
-A React application for creating and managing workout programs, built with Vite and React 18.
+React app for creating and executing custom workout programs with exercise selection and timer functionality.
 
-## 🚀 Quick Start
+## Architecture
 
-### Prerequisites
-- Node.js 20.19.0 or higher
-- npm or yarn
+**Stack**: React 18 + TypeScript, Redux Toolkit, React Router, Styled Components
 
-### Installation
-```bash
-npm install
-```
+**State Management**: Redux store with 2 slices:
+- `programSlice` - program drafts, saved programs, running program
+- `workoutSlice` - workout history and session data
 
-### Development
-```bash
-npm run dev
-# or
-npm start
-```
-Opens [http://localhost:3000](http://localhost:3000) with hot module replacement.
+## Routes
 
-### Production Build
-```bash
-npm run build
-```
-Builds the app for production to the `build` folder.
+- `/` - Main menu
+- `/programs` - Program list
+- `/workouts` - Workout history
+- `/create` - Create program
+- `/create/exercises` - Exercise selector (create mode)
+- `/edit/:id` - Edit program
+- `/edit/:id/exercises` - Exercise selector (edit mode)
+- `/start/:id` - Run workout
 
-### Preview Production Build
-```bash
-npm run preview
-```
-Preview the production build locally.
-
-## 🛠️ Tech Stack
-
-- **React 18** - UI library
-- **Vite** - Build tool and dev server
-- **ES Modules** - Modern JavaScript modules
-- **CSS3** - Styling
-
-## 📦 Deployment
-
-### Netlify
-The project is configured for Netlify deployment with:
-- Node.js 20.19.0 specified in `netlify.toml`
-- Build command: `npm run build`
-- Publish directory: `build`
-
-### GitHub Pages
-```bash
-npm run deploy
-```
-
-## 🔧 Configuration
-
-- **Vite config**: `vite.config.js`
-- **Netlify config**: `netlify.toml`
-- **Node version**: `.nvmrc`
-
-## 📁 Project Structure
+## File Structure
 
 ```
 src/
-├── components/          # React components
-├── assets/             # Images and static assets
-├── styles/             # CSS files
-└── index.js           # App entry point
+├── components/
+│   ├── exercises/       # Exercise selection UI
+│   ├── programs/        # Program CRUD (editor, start)
+│   ├── layout/          # Pages and navigation
+│   ├── common/          # Reusable components
+│   └── ui/              # UI primitives
+├── store/
+│   ├── slices/          # Redux state slices
+│   └── selectors/       # Memoized selectors
+├── services/            # Business logic (program/exercise operations, storage, validation)
+├── data/                # Exercise definitions, constants
+├── hooks/               # Custom React hooks
+├── types/               # TypeScript definitions
+├── theme/               # Global styles and theming
+└── utils/               # Helpers and formatters
 ```
+
+## Key Concepts
+
+- **Draft Pattern**: Programs edited in temporary draft state before saving
+- **Local Storage**: Programs persisted via storage service
+- **Exercise Library**: Pre-defined exercises organized by muscle group
+- **Timer System**: Configurable rest timer between exercises
+- **Workout History**: Completed workout sessions tracked and stored
