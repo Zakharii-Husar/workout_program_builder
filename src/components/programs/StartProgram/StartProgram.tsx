@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { startWorkout, endWorkout, cancelWorkout, markSetComplete, markSetIncomplete } from '../../../store/slices/workoutSlice';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
-import Timer from '../../common/Timer';
+import WorkoutHeader from '../../common/WorkoutHeader/WorkoutHeader';
 import ExercisesList from '../../exercises/ExercisesList';
 import { StartProgramContainer, WorkoutButton, WorkoutControls } from './StartProgram.styled';
 import { icons } from '../../../data';
@@ -82,7 +82,11 @@ const StartProgram: React.FC = () => {
 
   return (
     <StartProgramContainer>
-      <Timer time={currentProgram.timer} />
+      <WorkoutHeader 
+        isWorkoutActive={isWorkoutActive}
+        programName={currentProgram.name}
+        timerDuration={currentProgram.timer}
+      />
       
       <ExercisesList
         exercises={exercises}

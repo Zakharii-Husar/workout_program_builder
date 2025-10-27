@@ -14,7 +14,7 @@ const glow = keyframes`
     box-shadow: ${props => props.theme.shadows.glow};
   }
   50% {
-    box-shadow: 0 0 30px ${props => props.theme.colors.primary}99;
+    box-shadow: ${props => `0 0 30px ${props.theme.colors.primary}99`};
   }
 `;
 
