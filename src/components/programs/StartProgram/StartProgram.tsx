@@ -5,7 +5,7 @@ import { startWorkout, endWorkout, cancelWorkout, markSetComplete, markSetIncomp
 import { LoadingSpinner } from '../../common/LoadingSpinner';
 import Timer from '../../common/Timer';
 import ExercisesList from '../../exercises/ExercisesList';
-import { StartProgramContainer, ExitButton, WorkoutButton, WorkoutControls } from './StartProgram.styled';
+import { StartProgramContainer, WorkoutButton, WorkoutControls } from './StartProgram.styled';
 import { icons } from '../../../data';
 
 const StartProgram: React.FC = () => {
@@ -95,10 +95,16 @@ const StartProgram: React.FC = () => {
 
       <WorkoutControls>
         {!isWorkoutActive ? (
-          <WorkoutButton onClick={handleStartWorkout}>
-            <icons.check />
-            Start Workout
-          </WorkoutButton>
+          <>
+            <WorkoutButton onClick={handleStartWorkout}>
+              <icons.check />
+              Start Workout
+            </WorkoutButton>
+            <WorkoutButton onClick={() => navigate('/')}>
+              <icons.cancel />
+              Exit Program
+            </WorkoutButton>
+          </>
         ) : (
           <>
             <WorkoutButton onClick={handleEndWorkout}>
@@ -109,14 +115,13 @@ const StartProgram: React.FC = () => {
               <icons.cancel />
               Cancel Workout
             </WorkoutButton>
+            <WorkoutButton onClick={() => navigate('/')}>
+              <icons.cancel />
+              Exit Program
+            </WorkoutButton>
           </>
         )}
       </WorkoutControls>
-
-      <ExitButton onClick={() => navigate('/')}>
-        <icons.cancel />
-        Exit Program
-      </ExitButton>
     </StartProgramContainer>
   );
 };
