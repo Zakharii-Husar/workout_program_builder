@@ -1,12 +1,12 @@
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
 import { addDraftExercise, removeDraftExercise, updateDraftExercises } from '../../../../store/slices/programSlice';
-import { ExerciseService } from '../../../../services/exerciseService';
+import { ExerciseResolver } from '../../../../services/exerciseResolver';
 import { Exercise } from '../../../../types';
 
 export const useExerciseSelection = () => {
   const dispatch = useAppDispatch();
   const { programDraft } = useAppSelector(state => state.programs);
-  const chosenExercises = programDraft?.exercises || [];
+  const chosenExercises = ExerciseResolver.getExercisesByIds(programDraft?.exerciseIds || []);
 
   const handleAddExercise = (exercise: Exercise) => {
     dispatch(addDraftExercise(exercise));

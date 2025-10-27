@@ -17,38 +17,47 @@ export const backExercises: MuscleGroup = {
   name: "Back",
   exercises: [
     {
+      id: "back-pull-ups",
       img: pullUp,
       name: "Pull-ups"
     },
     {
+      id: "back-deadlift",
       img: deadlift,
       name: "Deadlift"
     },
     {
+      id: "back-romanian-deadlift",
       img: romanianDeadlift,
       name: "Romanian deadlift"
     },
     {
+      id: "back-shrugs",
       img: shrug,
       name: "Shrugs"
     },
     {
+      id: "back-bent-over-row",
       img: bentOverDumbbells,
       name: "Bent over row"
     },
     {
+      id: "back-one-arm-dumbbell-row",
       img: oneArmDumbbellRow,
       name: "One arm dumbbell row"
     },
     {
+      id: "back-lat-pull-down",
       img: latPullDown,
       name: "Lat pull down"
     },
     {
+      id: "back-seated-cable-row",
       img: seatedCableRow,
       name: "Seated cable row"
     },
     {
+      id: "back-chest-supported-row",
       img: chestSupportedRow,
       name: "Chest supported row"
     }

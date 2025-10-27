@@ -20,8 +20,8 @@ const programSlice = createSlice({
       state.programDraft = {
         id: generateId(),
         name: '',
-        timer: 60,
-        exercises: [],
+        restBetweenSets: 60,
+        exerciseIds: [],
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
@@ -43,35 +43,28 @@ const programSlice = createSlice({
 
     updateDraftTimer: (state, action: PayloadAction<number>) => {
       if (state.programDraft) {
-        state.programDraft.timer = action.payload;
+        state.programDraft.restBetweenSets = action.payload;
         state.programDraft.updatedAt = new Date().toISOString();
       }
     },
 
     addDraftExercise: (state, action: PayloadAction<Exercise>) => {
       if (state.programDraft) {
-        const updatedExercises = ExerciseService.addExerciseToProgram(
-          state.programDraft.exercises, 
-          action.payload
-        );
-        state.programDraft.exercises = updatedExercises;
+        state.programDraft.exerciseIds.push(action.payload.id);
         state.programDraft.updatedAt = new Date().toISOString();
       }
     },
 
     removeDraftExercise: (state, action: PayloadAction<number>) => {
       if (state.programDraft) {
-        const updatedExercises = state.programDraft.exercises.filter(
-          (_, index) => index !== action.payload
-        );
-        state.programDraft.exercises = updatedExercises;
+        state.programDraft.exerciseIds.splice(action.payload, 1);
         state.programDraft.updatedAt = new Date().toISOString();
       }
     },
 
-    updateDraftExercises: (state, action: PayloadAction<Exercise[]>) => {
+    updateDraftExercises: (state, action: PayloadAction<string[]>) => {
       if (state.programDraft) {
-        state.programDraft.exercises = action.payload;
+        state.programDraft.exerciseIds = action.payload;
         state.programDraft.updatedAt = new Date().toISOString();
       }
     },

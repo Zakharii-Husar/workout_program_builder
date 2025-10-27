@@ -25,63 +25,78 @@ export const armsExercises: MuscleGroup = {
   exercises: [
     // Biceps
     {
+      id: "arms-chin-ups",
       img: chinUp,
       name: "Chin-ups"
     },
     {
+      id: "arms-barbell-bicep-curls",
       img: barbellCurl,
       name: "Barbell bicep curls"
     },
     {
+      id: "arms-hammer-curls",
       img: hammerCurl,
       name: "Hammer curls"
     },
     {
+      id: "arms-seated-dumbbell-curls",
       img: seatedDumbbellCurl,
       name: "Seated dumbbell curls"
     },
     {
+      id: "arms-concentration-curl",
       img: concentrationCurl,
       name: "Concentration curl"
     },
     {
+      id: "arms-barbell-preacher-curls",
       img: barbellPreacherCurl,
       name: "Barbell preacher curls"
     },
     {
+      id: "arms-incline-dumbbell-curl",
       img: inclineDumbbellCurl,
       name: "Incline dumbbell curl"
     },
     // Triceps
     {
+      id: "arms-narrow-push-ups",
       img: narrowPushUps,
       name: "Narrow push-ups"
     },
     {
+      id: "arms-tricep-dips",
       img: tricepDips,
       name: "Tricep dips"
     },
     {
+      id: "arms-bench-dips",
       img: benchDip,
       name: "Bench dips"
     },
     {
+      id: "arms-close-grip-bench-press",
       img: closeGripBenchPress,
       name: "Close grip bench press"
     },
     {
+      id: "arms-standing-triceps-extension",
       img: standingTricepsExtension,
       name: "Standing triceps extension"
     },
     {
+      id: "arms-dumbbell-french-press",
       img: dumbbellFrenchPress,
       name: "Dumbbell french press"
     },
     {
+      id: "arms-lying-triceps-extension",
       img: lyingTricepsExtension,
       name: "Lying triceps extension"
     },
     {
+      id: "arms-cable-rope-tricep-pushdown",
       img: cableRopeTricepPushdown,
       name: "Rope triceps push-down"
     }

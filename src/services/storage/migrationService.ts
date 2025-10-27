@@ -1,9 +1,10 @@
-import { WorkoutProgram } from '../../types';
+import { WorkoutProgram, Exercise } from '../../types';
 import { generateId } from '../../utils/formatters';
+import { ExerciseResolver } from '../exerciseResolver';
 
 export class MigrationService {
   /**
-   * Migrate programs to add IDs if they don't exist
+   * Migrate programs to new structure with exercise IDs
    */
   static migratePrograms(programs: any[]): WorkoutProgram[] {
     const migratedPrograms = programs.map(program => {
@@ -15,6 +16,26 @@ export class MigrationService {
           updatedAt: program.updatedAt || new Date().toISOString()
         };
       }
+      
+      // Migrate from old structure (exercises array) to new structure (exerciseIds array)
+      if (program.exercises && Array.isArray(program.exercises) && !program.exerciseIds) {
+        const exerciseIds = program.exercises
+          .map((exercise: any) => {
+            // Try to find exercise by name first
+            const allExercises = ExerciseResolver.getAllExercises();
+            const foundExercise = allExercises.find(e => e.name === exercise.name);
+            return foundExercise ? foundExercise.id : null;
+          })
+          .filter((id: string | null): id is string => id !== null);
+        
+        return {
+          ...program,
+          restBetweenSets: program.timer || program.restBetweenSets || 60,
+          exerciseIds,
+          updatedAt: new Date().toISOString()
+        };
+      }
+      
       return program;
     });
     

@@ -18,42 +18,52 @@ export const coreExercises: MuscleGroup = {
   name: "Core",
   exercises: [
     {
+      id: "core-crunches",
       img: crunches,
       name: "Crunches"
     },
     {
+      id: "core-plank",
       img: plank,
       name: "Plank"
     },
     {
+      id: "core-knee-hip-raises",
       img: kneeHipRaise,
       name: "Knee hip raises"
     },
     {
+      id: "core-otis-up",
       img: otisUp,
       name: "Otis-up"
     },
     {
+      id: "core-bench-sit-up",
       img: benchSitUp,
       name: "Bench sit-up"
     },
     {
+      id: "core-upside-down",
       img: upsideDown,
       name: "Upside down"
     },
     {
+      id: "core-bent-press",
       img: bentPress,
       name: "Bent press"
     },
     {
+      id: "core-barbell-side-bend",
       img: barbellSideBend,
       name: "Barbell side bend"
     },
     {
+      id: "core-farmer-walk",
       img: farmerWalk,
       name: "Farmer walk"
     },
     {
+      id: "core-cable-crunch",
       img: cableCrunch,
       name: "Cable crunch"
     }

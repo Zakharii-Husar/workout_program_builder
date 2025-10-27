@@ -19,46 +19,57 @@ export const legsExercises: MuscleGroup = {
   name: "Legs",
   exercises: [
     {
+      id: "legs-squats",
       img: squat,
       name: "Squats"
     },
     {
+      id: "legs-dumbbell-squats",
       img: dumbbellSquat,
       name: "Dumbbell squats"
     },
     {
+      id: "legs-reverse-lunges",
       img: reverseLunge,
       name: "Reverse lunges"
     },
     {
+      id: "legs-nordic-hamstring-curl",
       img: nordicHamstringCurl,
       name: "Nordic hamstring curl"
     },
     {
+      id: "legs-barbell-back-squats",
       img: barbellBackSquat,
       name: "Barbell back squats"
     },
     {
+      id: "legs-barbell-front-squats",
       img: barbellFrontSquat,
       name: "Barbell front squats"
     },
     {
+      id: "legs-leg-press",
       img: legPress,
       name: "Leg press"
     },
     {
+      id: "legs-lying-leg-curl",
       img: lyingLegCurl,
       name: "Lying leg curl"
     },
     {
+      id: "legs-barbell-hip-thrust",
       img: barbellHipThrust,
       name: "Barbell hip thrust"
     },
     {
+      id: "legs-standing-calf-raises",
       img: standingCalfRaise,
       name: "Standing calf raises"
     },
     {
+      id: "legs-seated-calf-raises",
       img: seatedCalfRaise,
       name: "Seated calf raises"
     }

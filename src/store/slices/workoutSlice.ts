@@ -15,7 +15,7 @@ export interface WorkoutSet {
 
 // Workout session state
 export interface WorkoutSession {
-  id: string;
+  workoutSessionId: string;
   programId: string;
   name: string;
   startTime: string; // ISO string
@@ -50,7 +50,7 @@ const workoutSlice = createSlice({
       const { programId, name, restBetweenSets, exercises } = action.payload;
       
       state.runningWorkout = {
-        id: generateId(),
+        workoutSessionId: generateId(),
         programId,
         name,
         startTime: new Date().toISOString(),

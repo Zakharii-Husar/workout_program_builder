@@ -87,13 +87,13 @@ export class ProgramService {
     }
   }
 
-  static createProgram(name: string, timer: number, exercises: Exercise[], id?: string): WorkoutProgram {
+  static createProgram(name: string, restBetweenSets: number, exerciseIds: string[], id?: string): WorkoutProgram {
     const now = new Date().toISOString();
     return {
       id: id || generateId(),
       name: name.trim(),
-      timer,
-      exercises: [...exercises],
+      restBetweenSets,
+      exerciseIds: [...exerciseIds],
       createdAt: id ? undefined : now, // Only set createdAt for new programs
       updatedAt: now
     };

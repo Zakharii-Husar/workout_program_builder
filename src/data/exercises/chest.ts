@@ -20,50 +20,62 @@ export const chestExercises: MuscleGroup = {
   name: "Chest",
   exercises: [
     {
+      id: "chest-push-ups",
       img: pushUps,
       name: "Push-ups"
     },
     {
+      id: "chest-incline-push-ups",
       img: inclinePushUps,
       name: "Incline push-ups"
     },
     {
+      id: "chest-decline-push-ups",
       img: declinePushUps,
       name: "Decline push-ups"
     },
     {
+      id: "chest-chest-dips",
       img: chestDips,
       name: "Chest dips"
     },
     {
+      id: "chest-bench-press",
       img: flatBenchPress,
       name: "Bench press"
     },
     {
+      id: "chest-dumbbell-press",
       img: dumbbellPress,
       name: "Dumbbell press"
     },
     {
+      id: "chest-incline-bench-press",
       img: inclineBenchPress,
       name: "Incline bench press"
     },
     {
+      id: "chest-incline-dumbbell-press",
       img: inclineDumbbellPress,
       name: "Incline dumbbell press"
     },
     {
+      id: "chest-decline-bench-press",
       img: declineBenchPress,
       name: "Decline bench press"
     },
     {
+      id: "chest-dumbbell-fly",
       img: dumbbellFly,
       name: "Dumbbell fly"
     },
     {
+      id: "chest-pectoral-fly",
       img: pectoralFly,
       name: "Pectoral fly"
     },
     {
+      id: "chest-cable-crossover",
       img: cableCrossover,
       name: "Cable crossover"
     }

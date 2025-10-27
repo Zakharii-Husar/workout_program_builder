@@ -1,5 +1,6 @@
 // Base types
 export interface Exercise {
+  id: string;
   img: string;
   name: string;
 }
@@ -13,8 +14,8 @@ export interface MuscleGroup {
 export interface WorkoutProgram {
   id: string;
   name: string;
-  timer: number;
-  exercises: Exercise[];
+  restBetweenSets: number;
+  exerciseIds: string[];
   createdAt?: string; // ISO string
   updatedAt?: string; // ISO string
 }

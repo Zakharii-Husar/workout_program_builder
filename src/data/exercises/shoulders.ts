@@ -16,34 +16,42 @@ export const shouldersExercises: MuscleGroup = {
   name: "Shoulders",
   exercises: [
     {
+      id: "shoulders-military-press",
       img: militaryPress,
       name: "Military press"
     },
     {
+      id: "shoulders-military-dumbbell-press",
       img: militaryDumbbellPress,
       name: "Military dumbbell press"
     },
     {
+      id: "shoulders-seated-barbell-press",
       img: seatedBarbellPress,
       name: "Seated barbell press"
     },
     {
+      id: "shoulders-seated-dumbbell-press",
       img: seatedDumbbellPress,
       name: "Seated dumbbell press"
     },
     {
+      id: "shoulders-bottoms-up-kettlebell-press",
       img: bottomsUpKettlebellPress,
       name: "Bottoms-up kettlebell press"
     },
     {
+      id: "shoulders-dumbbell-lateral-raise",
       img: dumbbellLateralRaise,
       name: "Dumbbell lateral raise"
     },
     {
+      id: "shoulders-front-dumbbell-raise",
       img: frontDumbbellRaise,
       name: "Front dumbbell raise"
     },
     {
+      id: "shoulders-leverage-shoulder-press",
       img: leverageShoulderPress,
       name: "Leverage shoulder press"
     }

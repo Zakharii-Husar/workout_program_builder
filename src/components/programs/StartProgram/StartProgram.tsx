@@ -7,6 +7,7 @@ import WorkoutHeader from './WorkoutHeader/WorkoutHeader';
 import ExercisesList from '../../exercises/ExercisesList';
 import { StartProgramContainer, WorkoutButton, WorkoutControls } from './StartProgram.styled';
 import { icons } from '../../../data';
+import { ExerciseResolver } from '../../../services/exerciseResolver';
 
 const StartProgram: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -27,11 +28,12 @@ const StartProgram: React.FC = () => {
 
   const handleStartWorkout = () => {
     if (currentProgram) {
+      const exercises = ExerciseResolver.getExercisesByIds(currentProgram.exerciseIds);
       dispatch(startWorkout({
         programId: currentProgram.id,
         name: currentProgram.name,
-        restBetweenSets: currentProgram.timer, // Use the program's configured rest time
-        exercises: currentProgram.exercises.map(exercise => ({
+        restBetweenSets: currentProgram.restBetweenSets, // Use the program's configured rest time
+        exercises: exercises.map(exercise => ({
           name: exercise.name,
           reps: null,
           weight: null
@@ -58,7 +60,7 @@ const StartProgram: React.FC = () => {
     );
   }
 
-  const exercises = currentProgram.exercises || [];
+  const exercises = ExerciseResolver.getExercisesByIds(currentProgram.exerciseIds || []);
   const isWorkoutActive = !!runningWorkout;
   const workoutSets = runningWorkout?.exercises || [];
 
@@ -85,7 +87,7 @@ const StartProgram: React.FC = () => {
       <WorkoutHeader 
         isWorkoutActive={isWorkoutActive}
         programName={currentProgram.name}
-        timerDuration={currentProgram.timer}
+        timerDuration={currentProgram.restBetweenSets}
       />
       
       <ExercisesList
