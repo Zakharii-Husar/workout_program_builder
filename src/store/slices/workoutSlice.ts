@@ -9,6 +9,8 @@ export interface WorkoutSet {
   reps: number | null;
   weight: number | null;
   completed: boolean;
+  actualRestTime?: number; // Actual rest time taken in seconds
+  targetRestTime?: number; // Target rest time for this set in seconds
 }
 
 // Workout session state
@@ -59,7 +61,8 @@ const workoutSlice = createSlice({
           exerciseName: exercise.name,
           reps: exercise.reps,
           weight: exercise.weight,
-          completed: false
+          completed: false,
+          targetRestTime: restBetweenSets
         }))
       };
       
@@ -94,12 +97,27 @@ const workoutSlice = createSlice({
     // Update set details
     updateSet: (state, action: PayloadAction<{
       setId: string;
-      updates: Partial<Pick<WorkoutSet, 'reps' | 'weight'>>
+      updates: Partial<Pick<WorkoutSet, 'reps' | 'weight' | 'actualRestTime' | 'targetRestTime'>>
     }>) => {
       if (state.runningWorkout) {
         const set = state.runningWorkout.exercises.find(ex => ex.id === action.payload.setId);
         if (set) {
           Object.assign(set, action.payload.updates);
+          // Persist running workout state
+          LocalStorageService.saveRunningWorkout(state.runningWorkout);
+        }
+      }
+    },
+
+    // Record rest time for a completed set
+    recordRestTime: (state, action: PayloadAction<{
+      setId: string;
+      actualRestTime: number;
+    }>) => {
+      if (state.runningWorkout) {
+        const set = state.runningWorkout.exercises.find(ex => ex.id === action.payload.setId);
+        if (set) {
+          set.actualRestTime = action.payload.actualRestTime;
           // Persist running workout state
           LocalStorageService.saveRunningWorkout(state.runningWorkout);
         }
@@ -133,6 +151,7 @@ export const {
   markSetComplete,
   markSetIncomplete,
   updateSet,
+  recordRestTime,
   endWorkout,
   cancelWorkout
 } = workoutSlice.actions;

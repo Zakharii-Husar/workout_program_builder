@@ -30,7 +30,7 @@ const StartProgram: React.FC = () => {
       dispatch(startWorkout({
         programId: currentProgram.id,
         name: currentProgram.name,
-        restBetweenSets: 60, // Default 60 seconds rest
+        restBetweenSets: currentProgram.timer, // Use the program's configured rest time
         exercises: currentProgram.exercises.map(exercise => ({
           name: exercise.name,
           reps: null,

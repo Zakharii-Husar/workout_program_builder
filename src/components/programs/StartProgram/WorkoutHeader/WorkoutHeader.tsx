@@ -1,5 +1,6 @@
 import React from 'react';
 import Timer from './Timer';
+import RestTimer from './RestTimer';
 import ProgramName from './ProgramName';
 
 interface WorkoutHeaderProps {
@@ -16,7 +17,7 @@ const WorkoutHeader: React.FC<WorkoutHeaderProps> = ({
   return (
     <>
       {isWorkoutActive ? (
-        <Timer time={timerDuration} />
+        <RestTimer />
       ) : (
         <ProgramName name={programName} />
       )}
