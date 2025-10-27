@@ -6,9 +6,11 @@ import {
   updateDraftTimer, 
   updateDraftExercises, 
   saveDraft, 
-  clearDraft 
+  clearDraft,
+  createDraft
 } from '../../../../store/slices/programSlice';
 import { ProgramService } from '../../../../services/programService';
+import { ExerciseResolver } from '../../../../services/exerciseResolver';
 import { PROGRAM } from '../../../../utils/constants';
 import { WorkoutProgram, Exercise } from '../../../../types';
 
@@ -28,10 +30,17 @@ export const useProgramEditor = () => {
 
   // Form state - use programDraft directly for persistence
   const [isLoading, setIsLoading] = useState(false);
+
+  // Initialize draft for new programs if not already created
+  useEffect(() => {
+    if (!navigationState.isEditMode && !programDraft) {
+      dispatch(createDraft());
+    }
+  }, [navigationState.isEditMode, programDraft, dispatch]);
   
   // Get form values from programDraft
   const name = programDraft?.name ?? PROGRAM.DEFAULT_NAME;
-  const timer = programDraft?.timer || 60;
+  const timer = programDraft?.restBetweenSets || 60;
 
   // Timer controls
   const handleTimerChange = (increment: number) => {
@@ -103,7 +112,7 @@ export const useProgramEditor = () => {
     name,
     timer,
     isLoading,
-    chosenExercises: programDraft?.exercises || [],
+    chosenExercises: ExerciseResolver.getExercisesByIds(programDraft?.exerciseIds || []),
     navigationState,
     
     // Actions
@@ -114,7 +123,7 @@ export const useProgramEditor = () => {
     handleNavigateToExercises,
     
     // Computed values
-    hasExercises: (programDraft?.exercises?.length || 0) > 0,
+    hasExercises: (programDraft?.exerciseIds?.length || 0) > 0,
     isEditMode: navigationState.isEditMode,
     isUpdating: navigationState.isEditMode
   };

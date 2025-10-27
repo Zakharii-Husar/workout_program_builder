@@ -8,7 +8,7 @@ import { ErrorBoundary } from './components/common/ErrorBoundary';
 import RouteGuard from './components/layout/RouteGuard';
 import Main from './components/layout/Main';
 import Programs from './components/layout/Programs/Programs';
-import Workouts from './components/layout/Workouts/Workouts';
+import WorkoutHistory from './components/layout/WorkoutHistory';
 import ProgramEditor from './components/programs/ProgramEditor';
 import Exercises from './components/exercises/Exercises';
 import StartProgram from './components/programs/StartProgram';
@@ -34,7 +34,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Main />} />
                   <Route path="/programs" element={<Programs />} />
-                  <Route path="/workouts" element={<Workouts />} />
+                  <Route path="/workouts" element={<WorkoutHistory />} />
                   <Route path="/create" element={<ProgramEditor />} />
                   <Route path="/create/exercises" element={<Exercises />} />
                   <Route path="/edit/:programId" element={<ProgramEditor />} />

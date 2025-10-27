@@ -4,18 +4,18 @@ import { ValidationError } from '../types';
 export const useValidation = () => {
   const [errors, setErrors] = useState<ValidationError[]>([]);
 
-  const validateProgram = useCallback((program: { name: string; timer: number; exercises: any[] }) => {
+  const validateProgram = useCallback((program: { name: string; restBetweenSets: number; exerciseIds: string[] }) => {
     const newErrors: ValidationError[] = [];
 
     if (!program.name || program.name.trim() === '') {
       newErrors.push({ field: 'name', message: 'Program name is required' });
     }
 
-    if (!program.timer || program.timer <= 0) {
+    if (!program.restBetweenSets || program.restBetweenSets <= 0) {
       newErrors.push({ field: 'timer', message: 'Rest time must be greater than 0' });
     }
 
-    if (!program.exercises || program.exercises.length === 0) {
+    if (!program.exerciseIds || program.exerciseIds.length === 0) {
       newErrors.push({ field: 'exercises', message: 'At least one exercise is required' });
     }
 

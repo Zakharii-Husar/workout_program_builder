@@ -18,27 +18,24 @@ export class ProgramValidator {
     }
 
     // Timer validation
-    if (!program.timer || program.timer <= 0) {
+    if (!program.restBetweenSets || program.restBetweenSets <= 0) {
       errors.push('Rest time must be greater than 0 seconds');
-    } else if (program.timer > 600) { // 10 minutes max
+    } else if (program.restBetweenSets > 600) { // 10 minutes max
       errors.push('Rest time cannot exceed 10 minutes');
     }
 
     // Exercises validation
-    if (!program.exercises || program.exercises.length === 0) {
+    if (!program.exerciseIds || program.exerciseIds.length === 0) {
       errors.push(`At least ${EXERCISE.MIN_EXERCISES_REQUIRED} exercise is required`);
-    } else if (program.exercises.length > EXERCISE.MAX_EXERCISES_PER_PROGRAM) {
+    } else if (program.exerciseIds.length > EXERCISE.MAX_EXERCISES_PER_PROGRAM) {
       errors.push(`Cannot have more than ${EXERCISE.MAX_EXERCISES_PER_PROGRAM} exercises in a program`);
     }
 
     // Validate individual exercises
-    if (program.exercises) {
-      program.exercises.forEach((exercise, index) => {
-        if (!exercise.name || exercise.name.trim() === '') {
-          errors.push(`Exercise ${index + 1} must have a name`);
-        }
-        if (!exercise.img || exercise.img.trim() === '') {
-          errors.push(`Exercise ${index + 1} must have an image`);
+    if (program.exerciseIds) {
+      program.exerciseIds.forEach((exerciseId, index) => {
+        if (!exerciseId || exerciseId.trim() === '') {
+          errors.push(`Exercise ${index + 1} must have a valid ID`);
         }
       });
     }
