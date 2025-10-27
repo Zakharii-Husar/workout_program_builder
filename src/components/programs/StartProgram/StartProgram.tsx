@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { startWorkout, endWorkout, cancelWorkout, markSetComplete, markSetIncomplete } from '../../../store/slices/workoutSlice';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
-import WorkoutHeader from '../../common/WorkoutHeader/WorkoutHeader';
+import WorkoutHeader from './WorkoutHeader/WorkoutHeader';
 import ExercisesList from '../../exercises/ExercisesList';
 import { StartProgramContainer, WorkoutButton, WorkoutControls } from './StartProgram.styled';
 import { icons } from '../../../data';
