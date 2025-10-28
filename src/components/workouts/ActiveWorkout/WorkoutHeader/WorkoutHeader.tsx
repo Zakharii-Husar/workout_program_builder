@@ -1,5 +1,4 @@
 import React from 'react';
-import Timer from './Timer';
 import RestTimer from './RestTimer';
 import ProgramName from './ProgramName';
 
