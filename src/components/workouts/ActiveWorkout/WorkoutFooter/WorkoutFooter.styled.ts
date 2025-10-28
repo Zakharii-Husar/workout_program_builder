@@ -4,8 +4,8 @@ export const WorkoutFooterContainer = styled.div`
   position: sticky;
   bottom: 0;
   z-index: 100;
-  background: ${props => props.theme.colors.surface};
-  border-top: 1px solid ${props => props.theme.colors.border};
+  background: ${props => props.theme.colors.background};
+  border-top: 2px solid ${props => props.theme.colors.border};
   display: flex;
   gap: ${props => props.theme.spacing.md};
   justify-content: center;
@@ -31,7 +31,7 @@ export const WorkoutButton = styled.button`
   font-family: ${props => props.theme.typography.fontFamily.display};
   font-size: ${props => props.theme.typography.fontSize.base};
   font-weight: ${props => props.theme.typography.fontWeight.semibold};
-  border: 2px solid ${props => props.theme.colors.border};
+  border: 2px solid ${props => props.theme.colors.accent};
   border-radius: ${props => props.theme.borderRadius.lg};
   cursor: pointer;
   transition: ${props => props.theme.transitions.normal};
@@ -42,9 +42,9 @@ export const WorkoutButton = styled.button`
   letter-spacing: 0.5px;
 
   &:hover {
-    background: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.background};
-    border-color: ${props => props.theme.colors.primary};
+    background: ${props => props.theme.colors.accent};
+    color: ${props => props.theme.colors.text};
+    border-color: ${props => props.theme.colors.accent};
     transform: translateY(-2px);
     box-shadow: ${props => props.theme.shadows.md};
   }

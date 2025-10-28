@@ -9,7 +9,7 @@ import WorkoutHeader from './WorkoutHeader/WorkoutHeader';
 import WorkoutFooter from './WorkoutFooter';
 import ExercisesList from '../../exercises/ExercisesList';
 import SetCompletionModal from './SetCompletionModal';
-import { ActiveWorkoutContainer } from './ActiveWorkout.styled';
+import { ActiveWorkoutContainer, WorkoutContent } from './ActiveWorkout.styled';
 import { ExerciseResolver } from '../../../services/exerciseResolver';
 
 const ActiveWorkout: React.FC = () => {
@@ -136,14 +136,16 @@ const ActiveWorkout: React.FC = () => {
         timerDuration={currentProgram.restBetweenSets}
       />
       
-      <ExercisesList
-        exercises={exercises}
-        primaryIcon="exercise"
-        secondaryIcon={isWorkoutActive ? "dot" : "none"}
-        onPrimaryAction={() => {}}
-        onSecondaryAction={isWorkoutActive ? handleSetToggle : () => {}}
-        checkedIndices={completedIndices}
-      />
+      <WorkoutContent>
+        <ExercisesList
+          exercises={exercises}
+          primaryIcon="exercise"
+          secondaryIcon={isWorkoutActive ? "dot" : "none"}
+          onPrimaryAction={() => {}}
+          onSecondaryAction={isWorkoutActive ? handleSetToggle : () => {}}
+          checkedIndices={completedIndices}
+        />
+      </WorkoutContent>
 
       <WorkoutFooter
         isWorkoutActive={isWorkoutActive}

@@ -5,8 +5,8 @@ const ProgramNameContainer = styled.div`
   position: sticky;
   top: 0;
   z-index: 100;
-  background: ${props => props.theme.colors.primary};
-  border-bottom: 1px solid ${props => props.theme.colors.border};
+  background: ${props => props.theme.colors.surface};
+  border-bottom: 2px solid ${props => props.theme.colors.border};
   display: flex;
   flex-direction: column;
   padding: ${props => props.theme.spacing.md};
@@ -26,9 +26,9 @@ const ProgramNameDisplay = styled.div`
   font-family: ${props => props.theme.typography.fontFamily.display};
   font-size: ${props => props.theme.typography.fontSize['3xl']};
   font-weight: ${props => props.theme.typography.fontWeight.bold};
-  color: ${props => props.theme.colors.textOnPrimary};
+  color: ${props => props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.md};
-  text-shadow: ${props => props.theme.shadows.glow};
+  text-shadow: none;
   letter-spacing: 2px;
   text-transform: uppercase;
 

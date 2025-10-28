@@ -22,8 +22,8 @@ export const RestTimerContainer = styled.div<{ $isOvercount: boolean }>`
   position: sticky;
   top: 0;
   z-index: 100;
-  background: ${props => props.$isOvercount ? props.theme.colors.error : props.theme.colors.primary};
-  border-bottom: 1px solid ${props => props.theme.colors.border};
+  background: ${props => props.$isOvercount ? props.theme.colors.error : props.theme.colors.accent};
+  border-bottom: 2px solid ${props => props.theme.colors.border};
   display: flex;
   flex-direction: column;
   padding: ${props => props.theme.spacing.md};
@@ -44,11 +44,11 @@ export const RestTimerDisplay = styled.div<{ $isOvercount: boolean }>`
   font-family: ${props => props.theme.typography.fontFamily.timer};
   font-size: ${props => props.theme.typography.fontSize['3xl']};
   font-weight: ${props => props.theme.typography.fontWeight.bold};
-  color: ${props => props.theme.colors.textOnPrimary};
+  color: ${props => props.$isOvercount ? props.theme.colors.textOnPrimary : props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.md};
   text-shadow: ${props => props.$isOvercount 
     ? `0 0 15px ${props.theme.colors.background}99` 
-    : props.theme.shadows.glow};
+    : 'none'};
   letter-spacing: 2px;
   font-variant-numeric: tabular-nums;
   animation: ${props => props.$isOvercount ? pulse : 'none'} 1s infinite;
@@ -69,17 +69,17 @@ export const RestTimerDisplay = styled.div<{ $isOvercount: boolean }>`
 `;
 
 export const ElapsedTime = styled.span<{ $isOvercount: boolean }>`
-  color: ${props => props.$isOvercount ? props.theme.colors.background : props.theme.colors.textOnPrimary};
+  color: ${props => props.$isOvercount ? props.theme.colors.background : props.theme.colors.text};
   font-weight: ${props => props.theme.typography.fontWeight.bold};
 `;
 
 export const Separator = styled.span`
-  color: ${props => props.theme.colors.textOnPrimary};
+  color: ${props => props.theme.colors.text};
   opacity: 0.7;
 `;
 
 export const TargetTime = styled.span`
-  color: ${props => props.theme.colors.textOnPrimary};
+  color: ${props => props.theme.colors.text};
   opacity: 0.8;
   font-weight: ${props => props.theme.typography.fontWeight.medium};
 `;
