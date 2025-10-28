@@ -10,9 +10,9 @@ import {
   ElapsedTime,
   TargetTime,
   Separator
-} from './RestTimer.styled';
+} from './RestStopwatch.styled';
 
-const RestTimer: React.FC = () => {
+const RestStopwatch: React.FC = () => {
   const dispatch = useAppDispatch();
   const { runningWorkout } = useAppSelector((state: any) => state.workouts);
   
@@ -59,5 +59,5 @@ const RestTimer: React.FC = () => {
   );
 };
 
-export default RestTimer;
+export default RestStopwatch;
 
