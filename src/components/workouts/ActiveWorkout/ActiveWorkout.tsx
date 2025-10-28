@@ -5,10 +5,10 @@ import { startWorkout, endWorkout, cancelWorkout, markSetComplete, markSetIncomp
 import { WorkoutProgram, Exercise } from '../../../types';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
 import WorkoutHeader from './WorkoutHeader/WorkoutHeader';
+import WorkoutFooter from './WorkoutFooter';
 import ExercisesList from '../../exercises/ExercisesList';
 import SetCompletionModal from './SetCompletionModal';
-import { ActiveWorkoutContainer, WorkoutButton, WorkoutControls } from './ActiveWorkout.styled';
-import { icons } from '../../../data';
+import { ActiveWorkoutContainer } from './ActiveWorkout.styled';
 import { ExerciseResolver } from '../../../services/exerciseResolver';
 
 const ActiveWorkout: React.FC = () => {
@@ -137,35 +137,13 @@ const ActiveWorkout: React.FC = () => {
         checkedIndices={completedIndices}
       />
 
-      <WorkoutControls>
-        {!isWorkoutActive ? (
-          <>
-            <WorkoutButton onClick={handleStartWorkout}>
-              <icons.check />
-              Start Workout
-            </WorkoutButton>
-            <WorkoutButton onClick={() => navigate('/')}>
-              <icons.cancel />
-              Exit Program
-            </WorkoutButton>
-          </>
-        ) : (
-          <>
-            <WorkoutButton onClick={handleEndWorkout}>
-              <icons.check />
-              End Workout
-            </WorkoutButton>
-            <WorkoutButton onClick={handleCancelWorkout}>
-              <icons.cancel />
-              Cancel Workout
-            </WorkoutButton>
-            <WorkoutButton onClick={() => navigate('/')}>
-              <icons.cancel />
-              Exit Program
-            </WorkoutButton>
-          </>
-        )}
-      </WorkoutControls>
+      <WorkoutFooter
+        isWorkoutActive={isWorkoutActive}
+        onStartWorkout={handleStartWorkout}
+        onEndWorkout={handleEndWorkout}
+        onCancelWorkout={handleCancelWorkout}
+        onExit={() => navigate('/')}
+      />
 
       <SetCompletionModal
         isOpen={isModalOpen}
