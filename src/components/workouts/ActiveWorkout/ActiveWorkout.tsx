@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { startWorkout, endWorkout, cancelWorkout, markSetComplete, markSetIncomplete, updateSet, WorkoutSet } from '../../../store/slices/workoutSlice';
 import { WorkoutProgram, Exercise } from '../../../types';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
+import WarningModal from '../../common/WarningModal';
 import WorkoutHeader from './WorkoutHeader/WorkoutHeader';
 import WorkoutFooter from './WorkoutFooter';
 import ExercisesList from '../../exercises/ExercisesList';
@@ -22,6 +23,9 @@ const ActiveWorkout: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSetId, setSelectedSetId] = useState<string | null>(null);
   const [selectedExerciseName, setSelectedExerciseName] = useState<string>('');
+  
+  // Warning modal state for canceling workout
+  const [isCancelWarningOpen, setIsCancelWarningOpen] = useState(false);
   
   // Find the program by ID from URL params
   const currentProgram = programId ? allPrograms.find((p: WorkoutProgram) => p.id === programId) : runningProgram;
@@ -55,7 +59,12 @@ const ActiveWorkout: React.FC = () => {
   };
 
   const handleCancelWorkout = () => {
+    setIsCancelWarningOpen(true);
+  };
+
+  const handleConfirmCancel = () => {
     dispatch(cancelWorkout());
+    setIsCancelWarningOpen(false);
   };
 
   if (!currentProgram) {
@@ -150,6 +159,16 @@ const ActiveWorkout: React.FC = () => {
         onSave={handleModalSave}
         exerciseName={selectedExerciseName}
         targetRestTime={runningWorkout?.restBetweenSets || 60}
+      />
+
+      <WarningModal
+        isOpen={isCancelWarningOpen}
+        onClose={() => setIsCancelWarningOpen(false)}
+        onConfirm={handleConfirmCancel}
+        message="All progress will be lost! Are you sure you want to cancel?"
+        confirmLabel="Yes, Cancel"
+        cancelLabel="No, Keep Going"
+        confirmButtonColor="#dc3545"
       />
     </ActiveWorkoutContainer>
   );
