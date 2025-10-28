@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -12,6 +12,7 @@ import WorkoutHistory from './components/layout/WorkoutHistory';
 import ProgramEditor from './components/programs/ProgramEditor';
 import Exercises from './components/exercises/Exercises';
 import ActiveWorkout from './components/workouts/ActiveWorkout';
+import { timerService } from './services/timerService';
 
 const AppContainer = styled.div`
   display: flex;
@@ -24,6 +25,20 @@ const AppContainer = styled.div`
 `;
 
 function App() {
+  // Initialize timer service when app starts
+  useEffect(() => {
+    timerService.initialize();
+    
+    // Subscribe to store changes to sync timer service
+    const unsubscribe = store.subscribe(() => {
+      timerService.syncWithState();
+    });
+    
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
     <ErrorBoundary>
       <ThemeProvider>

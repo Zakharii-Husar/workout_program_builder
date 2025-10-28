@@ -1,7 +1,6 @@
-import React from 'react';
-import { useTimer } from '../../../../hooks/useTimer';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { recordRestTime } from '../../../../store/slices/workoutSlice';
+import React, { useEffect } from 'react';
+import { useAppSelector } from '../../../../store/hooks';
+import { timerService } from '../../../../services/timerService';
 import { icons } from '../../../../data';
 import { 
   RestTimerContainer, 
@@ -13,24 +12,41 @@ import {
 } from './RestStopwatch.styled';
 
 const RestStopwatch: React.FC = () => {
-  const dispatch = useAppDispatch();
   const { runningWorkout } = useAppSelector((state: any) => state.workouts);
   
   const targetRestTime = runningWorkout?.restBetweenSets || 60;
+  const timerState = runningWorkout?.timerState || { isRunning: false, minutes: 0, seconds: 0, milliseconds: 0 };
   
-  const {
-    isRunning,
-    minutes,
-    seconds,
-    isOvercount,
-    displayTime,
-    targetDisplayTime,
-    toggle,
-    reset,
-    setElapsedTime
-  } = useTimer(0, { mode: 'stopwatch', targetTime: targetRestTime });
-
+  const { isRunning, minutes, seconds } = timerState;
   const elapsedSeconds = minutes * 60 + seconds;
+  const isOvercount = elapsedSeconds > targetRestTime;
+
+  // Initialize timer service and sync with Redux state
+  useEffect(() => {
+    timerService.initialize();
+    timerService.syncWithState();
+    
+    // Subscribe to Redux state changes to sync timer service
+    const unsubscribe = timerService.syncWithState;
+    
+    return () => {
+      // Don't stop the timer service when component unmounts
+      // It should continue running in the background
+    };
+  }, []);
+
+  // Sync timer service with Redux state changes
+  useEffect(() => {
+    timerService.syncWithState();
+  }, [isRunning]);
+
+  const handleToggle = () => {
+    timerService.toggle();
+  };
+
+  const handleReset = () => {
+    timerService.reset();
+  };
 
 
   return (
@@ -49,11 +65,11 @@ const RestStopwatch: React.FC = () => {
       
       <RestTimerButtons>
         {isRunning ? (
-          <icons.pause onClick={toggle} />
+          <icons.pause onClick={handleToggle} />
         ) : (
-          <icons.start onClick={toggle} />
+          <icons.start onClick={handleToggle} />
         )}
-        <icons.stop onClick={reset} />
+        <icons.stop onClick={handleReset} />
       </RestTimerButtons>
     </RestTimerContainer>
   );

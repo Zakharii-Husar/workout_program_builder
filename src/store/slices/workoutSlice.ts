@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { generateId } from '../../utils/formatters';
 import { LocalStorageService } from '../../services/storage';
+import { TimerState } from '../../types';
 
 // Set within a workout session
 export interface WorkoutSet {
@@ -22,6 +23,8 @@ export interface WorkoutSession {
   restBetweenSets: number; // in seconds
   endTime: string | null; // ISO string
   exercises: WorkoutSet[];
+  timerState?: TimerState; // Current timer state for background persistence
+  timerStartTimestamp?: number; // Unix timestamp when timer was started
 }
 
 // Workout state
@@ -124,6 +127,23 @@ const workoutSlice = createSlice({
       }
     },
 
+    // Update timer state
+    updateTimerState: (state, action: PayloadAction<TimerState>) => {
+      if (state.runningWorkout) {
+        state.runningWorkout.timerState = action.payload;
+        // Persist running workout state
+        LocalStorageService.saveRunningWorkout(state.runningWorkout);
+      }
+    },
+
+    // Set timer start timestamp
+    setTimerStartTimestamp: (state, action: PayloadAction<number>) => {
+      if (state.runningWorkout) {
+        state.runningWorkout.timerStartTimestamp = action.payload;
+        // Persist running workout state
+        LocalStorageService.saveRunningWorkout(state.runningWorkout);
+      }
+    },
 
     // End workout and save to history
     endWorkout: (state) => {
@@ -152,6 +172,8 @@ export const {
   markSetIncomplete,
   updateSet,
   recordRestTime,
+  updateTimerState,
+  setTimerStartTimestamp,
   endWorkout,
   cancelWorkout
 } = workoutSlice.actions;
