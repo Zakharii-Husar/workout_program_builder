@@ -188,3 +188,4 @@ export const CancelButton = styled.button`
     height: 18px;
   }
 `;
+

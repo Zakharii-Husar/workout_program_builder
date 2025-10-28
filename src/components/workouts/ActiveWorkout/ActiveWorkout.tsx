@@ -7,11 +7,11 @@ import { LoadingSpinner } from '../../common/LoadingSpinner';
 import WorkoutHeader from './WorkoutHeader/WorkoutHeader';
 import ExercisesList from '../../exercises/ExercisesList';
 import SetCompletionModal from './SetCompletionModal';
-import { StartProgramContainer, WorkoutButton, WorkoutControls } from './StartProgram.styled';
+import { ActiveWorkoutContainer, WorkoutButton, WorkoutControls } from './ActiveWorkout.styled';
 import { icons } from '../../../data';
 import { ExerciseResolver } from '../../../services/exerciseResolver';
 
-const StartProgram: React.FC = () => {
+const ActiveWorkout: React.FC = () => {
   const dispatch = useAppDispatch();
   const { runningProgram, allPrograms } = useAppSelector(state => state.programs);
   const { runningWorkout } = useAppSelector(state => state.workouts);
@@ -121,7 +121,7 @@ const StartProgram: React.FC = () => {
   };
 
   return (
-    <StartProgramContainer>
+    <ActiveWorkoutContainer>
       <WorkoutHeader 
         isWorkoutActive={isWorkoutActive}
         programName={currentProgram.name}
@@ -174,8 +174,9 @@ const StartProgram: React.FC = () => {
         exerciseName={selectedExerciseName}
         targetRestTime={runningWorkout?.restBetweenSets || 60}
       />
-    </StartProgramContainer>
+    </ActiveWorkoutContainer>
   );
 };
 
-export default StartProgram;
+export default ActiveWorkout;
+

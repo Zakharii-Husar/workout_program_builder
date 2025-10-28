@@ -11,7 +11,7 @@ import Programs from './components/layout/Programs/Programs';
 import WorkoutHistory from './components/layout/WorkoutHistory';
 import ProgramEditor from './components/programs/ProgramEditor';
 import Exercises from './components/exercises/Exercises';
-import StartProgram from './components/programs/StartProgram';
+import ActiveWorkout from './components/workouts/ActiveWorkout';
 
 const AppContainer = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ function App() {
                   <Route path="/create/exercises" element={<Exercises />} />
                   <Route path="/edit/:programId" element={<ProgramEditor />} />
                   <Route path="/edit/:programId/exercises" element={<Exercises />} />
-                  <Route path="/start/:programId" element={<StartProgram />} />
+                  <Route path="/start/:programId" element={<ActiveWorkout />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
               </AppContainer>

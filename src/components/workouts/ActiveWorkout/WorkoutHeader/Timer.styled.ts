@@ -5,7 +5,7 @@ const pulse = keyframes`
     transform: scale(1);
   }
   50% {
-    transform: scale(1.05);
+    transform: scale(1.1);
   }
 `;
 
@@ -14,21 +14,20 @@ const glow = keyframes`
     box-shadow: ${props => props.theme.shadows.glow};
   }
   50% {
-    box-shadow: ${props => `0 0 30px ${props.theme.colors.error}99`};
+    box-shadow: ${props => `0 0 30px ${props.theme.colors.primary}99`};
   }
 `;
 
-export const RestTimerContainer = styled.div<{ $isOvercount: boolean }>`
+export const TimerContainer = styled.div`
   position: sticky;
   top: 0;
   z-index: 100;
-  background: ${props => props.$isOvercount ? props.theme.colors.error : props.theme.colors.primary};
+  background: ${props => props.theme.colors.primary};
   border-bottom: 1px solid ${props => props.theme.colors.border};
   display: flex;
   flex-direction: column;
   padding: ${props => props.theme.spacing.md};
   box-shadow: ${props => props.theme.shadows.md};
-  transition: ${props => props.theme.transitions.fast};
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
     padding: ${props => props.theme.spacing.sm};
@@ -39,23 +38,19 @@ export const RestTimerContainer = styled.div<{ $isOvercount: boolean }>`
   }
 `;
 
-export const RestTimerDisplay = styled.div<{ $isOvercount: boolean }>`
+export const Display = styled.div<{ $isFinished?: boolean }>`
   text-align: center;
   font-family: ${props => props.theme.typography.fontFamily.timer};
   font-size: ${props => props.theme.typography.fontSize['3xl']};
   font-weight: ${props => props.theme.typography.fontWeight.bold};
-  color: ${props => props.theme.colors.textOnPrimary};
+  color: ${props => props.$isFinished ? props.theme.colors.textOnPrimary : props.theme.colors.textOnPrimary};
   margin-bottom: ${props => props.theme.spacing.md};
-  text-shadow: ${props => props.$isOvercount 
-    ? `0 0 15px ${props.theme.colors.background}99` 
+  text-shadow: ${props => props.$isFinished 
+    ? `0 0 15px ${props.theme.colors.error}99` 
     : props.theme.shadows.glow};
   letter-spacing: 2px;
   font-variant-numeric: tabular-nums;
-  animation: ${props => props.$isOvercount ? pulse : 'none'} 1s infinite;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
+  animation: ${props => props.$isFinished ? pulse : 'none'} 1s infinite;
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
     font-size: ${props => props.theme.typography.fontSize['4xl']};
@@ -68,23 +63,7 @@ export const RestTimerDisplay = styled.div<{ $isOvercount: boolean }>`
   }
 `;
 
-export const ElapsedTime = styled.span<{ $isOvercount: boolean }>`
-  color: ${props => props.$isOvercount ? props.theme.colors.background : props.theme.colors.textOnPrimary};
-  font-weight: ${props => props.theme.typography.fontWeight.bold};
-`;
-
-export const Separator = styled.span`
-  color: ${props => props.theme.colors.textOnPrimary};
-  opacity: 0.7;
-`;
-
-export const TargetTime = styled.span`
-  color: ${props => props.theme.colors.textOnPrimary};
-  opacity: 0.8;
-  font-weight: ${props => props.theme.typography.fontWeight.medium};
-`;
-
-export const RestTimerButtons = styled.div`
+export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: ${props => props.theme.spacing.md};
@@ -142,3 +121,4 @@ export const RestTimerButtons = styled.div`
     }
   }
 `;
+

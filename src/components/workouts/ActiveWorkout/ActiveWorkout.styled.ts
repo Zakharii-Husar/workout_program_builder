@@ -20,7 +20,7 @@ const pulse = keyframes`
   }
 `;
 
-export const StartProgramContainer = styled.div`
+export const ActiveWorkoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -108,3 +108,4 @@ export const WorkoutButton = styled.button`
     }
   }
 `;
+

@@ -26,3 +26,4 @@ const WorkoutHeader: React.FC<WorkoutHeaderProps> = ({
 };
 
 export default WorkoutHeader;
+
