@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExerciseService } from '../../../../services/exerciseService';
+import { getAllMuscleGroups } from '../../../../services/exerciseService';
 import { icons } from '../../../../data';
 import ExercisesList from '../../ExercisesList';
 import { 
@@ -21,7 +21,7 @@ const MuscleGroupsList: React.FC<MuscleGroupsListProps> = ({
   onToggleVisibility,
   onAddExercise
 }) => {
-  const muscleGroups = ExerciseService.getAllMuscleGroups();
+  const muscleGroups = getAllMuscleGroups();
 
   return (
     <ContentWrapper>

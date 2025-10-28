@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppState, WorkoutProgram, Exercise } from '../../types';
 import { ProgramService } from '../../services/programService';
-import { ExerciseService } from '../../services/exerciseService';
 import { generateId } from '../../utils/formatters';
 
 // Initial state
