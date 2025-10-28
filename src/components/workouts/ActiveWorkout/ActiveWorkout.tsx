@@ -56,7 +56,6 @@ const ActiveWorkout: React.FC = () => {
 
   const handleCancelWorkout = () => {
     dispatch(cancelWorkout());
-    navigate('/');
   };
 
   if (!currentProgram) {
