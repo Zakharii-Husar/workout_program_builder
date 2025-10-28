@@ -21,6 +21,7 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    letter-spacing: ${props => props.theme.typography.letterSpacing.normal};
   }
 
   #root {
@@ -32,9 +33,11 @@ export const GlobalStyles = createGlobalStyle`
   /* Typography improvements */
   h1, h2, h3, h4, h5, h6 {
     font-family: ${props => props.theme.typography.fontFamily.display};
-    font-weight: ${props => props.theme.typography.fontWeight.bold};
+    font-weight: ${props => props.theme.typography.fontWeight.semibold};
     line-height: ${props => props.theme.typography.lineHeight.tight};
     margin: 0;
+    color: ${props => props.theme.colors.text};
+    letter-spacing: ${props => props.theme.typography.letterSpacing.tight};
   }
 
   p {
@@ -82,13 +85,14 @@ export const GlobalStyles = createGlobalStyle`
 
   /* Focus styles for accessibility */
   *:focus-visible {
-    outline: 2px solid ${props => props.theme.colors.secondary};
+    outline: 2px solid ${props => props.theme.colors.accent};
     outline-offset: 2px;
+    outline-radius: ${props => props.theme.borderRadius.md};
   }
 
   /* Selection styles */
   ::selection {
-    background: ${props => props.theme.colors.secondary};
-    color: ${props => props.theme.colors.background};
+    background: ${props => props.theme.colors.accentBlueLight};
+    color: ${props => props.theme.colors.text};
   }
 `;

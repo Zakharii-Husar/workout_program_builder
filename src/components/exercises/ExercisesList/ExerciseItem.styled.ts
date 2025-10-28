@@ -3,13 +3,13 @@ import styled from 'styled-components';
 export const ExerciseName = styled.div<{ $isCentered?: boolean }>`
   flex: 1;
   text-align: left;
-  font-family: ${props => props.theme.typography.fontFamily.display};
+  font-family: ${props => props.theme.typography.fontFamily.primary};
   font-size: ${props => props.$isCentered ? props.theme.typography.fontSize['3xl'] : props.theme.typography.fontSize.xl};
   font-weight: ${props => props.theme.typography.fontWeight.semibold};
   color: ${props => props.theme.colors.text};
   line-height: ${props => props.theme.typography.lineHeight.tight};
   cursor: pointer;
-  transition: ${props => props.theme.transitions.normal};
+  transition: ${props => props.theme.transitions.fast};
   padding: 0 ${props => props.theme.spacing.lg};
   display: flex;
   align-items: center;
@@ -24,7 +24,6 @@ export const ExerciseName = styled.div<{ $isCentered?: boolean }>`
 
   &:hover {
     color: ${props => props.theme.colors.accent};
-    transform: translateX(2px);
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
@@ -101,17 +100,17 @@ export const ExerciseIcon = styled.div<{ $hidden?: boolean }>`
 `;
 
 export const AddSetButton = styled.button`
-  background: linear-gradient(135deg, ${props => props.theme.colors.accent}, ${props => props.theme.colors.primary});
-  border: 2px solid ${props => props.theme.colors.accent};
-  border-radius: ${props => props.theme.borderRadius.lg};
+  background: ${props => props.theme.colors.accent};
+  border: 1px solid ${props => props.theme.colors.accent};
+  border-radius: ${props => props.theme.borderRadius.md};
   padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
   cursor: pointer;
   font-size: ${props => props.theme.typography.fontSize.sm};
-  color: ${props => props.theme.colors.background};
-  font-weight: ${props => props.theme.typography.fontWeight.semibold};
-  font-family: ${props => props.theme.typography.fontFamily.display};
-  transition: ${props => props.theme.transitions.normal};
-  box-shadow: ${props => props.theme.shadows.md};
+  color: ${props => props.theme.colors.white};
+  font-weight: ${props => props.theme.typography.fontWeight.medium};
+  font-family: ${props => props.theme.typography.fontFamily.primary};
+  transition: ${props => props.theme.transitions.fast};
+  box-shadow: ${props => props.theme.shadows.sm};
   min-width: 80px;
   max-width: 120px;
   height: 40px;
@@ -124,19 +123,16 @@ export const AddSetButton = styled.button`
   text-overflow: ellipsis;
   position: relative;
   z-index: 10;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 
   &:hover {
-    background: linear-gradient(135deg, ${props => props.theme.colors.primary}, ${props => props.theme.colors.accent});
-    border-color: ${props => props.theme.colors.primary};
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: ${props => props.theme.shadows.lg};
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: ${props => props.theme.shadows.md};
   }
 
   &:active {
-    transform: translateY(-1px) scale(1.02);
-    box-shadow: ${props => props.theme.shadows.md};
+    transform: translateY(0);
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {

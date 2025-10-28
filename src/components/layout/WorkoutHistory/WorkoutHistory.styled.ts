@@ -3,19 +3,20 @@ import styled from 'styled-components';
 export const WorkoutHistoryContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: ${props => props.theme.spacing.lg};
 `;
 
 export const WorkoutCard = styled.div`
-  background: #f8f9fa;
-  border: 1px solid #e9ecef;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.2s ease;
+  background: ${props => props.theme.colors.white};
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  padding: ${props => props.theme.spacing.xl};
+  box-shadow: ${props => props.theme.shadows.sm};
+  transition: ${props => props.theme.transitions.fast};
 
   &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: ${props => props.theme.shadows.md};
+    border-color: ${props => props.theme.colors.gray300};
   }
 `;
 
@@ -24,30 +25,33 @@ export const WorkoutHeader = styled.div`
 `;
 
 export const WorkoutTitle = styled.h3`
-  margin: 0 0 8px 0;
-  font-size: 20px;
-  font-weight: 600;
-  color: #212529;
+  margin: 0 0 ${props => props.theme.spacing.sm} 0;
+  font-size: ${props => props.theme.typography.fontSize.xl};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
+  color: ${props => props.theme.colors.text};
+  font-family: ${props => props.theme.typography.fontFamily.primary};
 `;
 
 export const WorkoutMeta = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 16px;
+  gap: ${props => props.theme.spacing.xs};
+  margin-bottom: ${props => props.theme.spacing.lg};
 `;
 
 export const MetaItem = styled.p`
   margin: 0;
-  font-size: 14px;
-  color: #6c757d;
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  color: ${props => props.theme.colors.textSecondary};
+  font-family: ${props => props.theme.typography.fontFamily.primary};
 `;
 
 export const CompletionStats = styled.p`
   margin: 0;
-  font-size: 14px;
-  font-weight: 500;
-  color: #495057;
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  font-weight: ${props => props.theme.typography.fontWeight.medium};
+  color: ${props => props.theme.colors.text};
+  font-family: ${props => props.theme.typography.fontFamily.primary};
 `;
 
 export const SetDetailsSection = styled.div`
@@ -55,32 +59,34 @@ export const SetDetailsSection = styled.div`
 `;
 
 export const SetDetailsTitle = styled.h4`
-  margin: 0 0 12px 0;
-  font-size: 16px;
-  font-weight: 600;
-  color: #212529;
+  margin: 0 0 ${props => props.theme.spacing.md} 0;
+  font-size: ${props => props.theme.typography.fontSize.base};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
+  color: ${props => props.theme.colors.text};
+  font-family: ${props => props.theme.typography.fontFamily.primary};
 `;
 
 export const SetDetailsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: ${props => props.theme.spacing.sm};
 `;
 
 export const SetItem = styled.div<{ $completed: boolean }>`
-  padding: 8px 12px;
-  background: ${props => props.$completed ? '#d4edda' : '#f8d7da'};
-  border: 1px solid ${props => props.$completed ? '#c3e6cb' : '#f5c6cb'};
-  border-radius: 6px;
-  font-size: 14px;
-  color: ${props => props.$completed ? '#155724' : '#721c24'};
+  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+  background: ${props => props.$completed ? props.theme.colors.accentBlueLight : props.theme.colors.gray100};
+  border: 1px solid ${props => props.$completed ? props.theme.colors.accent : props.theme.colors.border};
+  border-radius: ${props => props.theme.borderRadius.md};
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  color: ${props => props.$completed ? props.theme.colors.accentBlue : props.theme.colors.textSecondary};
+  font-family: ${props => props.theme.typography.fontFamily.primary};
 `;
 
 export const SetItemName = styled.span`
-  font-weight: 500;
+  font-weight: ${props => props.theme.typography.fontWeight.medium};
 `;
 
 export const SetItemDetails = styled.span`
-  margin-left: 8px;
-  font-weight: 400;
+  margin-left: ${props => props.theme.spacing.sm};
+  font-weight: ${props => props.theme.typography.fontWeight.normal};
 `;

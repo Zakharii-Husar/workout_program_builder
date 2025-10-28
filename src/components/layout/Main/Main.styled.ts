@@ -63,30 +63,31 @@ export const MainHeader = styled.div`
 
 export const MainTitle = styled.h1`
   font-family: ${props => props.theme.typography.fontFamily.display};
-  font-size: ${props => props.theme.typography.fontSize['4xl']};
-  font-weight: ${props => props.theme.typography.fontWeight.semibold};
+  font-size: ${props => props.theme.typography.fontSize['5xl']};
+  font-weight: ${props => props.theme.typography.fontWeight.bold};
   color: ${props => props.theme.colors.text};
   margin: 0;
-  letter-spacing: 0.5px;
-  text-shadow: ${props => props.theme.shadows.sm};
+  letter-spacing: ${props => props.theme.typography.letterSpacing.tight};
+  line-height: 1;
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: ${props => props.theme.typography.fontSize['3xl']};
+    font-size: ${props => props.theme.typography.fontSize['4xl']};
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: ${props => props.theme.typography.fontSize['5xl']};
+    font-size: ${props => props.theme.typography.fontSize['6xl']};
   }
 `;
 
 export const MainSubtitle = styled.p`
-  font-size: ${props => props.theme.typography.fontSize.lg};
-  color: ${props => props.theme.colors.warmGray};
-  margin: ${props => props.theme.spacing.sm} 0 0 0;
-  font-style: italic;
+  font-size: ${props => props.theme.typography.fontSize.base};
+  color: ${props => props.theme.colors.textSecondary};
+  margin: ${props => props.theme.spacing.md} 0 0 0;
+  font-weight: ${props => props.theme.typography.fontWeight.normal};
+  font-family: ${props => props.theme.typography.fontFamily.primary};
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: ${props => props.theme.typography.fontSize.base};
+    font-size: ${props => props.theme.typography.fontSize.sm};
   }
 `;
 
@@ -98,26 +99,12 @@ export const EmptyState = styled.div`
   flex: 1;
   padding: ${props => props.theme.spacing.xxxl};
   text-align: center;
-  background: linear-gradient(135deg, ${props => props.theme.colors.surface}, ${props => props.theme.colors.background});
-  border: 2px solid ${props => props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius.xl};
-  box-shadow: ${props => props.theme.shadows.lg};
+  background: ${props => props.theme.colors.surface};
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  box-shadow: ${props => props.theme.shadows.sm};
   position: relative;
   overflow: hidden;
-
-  /* Ensure any pseudo-elements don't block pointer events */
-  &::before,
-  &::after {
-    pointer-events: none;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, ${props => props.theme.colors.primary}05, ${props => props.theme.colors.accent}05);
-    border-radius: ${props => props.theme.borderRadius.xl};
-  }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
     padding: ${props => props.theme.spacing.xl};
@@ -129,44 +116,42 @@ export const EmptyState = styled.div`
 `;
 
 export const EmptyStateTitle = styled.h2`
-  font-family: ${props => props.theme.typography.fontFamily.display};
-  font-size: ${props => props.theme.typography.fontSize['5xl']};
-  font-weight: ${props => props.theme.typography.fontWeight.semibold};
+  font-family: ${props => props.theme.typography.fontFamily.handwriting};
+  font-size: ${props => props.theme.typography.fontSize['4xl']};
+  font-weight: ${props => props.theme.typography.fontWeight.normal};
   color: ${props => props.theme.colors.text};
-  margin-bottom: ${props => props.theme.spacing.lg};
-  font-style: italic;
-  letter-spacing: 1px;
+  margin-bottom: ${props => props.theme.spacing.md};
+  letter-spacing: ${props => props.theme.typography.letterSpacing.normal};
   position: relative;
-  z-index: 1;
+  line-height: 1.2;
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: ${props => props.theme.typography.fontSize['4xl']};
-    margin-bottom: ${props => props.theme.spacing.md};
+    font-size: ${props => props.theme.typography.fontSize['3xl']};
+    margin-bottom: ${props => props.theme.spacing.sm};
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: ${props => props.theme.typography.fontSize['6xl']};
+    font-size: ${props => props.theme.typography.fontSize['5xl']};
   }
 `;
 
 export const EmptyStateSubtitle = styled.p`
-  font-size: ${props => props.theme.typography.fontSize.lg};
-  color: ${props => props.theme.colors.warmGray};
+  font-size: ${props => props.theme.typography.fontSize.base};
+  color: ${props => props.theme.colors.textSecondary};
   margin-bottom: ${props => props.theme.spacing.xl};
   max-width: 500px;
   line-height: ${props => props.theme.typography.lineHeight.relaxed};
   position: relative;
-  z-index: 1;
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: ${props => props.theme.typography.fontSize.base};
+    font-size: ${props => props.theme.typography.fontSize.sm};
     margin-bottom: ${props => props.theme.spacing.lg};
     max-width: 100%;
     padding: 0 ${props => props.theme.spacing.sm};
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: ${props => props.theme.typography.fontSize.xl};
+    font-size: ${props => props.theme.typography.fontSize.lg};
     max-width: 600px;
   }
 `;
@@ -179,74 +164,58 @@ export const CreateButton = styled.button`
   width: 100%;
   max-width: 300px;
   padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.xl};
-  background: linear-gradient(135deg, ${props => props.theme.colors.primary}, ${props => props.theme.colors.accent});
-  color: ${props => props.theme.colors.background};
-  font-size: ${props => props.theme.typography.fontSize.xl};
-  font-weight: ${props => props.theme.typography.fontWeight.semibold};
-  font-family: ${props => props.theme.typography.fontFamily.display};
-  border-radius: ${props => props.theme.borderRadius.xl};
+  background: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.textOnPrimary};
+  font-size: ${props => props.theme.typography.fontSize.base};
+  font-weight: ${props => props.theme.typography.fontWeight.medium};
+  font-family: ${props => props.theme.typography.fontFamily.primary};
+  border-radius: ${props => props.theme.borderRadius.md};
   cursor: pointer;
-  transition: ${props => props.theme.transitions.normal};
-  box-shadow: ${props => props.theme.shadows.lg};
+  transition: ${props => props.theme.transitions.fast};
+  box-shadow: ${props => props.theme.shadows.md};
   border: none;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: ${props => props.theme.typography.letterSpacing.wide};
   position: relative;
-  z-index: 10;
   pointer-events: auto;
-  min-height: 60px;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, ${props => props.theme.colors.primary}, ${props => props.theme.colors.accent});
-    border-radius: ${props => props.theme.borderRadius.xl};
-    z-index: -1;
-    opacity: 0;
-    transition: ${props => props.theme.transitions.normal};
-  }
+  min-height: 56px;
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: ${props => props.theme.typography.fontSize.lg};
+    font-size: ${props => props.theme.typography.fontSize.sm};
     padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
-    min-height: 52px;
+    min-height: 48px;
     max-width: 280px;
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: ${props => props.theme.typography.fontSize['2xl']};
+    font-size: ${props => props.theme.typography.fontSize.lg};
     padding: ${props => props.theme.spacing.xl} ${props => props.theme.spacing.xxl};
-    min-height: 68px;
+    min-height: 64px;
     max-width: 350px;
   }
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: ${props => props.theme.shadows.xl}, ${props => props.theme.shadows.glow};
-    
-    &::before {
-      opacity: 0.1;
-    }
+    background: ${props => props.theme.colors.gray900};
+    transform: translateY(-2px);
+    box-shadow: ${props => props.theme.shadows.lg};
   }
 
   &:active {
-    transform: translateY(-1px);
+    transform: translateY(0);
   }
 
   svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     flex-shrink: 0;
 
     @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
     }
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-      width: 28px;
-      height: 28px;
+      width: 22px;
+      height: 22px;
     }
   }
 `;
@@ -271,25 +240,29 @@ export const MenuButton = styled.button`
   justify-content: center;
   gap: ${props => props.theme.spacing.md};
   padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.xl};
-  background: ${props => props.theme.colors.surface};
+  background: ${props => props.theme.colors.white};
   color: ${props => props.theme.colors.text};
-  font-size: ${props => props.theme.typography.fontSize.lg};
-  font-weight: ${props => props.theme.typography.fontWeight.semibold};
-  font-family: ${props => props.theme.typography.fontFamily.display};
-  border: 2px solid ${props => props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius.xl};
+  font-size: ${props => props.theme.typography.fontSize.base};
+  font-weight: ${props => props.theme.typography.fontWeight.medium};
+  font-family: ${props => props.theme.typography.fontFamily.primary};
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: ${props => props.theme.borderRadius.md};
   cursor: pointer;
-  transition: ${props => props.theme.transitions.normal};
-  box-shadow: ${props => props.theme.shadows.md};
+  transition: ${props => props.theme.transitions.fast};
+  box-shadow: ${props => props.theme.shadows.sm};
   min-width: 200px;
-  min-height: 60px;
+  min-height: 56px;
 
   &:hover {
-    background: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.background};
-    border-color: ${props => props.theme.colors.primary};
-    transform: translateY(-2px);
-    box-shadow: ${props => props.theme.shadows.lg};
+    background: ${props => props.theme.colors.gray50};
+    border-color: ${props => props.theme.colors.gray300};
+    transform: translateY(-1px);
+    box-shadow: ${props => props.theme.shadows.md};
+    color: ${props => props.theme.colors.primary};
+
+    svg {
+      transform: scale(1.05);
+    }
   }
 
   &:active {
@@ -297,32 +270,33 @@ export const MenuButton = styled.button`
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: ${props => props.theme.typography.fontSize.base};
+    font-size: ${props => props.theme.typography.fontSize.sm};
     padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
-    min-height: 52px;
+    min-height: 48px;
     min-width: 100%;
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: ${props => props.theme.typography.fontSize.xl};
+    font-size: ${props => props.theme.typography.fontSize.lg};
     padding: ${props => props.theme.spacing.xl} ${props => props.theme.spacing.xxl};
-    min-height: 68px;
+    min-height: 64px;
     min-width: 250px;
   }
 
   svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     flex-shrink: 0;
+    transition: ${props => props.theme.transitions.fast};
 
     @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
     }
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-      width: 28px;
-      height: 28px;
+      width: 22px;
+      height: 22px;
     }
   }
 `;
