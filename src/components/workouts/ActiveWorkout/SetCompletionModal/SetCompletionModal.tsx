@@ -41,18 +41,29 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
   const [restTimeInput, setRestTimeInput] = useState<string>(''); // mm:ss or seconds
 
   const timerStartTimestamp = useAppSelector((state: any) => state.workouts.runningWorkout?.timerStartTimestamp);
+  const timerState = useAppSelector((state: any) => state.workouts.runningWorkout?.timerState);
 
   // Reset form when modal opens
   useEffect(() => {
     if (isOpen) {
       setReps('');
       setWeight('');
-      const now = Date.now();
-      const defaultElapsed = timerStartTimestamp ? Math.max(0, now - timerStartTimestamp) : targetRestTime;
-      setActualRestTime(defaultElapsed);
-      setRestTimeInput(formatTime(defaultElapsed));
+
+      // Derive elapsed using timer's accumulated remaining time at open time (freeze value)
+      const remainingMs: number | undefined = timerState?.milliseconds;
+      let derivedElapsed = typeof remainingMs === 'number'
+        ? Math.max(0, targetRestTime - remainingMs)
+        : 0;
+
+      // If elapsed is zero/invalid, default to program target rest time
+      if (!Number.isFinite(derivedElapsed) || derivedElapsed <= 0) {
+        derivedElapsed = targetRestTime;
+      }
+
+      setActualRestTime(derivedElapsed);
+      setRestTimeInput(formatTime(derivedElapsed));
     }
-  }, [isOpen, targetRestTime, timerStartTimestamp]);
+  }, [isOpen, targetRestTime]);
 
   const handleSave = () => {
     const repsValue = reps.trim() === '' ? null : parseInt(reps, 10);

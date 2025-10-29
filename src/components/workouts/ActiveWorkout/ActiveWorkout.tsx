@@ -11,6 +11,7 @@ import ExercisesList from '../../exercises/ExercisesList';
 import SetCompletionModal from './SetCompletionModal';
 import { ActiveWorkoutContainer, WorkoutContent } from './ActiveWorkout.styled';
 import { ExerciseResolver } from '../../../services/exerciseResolver';
+import { timerService } from '../../../services/timerService';
 
 const ActiveWorkout: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -116,6 +117,10 @@ const ActiveWorkout: React.FC = () => {
           actualRestTime: data.actualRestTime
         }
       }));
+
+      // After saving, stop and reset timer to target rest time (do not start)
+      const targetRestTimeMs = runningWorkout?.restBetweenSets || currentProgram.restBetweenSets;
+      timerService.reset(targetRestTimeMs);
     }
     setIsModalOpen(false);
     setSelectedSetId(null);
