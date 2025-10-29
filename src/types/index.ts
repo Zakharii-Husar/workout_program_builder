@@ -1,3 +1,6 @@
+// Settings types (re-exported from settingsSlice for convenience)
+export type { WeightUnit, SettingsState } from '../store/slices/settingsSlice';
+
 // Base types
 export interface Exercise {
   id: string;

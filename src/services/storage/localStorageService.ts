@@ -2,6 +2,7 @@ import { safeJsonParse, safeJsonStringify } from '../../utils/helpers';
 import { STORAGE_KEYS } from '../../utils/constants';
 import { WorkoutProgram } from '../../types';
 import { WorkoutSession } from '../../store/slices/workoutSlice';
+import { SettingsState } from '../../store/slices/settingsSlice';
 
 export class LocalStorageService {
   /**
@@ -97,5 +98,22 @@ export class LocalStorageService {
 
   static removeRunningWorkout(): boolean {
     return this.removeItem(STORAGE_KEYS.RUNNING_WORKOUT);
+  }
+
+  // Settings methods
+  static saveSettings(settings: SettingsState): boolean {
+    return this.setItem(STORAGE_KEYS.SETTINGS, settings);
+  }
+
+  static getSettings(): SettingsState {
+    const defaultSettings: SettingsState = {
+      weightUnit: 'kg',
+      stopwatchAlarmOn: true,
+    };
+    return this.getItem(STORAGE_KEYS.SETTINGS, defaultSettings);
+  }
+
+  static removeSettings(): boolean {
+    return this.removeItem(STORAGE_KEYS.SETTINGS);
   }
 }
