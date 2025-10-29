@@ -4,6 +4,8 @@ import bellSound from '../assets/bell.mp3';
 class SoundService {
   private audio: HTMLAudioElement | null = null;
   private isPermissionGranted = false;
+  private isPlaying = false; // Track if sound is currently playing
+  private shouldStop = false; // Flag to interrupt playback
 
   constructor() {
     this.initializeAudio();
@@ -45,8 +47,17 @@ class SoundService {
       return;
     }
 
+    // Reset stop flag and mark as playing
+    this.shouldStop = false;
+    this.isPlaying = true;
+
     try {
       for (let i = 0; i < repeatCount; i++) {
+        // Check if we should stop before playing next repetition
+        if (this.shouldStop) {
+          break;
+        }
+
         // Reset audio to beginning for each play
         this.audio.currentTime = 0;
         await this.audio.play();
@@ -60,6 +71,11 @@ class SoundService {
           this.audio?.addEventListener('ended', handleEnded);
         });
 
+        // Check if we should stop before delay between repetitions
+        if (this.shouldStop) {
+          break;
+        }
+
         // Small delay between repetitions
         if (i < repeatCount - 1) {
           await new Promise(resolve => setTimeout(resolve, 200));
@@ -67,6 +83,9 @@ class SoundService {
       }
     } catch (error) {
       console.warn('Failed to play bell sound:', error);
+    } finally {
+      this.isPlaying = false;
+      this.shouldStop = false;
     }
   }
 
@@ -85,6 +104,16 @@ class SoundService {
   setVolume(volume: number): void {
     if (this.audio) {
       this.audio.volume = Math.max(0, Math.min(1, volume));
+    }
+  }
+
+  stop(): void {
+    if (this.isPlaying) {
+      this.shouldStop = true;
+      if (this.audio) {
+        this.audio.pause();
+        this.audio.currentTime = 0;
+      }
     }
   }
 }

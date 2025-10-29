@@ -136,6 +136,7 @@ class TimerService {
   reset(targetRestTimeMs: number) {
     this.stop();
     this.hasNotifiedZero = false; // Reset notification flag
+    soundService.stop(); // Stop any playing sounds
     const { minutes, seconds } = TimerService.millisecondsToMinutesAndSeconds(targetRestTimeMs);
     store.dispatch(updateTimerState({
       isRunning: false,
