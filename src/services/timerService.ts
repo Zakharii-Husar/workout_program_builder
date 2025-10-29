@@ -5,7 +5,32 @@ class TimerService {
   private intervalId: NodeJS.Timeout | null = null;
   private isRunning = false;
 
-  start() {
+  // Conversion utilities
+  static millisecondsToSeconds(ms: number): number {
+    return Math.floor(ms / 1000);
+  }
+
+  static millisecondsToMinutes(ms: number): number {
+    return Math.floor(ms / 60000);
+  }
+
+  static millisecondsToMinutesAndSeconds(ms: number): { minutes: number; seconds: number } {
+    const totalSeconds = this.millisecondsToSeconds(ms);
+    return {
+      minutes: Math.floor(totalSeconds / 60),
+      seconds: totalSeconds % 60
+    };
+  }
+
+  static secondsToMilliseconds(seconds: number): number {
+    return seconds * 1000;
+  }
+
+  static minutesAndSecondsToMilliseconds(minutes: number, seconds: number): number {
+    return (minutes * 60 + seconds) * 1000;
+  }
+
+  start(targetRestTimeMs: number) {
     if (this.isRunning) return;
     
     this.isRunning = true;
@@ -20,11 +45,11 @@ class TimerService {
     }
     
     this.intervalId = setInterval(() => {
-      this.updateTimerFromTimestamp();
-    }, 1000);
+      this.updateTimerFromTimestamp(targetRestTimeMs);
+    }, 100);
   }
 
-  private updateTimerFromTimestamp() {
+  private updateTimerFromTimestamp(targetRestTimeMs: number) {
     const state = store.getState();
     const timerStartTimestamp = state.workouts.runningWorkout?.timerStartTimestamp;
     
@@ -32,16 +57,20 @@ class TimerService {
     
     const now = Date.now();
     const elapsedMs = now - timerStartTimestamp;
-    const elapsedSeconds = Math.floor(elapsedMs / 1000);
+    const remainingMs = targetRestTimeMs - elapsedMs;
     
-    const minutes = Math.floor(elapsedSeconds / 60);
-    const seconds = elapsedSeconds % 60;
+    // If we've gone past the target time, show negative time (overtime)
+    const displayMs = remainingMs < 0 ? -remainingMs : remainingMs;
+    const isOvertime = remainingMs < 0;
+    
+    const { minutes: displayMinutes, seconds: displaySeconds } = TimerService.millisecondsToMinutesAndSeconds(displayMs);
     
     store.dispatch(updateTimerState({
       isRunning: true,
-      minutes,
-      seconds,
-      milliseconds: 0
+      minutes: isOvertime ? -displayMinutes : displayMinutes,
+      seconds: isOvertime ? -displaySeconds : displaySeconds,
+      milliseconds: remainingMs,
+      isOvertime
     }));
   }
 
@@ -66,7 +95,7 @@ class TimerService {
     }
   }
 
-  resume() {
+  resume(targetRestTimeMs: number) {
     const state = store.getState();
     const timerState = state.workouts.runningWorkout?.timerState;
     const timerStartTimestamp = state.workouts.runningWorkout?.timerStartTimestamp;
@@ -75,7 +104,7 @@ class TimerService {
       // If resuming, we need to adjust the start timestamp to account for paused time
       if (timerStartTimestamp) {
         const now = Date.now();
-        const currentElapsedMs = timerState.minutes * 60 * 1000 + timerState.seconds * 1000;
+        const currentElapsedMs = targetRestTimeMs - (timerState.milliseconds || 0);
         const newStartTimestamp = now - currentElapsedMs;
         store.dispatch(setTimerStartTimestamp(newStartTimestamp));
       }
@@ -84,22 +113,24 @@ class TimerService {
         ...timerState,
         isRunning: true
       }));
-      this.start();
+      this.start(targetRestTimeMs);
     }
   }
 
-  reset() {
+  reset(targetRestTimeMs: number) {
     this.stop();
+    const { minutes, seconds } = TimerService.millisecondsToMinutesAndSeconds(targetRestTimeMs);
     store.dispatch(updateTimerState({
       isRunning: false,
-      minutes: 0,
-      seconds: 0,
-      milliseconds: 0
+      minutes,
+      seconds,
+      milliseconds: targetRestTimeMs,
+      isOvertime: false
     }));
     store.dispatch(setTimerStartTimestamp(0));
   }
 
-  toggle() {
+  toggle(targetRestTimeMs: number) {
     const state = store.getState();
     const timerState = state.workouts.runningWorkout?.timerState;
     
@@ -108,33 +139,35 @@ class TimerService {
     if (timerState.isRunning) {
       this.pause();
     } else {
-      this.resume();
+      this.resume(targetRestTimeMs);
     }
   }
 
   // Initialize timer state if it doesn't exist
-  initialize() {
+  initialize(targetRestTimeMs: number) {
     const state = store.getState();
     const timerState = state.workouts.runningWorkout?.timerState;
     const timerStartTimestamp = state.workouts.runningWorkout?.timerStartTimestamp;
     
     if (!timerState) {
+      const { minutes, seconds } = TimerService.millisecondsToMinutesAndSeconds(targetRestTimeMs);
       store.dispatch(updateTimerState({
         isRunning: false,
-        minutes: 0,
-        seconds: 0,
-        milliseconds: 0
+        minutes,
+        seconds,
+        milliseconds: targetRestTimeMs,
+        isOvertime: false
       }));
     }
     
     // If we have a start timestamp and timer is running, calculate current elapsed time
     if (timerStartTimestamp && timerState?.isRunning) {
-      this.updateTimerFromTimestamp();
+      this.updateTimerFromTimestamp(targetRestTimeMs);
     }
   }
 
   // Sync with Redux state changes
-  syncWithState() {
+  syncWithState(targetRestTimeMs: number) {
     const state = store.getState();
     const timerState = state.workouts.runningWorkout?.timerState;
     
@@ -144,7 +177,7 @@ class TimerService {
     }
     
     if (timerState.isRunning && !this.isRunning) {
-      this.start();
+      this.start(targetRestTimeMs);
     } else if (!timerState.isRunning && this.isRunning) {
       this.stop();
     }
@@ -152,3 +185,4 @@ class TimerService {
 }
 
 export const timerService = new TimerService();
+export { TimerService };

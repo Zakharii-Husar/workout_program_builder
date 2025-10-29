@@ -13,7 +13,7 @@ import Settings from './components/layout/Settings';
 import ProgramEditor from './components/programs/ProgramEditor';
 import Exercises from './components/exercises/Exercises';
 import ActiveWorkout from './components/workouts/ActiveWorkout';
-import { timerService } from './services/timerService';
+import { timerService, TimerService } from './services/timerService';
 
 const AppContainer = styled.div`
   display: flex;
@@ -28,11 +28,19 @@ const AppContainer = styled.div`
 function App() {
   // Initialize timer service when app starts
   useEffect(() => {
-    timerService.initialize();
+    // Get rest time from store
+    const state = store.getState();
+    const targetRestTime = state.workouts.runningWorkout?.restBetweenSets || 60;
+    const targetRestTimeMs = TimerService.secondsToMilliseconds(targetRestTime);
+    
+    timerService.initialize(targetRestTimeMs);
     
     // Subscribe to store changes to sync timer service
     const unsubscribe = store.subscribe(() => {
-      timerService.syncWithState();
+      const currentState = store.getState();
+      const currentRestTime = currentState.workouts.runningWorkout?.restBetweenSets || 60;
+      const currentRestTimeMs = TimerService.secondsToMilliseconds(currentRestTime);
+      timerService.syncWithState(currentRestTimeMs);
     });
     
     return () => {

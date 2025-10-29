@@ -18,11 +18,11 @@ const glow = keyframes`
   }
 `;
 
-export const RestTimerContainer = styled.div<{ $isOvercount: boolean }>`
+export const TimerContainer = styled.div<{ $isOvertime: boolean }>`
   position: sticky;
   top: 0;
   z-index: 100;
-  background: ${props => props.$isOvercount ? props.theme.colors.error : props.theme.colors.accent};
+  background: ${props => props.$isOvertime ? props.theme.colors.error : props.theme.colors.accent};
   border-bottom: 2px solid ${props => props.theme.colors.border};
   display: flex;
   flex-direction: column;
@@ -39,19 +39,19 @@ export const RestTimerContainer = styled.div<{ $isOvercount: boolean }>`
   }
 `;
 
-export const RestTimerDisplay = styled.div<{ $isOvercount: boolean }>`
+export const TimerDisplay = styled.div<{ $isOvertime: boolean }>`
   text-align: center;
   font-family: ${props => props.theme.typography.fontFamily.timer};
   font-size: ${props => props.theme.typography.fontSize['3xl']};
   font-weight: ${props => props.theme.typography.fontWeight.bold};
-  color: ${props => props.$isOvercount ? props.theme.colors.textOnPrimary : props.theme.colors.text};
+  color: ${props => props.$isOvertime ? props.theme.colors.textOnPrimary : props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.md};
-  text-shadow: ${props => props.$isOvercount 
+  text-shadow: ${props => props.$isOvertime 
     ? `0 0 15px ${props.theme.colors.background}99` 
     : 'none'};
   letter-spacing: 2px;
   font-variant-numeric: tabular-nums;
-  animation: ${props => props.$isOvercount ? pulse : 'none'} 1s infinite;
+  animation: ${props => props.$isOvertime ? pulse : 'none'} 1s infinite;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,23 +68,12 @@ export const RestTimerDisplay = styled.div<{ $isOvercount: boolean }>`
   }
 `;
 
-export const ElapsedTime = styled.span<{ $isOvercount: boolean }>`
-  color: ${props => props.$isOvercount ? props.theme.colors.background : props.theme.colors.text};
+export const TimeValue = styled.span`
+  color: inherit;
   font-weight: ${props => props.theme.typography.fontWeight.bold};
 `;
 
-export const Separator = styled.span`
-  color: ${props => props.theme.colors.text};
-  opacity: 0.7;
-`;
-
-export const TargetTime = styled.span`
-  color: ${props => props.theme.colors.text};
-  opacity: 0.8;
-  font-weight: ${props => props.theme.typography.fontWeight.medium};
-`;
-
-export const RestTimerButtons = styled.div`
+export const TimerButtons = styled.div`
   display: flex;
   justify-content: center;
   gap: ${props => props.theme.spacing.md};

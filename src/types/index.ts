@@ -64,6 +64,7 @@ export interface TimerState {
   minutes: number;
   seconds: number;
   milliseconds: number;
+  isOvertime?: boolean;
 }
 
 
