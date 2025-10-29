@@ -10,8 +10,8 @@ export interface WorkoutSet {
   reps: number | null;
   weight: number | null;
   completed: boolean;
-  actualRestTime?: number; // Actual rest time taken in seconds
-  targetRestTime?: number; // Target rest time for this set in seconds
+  actualRestTime?: number; // Actual rest time taken in milliseconds
+  targetRestTime?: number; // Target rest time for this set in milliseconds
 }
 
 // Workout session state
@@ -20,7 +20,7 @@ export interface WorkoutSession {
   programId: string;
   name: string;
   startTime: string; // ISO string
-  restBetweenSets: number; // in seconds
+  restBetweenSets: number; // in milliseconds
   endTime: string | null; // ISO string
   exercises: WorkoutSet[];
   timerState?: TimerState; // Current timer state for background persistence

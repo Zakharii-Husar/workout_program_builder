@@ -108,7 +108,7 @@ export class LocalStorageService {
   static getSettings(): SettingsState {
     const defaultSettings: SettingsState = {
       weightUnit: 'kg',
-      stopwatchAlarmOn: true,
+      timerAlarmOn: true,
     };
     return this.getItem(STORAGE_KEYS.SETTINGS, defaultSettings);
   }

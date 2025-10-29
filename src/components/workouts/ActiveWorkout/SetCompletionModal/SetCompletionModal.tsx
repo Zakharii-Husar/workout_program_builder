@@ -23,10 +23,10 @@ interface SetCompletionModalProps {
   onSave: (data: {
     reps: number | null;
     weight: number | null;
-    actualRestTime: number;
+    actualRestTime: number; // in milliseconds
   }) => void;
   exerciseName: string;
-  targetRestTime: number;
+  targetRestTime: number; // in milliseconds
 }
 
 const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
@@ -38,14 +38,14 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
 }) => {
   const [reps, setReps] = useState<string>('');
   const [weight, setWeight] = useState<string>('');
-  const [actualRestTime, setActualRestTime] = useState<number>(targetRestTime);
+  const [actualRestTime, setActualRestTime] = useState<number>(targetRestTime); // Already in milliseconds
 
   // Reset form when modal opens
   useEffect(() => {
     if (isOpen) {
       setReps('');
       setWeight('');
-      setActualRestTime(targetRestTime);
+      setActualRestTime(targetRestTime); // Already in milliseconds
     }
   }, [isOpen, targetRestTime]);
 
@@ -65,18 +65,19 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
     onClose();
   };
 
-  const formatTime = (seconds: number): string => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
+  const formatTime = (milliseconds: number): string => {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const remainingSeconds = totalSeconds % 60;
     return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
   const incrementTime = () => {
-    setActualRestTime(prev => prev + 15); // Increment by 15 seconds
+    setActualRestTime(prev => prev + 15000); // Increment by 15 seconds (15000ms)
   };
 
   const decrementTime = () => {
-    setActualRestTime(prev => Math.max(0, prev - 15)); // Decrement by 15 seconds, minimum 0
+    setActualRestTime(prev => Math.max(0, prev - 15000)); // Decrement by 15 seconds (15000ms), minimum 0
   };
 
   if (!isOpen) return null;

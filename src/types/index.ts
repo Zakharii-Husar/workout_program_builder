@@ -17,7 +17,7 @@ export interface MuscleGroup {
 export interface WorkoutProgram {
   id: string;
   name: string;
-  restBetweenSets: number;
+  restBetweenSets: number; // in milliseconds
   exerciseIds: string[];
   createdAt?: string; // ISO string
   updatedAt?: string; // ISO string

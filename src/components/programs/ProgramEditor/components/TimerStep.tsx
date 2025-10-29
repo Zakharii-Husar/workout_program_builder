@@ -12,8 +12,8 @@ import {
 } from '../index.styled';
 
 interface TimerStepProps {
-  timer: number;
-  onTimerChange: (increment: number) => void;
+  timer: number; // in milliseconds
+  onTimerChange: (increment: number) => void; // increment in seconds
 }
 
 const TimerStep: React.FC<TimerStepProps> = ({

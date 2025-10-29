@@ -12,18 +12,16 @@ import {
 const Timer: React.FC = () => {
   const { runningWorkout } = useAppSelector((state: any) => state.workouts);
   
-  const targetRestTime = runningWorkout?.restBetweenSets || 60; // in seconds
-  const targetRestTimeMs = TimerService.secondsToMilliseconds(targetRestTime);
-  const { minutes: initialMinutes, seconds: initialSeconds } = TimerService.millisecondsToMinutesAndSeconds(targetRestTimeMs);
-  const timerState = runningWorkout?.timerState || { 
+  const targetRestTimeMs = runningWorkout?.restBetweenSets || 60000; // in milliseconds
+  const timerState = runningWorkout?.timerState;
+  
+  // If no timer state exists, use target rest time as initial state
+  const { isRunning, minutes, seconds, isOvertime } = timerState || { 
     isRunning: false, 
-    minutes: initialMinutes, 
-    seconds: initialSeconds, 
+    ...TimerService.millisecondsToMinutesAndSeconds(targetRestTimeMs),
     milliseconds: targetRestTimeMs, 
     isOvertime: false 
   };
-  
-  const { isRunning, minutes, seconds, isOvertime } = timerState;
 
   // Initialize timer service and sync with Redux state
   useEffect(() => {

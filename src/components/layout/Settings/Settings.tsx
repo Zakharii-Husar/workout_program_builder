@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
-import { setWeightUnit, setStopwatchAlarmOn, WeightUnit } from '../../../store/slices/settingsSlice';
+import { setWeightUnit, setTimerAlarmOn, WeightUnit } from '../../../store/slices/settingsSlice';
 import { MainContainer, MainHeader, MainTitle, MainSubtitle } from '../Main/Main.styled';
 import {
   SettingsContainer,
@@ -24,8 +24,8 @@ const Settings: React.FC = () => {
     dispatch(setWeightUnit(unit));
   };
 
-  const handleStopwatchAlarmToggle = () => {
-    dispatch(setStopwatchAlarmOn(!settings.stopwatchAlarmOn));
+  const handleTimerAlarmToggle = () => {
+    dispatch(setTimerAlarmOn(!settings.timerAlarmOn));
   };
 
   return (
@@ -70,23 +70,23 @@ const Settings: React.FC = () => {
           </SettingContent>
         </SettingCard>
 
-        {/* Stopwatch Alarm Setting */}
+        {/* Timer Alarm Setting */}
         <SettingCard>
           <SettingHeader>
-            <SettingTitle>Stopwatch Alarm</SettingTitle>
+            <SettingTitle>Timer Alarm</SettingTitle>
             <SettingDescription>
-              Enable or disable the alarm sound when the stopwatch reaches target time
+              Enable or disable the alarm sound when the timer reaches target time
             </SettingDescription>
           </SettingHeader>
           <SettingContent>
             <ToggleContainer>
               <ToggleSwitch
-                $active={settings.stopwatchAlarmOn}
-                onClick={handleStopwatchAlarmToggle}
-                aria-label="Toggle stopwatch alarm"
+                $active={settings.timerAlarmOn}
+                onClick={handleTimerAlarmToggle}
+                aria-label="Toggle timer alarm"
               />
-              <ToggleLabel onClick={handleStopwatchAlarmToggle}>
-                {settings.stopwatchAlarmOn ? 'Enabled' : 'Disabled'}
+              <ToggleLabel onClick={handleTimerAlarmToggle}>
+                {settings.timerAlarmOn ? 'Enabled' : 'Disabled'}
               </ToggleLabel>
             </ToggleContainer>
           </SettingContent>

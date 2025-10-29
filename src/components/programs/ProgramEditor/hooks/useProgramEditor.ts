@@ -40,11 +40,12 @@ export const useProgramEditor = () => {
   
   // Get form values from programDraft
   const name = programDraft?.name ?? PROGRAM.DEFAULT_NAME;
-  const timer = programDraft?.restBetweenSets || 60;
+  const timer = programDraft?.restBetweenSets || 60000; // in milliseconds
 
-  // Timer controls
+  // Timer controls - increment/decrement by 15 seconds (15000ms)
   const handleTimerChange = (increment: number) => {
-    const newTimer = timer + increment;
+    const incrementMs = increment * 1000; // Convert seconds to milliseconds
+    const newTimer = timer + incrementMs;
     if (newTimer >= 0) {
       dispatch(updateDraftTimer(newTimer));
     }

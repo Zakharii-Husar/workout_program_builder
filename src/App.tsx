@@ -30,16 +30,14 @@ function App() {
   useEffect(() => {
     // Get rest time from store
     const state = store.getState();
-    const targetRestTime = state.workouts.runningWorkout?.restBetweenSets || 60;
-    const targetRestTimeMs = TimerService.secondsToMilliseconds(targetRestTime);
+    const targetRestTimeMs = state.workouts.runningWorkout?.restBetweenSets || 60000;
     
     timerService.initialize(targetRestTimeMs);
     
     // Subscribe to store changes to sync timer service
     const unsubscribe = store.subscribe(() => {
       const currentState = store.getState();
-      const currentRestTime = currentState.workouts.runningWorkout?.restBetweenSets || 60;
-      const currentRestTimeMs = TimerService.secondsToMilliseconds(currentRestTime);
+      const currentRestTimeMs = currentState.workouts.runningWorkout?.restBetweenSets || 60000;
       timerService.syncWithState(currentRestTimeMs);
     });
     

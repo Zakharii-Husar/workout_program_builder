@@ -17,10 +17,10 @@ export class ProgramValidator {
       errors.push(`Program name must be no more than ${PROGRAM.MAX_NAME_LENGTH} characters long`);
     }
 
-    // Timer validation
-    if (!program.restBetweenSets || program.restBetweenSets <= 0) {
-      errors.push('Rest time must be greater than 0 seconds');
-    } else if (program.restBetweenSets > 600) { // 10 minutes max
+    // Timer validation - now in milliseconds
+    if (!program.restBetweenSets || program.restBetweenSets < 1000) { // At least 1 second (1000ms)
+      errors.push('Rest time must be at least 1 second');
+    } else if (program.restBetweenSets > 600000) { // 10 minutes max (600000ms)
       errors.push('Rest time cannot exceed 10 minutes');
     }
 
@@ -63,13 +63,13 @@ export class ProgramValidator {
   }
 
   /**
-   * Validate timer value
+   * Validate timer value (in milliseconds)
    */
   static validateTimer(timer: number): { isValid: boolean; error?: string } {
     if (timer < 0) {
       return { isValid: false, error: 'Rest time cannot be negative' };
     }
-    if (timer > 600) {
+    if (timer > 600000) { // 10 minutes max (600000ms)
       return { isValid: false, error: 'Rest time cannot exceed 10 minutes' };
     }
     return { isValid: true };

@@ -5,7 +5,7 @@ export type WeightUnit = 'kg' | 'lb';
 
 export interface SettingsState {
   weightUnit: WeightUnit;
-  stopwatchAlarmOn: boolean;
+  timerAlarmOn: boolean;
 }
 
 // Initial state - load from localStorage
@@ -21,8 +21,8 @@ const settingsSlice = createSlice({
       LocalStorageService.saveSettings(state);
     },
 
-    setStopwatchAlarmOn: (state, action: PayloadAction<boolean>) => {
-      state.stopwatchAlarmOn = action.payload;
+    setTimerAlarmOn: (state, action: PayloadAction<boolean>) => {
+      state.timerAlarmOn = action.payload;
       // Persist to localStorage
       LocalStorageService.saveSettings(state);
     },
@@ -31,7 +31,7 @@ const settingsSlice = createSlice({
 
 export const {
   setWeightUnit,
-  setStopwatchAlarmOn,
+  setTimerAlarmOn,
 } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

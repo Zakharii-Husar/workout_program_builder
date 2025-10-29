@@ -160,7 +160,7 @@ const ActiveWorkout: React.FC = () => {
         onClose={handleModalClose}
         onSave={handleModalSave}
         exerciseName={selectedExerciseName}
-        targetRestTime={runningWorkout?.restBetweenSets || 60}
+        targetRestTime={runningWorkout?.restBetweenSets || 60000}
       />
 
       <WarningModal

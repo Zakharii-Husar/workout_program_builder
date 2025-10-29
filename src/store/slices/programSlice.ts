@@ -19,7 +19,7 @@ const programSlice = createSlice({
       state.programDraft = {
         id: generateId(),
         name: '',
-        restBetweenSets: 60,
+        restBetweenSets: 60000, // 60 seconds in milliseconds
         exerciseIds: [],
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()

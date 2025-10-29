@@ -3,11 +3,12 @@
  */
 
 /**
- * Format time in seconds to MM:SS format
+ * Format time in milliseconds to MM:SS format
  */
-export const formatTime = (totalSeconds: number): string => {
+export const formatTime = (milliseconds: number): string => {
+  const totalSeconds = Math.floor(milliseconds / 1000);
   const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds - minutes * 60;
+  const seconds = totalSeconds % 60;
   const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
   const formattedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
   return `${formattedMinutes}:${formattedSeconds}`;

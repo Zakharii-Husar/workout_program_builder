@@ -2,11 +2,11 @@ import { useState, useEffect, useCallback } from 'react';
 import { TimerState } from '../types';
 import { soundService } from '../services/soundService';
 
-export type TimerMode = 'countdown' | 'stopwatch';
+export type TimerMode = 'countdown' | 'countup';
 
 export interface TimerConfig {
   mode: TimerMode;
-  targetTime?: number; // For stopwatch mode, this is the target rest time
+  targetTime?: number; // For countup mode, this is the target rest time
 }
 
 export const useTimer = (initialTime: number, config?: TimerConfig) => {
@@ -14,7 +14,7 @@ export const useTimer = (initialTime: number, config?: TimerConfig) => {
   const targetTime = config?.targetTime || initialTime;
   
   const [timerState, setTimerState] = useState<TimerState>(() => {
-    if (mode === 'stopwatch') {
+    if (mode === 'countup') {
       return {
         isRunning: false,
         minutes: 0,
@@ -45,7 +45,7 @@ export const useTimer = (initialTime: number, config?: TimerConfig) => {
   }, []);
 
   const reset = useCallback(() => {
-    if (mode === 'stopwatch') {
+    if (mode === 'countup') {
       setTimerState({
         isRunning: false,
         minutes: 0,
@@ -68,7 +68,7 @@ export const useTimer = (initialTime: number, config?: TimerConfig) => {
 
   const toggle = useCallback(() => {
     setTimerState(prev => {
-      if (mode === 'stopwatch') {
+      if (mode === 'countup') {
         return { ...prev, isRunning: !prev.isRunning };
       } else {
         // If timer is at 0:00:00 and not running, reset it before starting
@@ -89,7 +89,7 @@ export const useTimer = (initialTime: number, config?: TimerConfig) => {
   }, [initialTime, mode]);
 
   const setElapsedTime = useCallback((totalSeconds: number) => {
-    if (mode === 'stopwatch') {
+    if (mode === 'countup') {
       const minutes = Math.floor(totalSeconds / 60);
       const seconds = totalSeconds % 60;
       setTimerState({
@@ -111,7 +111,7 @@ export const useTimer = (initialTime: number, config?: TimerConfig) => {
         setTimerState(prev => {
           let { minutes, seconds, milliseconds } = prev;
 
-          if (mode === 'stopwatch') {
+          if (mode === 'countup') {
             // Count up
             milliseconds += 1;
             if (milliseconds >= 100) {
@@ -154,7 +154,7 @@ export const useTimer = (initialTime: number, config?: TimerConfig) => {
             return { ...prev, minutes, seconds, milliseconds };
           }
         });
-      }, mode === 'stopwatch' ? 10 : 10);
+      }, mode === 'countup' ? 10 : 10);
     }
 
     return () => {
@@ -183,15 +183,15 @@ export const useTimer = (initialTime: number, config?: TimerConfig) => {
 
   const displayTime = `${formatTime(timerState.minutes)}:${formatTime(timerState.seconds)}:${formatTime(timerState.milliseconds)}`;
   
-  // For stopwatch mode, also provide formatted target time
+  // For countup mode, also provide formatted target time
   const formatTargetTime = (totalSeconds: number): string => {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  const targetDisplayTime = mode === 'stopwatch' ? formatTargetTime(targetTime) : '';
-  const fullDisplay = mode === 'stopwatch' ? `${formatTime(timerState.minutes)}:${formatTime(timerState.seconds)} / ${targetDisplayTime}` : displayTime;
+  const targetDisplayTime = mode === 'countup' ? formatTargetTime(targetTime) : '';
+  const fullDisplay = mode === 'countup' ? `${formatTime(timerState.minutes)}:${formatTime(timerState.seconds)} / ${targetDisplayTime}` : displayTime;
 
   return {
     ...timerState,
