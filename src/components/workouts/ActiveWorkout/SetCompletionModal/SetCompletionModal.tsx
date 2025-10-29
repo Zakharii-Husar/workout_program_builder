@@ -38,7 +38,8 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
   const [reps, setReps] = useState<string>('');
   const [weight, setWeight] = useState<string>('');
   const [actualRestTime, setActualRestTime] = useState<number>(targetRestTime); // milliseconds
-  const [restTimeInput, setRestTimeInput] = useState<string>(''); // mm:ss or seconds
+  const [restMinutes, setRestMinutes] = useState<string>('0');
+  const [restSeconds, setRestSeconds] = useState<string>('00');
 
   const timerStartTimestamp = useAppSelector((state: any) => state.workouts.runningWorkout?.timerStartTimestamp);
   const timerState = useAppSelector((state: any) => state.workouts.runningWorkout?.timerState);
@@ -61,7 +62,9 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
       }
 
       setActualRestTime(derivedElapsed);
-      setRestTimeInput(formatTime(derivedElapsed));
+      const [mStr, sStr] = formatTime(derivedElapsed).split(':');
+      setRestMinutes(String(Number(mStr)));
+      setRestSeconds(sStr);
     }
   }, [isOpen, targetRestTime]);
 
@@ -88,30 +91,31 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
     return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
-  const parseTimeInputToMs = (value: string): number | null => {
-    const trimmed = value.trim();
-    if (trimmed === '') return null;
-    // Accept formats: mm:ss, m:ss, ss, m
-    if (trimmed.includes(':')) {
-      const parts = trimmed.split(':');
-      if (parts.length !== 2) return null;
-      const minutes = Number(parts[0]);
-      const seconds = Number(parts[1]);
-      if (!Number.isFinite(minutes) || !Number.isFinite(seconds) || seconds < 0 || seconds >= 60) return null;
-      return Math.max(0, (minutes * 60 + seconds) * 1000);
-    }
-    const secondsOnly = Number(trimmed);
-    if (!Number.isFinite(secondsOnly)) return null;
-    return Math.max(0, secondsOnly * 1000);
+  const sanitizeToNonNegativeInt = (value: string): string => {
+    const onlyDigits = value.replace(/[^0-9]/g, '');
+    if (onlyDigits === '') return '0';
+    // Remove leading zeros except when the value is exactly '0'
+    return String(parseInt(onlyDigits, 10));
   };
 
-  const handleRestTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setRestTimeInput(value);
-    const ms = parseTimeInputToMs(value);
-    if (ms !== null) {
-      setActualRestTime(ms);
-    }
+  const handleMinutesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const sanitized = sanitizeToNonNegativeInt(e.target.value);
+    setRestMinutes(sanitized);
+    const minutesNum = Number(sanitized);
+    const secondsNum = Number(restSeconds);
+    setActualRestTime(Math.max(0, (minutesNum * 60 + secondsNum) * 1000));
+  };
+
+  const handleSecondsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // discard decimals and non-digits, clamp to 0-59
+    const onlyDigits = e.target.value.replace(/[^0-9]/g, '');
+    let secondsNum = onlyDigits === '' ? 0 : parseInt(onlyDigits, 10);
+    if (!Number.isFinite(secondsNum) || secondsNum < 0) secondsNum = 0;
+    if (secondsNum > 59) secondsNum = 59;
+    const secondsStr = secondsNum.toString().padStart(2, '0');
+    setRestSeconds(secondsStr);
+    const minutesNum = Number(restMinutes);
+    setActualRestTime(Math.max(0, (minutesNum * 60 + secondsNum) * 1000));
   };
 
   if (!isOpen) return null;
@@ -154,14 +158,31 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
 
           <InputGroup>
             <Label>Rest Time</Label>
-            <Input
-              id="restTime"
-              type="text"
-              inputMode="numeric"
-              value={restTimeInput}
-              onChange={handleRestTimeChange}
-              placeholder="mm:ss or seconds"
-            />
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <Input
+                  id="restMinutes"
+                  type="text"
+                  inputMode="numeric"
+                  value={restMinutes}
+                  onChange={handleMinutesChange}
+                  placeholder="0"
+                />
+                <span style={{ fontSize: 12, color: '#6b7280', marginTop: 4 }}>min</span>
+              </div>
+              <div style={{ fontSize: 24, paddingBottom: 16 }}>:</div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <Input
+                  id="restSeconds"
+                  type="text"
+                  inputMode="numeric"
+                  value={restSeconds}
+                  onChange={handleSecondsChange}
+                  placeholder="00"
+                />
+                <span style={{ fontSize: 12, color: '#6b7280', marginTop: 4 }}>sec</span>
+              </div>
+            </div>
             <div style={{ marginTop: 6, fontSize: 12, color: '#6b7280' }}>
               Current: {formatTime(actualRestTime)}
             </div>
