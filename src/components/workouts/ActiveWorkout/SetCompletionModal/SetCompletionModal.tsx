@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAppSelector } from '../../../../store/hooks';
+import { TimerService } from '../../../../services/timerService';
 import { icons } from '../../../../data';
 import {
   ModalOverlay,
@@ -62,9 +63,9 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
       }
 
       setActualRestTime(derivedElapsed);
-      const [mStr, sStr] = formatTime(derivedElapsed).split(':');
-      setRestMinutes(String(Number(mStr)));
-      setRestSeconds(sStr);
+      const { minutes, seconds } = TimerService.millisecondsToMinutesAndSeconds(derivedElapsed);
+      setRestMinutes(String(minutes));
+      setRestSeconds(seconds.toString().padStart(2, '0'));
     }
   }, [isOpen, targetRestTime]);
 
@@ -85,10 +86,8 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
   };
 
   const formatTime = (milliseconds: number): string => {
-    const totalSeconds = Math.floor(milliseconds / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const remainingSeconds = totalSeconds % 60;
-    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+    const { minutes, seconds } = TimerService.millisecondsToMinutesAndSeconds(milliseconds);
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
   const sanitizeToNonNegativeInt = (value: string): string => {
@@ -103,7 +102,7 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
     setRestMinutes(sanitized);
     const minutesNum = Number(sanitized);
     const secondsNum = Number(restSeconds);
-    setActualRestTime(Math.max(0, (minutesNum * 60 + secondsNum) * 1000));
+    setActualRestTime(Math.max(0, TimerService.minutesAndSecondsToMilliseconds(minutesNum, secondsNum)));
   };
 
   const handleSecondsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,7 +114,7 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
     const secondsStr = secondsNum.toString().padStart(2, '0');
     setRestSeconds(secondsStr);
     const minutesNum = Number(restMinutes);
-    setActualRestTime(Math.max(0, (minutesNum * 60 + secondsNum) * 1000));
+    setActualRestTime(Math.max(0, TimerService.minutesAndSecondsToMilliseconds(minutesNum, secondsNum)));
   };
 
   if (!isOpen) return null;

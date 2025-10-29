@@ -1,5 +1,5 @@
 import { WorkoutProgram, Exercise, ProgramValidationResult } from '../types';
-import { LocalStorageService, MigrationService } from './storage';
+import { LocalStorageService } from './storage';
 import { ProgramValidator } from './validation';
 import { generateId, ERROR_CODES, createError } from '../utils';
 
@@ -37,8 +37,7 @@ export class ProgramService {
 
   static getSavedPrograms(): WorkoutProgram[] {
     try {
-      const programs = LocalStorageService.getPrograms();
-      return MigrationService.migratePrograms(programs);
+      return LocalStorageService.getPrograms();
     } catch (error) {
       console.error('Error loading programs:', error);
       return [];
