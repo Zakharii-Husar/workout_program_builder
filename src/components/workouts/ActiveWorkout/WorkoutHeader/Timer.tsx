@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { timerService, TimerService } from '../../../../services/timerService';
 import { icons } from '../../../../data';
+import { IoVolumeHigh, IoVolumeMute } from 'react-icons/io5';
+import { setTimerAlarmOn } from '../../../../store/slices/settingsSlice';
 import { 
   TimerContainer, 
   TimerDisplay, 
@@ -11,6 +13,8 @@ import {
 
 const Timer: React.FC = () => {
   const { runningWorkout } = useAppSelector((state: any) => state.workouts);
+  const { timerAlarmOn } = useAppSelector((state: any) => state.settings);
+  const dispatch = useAppDispatch();
   
   const targetRestTimeMs = runningWorkout?.restBetweenSets || 60000; // in milliseconds
   const timerState = runningWorkout?.timerState;
@@ -50,6 +54,10 @@ const Timer: React.FC = () => {
     timerService.reset(targetRestTimeMs);
   };
 
+  const handleToggleAlarm = () => {
+    dispatch(setTimerAlarmOn(!timerAlarmOn));
+  };
+
   // Format display - handle negative values for overtime
   const formatMinutes = () => {
     const absMinutes = Math.abs(minutes);
@@ -75,6 +83,11 @@ const Timer: React.FC = () => {
           <icons.start onClick={handleToggle} />
         )}
         <icons.stop onClick={handleReset} />
+        {timerAlarmOn ? (
+          <IoVolumeHigh onClick={handleToggleAlarm} aria-label="Disable timer alarm" />
+        ) : (
+          <IoVolumeMute onClick={handleToggleAlarm} aria-label="Enable timer alarm" />
+        )}
       </TimerButtons>
     </TimerContainer>
   );
