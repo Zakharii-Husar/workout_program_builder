@@ -35,13 +35,13 @@ export const CancelButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: ${props => props.theme.spacing.sm};
-  background: linear-gradient(135deg, ${props => props.theme.colors.warmGray}, ${props => props.theme.colors.dustyBrown});
-  color: ${props => props.theme.colors.background};
+  background: ${props => props.theme.colors.surface};
+  color: ${props => props.theme.colors.text};
   font-family: ${props => props.theme.typography.fontFamily.display};
   font-size: ${props => props.theme.typography.fontSize.base};
   font-weight: ${props => props.theme.typography.fontWeight.semibold};
   padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
-  border: none;
+  border: 2px solid ${props => props.theme.colors.gray300};
   border-radius: ${props => props.theme.borderRadius.lg};
   cursor: pointer;
   transition: ${props => props.theme.transitions.normal};
@@ -56,16 +56,7 @@ export const CancelButton = styled.button`
   position: relative;
   z-index: 1;
 
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, ${props => props.theme.colors.warmGray}, ${props => props.theme.colors.dustyBrown});
-    border-radius: ${props => props.theme.borderRadius.lg};
-    z-index: -1;
-    opacity: 0;
-    transition: ${props => props.theme.transitions.normal};
-  }
+  &::before { display: none; }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
     font-size: ${props => props.theme.typography.fontSize.sm};
@@ -76,10 +67,8 @@ export const CancelButton = styled.button`
   &:hover {
     transform: translateY(-2px);
     box-shadow: ${props => props.theme.shadows.lg};
-    
-    &::before {
-      opacity: 0.1;
-    }
+    background: ${props => props.theme.colors.gray100};
+    border-color: ${props => props.theme.colors.gray400};
   }
 
   &:active {

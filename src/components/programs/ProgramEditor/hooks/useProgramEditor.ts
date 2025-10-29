@@ -16,7 +16,7 @@ import { WorkoutProgram, Exercise } from '../../../../types';
 
 export const useProgramEditor = () => {
   const dispatch = useAppDispatch();
-  const { programDraft } = useAppSelector(state => state.programs);
+  const { programDraft, allPrograms } = useAppSelector(state => state.programs);
   const navigate = useNavigate();
   const { programId } = useParams<{ programId: string }>();
   const location = useLocation();
@@ -108,6 +108,36 @@ export const useProgramEditor = () => {
     navigate(exercisesPath);
   };
 
+  // Unsaved changes detection (edit mode only)
+  const hasUnsavedChanges = (() => {
+    if (!navigationState.isEditMode || !programDraft) return false;
+    const original = allPrograms.find(p => p.id === programDraft.id);
+    if (!original) return false;
+
+    const isNameEqual = original.name === programDraft.name;
+    const isTimerEqual = original.restBetweenSets === programDraft.restBetweenSets;
+    const areExercisesEqual = (() => {
+      const a = original.exerciseIds || [];
+      const b = programDraft.exerciseIds || [];
+      if (a.length !== b.length) return false;
+      for (let i = 0; i < a.length; i++) {
+        if (a[i] !== b[i]) return false;
+      }
+      return true;
+    })();
+
+    return !(isNameEqual && isTimerEqual && areExercisesEqual);
+  })();
+
+  // Unsaved changes detection (create mode)
+  const hasCreateUnsavedChanges = (() => {
+    if (navigationState.isEditMode || !programDraft) return false;
+    const nameTouched = (programDraft.name || '').trim().length > 0;
+    const timerChanged = programDraft.restBetweenSets !== 60000;
+    const hasAnyExercises = (programDraft.exerciseIds || []).length > 0;
+    return nameTouched || timerChanged || hasAnyExercises;
+  })();
+
   return {
     // State
     name,
@@ -126,6 +156,8 @@ export const useProgramEditor = () => {
     // Computed values
     hasExercises: (programDraft?.exerciseIds?.length || 0) > 0,
     isEditMode: navigationState.isEditMode,
-    isUpdating: navigationState.isEditMode
+    isUpdating: navigationState.isEditMode,
+    hasUnsavedChanges,
+    hasCreateUnsavedChanges
   };
 };
