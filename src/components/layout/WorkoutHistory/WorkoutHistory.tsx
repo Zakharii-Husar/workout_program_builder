@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../../../store/hooks';
+import { weightConversionService } from '../../../services/weightConversionService';
 import { WorkoutSession, WorkoutSet } from '../../../store/slices/workoutSlice';
 import { MainContainer, MainHeader, MainTitle, MainSubtitle, EmptyState, EmptyStateTitle, EmptyStateSubtitle } from '../Main/Main.styled';
 import {
@@ -20,6 +21,7 @@ import {
 
 const WorkoutHistory: React.FC = () => {
   const { workoutHistory } = useAppSelector(state => state.workouts);
+  const weightUnit = useAppSelector(state => state.settings.weightUnit);
 
   const formatTime = (milliseconds: number): string => {
     const totalSeconds = Math.floor(milliseconds / 1000);
@@ -33,7 +35,11 @@ const WorkoutHistory: React.FC = () => {
     
     const details = [];
     if (exercise.reps) details.push(`${exercise.reps} reps`);
-    if (exercise.weight) details.push(`@ ${exercise.weight}kg`);
+    if (typeof exercise.weightGrams !== 'undefined') {
+      const displayVal = weightConversionService.gramsToDisplay(exercise.weightGrams, weightUnit);
+      const formatted = Number.isFinite(displayVal) ? parseFloat(displayVal.toFixed(1)).toString() : '';
+      details.push(`@ ${formatted}${weightUnit}`);
+    }
     if (exercise.actualRestTime) details.push(`Rest: ${formatTime(exercise.actualRestTime)}`);
     
     return details.join(' • ');

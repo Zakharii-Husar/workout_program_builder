@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
 import { TimerService } from '../../../../services/timerService';
 import { icons } from '../../../../data';
+import { setWeightUnit } from '../../../../store/slices/settingsSlice';
+import { weightConversionService } from '../../../../services/weightConversionService';
 import {
   ModalOverlay,
   ModalContainer,
@@ -22,7 +24,7 @@ interface SetCompletionModalProps {
   onClose: () => void;
   onSave: (data: {
     reps: number | null;
-    weight: number | null;
+    weightGrams: number | null;
     actualRestTime: number; // in milliseconds
   }) => void;
   exerciseName: string;
@@ -44,6 +46,9 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
 
   const timerStartTimestamp = useAppSelector((state: any) => state.workouts.runningWorkout?.timerStartTimestamp);
   const timerState = useAppSelector((state: any) => state.workouts.runningWorkout?.timerState);
+  const preferredUnit = useAppSelector((state: any) => state.settings.weightUnit);
+  const dispatch = useAppDispatch();
+  const [localUnit, setLocalUnit] = useState<'kg' | 'lb'>(preferredUnit);
 
   // Reset form when modal opens
   useEffect(() => {
@@ -66,16 +71,21 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
       const { minutes, seconds } = TimerService.millisecondsToMinutesAndSeconds(derivedElapsed);
       setRestMinutes(String(minutes));
       setRestSeconds(seconds.toString().padStart(2, '0'));
+      setLocalUnit(preferredUnit);
     }
-  }, [isOpen, targetRestTime]);
+  }, [isOpen, targetRestTime, preferredUnit]);
 
   const handleSave = () => {
     const repsValue = reps.trim() === '' ? null : parseInt(reps, 10);
     const weightValue = weight.trim() === '' ? null : parseFloat(weight);
+    const weightGrams =
+      weightValue === null || !Number.isFinite(weightValue)
+        ? null
+        : weightConversionService.displayToGrams(weightValue, localUnit);
     
     onSave({
       reps: repsValue,
-      weight: weightValue,
+      weightGrams,
       actualRestTime
     });
     onClose();
@@ -88,6 +98,23 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
   const formatTime = (milliseconds: number): string => {
     const { minutes, seconds } = TimerService.millisecondsToMinutesAndSeconds(milliseconds);
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  const handleToggleUnit = () => {
+    const newUnit = localUnit === 'kg' ? 'lb' : 'kg';
+    // Live-convert current input value if present
+    if (weight.trim() !== '') {
+      const currentVal = parseFloat(weight);
+      if (Number.isFinite(currentVal)) {
+        const grams = weightConversionService.displayToGrams(currentVal, localUnit);
+        const converted = weightConversionService.gramsToDisplay(grams, newUnit);
+        // Show up to 1 decimal
+        setWeight(converted.toFixed(1).replace(/\.0$/, ''));
+      }
+    }
+    setLocalUnit(newUnit);
+    // Update global preference immediately
+    dispatch(setWeightUnit(newUnit));
   };
 
   const sanitizeToNonNegativeInt = (value: string): string => {
@@ -153,6 +180,12 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
               min="0"
               step="0.1"
             />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 6 }}>
+              <span style={{ fontSize: 12, color: '#6b7280' }}>Unit:</span>
+              <button type="button" onClick={handleToggleUnit} style={{ fontSize: 12, padding: '4px 8px', borderRadius: 6, border: '1px solid #d1d5db', background: '#f9fafb', cursor: 'pointer' }}>
+                {localUnit.toUpperCase()}
+              </button>
+            </div>
           </InputGroup>
 
           <InputGroup>

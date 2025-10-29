@@ -103,7 +103,7 @@ const ActiveWorkout: React.FC = () => {
 
   const handleModalSave = (data: {
     reps: number | null;
-    weight: number | null;
+    weightGrams: number | null;
     actualRestTime: number;
   }) => {
     if (selectedSetId) {
@@ -113,7 +113,7 @@ const ActiveWorkout: React.FC = () => {
         setId: selectedSetId,
         updates: {
           reps: data.reps,
-          weight: data.weight,
+          weightGrams: data.weightGrams === null ? undefined : data.weightGrams,
           actualRestTime: data.actualRestTime
         }
       }));

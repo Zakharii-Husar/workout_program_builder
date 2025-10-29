@@ -8,7 +8,8 @@ export interface WorkoutSet {
   id: string;
   exerciseName: string;
   reps: number | null;
-  weight: number | null;
+  // Store weight in grams internally; undefined means not provided, 0 means bodyweight/no external load
+  weightGrams?: number;
   completed: boolean;
   actualRestTime?: number; // Actual rest time taken in milliseconds
   targetRestTime?: number; // Target rest time for this set in milliseconds
@@ -63,7 +64,9 @@ const workoutSlice = createSlice({
           id: generateId(),
           exerciseName: exercise.name,
           reps: exercise.reps,
-          weight: exercise.weight,
+          // Initial program weights were in kg previously; for MVP default to not provided
+          // If needed later, convert exercise.weight (kg) -> grams when not null
+          weightGrams: exercise.weight == null ? undefined : Math.round(exercise.weight * 1000),
           completed: false,
           targetRestTime: restBetweenSets
         }))
@@ -100,7 +103,7 @@ const workoutSlice = createSlice({
     // Update set details
     updateSet: (state, action: PayloadAction<{
       setId: string;
-      updates: Partial<Pick<WorkoutSet, 'reps' | 'weight' | 'actualRestTime' | 'targetRestTime'>>
+      updates: Partial<Pick<WorkoutSet, 'reps' | 'weightGrams' | 'actualRestTime' | 'targetRestTime'>>
     }>) => {
       if (state.runningWorkout) {
         const set = state.runningWorkout.exercises.find(ex => ex.id === action.payload.setId);
