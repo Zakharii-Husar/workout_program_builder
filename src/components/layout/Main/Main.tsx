@@ -32,6 +32,10 @@ const Main: React.FC = () => {
           <icons.check />
           Workouts History
         </MenuButton>
+        <MenuButton onClick={() => navigate('/settings')}>
+          <icons.settings />
+          Settings
+        </MenuButton>
       </MenuContainer>
     </MainContainer>
   );

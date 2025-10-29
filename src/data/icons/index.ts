@@ -15,7 +15,8 @@ import {
   FaTimes as CancelIcon,
   FaEdit as EditIcon,
   FaUndo as UndoIcon,
-  FaExclamationTriangle as WarningIcon
+  FaExclamationTriangle as WarningIcon,
+  FaCog as SettingsIcon
 } from 'react-icons/fa';
 
 import arrow from '../../assets/arrow.png';
@@ -37,5 +38,6 @@ export const icons = {
   cancel: CancelIcon,
   edit: EditIcon,
   undo: UndoIcon,
-  warning: WarningIcon
+  warning: WarningIcon,
+  settings: SettingsIcon
 };

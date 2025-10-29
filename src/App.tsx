@@ -9,6 +9,7 @@ import RouteGuard from './components/layout/RouteGuard';
 import Main from './components/layout/Main';
 import Programs from './components/layout/Programs/Programs';
 import WorkoutHistory from './components/layout/WorkoutHistory';
+import Settings from './components/layout/Settings';
 import ProgramEditor from './components/programs/ProgramEditor';
 import Exercises from './components/exercises/Exercises';
 import ActiveWorkout from './components/workouts/ActiveWorkout';
@@ -50,6 +51,7 @@ function App() {
                   <Route path="/" element={<Main />} />
                   <Route path="/programs" element={<Programs />} />
                   <Route path="/workouts" element={<WorkoutHistory />} />
+                  <Route path="/settings" element={<Settings />} />
                   <Route path="/create" element={<ProgramEditor />} />
                   <Route path="/create/exercises" element={<Exercises />} />
                   <Route path="/edit/:programId" element={<ProgramEditor />} />
