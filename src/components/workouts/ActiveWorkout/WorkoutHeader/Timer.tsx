@@ -18,6 +18,7 @@ const Timer: React.FC = () => {
   
   const targetRestTimeMs = runningWorkout?.restBetweenSets || 60000; // in milliseconds
   const timerState = runningWorkout?.timerState;
+  const timerStartTimestamp = runningWorkout?.timerStartTimestamp;
   
   // If no timer state exists, use target rest time as initial state
   const { isRunning, minutes, seconds, isOvertime } = timerState || { 
@@ -77,12 +78,20 @@ const Timer: React.FC = () => {
       </TimerDisplay>
       
       <TimerButtons>
+        {/* Start button: starts or resumes */}
         {isRunning ? (
-          <icons.pause onClick={handleToggle} />
+          <icons.start aria-label="Start" />
         ) : (
-          <icons.start onClick={handleToggle} />
+          <icons.start onClick={handleToggle} aria-label="Start" />
         )}
-        <icons.stop onClick={handleReset} />
+        {/* Stop when running or not-started; Reset when paused */}
+        {isRunning ? (
+          <icons.stop onClick={() => timerService.pause()} aria-label="Stop" />
+        ) : timerStartTimestamp ? (
+          <icons.reset onClick={handleReset} aria-label="Reset" />
+        ) : (
+          <icons.stop onClick={handleReset} aria-label="Stop" />
+        )}
         {timerAlarmOn ? (
           <IoVolumeHigh onClick={handleToggleAlarm} aria-label="Disable timer alarm" />
         ) : (

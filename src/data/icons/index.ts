@@ -18,6 +18,7 @@ import {
   FaExclamationTriangle as WarningIcon,
   FaCog as SettingsIcon
 } from 'react-icons/fa';
+import { LuTimerReset as ResetIcon } from 'react-icons/lu';
 
 import arrow from '../../assets/arrow.png';
 
@@ -33,6 +34,7 @@ export const icons = {
   start: StartIcon,
   pause: PauseIcon,
   stop: StopIcon,
+  reset: ResetIcon,
   save: SaveIcon,
   correct: CorrectIcon,
   cancel: CancelIcon,
