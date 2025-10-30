@@ -1,6 +1,6 @@
 import React from 'react';
 import { TimerService } from '../../../../services/timerService';
-import { InputGroup, Label, DigitWrapper, DigitColumns, DigitColumn, DigitButton, DigitInput, DigitSeparator, TimeCurrent } from './SetCompletionModal.styled';
+import { InputGroup, Label, DigitWrapper, DigitColumns, DigitGroup, DigitGroupRow, DigitColumn, DigitButton, DigitInput, DigitSeparator, DigitSubLabel, TimeCurrent } from './SetCompletionModal.styled';
 
 interface TimeInputProps {
   restMinutes: string;
@@ -76,51 +76,61 @@ const TimeInput: React.FC<TimeInputProps> = ({
       <Label>Rest Time</Label>
       <DigitWrapper>
         <DigitColumns>
-          <DigitColumn>
-            <DigitButton type="button" onClick={bumpDigit('mT', 1)}>▲</DigitButton>
-            <DigitInput
-              type="text"
-              inputMode="numeric"
-              maxLength={1}
-              value={getMinuteDigits()[0]}
-              onChange={onDigitChange('mT')}
-            />
-            <DigitButton type="button" onClick={bumpDigit('mT', -1)}>▼</DigitButton>
-          </DigitColumn>
-          <DigitColumn>
-            <DigitButton type="button" onClick={bumpDigit('mO', 1)}>▲</DigitButton>
-            <DigitInput
-              type="text"
-              inputMode="numeric"
-              maxLength={1}
-              value={getMinuteDigits()[1]}
-              onChange={onDigitChange('mO')}
-            />
-            <DigitButton type="button" onClick={bumpDigit('mO', -1)}>▼</DigitButton>
-          </DigitColumn>
+          <DigitGroup>
+            <DigitGroupRow>
+              <DigitColumn>
+                <DigitButton type="button" onClick={bumpDigit('mT', 1)}>▲</DigitButton>
+                <DigitInput
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={1}
+                  value={getMinuteDigits()[0]}
+                  onChange={onDigitChange('mT')}
+                />
+                <DigitButton type="button" onClick={bumpDigit('mT', -1)}>▼</DigitButton>
+              </DigitColumn>
+              <DigitColumn>
+                <DigitButton type="button" onClick={bumpDigit('mO', 1)}>▲</DigitButton>
+                <DigitInput
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={1}
+                  value={getMinuteDigits()[1]}
+                  onChange={onDigitChange('mO')}
+                />
+                <DigitButton type="button" onClick={bumpDigit('mO', -1)}>▼</DigitButton>
+              </DigitColumn>
+            </DigitGroupRow>
+            <DigitSubLabel>Minutes</DigitSubLabel>
+          </DigitGroup>
           <DigitSeparator>:</DigitSeparator>
-          <DigitColumn>
-            <DigitButton type="button" onClick={bumpDigit('sT', 1)}>▲</DigitButton>
-            <DigitInput
-              type="text"
-              inputMode="numeric"
-              maxLength={1}
-              value={getSecondDigits()[0]}
-              onChange={onDigitChange('sT')}
-            />
-            <DigitButton type="button" onClick={bumpDigit('sT', -1)}>▼</DigitButton>
-          </DigitColumn>
-          <DigitColumn>
-            <DigitButton type="button" onClick={bumpDigit('sO', 1)}>▲</DigitButton>
-            <DigitInput
-              type="text"
-              inputMode="numeric"
-              maxLength={1}
-              value={getSecondDigits()[1]}
-              onChange={onDigitChange('sO')}
-            />
-            <DigitButton type="button" onClick={bumpDigit('sO', -1)}>▼</DigitButton>
-          </DigitColumn>
+          <DigitGroup>
+            <DigitGroupRow>
+              <DigitColumn>
+                <DigitButton type="button" onClick={bumpDigit('sT', 1)}>▲</DigitButton>
+                <DigitInput
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={1}
+                  value={getSecondDigits()[0]}
+                  onChange={onDigitChange('sT')}
+                />
+                <DigitButton type="button" onClick={bumpDigit('sT', -1)}>▼</DigitButton>
+              </DigitColumn>
+              <DigitColumn>
+                <DigitButton type="button" onClick={bumpDigit('sO', 1)}>▲</DigitButton>
+                <DigitInput
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={1}
+                  value={getSecondDigits()[1]}
+                  onChange={onDigitChange('sO')}
+                />
+                <DigitButton type="button" onClick={bumpDigit('sO', -1)}>▼</DigitButton>
+              </DigitColumn>
+            </DigitGroupRow>
+            <DigitSubLabel>Seconds</DigitSubLabel>
+          </DigitGroup>
         </DigitColumns>
       </DigitWrapper>
       <TimeCurrent>

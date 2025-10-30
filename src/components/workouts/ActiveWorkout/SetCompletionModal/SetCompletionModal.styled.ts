@@ -303,18 +303,37 @@ export const UnitOption = styled.button<{ $active: boolean }>`
 `;
 
 export const TimeCurrent = styled.div`
-  margin-top: 6px;
+  margin-top: 8px;
   font-size: 12px;
-  color: ${props => props.theme.colors.textMuted};
+  color: ${props => props.theme.colors.textSecondary};
 `;
 
 export const DigitWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  padding: ${props => props.theme.spacing.sm};
+  background: linear-gradient(180deg, ${props => props.theme.colors.gray50} 0%, ${props => props.theme.colors.gray100} 100%);
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  box-shadow: ${props => props.theme.shadows.sm};
 `;
 
 export const DigitColumns = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+`;
+
+export const DigitGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+`;
+
+export const DigitGroupRow = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -325,18 +344,28 @@ export const DigitColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 0;
+  width: 44px;
+  background: ${props => props.theme.colors.white};
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  overflow: hidden;
+  box-shadow: ${props => props.theme.shadows.sm};
+
+  &:focus-within {
+    border-color: ${props => props.theme.colors.accent};
+    box-shadow: 0 0 0 1px ${props => props.theme.colors.accentBlueLight};
+  }
 `;
 
 export const DigitButton = styled.button`
-  width: 28px;
-  height: 20px;
+  width: 100%;
+  height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid ${props => props.theme.colors.border};
+  border: none;
   background: ${props => props.theme.colors.white};
-  border-radius: ${props => props.theme.borderRadius.sm};
   cursor: pointer;
   padding: 0;
   transition: ${props => props.theme.transitions.fast};
@@ -344,30 +373,46 @@ export const DigitButton = styled.button`
   &:hover {
     background: ${props => props.theme.colors.gray50};
   }
+
+  &:active {
+    transform: translateY(1px);
+  }
 `;
 
 export const DigitInput = styled.input`
-  width: 28px;
-  height: 36px;
+  width: 100%;
+  height: 48px;
   text-align: center;
-  border: 1px solid ${props => props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius.md};
-  font-size: ${props => props.theme.typography.fontSize.base};
+  border: 0;
+  font-size: ${props => props.theme.typography.fontSize.lg};
   background: ${props => props.theme.colors.white};
   transition: ${props => props.theme.transitions.fast};
   font-family: ${props => props.theme.typography.fontFamily.timer};
+  border-top: 1px solid ${props => props.theme.colors.border};
+  border-bottom: 1px solid ${props => props.theme.colors.border};
 
   &:focus {
     outline: none;
-    border-color: ${props => props.theme.colors.accent};
-    box-shadow: 0 0 0 1px ${props => props.theme.colors.accentBlueLight};
+    border-top-color: ${props => props.theme.colors.accent};
+    border-bottom-color: ${props => props.theme.colors.accent};
   }
 `;
 
 export const DigitSeparator = styled.div`
-  padding: 0 4px;
+  padding: 2px 8px;
   color: ${props => props.theme.colors.textSecondary};
-  font-size: 16px;
+  font-size: 18px;
   align-self: center;
+  border-radius: ${props => props.theme.borderRadius.full};
+  background: ${props => props.theme.colors.gray100};
+  box-shadow: ${props => props.theme.shadows.sm};
+`;
+
+export const DigitSubLabel = styled.div`
+  margin-top: 2px;
+  font-size: 12px;
+  color: ${props => props.theme.colors.textMuted};
+  letter-spacing: ${props => props.theme.typography.letterSpacing.wide};
+  text-transform: uppercase;
 `;
 
