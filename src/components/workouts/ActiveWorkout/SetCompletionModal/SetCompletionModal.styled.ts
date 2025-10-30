@@ -18,7 +18,7 @@ export const ModalContainer = styled.div`
   background: ${props => props.theme.colors.white};
   border-radius: ${props => props.theme.borderRadius.xl};
   padding: 0;
-  max-width: 420px;
+  max-width: 600px;
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
@@ -87,51 +87,56 @@ export const FormContainer = styled.div`
   }
 `;
 
-export const Section = styled.section`
-  padding: ${props => props.theme.spacing.sm} 0;
-  
-  &:not(:last-of-type) {
-    margin-bottom: ${props => props.theme.spacing.lg};
-    padding-bottom: ${props => props.theme.spacing.lg};
-    border-bottom: 1px solid ${props => props.theme.colors.border};
-  }
-`;
-
-export const SectionHeader = styled.div`
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: ${props => props.theme.spacing.md};
-`;
-
-export const SectionTitle = styled.h3`
-  margin: 0;
-  font-size: ${props => props.theme.typography.fontSize.sm};
-  font-weight: ${props => props.theme.typography.fontWeight.semibold};
-  color: ${props => props.theme.colors.textSecondary};
-  letter-spacing: ${props => props.theme.typography.letterSpacing.wide};
-  text-transform: uppercase;
-`;
-
-export const SectionBody = styled.div``;
-
-export const FieldsRow = styled.div`
+export const StepsGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: ${props => props.theme.spacing.md};
-
+  
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
     grid-template-columns: 1fr;
   }
 `;
 
-export const ButtonGroup = styled.div`
+export const StepCard = styled.div`
+  position: relative;
+  background: ${props => props.theme.colors.white};
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  padding: ${props => props.theme.spacing.md};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: ${props => props.theme.shadows.sm};
+  min-height: 140px;
+
+  @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
+    min-height: 120px;
+  }
+`;
+
+export const StepNumber = styled.div`
+  position: absolute;
+  top: ${props => props.theme.spacing.sm};
+  left: ${props => props.theme.spacing.sm};
+  width: 24px;
+  height: 24px;
+  border-radius: ${props => props.theme.borderRadius.full};
+  background: ${props => props.theme.colors.accent};
+  color: ${props => props.theme.colors.white};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
+  font-size: ${props => props.theme.typography.fontSize.xs};
+  box-shadow: ${props => props.theme.shadows.md};
+`;
+
+export const Actions = styled.div`
   display: flex;
   gap: ${props => props.theme.spacing.md};
-  margin-top: ${props => props.theme.spacing.xl};
-  padding-top: ${props => props.theme.spacing.lg};
-  border-top: 1px solid ${props => props.theme.colors.border};
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 `;
 
 export const SaveButton = styled.button`

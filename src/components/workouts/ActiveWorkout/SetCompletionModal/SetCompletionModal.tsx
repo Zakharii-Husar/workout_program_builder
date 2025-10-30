@@ -14,12 +14,10 @@ import {
   ModalTitle,
   ModalCloseButton,
   FormContainer,
-  Section,
-  SectionHeader,
-  SectionTitle,
-  SectionBody,
-  FieldsRow,
-  ButtonGroup,
+  StepsGrid,
+  StepCard,
+  StepNumber,
+  Actions,
   SaveButton,
   CancelButton
 } from './SetCompletionModal.styled';
@@ -140,28 +138,22 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
         </ModalHeader>
 
         <FormContainer>
-          <Section>
-            <SectionHeader>
-              <SectionTitle>Performance</SectionTitle>
-            </SectionHeader>
-            <SectionBody>
-              <FieldsRow>
-                <RepsInput value={reps} onChange={setReps} />
-                <WeightInput 
-                  value={weight} 
-                  onChange={setWeight} 
-                  unit={localUnit} 
-                  onUnitChange={setUnit}
-                />
-              </FieldsRow>
-            </SectionBody>
-          </Section>
-
-          <Section>
-            <SectionHeader>
-              <SectionTitle>Rest</SectionTitle>
-            </SectionHeader>
-            <SectionBody>
+          <StepsGrid>
+            <StepCard>
+              <StepNumber>1</StepNumber>
+              <RepsInput value={reps} onChange={setReps} />
+            </StepCard>
+            <StepCard>
+              <StepNumber>2</StepNumber>
+              <WeightInput 
+                value={weight} 
+                onChange={setWeight} 
+                unit={localUnit} 
+                onUnitChange={setUnit}
+              />
+            </StepCard>
+            <StepCard>
+              <StepNumber>3</StepNumber>
               <TimeInput
                 restMinutes={restMinutes}
                 restSeconds={restSeconds}
@@ -169,19 +161,21 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
                 onMinutesChange={handleMinutesChange}
                 onSecondsChange={handleSecondsChange}
               />
-            </SectionBody>
-          </Section>
-
-          <ButtonGroup>
-            <CancelButton onClick={handleCancel}>
-              <icons.cancel />
-              Cancel
-            </CancelButton>
-            <SaveButton onClick={handleSave}>
-              <icons.check />
-              Save Set
-            </SaveButton>
-          </ButtonGroup>
+            </StepCard>
+            <StepCard>
+              <StepNumber>4</StepNumber>
+              <Actions>
+                <CancelButton onClick={handleCancel}>
+                  <icons.cancel />
+                  Cancel
+                </CancelButton>
+                <SaveButton onClick={handleSave}>
+                  <icons.check />
+                  Save Set
+                </SaveButton>
+              </Actions>
+            </StepCard>
+          </StepsGrid>
         </FormContainer>
       </ModalContainer>
     </ModalOverlay>
