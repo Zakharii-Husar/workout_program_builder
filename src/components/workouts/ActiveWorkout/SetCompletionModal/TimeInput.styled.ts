@@ -17,32 +17,32 @@ export const DigitWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: ${props => props.theme.spacing.sm};
-  background: linear-gradient(180deg, ${props => props.theme.colors.gray50} 0%, ${props => props.theme.colors.gray100} 100%);
+  padding: ${props => props.theme.spacing.xs};
+  background: ${props => props.theme.colors.gray50};
   border: 1px solid ${props => props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius.lg};
-  box-shadow: ${props => props.theme.shadows.sm};
+  border-radius: 0;
+  box-shadow: none;
 `;
 
 export const DigitColumns = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
 `;
 
 export const DigitGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 `;
 
 export const DigitGroupRow = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 10px;
+  gap: 0;
 `;
 
 export const DigitColumn = styled.div`
@@ -53,13 +53,18 @@ export const DigitColumn = styled.div`
   width: 44px;
   background: ${props => props.theme.colors.white};
   border: 1px solid ${props => props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius.lg};
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: ${props => props.theme.shadows.sm};
+  box-shadow: none;
 
   &:focus-within {
     border-color: ${props => props.theme.colors.accent};
     box-shadow: 0 0 0 1px ${props => props.theme.colors.accentBlueLight};
+  }
+
+  /* Make adjacent digit columns visually touch */
+  &:not(:first-child) {
+    border-left: 0;
   }
 `;
 
@@ -76,7 +81,7 @@ export const DigitButton = styled.button`
   transition: ${props => props.theme.transitions.fast};
 
   &:hover {
-    background: ${props => props.theme.colors.gray50};
+    background: ${props => props.theme.colors.gray100};
   }
 
   &:active {
@@ -104,13 +109,13 @@ export const DigitInput = styled.input`
 `;
 
 export const DigitSeparator = styled.div`
-  padding: 2px 8px;
+  padding: 0 6px;
   color: ${props => props.theme.colors.textSecondary};
   font-size: 18px;
   align-self: center;
-  border-radius: ${props => props.theme.borderRadius.full};
-  background: ${props => props.theme.colors.gray100};
-  box-shadow: ${props => props.theme.shadows.sm};
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 `;
 
 export const DigitSubLabel = styled.div`
