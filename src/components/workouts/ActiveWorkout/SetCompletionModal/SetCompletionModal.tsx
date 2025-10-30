@@ -16,7 +16,11 @@ import {
   Input,
   ButtonGroup,
   SaveButton,
-  CancelButton
+  CancelButton,
+  UnitToggleWrapper,
+  UnitToggle,
+  UnitToggleThumb,
+  UnitOption
 } from './SetCompletionModal.styled';
 
 interface SetCompletionModalProps {
@@ -100,20 +104,17 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  const handleToggleUnit = () => {
-    const newUnit = localUnit === 'kg' ? 'lb' : 'kg';
-    // Live-convert current input value if present
+  const setUnit = (newUnit: 'kg' | 'lb') => {
+    if (newUnit === localUnit) return;
     if (weight.trim() !== '') {
       const currentVal = parseFloat(weight);
       if (Number.isFinite(currentVal)) {
         const grams = weightConversionService.displayToGrams(currentVal, localUnit);
         const converted = weightConversionService.gramsToDisplay(grams, newUnit);
-        // Show up to 1 decimal
         setWeight(converted.toFixed(1).replace(/\.0$/, ''));
       }
     }
     setLocalUnit(newUnit);
-    // Update global preference immediately
     dispatch(setWeightUnit(newUnit));
   };
 
@@ -180,12 +181,13 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
               min="0"
               step="0.1"
             />
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 6 }}>
-              <span style={{ fontSize: 12, color: '#6b7280' }}>Unit:</span>
-              <button type="button" onClick={handleToggleUnit} style={{ fontSize: 12, padding: '4px 8px', borderRadius: 6, border: '1px solid #d1d5db', background: '#f9fafb', cursor: 'pointer' }}>
-                {localUnit.toUpperCase()}
-              </button>
-            </div>
+            <UnitToggleWrapper>
+              <UnitOption type="button" onClick={() => setUnit('kg')} $active={localUnit === 'kg'}>KG</UnitOption>
+              <UnitToggle type="button" onClick={() => setUnit(localUnit === 'kg' ? 'lb' : 'kg')} $isOn={localUnit === 'lb'} aria-label="Toggle weight unit">
+                <UnitToggleThumb $isOn={localUnit === 'lb'} />
+              </UnitToggle>
+              <UnitOption type="button" onClick={() => setUnit('lb')} $active={localUnit === 'lb'}>LB</UnitOption>
+            </UnitToggleWrapper>
           </InputGroup>
 
           <InputGroup>

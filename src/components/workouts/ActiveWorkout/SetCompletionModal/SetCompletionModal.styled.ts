@@ -257,3 +257,49 @@ export const CancelButton = styled.button`
   }
 `;
 
+export const UnitToggleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${props => props.theme.spacing.sm};
+`;
+
+export const UnitToggle = styled.button<{ $isOn: boolean }>`
+  position: relative;
+  width: 48px;
+  height: 26px;
+  border-radius: 9999px;
+  border: 2px solid ${props => props.theme.colors.border};
+  background: ${props => props.theme.colors.gray200};
+  cursor: pointer;
+  padding: 0;
+  transition: ${props => props.theme.transitions.fast};
+  box-shadow: ${props => props.theme.shadows.sm};
+
+  &:hover {
+    filter: brightness(0.98);
+  }
+`;
+
+export const UnitToggleThumb = styled.div<{ $isOn: boolean }>`
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: ${props => props.theme.colors.white};
+  box-shadow: ${props => props.theme.shadows.md};
+  transform: translateX(${props => (props.$isOn ? '22px' : '0')});
+  transition: ${props => props.theme.transitions.fast};
+`;
+
+export const UnitOption = styled.button<{ $active: boolean }>`
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 12px;
+  color: ${props => (props.$active ? props.theme.colors.text : props.theme.colors.textMuted)};
+  font-weight: ${props => (props.$active ? props.theme.typography.fontWeight.semibold : props.theme.typography.fontWeight.medium)};
+  padding: 2px 4px;
+`;
+
