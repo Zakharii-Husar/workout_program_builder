@@ -183,43 +183,6 @@ export const InputCompactWide = styled(Input)`
   }
 `;
 
-export const TimeDisplay = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${props => props.theme.spacing.lg};
-  padding: ${props => props.theme.spacing.lg};
-  border: 1px solid ${props => props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius.lg};
-  background: ${props => props.theme.colors.white};
-  
-  svg {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    color: ${props => props.theme.colors.text};
-    transition: ${props => props.theme.transitions.fast};
-    padding: ${props => props.theme.spacing.sm};
-    border-radius: ${props => props.theme.borderRadius.full};
-    background: transparent;
-    
-    &:hover {
-      color: ${props => props.theme.colors.accent};
-      background: ${props => props.theme.colors.gray50};
-    }
-  }
-  
-  span {
-    font-size: ${props => props.theme.typography.fontSize.xl};
-    font-weight: ${props => props.theme.typography.fontWeight.semibold};
-    color: ${props => props.theme.colors.text};
-    font-family: ${props => props.theme.typography.fontFamily.timer};
-    min-width: 70px;
-    text-align: center;
-    letter-spacing: 1px;
-  }
-`;
-
 export const ButtonGroup = styled.div`
   display: flex;
   gap: ${props => props.theme.spacing.md};
@@ -337,35 +300,6 @@ export const UnitOption = styled.button<{ $active: boolean }>`
   color: ${props => (props.$active ? props.theme.colors.text : props.theme.colors.textMuted)};
   font-weight: ${props => (props.$active ? props.theme.typography.fontWeight.semibold : props.theme.typography.fontWeight.medium)};
   padding: 2px 4px;
-`;
-
-export const TimeInputs = styled.div`
-  display: flex;
-  gap: ${props => props.theme.spacing.sm};
-  align-items: center;
-`;
-
-export const TimeColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  input {
-    width: 72px;
-    text-align: center;
-  }
-`;
-
-export const TimeUnit = styled.span`
-  font-size: 12px;
-  color: ${props => props.theme.colors.textMuted};
-  margin-top: 4px;
-`;
-
-export const TimeColon = styled.div`
-  font-size: 18px;
-  padding-bottom: 10px;
-  color: ${props => props.theme.colors.textSecondary};
 `;
 
 export const TimeCurrent = styled.div`
