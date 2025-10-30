@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, Label, LabelRow, InputCompactWide, UnitToggleWrapper, UnitToggle, UnitToggleThumb, UnitOption } from './SetCompletionModal.styled';
+import { Field, Label, LabelRow, InputCompactWide, UnitToggleWrapper, UnitToggle, UnitToggleThumb, UnitOption } from './WeightInput.styled';
 
 interface WeightInputProps {
   value: string;

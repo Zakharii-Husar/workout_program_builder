@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, Label, InputCompact } from './SetCompletionModal.styled';
+import { Field, Label, InputCompact } from './RepsInput.styled';
 
 interface RepsInputProps {
   value: string;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TimerService } from '../../../../services/timerService';
-import { InputGroup, Label, DigitWrapper, DigitColumns, DigitGroup, DigitGroupRow, DigitColumn, DigitButton, DigitInput, DigitSeparator, DigitSubLabel, TimeCurrent } from './SetCompletionModal.styled';
+import { InputGroup, Label, DigitWrapper, DigitColumns, DigitGroup, DigitGroupRow, DigitColumn, DigitButton, DigitInput, DigitSeparator, DigitSubLabel, TimeCurrent } from './TimeInput.styled';
 
 interface TimeInputProps {
   restMinutes: string;
