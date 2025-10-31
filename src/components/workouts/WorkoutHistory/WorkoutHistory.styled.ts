@@ -7,8 +7,8 @@ export const WorkoutHistoryContainer = styled.div`
 `;
 
 export const WorkoutCard = styled.div`
-  background: ${props => props.theme.colors.white};
-  border: 1px solid ${props => props.theme.colors.border};
+  background: ${props => props.theme.colors.surface};
+  border: 1px solid ${props => props.theme.colors.borderLight};
   border-radius: ${props => props.theme.borderRadius.lg};
   padding: ${props => props.theme.spacing.xl};
   box-shadow: ${props => props.theme.shadows.sm};
@@ -16,7 +16,7 @@ export const WorkoutCard = styled.div`
 
   &:hover {
     box-shadow: ${props => props.theme.shadows.md};
-    border-color: ${props => props.theme.colors.gray300};
+    border-color: ${props => props.theme.colors.border};
   }
 `;
 
@@ -37,6 +37,12 @@ export const WorkoutMeta = styled.div`
   flex-direction: column;
   gap: ${props => props.theme.spacing.xs};
   margin-bottom: ${props => props.theme.spacing.lg};
+
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    flex-direction: row;
+    align-items: center;
+    gap: ${props => props.theme.spacing.lg};
+  }
 `;
 
 export const MetaItem = styled.p`
@@ -75,7 +81,7 @@ export const SetDetailsList = styled.div`
 export const SetItem = styled.div<{ $completed: boolean }>`
   padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
   background: ${props => props.$completed ? props.theme.colors.accentBlueLight : props.theme.colors.gray100};
-  border: 1px solid ${props => props.$completed ? props.theme.colors.accent : props.theme.colors.border};
+  border: 1px solid ${props => props.$completed ? props.theme.colors.accent : props.theme.colors.borderLight};
   border-radius: ${props => props.theme.borderRadius.md};
   font-size: ${props => props.theme.typography.fontSize.sm};
   color: ${props => props.$completed ? props.theme.colors.accentBlue : props.theme.colors.textSecondary};

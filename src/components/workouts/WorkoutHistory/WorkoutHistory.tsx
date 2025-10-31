@@ -30,6 +30,27 @@ const WorkoutHistory: React.FC = () => {
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
+  const formatDuration = (milliseconds: number): string => {
+    if (!Number.isFinite(milliseconds) || milliseconds <= 0) return '—';
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    if (hours > 0) return `${hours}h ${minutes}m`;
+    return `${minutes}m`;
+  };
+
+  const formatDateWithWeekday = (dateStr: string): string => {
+    const date = new Date(dateStr);
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const day = weekdays[date.getDay()];
+    const datePart = date.toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+    return `${datePart} · ${day}`;
+  };
+
   const formatSetDetails = (exercise: WorkoutSet): string => {
     if (!exercise.completed) return 'Not completed';
     
@@ -78,10 +99,10 @@ const WorkoutHistory: React.FC = () => {
               <WorkoutTitle>{workout.name}</WorkoutTitle>
               <WorkoutMeta>
                 <MetaItem>
-                  Started: {new Date(workout.startTime).toLocaleString()}
+                  {formatDateWithWeekday(workout.startTime)}
                 </MetaItem>
                 <MetaItem>
-                  Ended: {workout.endTime ? new Date(workout.endTime).toLocaleString() : 'N/A'}
+                  Duration: {workout.endTime ? formatDuration(new Date(workout.endTime).getTime() - new Date(workout.startTime).getTime()) : '—'}
                 </MetaItem>
                 <CompletionStats>
                   Sets completed: {workout.exercises.filter(ex => ex.completed).length} / {workout.exercises.length}
