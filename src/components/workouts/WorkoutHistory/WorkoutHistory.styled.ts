@@ -90,3 +90,5 @@ export const SetItemDetails = styled.span`
   margin-left: ${props => props.theme.spacing.sm};
   font-weight: ${props => props.theme.typography.fontWeight.normal};
 `;
+
+

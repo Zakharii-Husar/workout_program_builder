@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppSelector } from '../../../store/hooks';
 import { weightConversionService } from '../../../services/weightConversionService';
 import { WorkoutSession, WorkoutSet } from '../../../store/slices/workoutSlice';
-import { MainContainer, MainHeader, MainTitle, MainSubtitle, EmptyState, EmptyStateTitle, EmptyStateSubtitle } from '../Main/Main.styled';
+import { MainContainer, MainHeader, MainTitle, MainSubtitle, EmptyState, EmptyStateTitle, EmptyStateSubtitle } from '../../layout/Main/Main.styled';
 import {
   WorkoutHistoryContainer,
   WorkoutCard,
@@ -33,7 +33,7 @@ const WorkoutHistory: React.FC = () => {
   const formatSetDetails = (exercise: WorkoutSet): string => {
     if (!exercise.completed) return 'Not completed';
     
-    const details = [];
+    const details = [] as string[];
     if (exercise.reps) details.push(`${exercise.reps} reps`);
     if (typeof exercise.weightGrams !== 'undefined') {
       const displayVal = weightConversionService.gramsToDisplay(exercise.weightGrams, weightUnit);
@@ -108,3 +108,5 @@ const WorkoutHistory: React.FC = () => {
 };
 
 export default WorkoutHistory;
+
+

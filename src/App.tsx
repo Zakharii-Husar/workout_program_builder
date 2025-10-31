@@ -8,7 +8,7 @@ import { ErrorBoundary } from './components/common/ErrorBoundary';
 import RouteGuard from './components/layout/RouteGuard';
 import Main from './components/layout/Main';
 import Programs from './components/layout/Programs/Programs';
-import WorkoutHistory from './components/layout/WorkoutHistory';
+import WorkoutHistory from './components/workouts/WorkoutHistory';
 import Settings from './components/layout/Settings';
 import ProgramEditor from './components/programs/ProgramEditor';
 import Exercises from './components/exercises/Exercises';
