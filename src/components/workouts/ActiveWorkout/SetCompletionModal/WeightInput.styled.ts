@@ -9,6 +9,8 @@ export const Label = styled.label`
   font-weight: ${props => props.theme.typography.fontWeight.medium};
   color: ${props => props.theme.colors.text};
   font-family: ${props => props.theme.typography.fontFamily.primary};
+  letter-spacing: ${props => props.theme.typography.letterSpacing.wide};
+  text-transform: uppercase;
 `;
 
 export const LabelRow = styled.div`
@@ -20,7 +22,7 @@ export const LabelRow = styled.div`
 
 export const Input = styled.input`
   width: 100%;
-  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+  padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius.md};
   font-size: ${props => props.theme.typography.fontSize.sm};
@@ -28,11 +30,16 @@ export const Input = styled.input`
   font-family: ${props => props.theme.typography.fontFamily.primary};
   transition: ${props => props.theme.transitions.fast};
   background: ${props => props.theme.colors.white};
+  color: ${props => props.theme.colors.text};
+  box-shadow: none;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: ${props => props.theme.typography.fontFamily.timer};
   
   &:focus {
     outline: none;
     border-color: ${props => props.theme.colors.accent};
-    box-shadow: 0 0 0 1px ${props => props.theme.colors.accentBlueLight};
+    box-shadow: 0 0 0 3px ${props => props.theme.colors.accentBlueLight};
   }
   
   &::placeholder {
@@ -41,7 +48,7 @@ export const Input = styled.input`
 `;
 
 export const InputCompactWide = styled(Input)`
-  width: 128px;
+  width: 120px;
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
     width: 100%;
   }
@@ -55,15 +62,15 @@ export const UnitToggleWrapper = styled.div`
 
 export const UnitToggle = styled.button<{ $isOn: boolean }>`
   position: relative;
-  width: 40px;
-  height: 22px;
+  width: 44px;
+  height: 24px;
   border-radius: 9999px;
   border: 1px solid ${props => props.theme.colors.border};
   background: ${props => props.theme.colors.gray200};
   cursor: pointer;
   padding: 0;
   transition: ${props => props.theme.transitions.fast};
-  box-shadow: none;
+  box-shadow: ${props => props.theme.shadows.sm};
 
   &:hover {
     filter: brightness(0.98);
@@ -72,10 +79,10 @@ export const UnitToggle = styled.button<{ $isOn: boolean }>`
 
 export const UnitToggleThumb = styled.div<{ $isOn: boolean }>`
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 16px;
-  height: 16px;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
   border-radius: 9999px;
   background: ${props => props.theme.colors.white};
   box-shadow: ${props => props.theme.shadows.sm};

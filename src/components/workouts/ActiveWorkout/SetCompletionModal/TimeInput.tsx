@@ -73,7 +73,7 @@ const TimeInput: React.FC<TimeInputProps> = ({
 
   return (
     <InputGroup>
-      <Label>Rest Time</Label>
+      <Label>REST TIME</Label>
       <DigitWrapper>
         <DigitColumns>
           <DigitGroup>

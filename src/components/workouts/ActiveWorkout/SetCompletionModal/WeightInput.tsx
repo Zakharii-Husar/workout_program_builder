@@ -17,7 +17,7 @@ const WeightInput: React.FC<WeightInputProps> = ({ value, onChange, unit, onUnit
   return (
     <Field>
       <LabelRow>
-        <Label htmlFor="weight">Weight (optional)</Label>
+        <Label htmlFor="weight">WEIGHT (OPTIONAL)</Label>
         <UnitToggleWrapper>
           <UnitOption type="button" onClick={() => handleUnitToggle('kg')} $active={unit === 'kg'}>KG</UnitOption>
           <UnitToggle type="button" onClick={() => handleUnitToggle(unit === 'kg' ? 'lb' : 'kg')} $isOn={unit === 'lb'} aria-label="Toggle weight unit">
@@ -31,7 +31,8 @@ const WeightInput: React.FC<WeightInputProps> = ({ value, onChange, unit, onUnit
         type="number"
         value={value}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
-        placeholder="Enter weight"
+        inputMode="decimal"
+        placeholder="0.0"
         min="0"
         step="0.1"
       />

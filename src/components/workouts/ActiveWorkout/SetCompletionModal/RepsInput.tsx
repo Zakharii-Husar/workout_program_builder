@@ -9,13 +9,14 @@ interface RepsInputProps {
 const RepsInput: React.FC<RepsInputProps> = ({ value, onChange }) => {
   return (
     <Field>
-      <Label htmlFor="reps">Reps (optional)</Label>
+      <Label htmlFor="reps">REPS (OPTIONAL)</Label>
       <InputCompact
         id="reps"
         type="number"
         value={value}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
-        placeholder="Enter reps"
+        inputMode="numeric"
+        placeholder="0"
         min="0"
       />
     </Field>

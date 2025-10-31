@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const InputGroup = styled.div`
-  margin-bottom: ${props => props.theme.spacing.xl};
+  margin-bottom: ${props => props.theme.spacing.md};
 `;
 
 export const Label = styled.label`
@@ -11,31 +11,33 @@ export const Label = styled.label`
   font-weight: ${props => props.theme.typography.fontWeight.medium};
   color: ${props => props.theme.colors.text};
   font-family: ${props => props.theme.typography.fontFamily.primary};
+  letter-spacing: ${props => props.theme.typography.letterSpacing.wide};
+  text-transform: uppercase;
 `;
 
 export const DigitWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: ${props => props.theme.spacing.xs};
+  padding: ${props => props.theme.spacing.sm};
   background: ${props => props.theme.colors.gray50};
   border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 0;
-  box-shadow: none;
+  border-radius: ${props => props.theme.borderRadius.lg};
+  box-shadow: ${props => props.theme.shadows.sm};
 `;
 
 export const DigitColumns = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
 `;
 
 export const DigitGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 `;
 
 export const DigitGroupRow = styled.div`
@@ -53,13 +55,13 @@ export const DigitColumn = styled.div`
   width: 44px;
   background: ${props => props.theme.colors.white};
   border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 0;
+  border-radius: ${props => props.theme.borderRadius.md};
   overflow: hidden;
-  box-shadow: none;
+  box-shadow: ${props => props.theme.shadows.sm};
 
   &:focus-within {
     border-color: ${props => props.theme.colors.accent};
-    box-shadow: 0 0 0 1px ${props => props.theme.colors.accentBlueLight};
+    box-shadow: 0 0 0 3px ${props => props.theme.colors.accentBlueLight};
   }
 
   /* Make adjacent digit columns visually touch */
@@ -70,7 +72,7 @@ export const DigitColumn = styled.div`
 
 export const DigitButton = styled.button`
   width: 100%;
-  height: 26px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,7 +93,7 @@ export const DigitButton = styled.button`
 
 export const DigitInput = styled.input`
   width: 100%;
-  height: 48px;
+  height: 52px;
   text-align: center;
   border: 0;
   font-size: ${props => props.theme.typography.fontSize.lg};
@@ -109,11 +111,11 @@ export const DigitInput = styled.input`
 `;
 
 export const DigitSeparator = styled.div`
-  padding: 0 6px;
+  padding: 0 8px;
   color: ${props => props.theme.colors.textSecondary};
   font-size: 18px;
   align-self: center;
-  border-radius: 0;
+  border-radius: ${props => props.theme.borderRadius.md};
   background: transparent;
   box-shadow: none;
 `;
@@ -127,9 +129,10 @@ export const DigitSubLabel = styled.div`
 `;
 
 export const TimeCurrent = styled.div`
-  margin-top: 8px;
+  margin-top: 10px;
   font-size: 12px;
   color: ${props => props.theme.colors.textSecondary};
+  text-align: center;
 `;
 
 

@@ -16,10 +16,10 @@ import {
   FormContainer,
   StepsGrid,
   StepCard,
-  StepNumber,
   Actions,
   SaveButton,
-  CancelButton
+  CancelButton,
+  ModalFooter
 } from './SetCompletionModal.styled';
 
 interface SetCompletionModalProps {
@@ -132,7 +132,7 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
       <ModalContainer onClick={(e: React.MouseEvent) => e.stopPropagation()}>
         <ModalHeader>
           <ModalTitle>Complete Set - {exerciseName}</ModalTitle>
-          <ModalCloseButton onClick={onClose}>
+          <ModalCloseButton onClick={onClose} aria-label="Close">
             <icons.cancel />
           </ModalCloseButton>
         </ModalHeader>
@@ -140,11 +140,9 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
         <FormContainer>
           <StepsGrid>
             <StepCard>
-              <StepNumber>1</StepNumber>
               <RepsInput value={reps} onChange={setReps} />
             </StepCard>
             <StepCard>
-              <StepNumber>2</StepNumber>
               <WeightInput 
                 value={weight} 
                 onChange={setWeight} 
@@ -153,7 +151,6 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
               />
             </StepCard>
             <StepCard>
-              <StepNumber>3</StepNumber>
               <TimeInput
                 restMinutes={restMinutes}
                 restSeconds={restSeconds}
@@ -162,21 +159,20 @@ const SetCompletionModal: React.FC<SetCompletionModalProps> = ({
                 onSecondsChange={handleSecondsChange}
               />
             </StepCard>
-            <StepCard>
-              <StepNumber>4</StepNumber>
-              <Actions>
-                <CancelButton onClick={handleCancel}>
-                  <icons.cancel />
-                  Cancel
-                </CancelButton>
-                <SaveButton onClick={handleSave}>
-                  <icons.check />
-                  Save Set
-                </SaveButton>
-              </Actions>
-            </StepCard>
           </StepsGrid>
         </FormContainer>
+        <ModalFooter>
+          <Actions>
+            <CancelButton onClick={handleCancel}>
+              <icons.cancel />
+              Cancel
+            </CancelButton>
+            <SaveButton onClick={handleSave}>
+              <icons.check />
+              Save Set
+            </SaveButton>
+          </Actions>
+        </ModalFooter>
       </ModalContainer>
     </ModalOverlay>
   );
