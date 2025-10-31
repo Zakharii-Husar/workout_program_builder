@@ -20,10 +20,7 @@ import {
 } from 'react-icons/fa';
 import { LuTimerReset as ResetIcon } from 'react-icons/lu';
 
-import arrow from '../../assets/arrow.png';
-
 export const icons = {
-  arrow,
   add: AddIcon,
   check: CheckIcon,
   remove: RemoveIcon,

@@ -27,7 +27,7 @@ const ExercisesList: React.FC<ExerciseListProps> = ({
   const getIconComponent = (iconType: string, exercise?: Exercise, exerciseIndex?: number) => {
     switch (iconType) {
       case 'arrow':
-        return <img src={icons.arrow} alt="arrow" />;
+        return <icons.down />;
       case 'exercise':
         return <img src={exercise?.img} alt={exercise?.name} />;
       case 'muscle':

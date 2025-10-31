@@ -27,14 +27,12 @@ const MuscleGroupsList: React.FC<MuscleGroupsListProps> = ({
     <ContentWrapper>
       {muscleGroups.map((muscle, muscleIndex) => (
         <div key={muscle.name}>
-          <MuscleGroupContainer>
+          <MuscleGroupContainer onClick={() => onToggleVisibility(muscleIndex)}>
             <MuscleIcon src={muscle.img} alt={muscle.name} />
             <MuscleNameText>{muscle.name}</MuscleNameText>
-            <ArrowIcon 
-              src={icons.arrow} 
-              onClick={() => onToggleVisibility(muscleIndex)}
-              alt="Toggle exercises"
-            />
+            <ArrowIcon>
+              {visibleExercises.includes(muscleIndex) ? <icons.up /> : <icons.down />}
+            </ArrowIcon>
           </MuscleGroupContainer>
           
           <ExercisesList

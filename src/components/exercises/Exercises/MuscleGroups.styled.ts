@@ -90,29 +90,28 @@ export const MuscleIcon = styled.img`
   }
 `;
 
-export const ArrowIcon = styled.img`
-  width: 24px;
-  height: 24px;
+export const ArrowIcon = styled.div`
   margin-left: auto;
   transition: ${props => props.theme.transitions.normal};
-  filter: invert(0);
   flex-shrink: 0;
   position: relative;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px; /* controls react-icon size */
 
   ${MuscleGroupContainer}:hover & {
     transform: translateX(4px) scale(1.1);
-    filter: invert(0.5);
+    opacity: 0.8;
   }
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.mobile}) {
-    width: 20px;
-    height: 20px;
+    font-size: 20px;
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    width: 28px;
-    height: 28px;
+    font-size: 28px;
   }
 `;
 
