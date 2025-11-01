@@ -43,7 +43,7 @@ export const NameContainer = styled.div`
     }
 
     &::placeholder {
-      color: ${props => props.theme.colors.warmGray};
+      color: ${props => props.theme.colors.textMuted};
       font-style: italic;
     }
 
