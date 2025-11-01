@@ -5,7 +5,10 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { ThemeProvider } from './theme/ThemeProvider';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
+import AuthProvider from './components/auth/AuthProvider';
 import RouteGuard from './components/layout/RouteGuard';
+import Header from './components/layout/Header';
+import Login from './components/auth/Login';
 import Main from './components/layout/Main';
 import Programs from './components/layout/Programs/Programs';
 import WorkoutHistory from './components/workouts/WorkoutHistory';
@@ -50,24 +53,28 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider>
         <Provider store={store}>
-          <Router>
-            <RouteGuard>
-              <AppContainer>
-                <Routes>
-                  <Route path="/" element={<Main />} />
-                  <Route path="/programs" element={<Programs />} />
-                  <Route path="/workouts" element={<WorkoutHistory />} />
-                  <Route path="/settings" element={<Settings />} />
-                  <Route path="/create" element={<ProgramEditor />} />
-                  <Route path="/create/exercises" element={<Exercises />} />
-                  <Route path="/edit/:programId" element={<ProgramEditor />} />
-                  <Route path="/edit/:programId/exercises" element={<Exercises />} />
-                  <Route path="/start/:programId" element={<ActiveWorkout />} />
-                  <Route path="*" element={<Navigate to="/" replace />} />
-                </Routes>
-              </AppContainer>
-            </RouteGuard>
-          </Router>
+          <AuthProvider>
+            <Router>
+              <RouteGuard>
+                <AppContainer>
+                  <Header />
+                  <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/" element={<Main />} />
+                    <Route path="/programs" element={<Programs />} />
+                    <Route path="/workouts" element={<WorkoutHistory />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/create" element={<ProgramEditor />} />
+                    <Route path="/create/exercises" element={<Exercises />} />
+                    <Route path="/edit/:programId" element={<ProgramEditor />} />
+                    <Route path="/edit/:programId/exercises" element={<Exercises />} />
+                    <Route path="/start/:programId" element={<ActiveWorkout />} />
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                  </Routes>
+                </AppContainer>
+              </RouteGuard>
+            </Router>
+          </AuthProvider>
         </Provider>
       </ThemeProvider>
     </ErrorBoundary>

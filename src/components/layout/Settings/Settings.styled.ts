@@ -166,3 +166,27 @@ export const RadioOption = styled.label<{ $checked: boolean }>`
     accent-color: ${props => props.theme.colors.primary};
   }
 `;
+
+export const LogoutButton = styled.button`
+  margin-top: ${props => props.theme.spacing.xl};
+  padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
+  font-size: ${props => props.theme.typography.fontSize.base};
+  font-weight: ${props => props.theme.typography.fontWeight.semibold};
+  color: ${props => props.theme.colors.textOnPrimary};
+  background: ${props => props.theme.colors.accentRed};
+  border: none;
+  border-radius: ${props => props.theme.borderRadius.md};
+  cursor: pointer;
+  transition: ${props => props.theme.transitions.normal};
+  width: 100%;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: ${props => props.theme.shadows.md};
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`;

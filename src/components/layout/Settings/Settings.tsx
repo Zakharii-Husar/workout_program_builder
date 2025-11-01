@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { setWeightUnit, setTimerAlarmOn, WeightUnit } from '../../../store/slices/settingsSlice';
+import { logout } from '../../../store/slices/authSlice';
 import { MainContainer, MainHeader, MainTitle, MainSubtitle } from '../Main/Main.styled';
 import {
   SettingsContainer,
@@ -14,10 +15,12 @@ import {
   ToggleSwitch,
   RadioGroup,
   RadioOption,
+  LogoutButton,
 } from './Settings.styled';
 
 const Settings: React.FC = () => {
   const settings = useAppSelector(state => state.settings);
+  const { user } = useAppSelector(state => state.auth);
   const dispatch = useAppDispatch();
 
   const handleWeightUnitChange = (unit: WeightUnit) => {
@@ -26,6 +29,10 @@ const Settings: React.FC = () => {
 
   const handleTimerAlarmToggle = () => {
     dispatch(setTimerAlarmOn(!settings.timerAlarmOn));
+  };
+
+  const handleLogout = async () => {
+    await dispatch(logout());
   };
 
   return (
@@ -91,6 +98,23 @@ const Settings: React.FC = () => {
             </ToggleContainer>
           </SettingContent>
         </SettingCard>
+
+        {/* Account Section */}
+        {user && (
+          <SettingCard>
+            <SettingHeader>
+              <SettingTitle>Account</SettingTitle>
+              <SettingDescription>
+                Signed in as {user.email}
+              </SettingDescription>
+            </SettingHeader>
+            <SettingContent>
+              <LogoutButton onClick={handleLogout}>
+                Sign Out
+              </LogoutButton>
+            </SettingContent>
+          </SettingCard>
+        )}
       </SettingsContainer>
     </MainContainer>
   );
